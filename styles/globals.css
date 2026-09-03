@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   Semantic layer
+   Components describe intent. They never name a hex value.
+   A palette change is an edit to this block plus the config.
+   ========================================================= */
+@layer base {
+  :root {
+    --surface: theme(colors.brand.paper.DEFAULT);
+    --surface-raised: theme(colors.brand.paper.100);
+    --surface-inverse: theme(colors.brand.ink.DEFAULT);
+    --text-primary: theme(colors.brand.ink.DEFAULT);
+    --text-body: rgba(5, 6, 14, 0.75);
+    --text-muted: rgba(5, 6, 14, 0.6);
+    --text-inverse: theme(colors.brand.paper.DEFAULT);
+    --border-subtle: theme(colors.brand.line.DEFAULT);
+    --focus-ring: theme(colors.brand.violet.500);
+  }
+
+  /* Scales every rem utility down slightly. Pinned inputs below stop iOS
+     Safari from zooming the page when a field is focused. */
+  html {
+    font-size: 95%;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-brand-paper font-body text-brand-ink antialiased;
+  }
+
+  /* The display face is assigned once, here. Never per component. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-normal text-brand-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Focus ring in the accent, offset in the ground, so the halo reads. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-violet-500 ring-offset-2 ring-offset-brand-paper;
+  }
+
+  ::selection {
+    background-color: theme(colors.brand.violet.200);
+    color: theme(colors.brand.ink.DEFAULT);
+  }
+
+  /* iOS Safari zooms any field under 16px. Pin them. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* WCAG 2.2 target size, with room to spare. */
+  button,
+  a.btn,
+  [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Never let a long word or a hashtag blow out a narrow viewport. */
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  td {
+    overflow-wrap: break-word;
+  }
+}
+
+/* =========================================================
+   Components
+   ========================================================= */
+@layer components {
+  /* ---------------------------------------------------------
+     The dark band.
+     One per page, never two. Anything inside it flips polarity
+     automatically, so a section only has to declare `on-ink`
+     rather than restate a colour on every child.
+     --------------------------------------------------------- */
+  .on-ink {
+    @apply bg-brand-ink text-brand-paper;
+  }
+
+  .on-ink h1,
+  .on-ink h2,
+  .on-ink h3,
+  .on-ink h4 {
+    @apply text-brand-paper;
+  }
+
+  .on-ink :focus-visible {
+    @apply ring-brand-violet-300 ring-offset-brand-ink;
+  }
+
+  /* --- Actions --- */
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300 ease-expo;
+  }
+
+  /* Ink on paper: 19.5:1. The strongest thing on the page is also the
+     thing we most want a guest to press. */
+  .btn-primary {
+    @apply btn bg-brand-ink text-brand-paper hover:bg-brand-ink-700 hover:shadow-lift;
+  }
+
+  .btn-outline {
+    @apply btn border border-brand-line-strong bg-transparent text-brand-ink hover:border-brand-violet-500 hover:bg-brand-violet-100;
+  }
+
+  /* Inside the dark band the polarity inverts. */
+  .btn-primary-inverse {
+    @apply btn bg-brand-paper text-brand-ink hover:bg-white hover:shadow-glow focus-visible:ring-offset-brand-ink;
+  }
+
+  .btn-outline-inverse {
+    @apply btn border border-brand-paper/30 text-brand-paper hover:border-brand-paper/70 hover:bg-white/10 focus-visible:ring-offset-brand-ink;
+  }
+
+  /* --- Surfaces --- */
+  .card {
+    @apply rounded-2xl border border-brand-line bg-brand-paper-100 p-6 shadow-soft;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-expo hover:-translate-y-1 hover:border-brand-line-strong hover:shadow-lift;
+  }
+
+  .on-ink .card {
+    @apply border-white/10 bg-white/5;
+  }
+
+  /* --- Type --- */
+  .eyebrow {
+    @apply font-body text-xs font-semibold uppercase tracking-eyebrow text-brand-violet-500;
+  }
+
+  .on-ink .eyebrow {
+    @apply text-brand-violet-300;
+  }
+
+  /* Body copy is never full-strength ink. 75 percent, which measures 9.5:1. */
+  .prose-body {
+    @apply max-w-prose text-base leading-relaxed text-brand-ink/75;
+  }
+
+  .on-ink .prose-body {
+    @apply text-brand-paper/80;
+  }
+
+  /* The gradient wordmark. Used for the hashtag and the ampersand only. */
+  .aurora-text {
+    @apply bg-aurora bg-clip-text text-transparent;
+  }
+
+  /* The paper gradient measures 5.8:1 and 5.4:1 on paper, but only 3.4:1
+     on ink, which fails for body text. Inside the dark band the wordmark
+     therefore switches to the light pair, which measures about 9:1.
+     Nothing currently puts a wordmark on the dark band; this exists so
+     that the day something does, it is already correct. */
+  .on-ink .aurora-text {
+    @apply bg-aurora-light;
+  }
+
+  /* --- The one divider we use site-wide --- */
+  .rule {
+    @apply h-px w-16 bg-aurora-soft;
+  }
+
+  .rule-v {
+    @apply w-px bg-aurora-v;
+  }
+
+  /* --- Section rhythm --- */
+  .section {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  /* --- Marquee, edge-masked and hover-paused --- */
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* --- Forms --- */
+  .field {
+    @apply w-full rounded-xl border border-brand-line bg-brand-paper-100 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 transition-colors duration-200 hover:border-brand-line-strong focus:border-brand-violet-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-medium text-brand-ink/85;
+  }
+
+  .field-hint {
+    @apply mt-1.5 text-xs text-brand-ink/60;
+  }
+
+  .field-error {
+    @apply mt-1.5 flex items-start gap-1.5 text-xs font-medium text-brand-violet-600;
+  }
+}
+
+/* =========================================================
+   Scroll reveal
+   Content is visible by default and only hides once JS confirms it can
+   animate it back in. No JS, no problem. Crawler, no problem.
+   ========================================================= */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================================
+   Reduced motion
+   A blanket CSS rule, not a JS check. A JS check misses hover transitions.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

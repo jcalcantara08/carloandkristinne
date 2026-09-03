@@ -1,0 +1,56 @@
+{
+  "name": "carlo-kristinne-wedding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The wedding website of John Carlo Alcantara and Kristinne Monzon. 17 October 2026, Rosario, Cavite.",
+  "author": "Erick Cabal (https://erickcabal.com)",
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=20.10"
+  },
+  "scripts": {
+    "dev": "next dev -p 3028",
+    "build": "next build && node scripts/stamp.mjs .next",
+    "start": "next start -p 3028",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "qa": "tsx scripts/qa-check.ts",
+    "grammar": "tsx scripts/grammar-check.ts",
+    "security": "tsx scripts/security-check.ts",
+    "css": "tsx scripts/css-check.ts",
+    "check": "npm run qa && npm run grammar && npm run security && npm run css",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "doctor": "node scripts/doctor.mjs",
+    "clean": "node scripts/clean.mjs",
+    "postinstall": "node scripts/stamp.mjs node_modules"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.3",
+    "@supabase/supabase-js": "^2.110.8",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.25.0",
+    "next": "^16.2.11",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "resend": "^6.18.0",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^2.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "autoprefixer": "^10.5.4",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^16.2.11",
+    "postcss": "^8.5.22",
+    "tailwindcss": "^3.4.19",
+    "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.3"
+  }
+}

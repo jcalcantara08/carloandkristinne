@@ -7,12 +7,8 @@ import { PendingChip } from "@/components/Pending";
 import { Card } from "@/components/ui/Card";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
-import {
-  RECEPTION_DOORS,
-  RECEPTION_RUNTIME_MINUTES,
-  RECEPTION_TIMELINE,
-  SCHEDULE,
-} from "@/lib/constants";
+import { getContent } from "@/lib/content";
+import { receptionTimeline, type Phase } from "@/lib/content-schema";
 import { formatClock, formatDuration } from "@/lib/utils";
 
 export const metadata: Metadata = pageMeta({
@@ -22,58 +18,30 @@ export const metadata: Metadata = pageMeta({
   path: "/programme",
 });
 
-const PHASES = [
-  {
-    key: "morning" as const,
-    label: "Morning",
-    title: "Long before you see any of it",
-    blurb:
-      "Hair, make-up and photographs, from seven in the morning. The entourage is called for half past eleven.",
-  },
-  {
-    key: "afternoon" as const,
-    label: "Afternoon",
-    title: "Into the ceremony look",
-    blurb: "The change, the retouch, and one hour of enforced rest.",
-  },
-  {
-    key: "ceremony" as const,
-    label: "Ceremony",
-    title: "The part that counts",
-    blurb: "Please come early. This is the half hour they care about most.",
-  },
-  {
-    key: "between" as const,
-    label: "In between",
-    title: "The gap, and why it is there",
-    blurb:
-      "The photographs at the church take a while, and the reception is somewhere else. Please do not drive straight over: the doors do not open until a quarter past seven.",
-  },
-];
+const DAY_PHASES: Exclude<Phase, "reception">[] = ["morning", "afternoon", "ceremony", "between"];
 
 /**
- * The reception is rendered separately from the phases above. Its items carry
- * a duration rather than a written clock time, and every time shown is
- * derived from the 7:15 PM doors, so changing one duration moves the rest.
+ * Every word here comes from the site document (Edit the website,
+ * Programme). Day items carry a clock time. Reception items carry a duration
+ * instead, and every time shown for them is worked out from the doors time,
+ * so changing one duration moves the rest and the two can never disagree.
  */
+export default async function ProgrammePage() {
+  const { programme } = await getContent();
+  const timeline = receptionTimeline(programme.items, programme.doors);
+  const runtime = timeline.reduce((total, entry) => total + entry.minutes, 0);
 
-export default function ProgrammePage() {
   // Derived from the list rather than typed out, so the headline figure can
   // never drift away from the row it is summarising.
-  const dinner = RECEPTION_TIMELINE.find(({ item }) => item.title.startsWith("Dinner"));
+  const dinner = timeline.find(({ item }) => /^dinner/i.test(item.title));
   const dinnerAt = dinner ? formatClock(dinner.clockMinutes) : "See below";
 
   return (
     <>
       <PageHeader
-        eyebrow="The run of show"
-        title="One very long Saturday"
-        intro={
-          <p>
-            It starts at seven in the morning and finishes near midnight. Here is the whole of it,
-            including the parts you are not expected to be awake for.
-          </p>
-        }
+        eyebrow={programme.eyebrow}
+        title={programme.title}
+        intro={programme.intro ? <p>{programme.intro}</p> : undefined}
       >
         <Link href="/rsvp" className="btn-primary w-full sm:w-auto">
           RSVP
@@ -83,41 +51,42 @@ export default function ProgrammePage() {
         </Link>
       </PageHeader>
 
-      {PHASES.map((phase) => {
-        const items = SCHEDULE.filter((item) => item.phase === phase.key);
+      {DAY_PHASES.map((key) => {
+        const phase = programme.phases[key];
+        const items = programme.items.filter((item) => item.phase === key);
         if (items.length === 0) return null;
 
         return (
-          <Section key={phase.key}>
+          <Section key={key}>
             <div className="container">
               <SectionHeading
                 eyebrow={phase.label}
                 title={phase.title}
-                intro={<p>{phase.blurb}</p>}
+                intro={phase.blurb ? <p>{phase.blurb}</p> : undefined}
               />
 
               <ol className="mt-12 space-y-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line">
                 {items.map((item, index) => (
                   <Reveal
                     as="li"
-                    key={item.title}
+                    key={`${item.title}-${index}`}
                     delay={index * 80}
                     className="grid gap-2 bg-brand-paper-100 px-5 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6 sm:px-7"
                   >
                     <div className="shrink-0">
-                      {item.time.pending ? (
-                        <PendingChip label="Time TBC" />
-                      ) : (
+                      {item.time ? (
                         <span className="font-display text-xl tabular-nums text-brand-ink">
-                          {item.time.value}
+                          {item.time}
                         </span>
+                      ) : (
+                        <PendingChip label="Time TBC" />
                       )}
                     </div>
                     <div className="min-w-0">
                       <h3 className="text-lg font-medium text-brand-ink">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">
-                        {item.detail}
-                      </p>
+                      {item.detail ? (
+                        <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.detail}</p>
+                      ) : null}
                     </div>
                   </Reveal>
                 ))}
@@ -127,110 +96,103 @@ export default function ProgrammePage() {
         );
       })}
 
-      {/* --- The reception. Clock times derived from the 7:15 PM doors. --- */}
-      <Section on="tint">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Reception"
-            title="Then, the whole evening"
-            intro={
-              <p>
-                The full running order, in the order your host will actually call it. It opens with
-                everybody on their feet and it ends near midnight, with a proper three quarters of
-                an hour in the middle for dinner.
-              </p>
-            }
-          />
+      {/* --- The reception. Clock times derived from the doors time. --- */}
+      {timeline.length > 0 ? (
+        <Section on="tint">
+          <div className="container">
+            <SectionHeading
+              eyebrow={programme.receptionEyebrow}
+              title={programme.receptionTitle}
+              intro={programme.receptionIntro ? <p>{programme.receptionIntro}</p> : undefined}
+            />
 
-          <Reveal delay={80}>
-            <dl className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line sm:grid-cols-3">
-              <div className="bg-brand-paper-100 px-5 py-6">
-                <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
-                  Doors open
-                </dt>
-                <dd className="mt-2 font-display text-xl text-brand-ink">{RECEPTION_DOORS}</dd>
-              </div>
-              <div className="bg-brand-paper-100 px-5 py-6">
-                <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
-                  Dinner is called
-                </dt>
-                <dd className="mt-2 font-display text-xl text-brand-ink">{dinnerAt}</dd>
-              </div>
-              <div className="bg-brand-paper-100 px-5 py-6">
-                <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
-                  Doors to goodnight
-                </dt>
-                <dd className="mt-2 font-display text-xl text-brand-ink">
-                  {formatDuration(RECEPTION_RUNTIME_MINUTES)}
-                </dd>
-              </div>
-            </dl>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <p className="mt-6 text-sm leading-relaxed text-brand-ink/65">
-              Every time below is worked out from the quarter past seven doors, so treat them as
-              close rather than exact. A ceremony that runs long, or a room that will not stop
-              dancing, moves everything after it. Nobody minds.
-            </p>
-          </Reveal>
-
-          <ol className="mt-10 space-y-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line">
-            {RECEPTION_TIMELINE.map(({ item, clockMinutes }, index) => (
-              <Reveal
-                as="li"
-                key={item.title}
-                delay={Math.min(index, 8) * 80}
-                className="grid gap-2 bg-brand-paper-100 px-5 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6 sm:px-7"
-              >
-                <div className="shrink-0">
-                  <span className="font-display text-xl tabular-nums text-brand-ink">
-                    {formatClock(clockMinutes)}
-                  </span>
-                  {item.minutes ? (
-                    <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-brand-ink/60">
-                      {item.minutes} min
-                    </span>
-                  ) : null}
+            <Reveal delay={80}>
+              <dl className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line sm:grid-cols-3">
+                <div className="bg-brand-paper-100 px-5 py-6">
+                  <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
+                    Doors open
+                  </dt>
+                  <dd className="mt-2 font-display text-xl text-brand-ink">{programme.doors}</dd>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-medium text-brand-ink">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.detail}</p>
+                <div className="bg-brand-paper-100 px-5 py-6">
+                  <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
+                    Dinner is called
+                  </dt>
+                  <dd className="mt-2 font-display text-xl text-brand-ink">{dinnerAt}</dd>
                 </div>
+                <div className="bg-brand-paper-100 px-5 py-6">
+                  <dt className="text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
+                    Doors to goodnight
+                  </dt>
+                  <dd className="mt-2 font-display text-xl text-brand-ink">{formatDuration(runtime)}</dd>
+                </div>
+              </dl>
+            </Reveal>
+
+            {programme.receptionNote ? (
+              <Reveal delay={120}>
+                <p className="mt-6 text-sm leading-relaxed text-brand-ink/65">{programme.receptionNote}</p>
               </Reveal>
-            ))}
-          </ol>
-        </div>
-      </Section>
+            ) : null}
 
-      <Section>
-        <div className="container">
-          <Reveal>
-            <Card className="mx-auto max-w-2xl text-center">
-              <p className="eyebrow">Your host</p>
-              <h2 className="mt-4 text-display-md">Erick is running the evening</h2>
-              <p className="mt-4 text-sm leading-relaxed text-brand-ink/75">
-                He is both the best man and the host, which is two jobs, so a separate on-the-day
-                coordinator is being assigned for everything that is not a microphone.
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-brand-ink/75">
-                The running order below is his, so if you are giving a toast, reading, performing or
-                leading the prayer, speak to him well before the day rather than on the night. He
-                would much rather move something than surprise you with it.
-              </p>
-              <div className="mt-7">
-                <Link href="/entourage" className="btn-outline">
-                  See who else is involved
-                </Link>
-              </div>
-            </Card>
-          </Reveal>
-        </div>
-      </Section>
+            <ol className="mt-10 space-y-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line">
+              {timeline.map(({ item, minutes, clockMinutes }, index) => (
+                <Reveal
+                  as="li"
+                  key={`${item.title}-${index}`}
+                  delay={Math.min(index, 8) * 80}
+                  className="grid gap-2 bg-brand-paper-100 px-5 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6 sm:px-7"
+                >
+                  <div className="shrink-0">
+                    <span className="font-display text-xl tabular-nums text-brand-ink">
+                      {formatClock(clockMinutes)}
+                    </span>
+                    {minutes ? (
+                      <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-brand-ink/60">
+                        {minutes} min
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-medium text-brand-ink">{item.title}</h3>
+                    {item.detail ? (
+                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.detail}</p>
+                    ) : null}
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </Section>
+      ) : null}
+
+      {programme.hostTitle ? (
+        <Section>
+          <div className="container">
+            <Reveal>
+              <Card className="mx-auto max-w-2xl text-center">
+                <p className="eyebrow">{programme.hostEyebrow}</p>
+                <h2 className="mt-4 text-display-md">{programme.hostTitle}</h2>
+                {programme.hostP1 ? (
+                  <p className="mt-4 text-sm leading-relaxed text-brand-ink/75">{programme.hostP1}</p>
+                ) : null}
+                {programme.hostP2 ? (
+                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/75">{programme.hostP2}</p>
+                ) : null}
+                <div className="mt-7">
+                  <Link href="/entourage" className="btn-outline">
+                    See who else is involved
+                  </Link>
+                </div>
+              </Card>
+            </Reveal>
+          </div>
+        </Section>
+      ) : null}
 
       <CtaBanner
-        title="Tell them you are coming"
-        body="The programme comes together far more easily once the couple know who will be there."
+        title={programme.ctaTitle}
+        body={programme.ctaBody}
         secondary={{ href: "/entourage", label: "The entourage" }}
       />
 

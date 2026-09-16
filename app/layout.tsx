@@ -6,6 +6,7 @@ import { SITE } from "@/lib/constants";
 import { eventJsonLd, websiteJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { EditPageButton } from "@/components/EditPageButton";
 import { SkipLink } from "@/components/layout/SkipLink";
 
 export const metadata: Metadata = {
@@ -73,6 +74,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
+        {/* Only the couple ever see this: it reads the sign-in hint cookie. */}
+        <EditPageButton />
 
         <script
           type="application/ld+json"

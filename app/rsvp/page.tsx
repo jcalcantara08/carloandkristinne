@@ -6,7 +6,8 @@ import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/Card";
 import { RsvpForm } from "@/components/forms/RsvpForm";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
-import { RSVP, WEDDING_DAY } from "@/lib/constants";
+import { getContent } from "@/lib/content";
+import { WEDDING_DAY } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "RSVP",
@@ -15,35 +16,17 @@ export const metadata: Metadata = pageMeta({
   path: "/rsvp",
 });
 
-const WHY = [
-  {
-    icon: Users,
-    title: "The list is 100",
-    body: "Every seat is already accounted for, so please count only the people named on your invitation.",
-  },
-  {
-    icon: Utensils,
-    title: "The caterer needs a number",
-    body: "The final headcount goes to the kitchen about two weeks before the day, so an early reply is a real help.",
-  },
-  {
-    icon: CalendarCheck,
-    title: "It takes two minutes",
-    body: `Reply by ${RSVP.deadlineLabel}. If your plans change afterwards, message Erick rather than filling this in again.`,
-  },
-];
+const WHY_ICONS = [Users, Utensils, CalendarCheck];
 
-export default function RsvpPage() {
+export default async function RsvpPage() {
+  const { rsvp } = await getContent();
+
   return (
     <>
       <PageHeader
-        eyebrow={`Please reply by ${RSVP.deadlineLabel}`}
-        title="Are you coming?"
-        intro={
-          <p>
-            One short form, two minutes, and then Carlo and Kristinne can stop refreshing their phones.
-          </p>
-        }
+        eyebrow={rsvp.deadlineLabel ? `Please reply by ${rsvp.deadlineLabel}` : "Please reply"}
+        title={rsvp.title}
+        intro={rsvp.intro ? <p>{rsvp.intro}</p> : undefined}
       />
 
       <Section>
@@ -56,24 +39,29 @@ export default function RsvpPage() {
 
           <div className="lg:col-span-5">
             <ul className="space-y-5">
-              {WHY.map((item, index) => (
-                <Reveal as="li" key={item.title} delay={index * 80}>
-                  <Card>
-                    <item.icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
-                    <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
-                  </Card>
-                </Reveal>
-              ))}
+              {rsvp.why.map((item, index) => {
+                const Icon = WHY_ICONS[index] ?? CalendarCheck;
+                return (
+                  <Reveal as="li" key={item.title} delay={index * 80}>
+                    <Card>
+                      <Icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
+                      <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">
+                        {index === rsvp.why.length - 1 && rsvp.deadlineLabel
+                          ? `Reply by ${rsvp.deadlineLabel}. ${item.body}`
+                          : item.body}
+                      </p>
+                    </Card>
+                  </Reveal>
+                );
+              })}
             </ul>
 
             <Reveal delay={240}>
               <div className="mt-5 rounded-2xl border border-brand-steel-600/30 bg-brand-steel-600/5 p-6 text-center">
-                <p className="eyebrow">The day itself</p>
+                <p className="eyebrow">{rsvp.dayEyebrow}</p>
                 <p className="mt-3 font-display text-display-md">{WEDDING_DAY.dateShort}</p>
-                <p className="mt-2 text-sm text-brand-ink/65">
-                  Ceremony at {WEDDING_DAY.ceremonyTime}. Be seated by 3:30 PM.
-                </p>
+                {rsvp.dayNote ? <p className="mt-2 text-sm text-brand-ink/65">{rsvp.dayNote}</p> : null}
               </div>
             </Reveal>
           </div>

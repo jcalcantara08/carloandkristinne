@@ -10,6 +10,13 @@
  */
 
 export const SESSION_COOKIE = "ck_admin_session";
+/**
+ * A plain, non-secret companion to the session cookie, readable by the
+ * browser, so the public pages can draw an "Edit this page" button for the
+ * couple without becoming dynamic. It grants nothing: the dashboard behind
+ * the button is still gated by requireAuth().
+ */
+export const ADMIN_HINT_COOKIE = "ck_admin_hint";
 const MAX_AGE_SECONDS = 60 * 60 * 8;
 
 function requiredEnv(name: string): string {

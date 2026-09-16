@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { LogOut } from "lucide-react";
 
 import { requireAuth } from "@/lib/admin-guard";
@@ -35,7 +36,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </div>
 
             <div className="mt-6">
-              <AdminNav />
+              {/* The nav reads the URL to mark the current section. */}
+              <Suspense fallback={null}>
+                <AdminNav />
+              </Suspense>
             </div>
 
             <form action={signOut} className="mt-6 border-t border-brand-line pt-5">

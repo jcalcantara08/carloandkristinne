@@ -3,28 +3,25 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import type { Photo } from "@/lib/types";
+import { getContent } from "@/lib/content";
 
 /**
  * Shown only once there is something to show. Before the wedding the album
  * is empty, and a grid of "coming soon" frames on the home page reads as
  * unfinished rather than anticipatory.
  */
-export function GalleryPreview({ photos }: { photos: Photo[] }) {
+export async function GalleryPreview({ photos }: { photos: Photo[] }) {
   if (photos.length === 0) return null;
+  const { home } = await getContent();
   const shown = photos.slice(0, 6);
 
   return (
     <Section>
       <div className="container">
         <SectionHeading
-          eyebrow="The album"
-          title="Everything anyone photographs, in one place"
-          intro={
-            <p>
-              From the day of the wedding onwards, anyone can add the photographs they took, and anyone
-              can download them at full size. No app, no account, nothing to sign up for.
-            </p>
-          }
+          eyebrow={home.galleryEyebrow}
+          title={home.galleryTitle}
+          intro={home.galleryIntro ? <p>{home.galleryIntro}</p> : undefined}
         />
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">

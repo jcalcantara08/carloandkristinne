@@ -2,12 +2,19 @@ import Image from "next/image";
 import { requireAuth } from "@/lib/admin-guard";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { listPhotos } from "@/lib/store";
+import { listPhotos, TRASH_DAYS } from "@/lib/store";
 import { formatDateTime } from "@/lib/utils";
-import { moderatePhoto, removePhoto } from "@/app/admin/(dashboard)/actions";
+import { moderatePhoto } from "@/app/admin/(dashboard)/actions";
+import {
+  ShelfActions,
+  ViewChips,
+  ViewNote,
+  readView,
+  type ListView,
+} from "@/app/admin/(dashboard)/shelf-controls";
 import type { Photo } from "@/lib/types";
 
-function PhotoCard({ photo }: { photo: Photo }) {
+function PhotoCard({ photo, view }: { photo: Photo; view: ListView }) {
   return (
     <Card className="flex h-full flex-col p-4">
       <div className="relative aspect-square overflow-hidden rounded-xl border border-brand-line bg-brand-paper-200">
@@ -31,8 +38,8 @@ function PhotoCard({ photo }: { photo: Photo }) {
         <p className="mt-1 text-xs text-brand-ink/60">{formatDateTime(photo.createdAt)}</p>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2 border-t border-brand-line pt-4">
-        {photo.status !== "approved" ? (
+      <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-brand-line pt-4">
+        {view === "active" && photo.status !== "approved" ? (
           <form action={moderatePhoto}>
             <input type="hidden" name="id" value={photo.id} />
             <input type="hidden" name="status" value="approved" />
@@ -42,7 +49,7 @@ function PhotoCard({ photo }: { photo: Photo }) {
           </form>
         ) : null}
 
-        {photo.status !== "hidden" ? (
+        {view === "active" && photo.status !== "hidden" ? (
           <form action={moderatePhoto}>
             <input type="hidden" name="id" value={photo.id} />
             <input type="hidden" name="status" value="hidden" />
@@ -52,61 +59,80 @@ function PhotoCard({ photo }: { photo: Photo }) {
           </form>
         ) : null}
 
-        <form action={removePhoto}>
-          <input type="hidden" name="id" value={photo.id} />
-          <button
-            type="submit"
-            className="inline-flex min-h-[44px] items-center px-2 text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-steel-500"
-          >
-            Delete
-          </button>
-        </form>
+        <ShelfActions table="photos" id={photo.id} view={view} />
       </div>
     </Card>
   );
 }
 
-export default async function AdminPhotosPage() {
+export default async function AdminPhotosPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>;
+}) {
   await requireAuth();
 
-  const photos = await listPhotos("all");
-  const pending = photos.filter((photo) => photo.status === "pending");
-  const rest = photos.filter((photo) => photo.status !== "pending");
+  const view = readView((await searchParams).view);
+  const [active, archived, trash] = await Promise.all([
+    listPhotos("all", "active"),
+    listPhotos("all", "archived"),
+    listPhotos("all", "trash"),
+  ]);
+  const photos = view === "active" ? active : view === "archived" ? archived : trash;
+  const pending = view === "active" ? photos.filter((photo) => photo.status === "pending") : [];
+  const rest = view === "active" ? photos.filter((photo) => photo.status !== "pending") : photos;
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-display-md">Photographs</h2>
         <p className="mt-2 text-sm text-brand-ink/70">
-          Uploads are invisible on the public album until you publish them. Deleting removes the
-          file from storage as well as the record.
+          Uploads are invisible on the public album until you publish them. Delete moves a
+          photograph to the recycle bin; the file itself only goes when the bin is emptied.
         </p>
       </div>
 
-      <section>
-        <h3 className="eyebrow">Waiting for you ({pending.length})</h3>
-        {pending.length === 0 ? (
-          <Card className="mt-4 text-center text-sm text-brand-ink/70">Nothing waiting.</Card>
-        ) : (
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {pending.map((photo) => (
-              <li key={photo.id}>
-                <PhotoCard photo={photo} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <div className="space-y-3">
+        <ViewChips
+          base="/admin/photos"
+          view={view}
+          counts={{ active: active.length, archived: archived.length, trash: trash.length }}
+        />
+        <ViewNote view={view} trashDays={TRASH_DAYS} />
+      </div>
+
+      {view === "active" ? (
+        <section>
+          <h3 className="eyebrow">Waiting for you ({pending.length})</h3>
+          {pending.length === 0 ? (
+            <Card className="mt-4 text-center text-sm text-brand-ink/70">Nothing waiting.</Card>
+          ) : (
+            <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {pending.map((photo) => (
+                <li key={photo.id}>
+                  <PhotoCard photo={photo} view={view} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ) : null}
 
       <section>
-        <h3 className="eyebrow">Everything else ({rest.length})</h3>
+        <h3 className="eyebrow">
+          {view === "active"
+            ? `Everything else (${rest.length})`
+            : view === "archived"
+              ? `Archived (${rest.length})`
+              : `In the recycle bin (${rest.length})`}
+        </h3>
         {rest.length === 0 ? (
           <Card className="mt-4 text-center text-sm text-brand-ink/70">Nothing here yet.</Card>
         ) : (
           <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {rest.map((photo) => (
               <li key={photo.id}>
-                <PhotoCard photo={photo} />
+                <PhotoCard photo={photo} view={view} />
               </li>
             ))}
           </ul>

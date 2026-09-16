@@ -3,7 +3,13 @@
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { SESSION_COOKIE, SESSION_MAX_AGE, checkPassword, createSessionToken } from "@/lib/auth";
+import {
+  ADMIN_HINT_COOKIE,
+  SESSION_COOKIE,
+  SESSION_MAX_AGE,
+  checkPassword,
+  createSessionToken,
+} from "@/lib/auth";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import type { ActionState } from "@/lib/types";
 
@@ -54,6 +60,14 @@ export async function signIn(_prev: ActionState, formData: FormData): Promise<Ac
     path: "/",
     maxAge: SESSION_MAX_AGE,
   });
+  // The hint is deliberately readable by the page. See lib/auth.ts.
+  store.set(ADMIN_HINT_COOKIE, "1", {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: SESSION_MAX_AGE,
+  });
 
   redirect(next);
 }
@@ -61,5 +75,6 @@ export async function signIn(_prev: ActionState, formData: FormData): Promise<Ac
 export async function signOut(): Promise<void> {
   const store = await cookies();
   store.delete(SESSION_COOKIE);
+  store.delete(ADMIN_HINT_COOKIE);
   redirect("/admin/login");
 }

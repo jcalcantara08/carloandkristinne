@@ -6,8 +6,11 @@ import type {
   GuestbookEntry,
   ModerationStatus,
   Photo,
+  RecordTable,
+  RecordView,
   Rsvp,
   RsvpGuest,
+  TrashItem,
 } from "@/lib/types";
 
 /**
@@ -16,9 +19,18 @@ import type {
  * Every read degrades to an empty result when the database is not
  * configured, so the site renders correctly before Supabase is wired up.
  * Writes report that plainly instead of pretending to succeed.
+ *
+ * Three shelves. Every reply, message and photograph is active, archived
+ * (kept for good, hidden) or in the recycle bin (deleted_at set, purged after
+ * TRASH_DAYS). The public site and the working views only ever see active
+ * rows; "all" exists for exports and the purge.
  */
 
 export const PHOTO_BUCKET = "guest-photos";
+export const SITE_BUCKET = "site-assets";
+
+/** How long a deleted record waits in the recycle bin before the purge. */
+export const TRASH_DAYS = 14;
 
 export type WriteResult = { ok: true } | { ok: false; reason: "not-configured" | "failed" };
 
@@ -27,11 +39,21 @@ const failed: WriteResult = { ok: false, reason: "failed" };
 
 export { isDatabaseConfigured };
 
+type Flags = { archived_at: string | null; deleted_at: string | null };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- supabase-js query builders are not generic over our row types
+function applyView(query: any, view: RecordView) {
+  if (view === "active") return query.is("archived_at", null).is("deleted_at", null);
+  if (view === "archived") return query.not("archived_at", "is", null).is("deleted_at", null);
+  if (view === "trash") return query.not("deleted_at", "is", null);
+  return query;
+}
+
 /* =========================
    RSVPs
    ========================= */
 
-type RsvpRow = {
+type RsvpRow = Flags & {
   id: string;
   created_at: string;
   name: string;
@@ -58,6 +80,8 @@ function toRsvp(row: RsvpRow): Rsvp {
     dietary: row.dietary,
     songRequest: row.song_request,
     message: row.message,
+    archivedAt: row.archived_at ?? null,
+    deletedAt: row.deleted_at ?? null,
   };
 }
 
@@ -94,14 +118,14 @@ export async function createRsvp(input: {
   return { ok: true };
 }
 
-export async function listRsvps(): Promise<Rsvp[]> {
+export async function listRsvps(view: RecordView = "active"): Promise<Rsvp[]> {
   const supabase = createAdminClient();
   if (!supabase) return [];
 
-  const { data, error } = await supabase
-    .from("rsvps")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const { data, error } = await applyView(
+    supabase.from("rsvps").select("*").order("created_at", { ascending: false }),
+    view,
+  );
 
   if (error) {
     console.error("[store] listRsvps failed:", error.message);
@@ -110,13 +134,14 @@ export async function listRsvps(): Promise<Rsvp[]> {
   return (data as RsvpRow[]).map(toRsvp);
 }
 
+/** Active replies only. Archived and binned replies never count towards seats. */
 export async function rsvpTotals(): Promise<{
   responses: number;
   attending: number;
   declined: number;
   headcount: number;
 }> {
-  const rsvps = await listRsvps();
+  const rsvps = await listRsvps("active");
   const attendingRows = rsvps.filter((r) => r.attending === "yes");
   return {
     responses: rsvps.length,
@@ -126,22 +151,11 @@ export async function rsvpTotals(): Promise<{
   };
 }
 
-export async function deleteRsvp(id: string): Promise<WriteResult> {
-  const supabase = createAdminClient();
-  if (!supabase) return notConfigured;
-  const { error } = await supabase.from("rsvps").delete().eq("id", id);
-  if (error) {
-    console.error("[store] deleteRsvp failed:", error.message);
-    return failed;
-  }
-  return { ok: true };
-}
-
 /* =========================
    Guestbook
    ========================= */
 
-type GuestbookRow = {
+type GuestbookRow = Flags & {
   id: string;
   created_at: string;
   name: string;
@@ -156,6 +170,8 @@ function toGuestbook(row: GuestbookRow): GuestbookEntry {
     name: row.name,
     message: row.message,
     status: row.status,
+    archivedAt: row.archived_at ?? null,
+    deletedAt: row.deleted_at ?? null,
   };
 }
 
@@ -180,11 +196,15 @@ export async function createGuestbookEntry(input: {
 export async function listGuestbook(
   status: ModerationStatus | "all" = "approved",
   limit?: number,
+  view: RecordView = "active",
 ): Promise<GuestbookEntry[]> {
   const supabase = createAdminClient();
   if (!supabase) return [];
 
-  let query = supabase.from("guestbook").select("*").order("created_at", { ascending: false });
+  let query = applyView(
+    supabase.from("guestbook").select("*").order("created_at", { ascending: false }),
+    view,
+  );
   if (status !== "all") query = query.eq("status", status);
   if (limit) query = query.limit(limit);
 
@@ -214,7 +234,7 @@ export async function setGuestbookStatus(
    Photos
    ========================= */
 
-type PhotoRow = {
+type PhotoRow = Flags & {
   id: string;
   created_at: string;
   storage_path: string;
@@ -225,9 +245,9 @@ type PhotoRow = {
   height: number | null;
 };
 
-function publicUrlFor(path: string): string {
+function publicUrlFor(bucket: string, path: string): string {
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-  return `${base}/storage/v1/object/public/${PHOTO_BUCKET}/${path}`;
+  return `${base}/storage/v1/object/public/${bucket}/${path}`;
 }
 
 function toPhoto(row: PhotoRow): Photo {
@@ -235,12 +255,14 @@ function toPhoto(row: PhotoRow): Photo {
     id: row.id,
     createdAt: row.created_at,
     storagePath: row.storage_path,
-    publicUrl: publicUrlFor(row.storage_path),
+    publicUrl: publicUrlFor(PHOTO_BUCKET, row.storage_path),
     uploaderName: row.uploader_name,
     caption: row.caption,
     status: row.status,
     width: row.width,
     height: row.height,
+    archivedAt: row.archived_at ?? null,
+    deletedAt: row.deleted_at ?? null,
   };
 }
 
@@ -290,11 +312,15 @@ export async function uploadPhoto(input: {
 
 export async function listPhotos(
   status: ModerationStatus | "all" = "approved",
+  view: RecordView = "active",
 ): Promise<Photo[]> {
   const supabase = createAdminClient();
   if (!supabase) return [];
 
-  let query = supabase.from("photos").select("*").order("created_at", { ascending: false });
+  let query = applyView(
+    supabase.from("photos").select("*").order("created_at", { ascending: false }),
+    view,
+  );
   if (status !== "all") query = query.eq("status", status);
 
   const { data, error } = await query;
@@ -316,28 +342,180 @@ export async function setPhotoStatus(id: string, status: ModerationStatus): Prom
   return { ok: true };
 }
 
-export async function deletePhoto(id: string): Promise<WriteResult> {
+/* =========================
+   The three shelves: archive, recycle bin, restore, delete for good
+   ========================= */
+
+/**
+ * Archive keeps the record for good and hides it. Trash moves it to the
+ * recycle bin (and clears any archive stamp, so a restore from the bin lands
+ * it back on the active shelf). Restore clears both stamps.
+ */
+export async function setRecordShelf(
+  table: RecordTable,
+  id: string,
+  shelf: "archive" | "trash" | "restore",
+): Promise<WriteResult> {
   const supabase = createAdminClient();
   if (!supabase) return notConfigured;
 
-  const { data, error: readError } = await supabase
-    .from("photos")
-    .select("storage_path")
-    .eq("id", id)
-    .single();
+  const now = new Date().toISOString();
+  const patch =
+    shelf === "archive"
+      ? { archived_at: now }
+      : shelf === "trash"
+        ? { deleted_at: now, archived_at: null }
+        : { archived_at: null, deleted_at: null };
 
-  if (readError || !data) {
-    console.error("[store] deletePhoto lookup failed:", readError?.message);
-    return failed;
-  }
-
-  await supabase.storage.from(PHOTO_BUCKET).remove([(data as { storage_path: string }).storage_path]);
-  const { error } = await supabase.from("photos").delete().eq("id", id);
+  const { error } = await supabase.from(table).update(patch).eq("id", id);
   if (error) {
-    console.error("[store] deletePhoto failed:", error.message);
+    console.error(`[store] setRecordShelf ${table} ${shelf} failed:`, error.message);
     return failed;
   }
   return { ok: true };
+}
+
+/**
+ * Removes a row permanently. For a photograph the storage object goes too.
+ * Only the recycle bin and the purge call this; nothing else deletes.
+ */
+export async function deleteForGood(table: RecordTable, id: string): Promise<WriteResult> {
+  const supabase = createAdminClient();
+  if (!supabase) return notConfigured;
+
+  if (table === "photos") {
+    const { data } = await supabase.from("photos").select("storage_path").eq("id", id).maybeSingle();
+    const path = (data as { storage_path: string } | null)?.storage_path;
+    if (path) await supabase.storage.from(PHOTO_BUCKET).remove([path]);
+  }
+
+  const { error } = await supabase.from(table).delete().eq("id", id);
+  if (error) {
+    console.error(`[store] deleteForGood ${table} failed:`, error.message);
+    return failed;
+  }
+  return { ok: true };
+}
+
+function daysLeft(deletedAt: string, now: number): number {
+  const purgeAt = new Date(deletedAt).getTime() + TRASH_DAYS * 86_400_000;
+  return Math.max(0, Math.ceil((purgeAt - now) / 86_400_000));
+}
+
+/** Everything in the recycle bin, newest deletion first. */
+export async function listTrash(now = Date.now()): Promise<TrashItem[]> {
+  const [rsvps, entries, photos] = await Promise.all([
+    listRsvps("trash"),
+    listGuestbook("all", undefined, "trash"),
+    listPhotos("all", "trash"),
+  ]);
+
+  const items: TrashItem[] = [
+    ...rsvps.map((r) => ({
+      table: "rsvps" as const,
+      id: r.id,
+      title: r.name,
+      detail: r.attending === "yes" ? `Reply, coming (${r.partySize})` : "Reply, cannot make it",
+      deletedAt: r.deletedAt ?? "",
+      daysLeft: daysLeft(r.deletedAt ?? "", now),
+    })),
+    ...entries.map((e) => ({
+      table: "guestbook" as const,
+      id: e.id,
+      title: e.name,
+      detail: `Message: ${e.message.length > 80 ? `${e.message.slice(0, 80).trim()}...` : e.message}`,
+      deletedAt: e.deletedAt ?? "",
+      daysLeft: daysLeft(e.deletedAt ?? "", now),
+    })),
+    ...photos.map((p) => ({
+      table: "photos" as const,
+      id: p.id,
+      title: p.uploaderName ?? "Anonymous",
+      detail: p.caption ? `Photograph: ${p.caption}` : "Photograph",
+      deletedAt: p.deletedAt ?? "",
+      daysLeft: daysLeft(p.deletedAt ?? "", now),
+      imageUrl: p.publicUrl,
+    })),
+  ];
+
+  return items.sort((a, b) => b.deletedAt.localeCompare(a.deletedAt));
+}
+
+/**
+ * Empties the recycle bin of anything older than TRASH_DAYS. Runs from the
+ * daily cron; returns how many records were removed for good.
+ */
+export async function purgeTrash(now = Date.now()): Promise<number> {
+  const supabase = createAdminClient();
+  if (!supabase) return 0;
+
+  const cutoff = new Date(now - TRASH_DAYS * 86_400_000).toISOString();
+  let removed = 0;
+
+  for (const table of ["rsvps", "guestbook", "photos"] as const) {
+    const { data, error } = await supabase
+      .from(table)
+      .select("id")
+      .not("deleted_at", "is", null)
+      .lt("deleted_at", cutoff);
+    if (error) {
+      console.error(`[store] purgeTrash scan ${table} failed:`, error.message);
+      continue;
+    }
+    for (const row of (data ?? []) as { id: string }[]) {
+      const result = await deleteForGood(table, row.id);
+      if (result.ok) removed += 1;
+    }
+  }
+  return removed;
+}
+
+/* =========================
+   Page content and the couple's own photographs
+   ========================= */
+
+export async function readSiteDoc<T>(key: string, fallback: T): Promise<T> {
+  const supabase = createAdminClient();
+  if (!supabase) return fallback;
+  const { data, error } = await supabase.from("site_docs").select("data").eq("key", key).maybeSingle();
+  if (error) {
+    console.error("[store] readSiteDoc failed:", error.message);
+    return fallback;
+  }
+  return ((data as { data: T } | null)?.data ?? fallback) as T;
+}
+
+export async function writeSiteDoc(key: string, data: unknown): Promise<WriteResult> {
+  const supabase = createAdminClient();
+  if (!supabase) return notConfigured;
+  const { error } = await supabase
+    .from("site_docs")
+    .upsert({ key, data, updated_at: new Date().toISOString() }, { onConflict: "key" });
+  if (error) {
+    console.error("[store] writeSiteDoc failed:", error.message);
+    return failed;
+  }
+  return { ok: true };
+}
+
+/** Uploads one of the couple's own photographs and returns its public URL. */
+export async function uploadSiteAsset(input: {
+  file: File;
+  extension: string;
+}): Promise<{ ok: true; url: string } | { ok: false; reason: "not-configured" | "failed" }> {
+  const supabase = createAdminClient();
+  if (!supabase) return { ok: false, reason: "not-configured" };
+  if (input.file.size > GALLERY.maxUploadBytes) return { ok: false, reason: "failed" };
+
+  const path = `${crypto.randomUUID()}.${input.extension}`;
+  const { error } = await supabase.storage
+    .from(SITE_BUCKET)
+    .upload(path, input.file, { contentType: input.file.type, cacheControl: "31536000", upsert: false });
+  if (error) {
+    console.error("[store] uploadSiteAsset failed:", error.message);
+    return { ok: false, reason: "failed" };
+  }
+  return { ok: true, url: publicUrlFor(SITE_BUCKET, path) };
 }
 
 /* =========================

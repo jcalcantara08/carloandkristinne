@@ -7,7 +7,9 @@ import { Card } from "@/components/ui/Card";
 import { PendingBlock } from "@/components/Pending";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
-import { ENTOURAGE_FOOTNOTE, ENTOURAGE_GROUPS, SHOW_PENDING } from "@/lib/constants";
+import { getContent } from "@/lib/content";
+import { linesToPeople } from "@/lib/content-schema";
+import { SHOW_PENDING } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "Entourage",
@@ -16,18 +18,21 @@ export const metadata: Metadata = pageMeta({
   path: "/entourage",
 });
 
-export default function EntouragePage() {
+/**
+ * Every group and every name comes from the site document (Edit the website,
+ * Entourage), typed one person per line as Name | Role | Note. A group with
+ * no names yet is not shown to guests.
+ */
+export default async function EntouragePage() {
+  const { entourage } = await getContent();
+  const groups = entourage.groups.map((group) => ({ ...group, list: linesToPeople(group.people) }));
+
   return (
     <>
       <PageHeader
-        eyebrow="The people"
-        title="Who is standing with them"
-        intro={
-          <p>
-            The people walking down the aisle with them, and the two very small ones carrying the
-            most important things.
-          </p>
-        }
+        eyebrow={entourage.eyebrow}
+        title={entourage.title}
+        intro={entourage.intro ? <p>{entourage.intro}</p> : undefined}
       >
         <Link href="/programme" className="btn-primary w-full sm:w-auto">
           The programme
@@ -37,57 +42,56 @@ export default function EntouragePage() {
         </Link>
       </PageHeader>
 
-      {ENTOURAGE_GROUPS.filter((group) => group.people.length > 0 || SHOW_PENDING).map((group) => (
-        <Section key={group.key}>
-          <div className="container">
-            <SectionHeading
-              eyebrow={group.blurb}
-              title={group.title}
-            />
+      {groups
+        .filter((group) => group.list.length > 0 || SHOW_PENDING)
+        .map((group) => (
+          <Section key={group.title}>
+            <div className="container">
+              <SectionHeading eyebrow={group.blurb} title={group.title} />
 
-            {group.people.length > 0 ? (
-              <ul className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {group.people.map((person, index) => (
-                  <Reveal as="li" key={person.name} delay={index * 80}>
-                    <Card hover className="h-full text-center">
-                      <p className="eyebrow">{person.role}</p>
-                      <p className="mt-4 font-display text-xl text-brand-ink">{person.name}</p>
-                      {person.note ? (
-                        <p className="mt-2 text-xs text-brand-ink/60">{person.note}</p>
-                      ) : null}
-                    </Card>
-                  </Reveal>
-                ))}
-              </ul>
-            ) : (
-              <Reveal delay={80}>
-                <PendingBlock
-                  className="mx-auto mt-12 max-w-2xl"
-                  title={`${group.title} are still being confirmed`}
-                  note={group.pendingNote ?? "Names go up here as soon as they are set."}
-                />
-              </Reveal>
-            )}
+              {group.list.length > 0 ? (
+                <ul className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.list.map((person, index) => (
+                    <Reveal as="li" key={`${person.name}-${index}`} delay={index * 80}>
+                      <Card hover className="h-full text-center">
+                        {person.role ? <p className="eyebrow">{person.role}</p> : null}
+                        <p className="mt-4 font-display text-xl text-brand-ink">{person.name}</p>
+                        {person.note ? (
+                          <p className="mt-2 text-xs text-brand-ink/60">{person.note}</p>
+                        ) : null}
+                      </Card>
+                    </Reveal>
+                  ))}
+                </ul>
+              ) : (
+                <Reveal delay={80}>
+                  <PendingBlock
+                    className="mx-auto mt-12 max-w-2xl"
+                    title={`${group.title} are still being confirmed`}
+                    note={group.pendingNote || "Names go up here as soon as they are set."}
+                  />
+                </Reveal>
+              )}
+            </div>
+          </Section>
+        ))}
+
+      {entourage.footnote ? (
+        <Section>
+          <div className="container">
+            <Reveal>
+              <Card className="mx-auto max-w-2xl border-brand-steel-600/30 text-center">
+                <p className="eyebrow">{entourage.footnoteEyebrow}</p>
+                <p className="mt-4 text-base leading-relaxed text-brand-ink/80">{entourage.footnote}</p>
+              </Card>
+            </Reveal>
           </div>
         </Section>
-      ))}
-
-      <Section>
-        <div className="container">
-          <Reveal>
-            <Card className="mx-auto max-w-2xl border-brand-steel-600/30 text-center">
-              <p className="eyebrow">A note on flowers</p>
-              <p className="mt-4 text-base leading-relaxed text-brand-ink/80">
-                {ENTOURAGE_FOOTNOTE}
-              </p>
-            </Card>
-          </Reveal>
-        </div>
-      </Section>
+      ) : null}
 
       <CtaBanner
-        title="Are you on this list?"
-        body="If you are, you already know. Either way, Carlo and Kristinne would love to have you in the room."
+        title={entourage.ctaTitle}
+        body={entourage.ctaBody}
         secondary={{ href: "/programme", label: "See the programme" }}
       />
 

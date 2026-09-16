@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
-import { ATTIRE_PALETTE, DRESS_CODE, DRESS_NOTE } from "@/lib/constants";
+import { ATTIRE_PALETTE, DRESS_CODE } from "@/lib/constants";
+import { getContent } from "@/lib/content";
 
 /**
  * The dress code, which is also the clearest statement of the site's palette.
@@ -8,18 +9,26 @@ import { ATTIRE_PALETTE, DRESS_CODE, DRESS_NOTE } from "@/lib/constants";
  * The swatch is never the only cue: every row names its colour in words, so
  * the table works for a colour-blind guest and in a screen reader.
  */
-export function DressCode() {
+export async function DressCode() {
+  const { details } = await getContent();
+  // Swatches stay in code (they are the palette, not copy) and follow the
+  // row's position; a row the couple add beyond the known ones gets the
+  // last swatch rather than none.
+  const rows = details.dressCode.map((row, index) => ({
+    ...row,
+    swatch: (DRESS_CODE[index] ?? DRESS_CODE[DRESS_CODE.length - 1]).swatch,
+  }));
   return (
     <Section id="dress-code" on="tint">
       <div className="container">
         <SectionHeading
-          eyebrow="What to wear"
-          title="The blues, and white is theirs"
-          intro={<p>{DRESS_NOTE}</p>}
+          eyebrow={details.dressEyebrow}
+          title={details.dressTitle}
+          intro={details.dressNote ? <p>{details.dressNote}</p> : undefined}
         />
 
         <ul className="mx-auto mt-12 grid max-w-3xl gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line sm:grid-cols-2">
-          {DRESS_CODE.map((role, index) => (
+          {rows.map((role, index) => (
             <Reveal
               as="li"
               key={role.role}

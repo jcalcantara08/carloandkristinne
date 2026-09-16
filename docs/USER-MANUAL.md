@@ -69,8 +69,16 @@ notes and song requests. The Download CSV button is here.
 takes it down again without deleting it.
 
 **Photographs.** Guest uploads. Publish adds one to the public album, where
-anyone can view and download it at full size. Delete removes the actual file
-as well as the record and cannot be undone.
+anyone can view and download it at full size. Delete moves one to the recycle
+bin; the file itself only goes when the bin lets it go.
+
+**Edit the website.** One entry per public page (Home, Our story, Details,
+Programme, Entourage, Gallery, Guestbook, RSVP). Each is a form holding every
+headline, paragraph, list and photograph on that page. Save and publish is
+live at once. See section 8.
+
+**Recycle bin.** Everything you have deleted, with the day each item goes for
+good. Restore or Delete for good from here. See section 6.
 
 **Manual.** This guide, inside the site.
 
@@ -80,8 +88,27 @@ as well as the record and cannot be undone.
 
 Replies cannot be edited by guests once sent. If somebody needs to change
 theirs, they message Erick and he changes it in the database. If somebody
-replied twice, delete the older one. Deleting is permanent, so read both
-first.
+replied twice, archive or delete the older one. Only active replies count
+towards the headcount.
+
+### Archive, delete, and the recycle bin
+
+Every reply, message and photograph sits on one of three shelves, switched
+with the **Active / Archived / Recycle bin** chips at the top of each list.
+
+- **Active** is the working list, and the only shelf the public site reads.
+- **Archive** keeps a record for good but hides it from the list and the
+  site. Use it for a duplicate reply you want to keep, a message you have
+  dealt with, or a photograph you want out of the album without losing it.
+  **Restore** brings it back.
+- **Delete** moves a record to the **recycle bin**. It waits there 14 days.
+  **Restore** puts it back where it came from; **Delete for good** removes it
+  now, and there is no way back after that. Anything still in the bin after
+  14 days is removed by itself, at two in the morning, files included.
+
+The **Recycle bin** page in the side panel shows everything in the bin at
+once, whichever list it came from, with the day each item goes. **Empty the
+bin** removes all of it now.
 
 ### The number the caterer needs
 
@@ -103,8 +130,8 @@ writer is not told.
 
 These arrive after the wedding, mostly in the week after. Check the
 Photographs page daily that week. Publish the good ones. Hide anything that
-should not be in the album. Use Delete only if it must be gone from storage
-entirely.
+should not be in the album. Archive keeps one out of the way; Delete sends it
+to the recycle bin, and the file leaves storage only when the bin lets it go.
 
 You upload your own photographs the same way a guest does, on the Gallery
 page, then approve them in the dashboard. One process to learn instead of two.
@@ -124,34 +151,50 @@ page in the dashboard; it is the source of truth.
 
 ## 8. Changing what the site says
 
-Almost every fact on the public pages lives in one file, `lib/constants.ts`:
-venue names, times, the programme, the entourage, the dress code, the
-questions and answers.
+Open **Edit the website** in the side panel and pick the page. Each page is
+one form with every headline, paragraph, list and photograph on it. Press
+**Save and publish** and the public page shows the change at once; the **Open
+the live page** link at the top of the form is there to check it. While you
+are signed in, every public page also shows an **Edit this page** button at
+the bottom right that opens the right form. Guests never see it.
 
-Anything not decided yet is marked as pending in that file, and the public
-site simply leaves it out: no chip, no blank, and never a made-up answer. Fill
-in the real value and it appears by itself.
+Leave a field empty and that line is simply not shown: no chip, no blank, and
+never a made-up answer. That is how the things below stay hidden until you
+have them. Fill one in and it appears by itself.
 
-Things guests currently cannot see because they are still pending:
+Things guests currently cannot see because they are still empty:
 
-- the church name and address
-- the reception venue name and address
-- both map links
+- the church name, address and map link (Details)
+- the reception venue name, address and map link (Details)
 - the principal sponsors, secondary sponsors, bridesmaids and groomsmen
-- Erick's guest-facing email and phone number
-- the on-the-day coordinator
+  (Entourage)
+- your own story, how you met and how he asked (Our story)
+- Erick's guest-facing email and phone number (Details)
+- the hero photograph (Home)
 
-Ask Erick to make these edits. Once the site is connected to its hosting, a
-saved change goes live automatically in about a minute; there is no publish
-button to press.
+**Lists.** The questions and answers, the programme, the dress code rows, the
+entourage groups and the small cards all work the same way: a blank row at
+the bottom adds one, and blanking a row's title removes it. Entourage names
+are typed one per line as `Name | Role | Note`; the note is optional.
+
+**Photographs on the pages.** The hero photograph is uploaded from the Home
+form. A landscape photograph of the two of you, under 12 MB. Guests' album
+photographs still come in through the Gallery page and are approved under
+Photographs.
+
+Three things stay in code on purpose and need Erick: the wedding date (it
+drives the countdown and the calendar), the guest cap of 100 and the RSVP
+form's own limits, and the colours. A change he makes goes live about a
+minute after he publishes it.
 
 ### The reception programme
 
 The Programme page shows the full traditional running order from the host's
-programme sheet, twenty-six items from the opening dance to the closing
-remark. The clock times for the reception are not typed in anywhere: each
-item has a length, and the site works every time out from the 7:15 PM doors.
-Change one length and everything after it moves by itself.
+programme sheet, from the opening dance to the closing remark. The clock
+times for the reception are not typed in anywhere: each reception item has
+a number of minutes, and the site works every time out from the doors time
+on the Programme form. Change one length and everything after it moves by
+itself. Day items (morning to the church) carry their own clock time.
 
 Two numbers worth knowing: dinner is called at about a quarter to nine, and
 the evening finishes at about half past eleven.

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Countdown } from "@/components/Countdown";
 import { Monogram } from "@/components/Monogram";
 import { Reveal } from "@/components/Reveal";
-import { COUPLE, HERO_PHOTO, SITE, WEDDING_DAY } from "@/lib/constants";
+import { COUPLE, SITE, WEDDING_DAY } from "@/lib/constants";
+import { getContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,8 +21,10 @@ import { cn } from "@/lib/utils";
  * it ugly. The reviewed sites are centred, classic and unhurried, and so is
  * this.
  */
-export function Hero() {
-  const photo = HERO_PHOTO.pending ? null : HERO_PHOTO.value;
+export async function Hero() {
+  const { home } = await getContent();
+  // Set from the dashboard (Edit the website, Home). Empty means type only.
+  const photo = home.heroPhoto ? { src: home.heroPhoto, alt: home.heroPhotoAlt } : null;
 
   return (
     <section
@@ -93,20 +96,21 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={240}>
-            <p className={cn("mx-auto mt-6 max-w-md text-base leading-relaxed", photo ? "text-brand-paper/85" : "text-brand-ink/75")}>
-              In their own words: makulit, masayahin, simple lang. You are warmly invited to be
-              there when they promise it out loud.
-            </p>
+            {home.intro ? (
+              <p className={cn("mx-auto mt-6 max-w-md text-base leading-relaxed", photo ? "text-brand-paper/85" : "text-brand-ink/75")}>
+                {home.intro}
+              </p>
+            ) : null}
           </Reveal>
 
           {/* Always exactly two. Primary plus outline. */}
           <Reveal delay={280}>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link href="/rsvp" className={cn("w-full sm:w-auto", photo ? "btn-primary-inverse" : "btn-primary")}>
-                RSVP
+                {home.primaryLabel || "RSVP"}
               </Link>
               <Link href="/details" className={cn("w-full sm:w-auto", photo ? "btn-outline-inverse" : "btn-outline")}>
-                The details
+                {home.secondaryLabel || "The details"}
               </Link>
             </div>
           </Reveal>

@@ -1,14 +1,30 @@
 import { requireAuth } from "@/lib/admin-guard";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { listRsvps, rsvpTotals } from "@/lib/store";
+import { listRsvps, rsvpTotals, TRASH_DAYS } from "@/lib/store";
 import { formatDateTime } from "@/lib/utils";
-import { removeRsvp } from "@/app/admin/(dashboard)/actions";
+import {
+  ShelfActions,
+  ViewChips,
+  ViewNote,
+  readView,
+} from "@/app/admin/(dashboard)/shelf-controls";
 
-export default async function AdminRsvpsPage() {
+export default async function AdminRsvpsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>;
+}) {
   await requireAuth();
 
-  const [rsvps, totals] = await Promise.all([listRsvps(), rsvpTotals()]);
+  const view = readView((await searchParams).view);
+  const [active, archived, trash, totals] = await Promise.all([
+    listRsvps("active"),
+    listRsvps("archived"),
+    listRsvps("trash"),
+    rsvpTotals(),
+  ]);
+  const rsvps = view === "active" ? active : view === "archived" ? archived : trash;
 
   return (
     <div className="space-y-6">
@@ -26,11 +42,24 @@ export default async function AdminRsvpsPage() {
         </a>
       </div>
 
+      <ViewChips
+        base="/admin/rsvps"
+        view={view}
+        counts={{ active: active.length, archived: archived.length, trash: trash.length }}
+      />
+      <ViewNote view={view} trashDays={TRASH_DAYS} />
+
       {rsvps.length === 0 ? (
         <Card className="text-center">
-          <p className="font-display text-display-md">No replies yet</p>
+          <p className="font-display text-display-md">
+            {view === "active" ? "No replies yet" : "Nothing here"}
+          </p>
           <p className="mt-3 text-sm text-brand-ink/70">
-            They appear here the moment somebody submits the form.
+            {view === "active"
+              ? "They appear here the moment somebody submits the form."
+              : view === "archived"
+                ? "Archive a reply to keep it out of the way without losing it."
+                : "Deleted replies wait here for 14 days before they go for good."}
           </p>
         </Card>
       ) : (
@@ -108,16 +137,8 @@ export default async function AdminRsvpsPage() {
                   ) : null}
                 </dl>
 
-                <div className="mt-5 border-t border-brand-line pt-4">
-                  <form action={removeRsvp}>
-                    <input type="hidden" name="id" value={rsvp.id} />
-                    <button
-                      type="submit"
-                      className="text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-steel-500"
-                    >
-                      Delete this reply
-                    </button>
-                  </form>
+                <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-brand-line pt-4">
+                  <ShelfActions table="rsvps" id={rsvp.id} view={view} />
                 </div>
               </Card>
             </li>

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Monogram } from "@/components/Monogram";
-import { RSVP, WEDDING_DAY } from "@/lib/constants";
+import { WEDDING_DAY } from "@/lib/constants";
+import { getContent } from "@/lib/content";
 
 /**
  * The closing CTA, and the single dark band on the page.
@@ -11,9 +12,9 @@ import { RSVP, WEDDING_DAY } from "@/lib/constants";
  * way down, so it reads as the evening closing in rather than as gloom.
  * There is never a second dark band on a page: two stops being punctuation.
  */
-export function CtaBanner({
-  title = "Will we see you there?",
-  body = "There are a hundred seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.",
+export async function CtaBanner({
+  title,
+  body,
   primary = { href: "/rsvp", label: "Send your RSVP" },
   secondary = { href: "/details", label: "Read the details" },
 }: {
@@ -22,6 +23,9 @@ export function CtaBanner({
   primary?: { href: string; label: string };
   secondary?: { href: string; label: string };
 }) {
+  const { home, rsvp } = await getContent();
+  const heading = title ?? home.ctaTitle;
+  const text = body ?? home.ctaBody;
   return (
     <section className="section on-ink relative overflow-hidden">
       {/* A soft bloom, so the black has depth rather than sitting flat. */}
@@ -37,12 +41,14 @@ export function CtaBanner({
 
         <Reveal delay={80}>
           <p className="eyebrow mt-6">{WEDDING_DAY.dateShort}</p>
-          <h2 className="mt-4 text-display-lg">{title}</h2>
+          <h2 className="mt-4 text-display-lg">{heading}</h2>
           <div aria-hidden="true" className="rule mx-auto mt-6" />
-          <p className="prose-body mx-auto mt-6">{body}</p>
-          <p className="mt-3 text-sm font-medium text-brand-paper/70">
-            Kindly reply by {RSVP.deadlineLabel}.
-          </p>
+          {text ? <p className="prose-body mx-auto mt-6">{text}</p> : null}
+          {rsvp.deadlineLabel ? (
+            <p className="mt-3 text-sm font-medium text-brand-paper/70">
+              {rsvp.closingLine || "Kindly reply by"} {rsvp.deadlineLabel}.
+            </p>
+          ) : null}
         </Reveal>
 
         <Reveal delay={160}>

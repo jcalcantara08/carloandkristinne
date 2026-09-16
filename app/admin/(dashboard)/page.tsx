@@ -1,17 +1,18 @@
 import Link from "next/link";
 import { requireAuth } from "@/lib/admin-guard";
 import { Card } from "@/components/ui/Card";
-import { listGuestbook, listPhotos, rsvpTotals } from "@/lib/store";
+import { listGuestbook, listPhotos, listTrash, rsvpTotals, TRASH_DAYS } from "@/lib/store";
 import { RSVP, WEDDING_DATE_ISO, WEDDING_DAY } from "@/lib/constants";
 
 export default async function AdminOverviewPage() {
   await requireAuth();
 
-  const [totals, pendingMessages, pendingPhotos, approvedPhotos] = await Promise.all([
+  const [totals, pendingMessages, pendingPhotos, approvedPhotos, trash] = await Promise.all([
     rsvpTotals(),
     listGuestbook("pending"),
     listPhotos("pending"),
     listPhotos("approved"),
+    listTrash(),
   ]);
 
   // Unlike the public countdown, reading the clock here is correct and safe:
@@ -118,6 +119,32 @@ export default async function AdminOverviewPage() {
           </p>
           <Link href="/admin/photos" className="btn-outline mt-5 px-5 py-2.5 text-xs">
             Review photographs
+          </Link>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Card>
+          <h2 className="text-display-md">Edit the website</h2>
+          <p className="mt-3 text-sm text-brand-ink/75">
+            Every headline, paragraph, list and photograph on the public pages, editable here. Save
+            publishes straight away.
+          </p>
+          <Link href="/admin/pages" className="btn-outline mt-5 px-5 py-2.5 text-xs">
+            Open the editor
+          </Link>
+        </Card>
+
+        <Card>
+          <h2 className="text-display-md">Recycle bin</h2>
+          <p className="mt-3 text-sm text-brand-ink/75">
+            {trash.length === 0
+              ? "Empty. Anything you delete waits here for "
+              : `${trash.length} ${trash.length === 1 ? "item" : "items"} waiting. Each goes for good `}
+            {TRASH_DAYS} days{trash.length === 0 ? " before it goes for good." : " after it was deleted."}
+          </p>
+          <Link href="/admin/recycle-bin" className="btn-outline mt-5 px-5 py-2.5 text-xs">
+            Open the bin
           </Link>
         </Card>
       </div>

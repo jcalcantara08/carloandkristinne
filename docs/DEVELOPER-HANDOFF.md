@@ -41,6 +41,13 @@ the migrations were run through the SQL Editor, and a live RSVP, guestbook
 message and photo upload were verified against the database. Resend is
 connected in test mode. The admin secrets are set on Vercel.
 
+**Pending on the hosting side (17 September 2026, later):** migration
+`0004_recycle_bin_archive_content.sql` must be run in the Supabase SQL Editor
+and `CRON_SECRET` set on Vercel. Until the migration runs, the dashboard's
+Archive, Delete and Edit the website actions fail quietly (the store logs the
+column or table error) and the public pages fall back to the defaults in
+code. Until the secret is set, the recycle bin never purges by itself.
+
 **What does not exist yet:** the domain. When `carloandkristinne.com` is
 bought, add it in Vercel Domains, change `NEXT_PUBLIC_SITE_URL` to match,
 verify the domain in Resend and change `FROM_EMAIL`, then redeploy.
@@ -243,6 +250,27 @@ yes/no, `party_size` int 0 to 20, `guests` jsonb `[{name, isChild}]`,
 text, `detail` text. Append-only. Written on every admin mutation and every
 CSV export.
 
+**The three shelves (0004).** `rsvps`, `guestbook` and `photos` each carry
+`archived_at` and `deleted_at` (timestamptz, nullable, partial index on
+`deleted_at`). Both null is active; `archived_at` set is archived (kept for
+good, hidden); `deleted_at` set is the recycle bin. `lib/store.ts` filters
+every list by `RecordView` and the public site only ever reads `active`.
+`setRecordShelf()` moves between shelves (trash clears the archive stamp so a
+restore lands active), `deleteForGood()` is the only hard delete (it removes
+the storage object for a photograph), `listTrash()` unifies the bin, and
+`purgeTrash()` removes anything older than `TRASH_DAYS` (14). The purge runs
+from `app/api/cron/purge/route.ts`, scheduled in `vercel.json` at 18:00 UTC
+(02:00 Manila) and gated by `CRON_SECRET`; without the secret it refuses every
+call and the bin simply keeps things.
+
+**`site_docs`** (0004): `key` text primary key, `data` jsonb, `updated_at`.
+One document per key; today only `content`, the words and photographs on the
+public pages. RLS on, no policies, service role only, like the rest.
+
+**Storage bucket `site-assets`** (0004): the couple's own photographs on the
+pages (the hero, for now). Same rules as `guest-photos`: public read, server
+writes only, random UUID names, 12 MB, JPEG/PNG/WebP/HEIC.
+
 **RLS is enabled on all four tables with no policies at all**, and `anon` and
 `authenticated` have every grant revoked. That is deliberate: nothing in the
 browser ever needs the database. Do not add a "public read approved rows"
@@ -254,6 +282,52 @@ asked that anyone be able to download originals with no account and no
 expiring link. Paths are unguessable UUIDs. There is no write policy, so no
 client can upload directly; every object is written by the server after a
 real MIME and size check. 12 MB limit, JPEG, PNG, WebP, HEIC and HEIF.
+
+## 10a. Editable page content
+
+`lib/content-schema.ts` is the whole model, with no server imports so the
+client nav can read the section list:
+
+- `SiteContent`: every headline, paragraph, list and photograph on the
+  public pages. Strings only; `""` means "not set" and is never rendered.
+- `DEFAULT_CONTENT`: the defaults, built from `lib/constants.ts` and the copy
+  that used to sit in each page.
+- `CONTENT_SECTIONS`: one section per public page, listing its fields.
+  Scalar fields are `text`, `textarea`, `url` or `image`; a `list` field
+  names its item fields and the `required` key that decides whether a row
+  exists (blank it to remove the row). Lists are posted as numbered rows
+  under `path.N.key` with a hidden `path.count`.
+- `mergeContent()`: stored over defaults, key by key for objects, whole for
+  arrays and scalars, so a field added later in code never breaks an older
+  saved document.
+- `receptionTimeline()` and `clockToMinutes()`: the reception clock is
+  derived from `programme.doors` and each item's minutes, as before.
+
+`lib/content.ts` (server only) is `getContent()`, the merge wrapped in React
+`cache()` so a page's sections read the document once per request, and
+`saveContent()`. Every public page and home section calls `getContent()`;
+the pages stay static (`○` in the build output) because nothing reads
+cookies or headers, and the editor's action calls `revalidatePath()` on every
+public path after a save.
+
+The editor is `app/admin/(dashboard)/pages/page.tsx` with its action in
+`pages/actions.ts`: sanitise with `normalizeText` / `normalizeMultiline`,
+keep only http(s) URLs, cap text at 600 and paragraphs at 6000 characters and
+lists at 60 rows, upload an image through `uploadSiteAsset()`, save, audit,
+revalidate, redirect back with `saved=1` or `error=`.
+
+`components/EditPageButton.tsx` draws "Edit this page" on public pages for a
+signed-in owner. It reads `ck_admin_hint`, a non-httpOnly companion cookie
+set and cleared beside the session cookie in `app/admin/login/actions.ts`.
+The hint grants nothing; it only decides whether the button is drawn, and it
+is read with `useSyncExternalStore` on the client so the static HTML is the
+same for everyone.
+
+What stays in `lib/constants.ts` on purpose: the date and time (countdown,
+calendar, email), `WEDDING_DAY`, `RSVP.maxPartySize` and the form limits,
+`GALLERY` limits, `NAV`, `SITE`, the attire palette and dress-code swatches.
+Non-negotiable 3 in `CLAUDE.md` now reads: every wedding fact comes from
+`lib/constants.ts` or the site document; never hardcode one in a component.
 
 ## 11. Third-party integrations, and how each degrades
 
@@ -516,6 +590,26 @@ fire and `Reveal` content stays at opacity 0 in screenshots. Force
 `.is-visible` on `.reveal` elements before capturing, and use
 `behavior: "instant"` for programmatic scrolls, because the smooth scroll in
 `globals.css` never completes there.
+
+### Recycle bin, archive and Edit the website (17 September 2026)
+
+Asked for by the owner, modelled on the Centennial Events Hall dashboard, and
+checked against current practice (SharePoint 93 days, Salesforce 15, Fabric 7
+to 90; all agree on a dedicated bin view, self-service restore and a confirmed
+permanent delete). Retention here is 14 days, the studio's house number.
+
+- Migration `0004_recycle_bin_archive_content.sql`. Run it in the Supabase SQL
+  Editor like the first three; it is additive and safe to re-run.
+- `CRON_SECRET` is a new required variable on Vercel. Until it is set the
+  purge route returns 401 and nothing is ever removed for good by itself.
+- The three list pages take `?view=active|archived|trash`. The shared chips,
+  buttons and copy live in `app/admin/(dashboard)/shelf-controls.tsx`; the two
+  irreversible buttons use `confirm-button.tsx` (a browser confirm).
+- `removePhoto` and `removeRsvp` are gone. Nothing outside `deleteForGood()`
+  hard-deletes, and only the bin and the purge call it.
+- Test and template rows: the owner asked that everything test-like be
+  deleted. That is done from the dashboard (Delete, or Empty the bin), not by
+  a migration, so it goes through the audit log like everything else.
 
 ## 18. Future improvements
 

@@ -45,15 +45,31 @@ const SECTIONS = [
     title: "Photographs",
     body: [
       "Guests upload from the Gallery page on their phone. Publish adds a photograph to the public album, where anyone can view and download it at full size.",
-      "Delete removes both the record and the actual file from storage. It cannot be undone.",
+      "Delete moves a photograph to the recycle bin. The file itself only goes when the bin lets it go, 14 days later, or when you delete it for good.",
+    ],
+  },
+  {
+    title: "Archive, delete, and the recycle bin",
+    body: [
+      "Every reply, message and photograph sits on one of three shelves. Active is the working list. Archive keeps a record for good but hides it from the list and from the site; use it for a duplicate reply you want to keep, or a message you have dealt with. Delete moves a record to the recycle bin.",
+      "The recycle bin holds deleted things for 14 days. Restore puts one back where it came from. Delete for good removes it now, and there is no way back after that. Anything still in the bin after 14 days is removed by itself, files included.",
+      "The Active, Archived and Recycle bin chips at the top of each list switch between the shelves. The Recycle bin page in the side panel shows everything in the bin at once, with the day each item goes.",
+    ],
+  },
+  {
+    title: "Edit the website",
+    body: [
+      "Every page has an entry under Edit the website in the side panel: Home, Our story, Details, Programme, Entourage, Gallery, Guestbook and RSVP. Each opens a form with every headline, paragraph, list and photograph on that page. Save and publish puts it live straight away.",
+      "Leave a field empty and that line is simply not shown. That is how the venue names, the map links and the sponsor lists stay hidden until you have them: nothing is ever invented in their place.",
+      "Lists (the questions and answers, the programme, the entourage groups) have a blank row at the bottom for adding one, and you remove a row by blanking its title. Entourage names are typed one per line as Name | Role | Note.",
+      "While you are signed in, every public page shows an Edit this page button at the bottom right that opens the right form. Guests never see it.",
     ],
   },
   {
     title: "Changing what the site says",
     body: [
-      "Almost every fact on the public pages, the venue names, the times, the entourage, the dress code, the questions and answers, lives in one file: lib/constants.ts.",
-      "Anything not yet decided is marked as pending in that file. The public site simply does not show it: no chip, no blank, and never an invented answer. Fill in the real value and it appears by itself.",
-      "Ask Erick to make these edits, or make them yourself and the site rebuilds automatically within about a minute.",
+      "The words and photographs on every page are edited under Edit the website, above. Three things stay in code on purpose and need Erick: the wedding date (it drives the countdown), the guest cap of 100 and the RSVP form's own limits, and the palette.",
+      "A change saved in the dashboard is live the moment you save it. A change Erick makes in code goes live about a minute after he publishes it.",
     ],
   },
   {

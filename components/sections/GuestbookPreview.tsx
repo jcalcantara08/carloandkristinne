@@ -4,6 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
 import { Card } from "@/components/ui/Card";
 import type { GuestbookEntry } from "@/lib/types";
+import { getContent } from "@/lib/content";
 
 /**
  * Wishes from guests, immediately before the final CTA.
@@ -11,19 +12,16 @@ import type { GuestbookEntry } from "@/lib/types";
  * This is the wedding equivalent of the testimonial slot in the house page
  * arc: social proof as the closing argument, never buried mid-page.
  */
-export function GuestbookPreview({ entries }: { entries: GuestbookEntry[] }) {
+export async function GuestbookPreview({ entries }: { entries: GuestbookEntry[] }) {
+  const { home } = await getContent();
   return (
     <Section on="tint">
       <div className="container">
         <SectionHeading
-          eyebrow="From everyone else"
-          title="Wishes for the two of them"
+          eyebrow={home.wishesEyebrow}
+          title={home.wishesTitle}
           align="center"
-          intro={
-            <p>
-              Anyone can leave a note. Every one of them is read by both of them before it goes up.
-            </p>
-          }
+          intro={home.wishesIntro ? <p>{home.wishesIntro}</p> : undefined}
         />
 
         {entries.length > 0 ? (

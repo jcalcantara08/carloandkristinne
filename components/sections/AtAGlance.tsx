@@ -1,6 +1,6 @@
 import { CalendarDays, Church, PartyPopper, Shirt } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { WEDDING_DAY } from "@/lib/constants";
+import { getContent } from "@/lib/content";
 
 /**
  * The proof strip, directly under the hero.
@@ -8,14 +8,12 @@ import { WEDDING_DAY } from "@/lib/constants";
  * Its job is to pay off the hero's claim before asking for more scroll:
  * four facts a guest needs before anything else, above the fold on a laptop.
  */
-const FACTS = [
-  { icon: CalendarDays, label: "The date", value: WEDDING_DAY.dateShort, note: WEDDING_DAY.dayOfWeek },
-  { icon: Church, label: "Ceremony", value: "4:00 PM", note: `${WEDDING_DAY.town}, ${WEDDING_DAY.province}` },
-  { icon: PartyPopper, label: "Reception", value: "Doors at 7:15 PM", note: "Second venue, programme at 8" },
-  { icon: Shirt, label: "Dress code", value: "Blue, violet or black", note: "White is for the couple" },
-];
+const ICONS = [CalendarDays, Church, PartyPopper, Shirt];
 
-export function AtAGlance() {
+export async function AtAGlance() {
+  const { home } = await getContent();
+  const FACTS = home.glance.map((fact, index) => ({ ...fact, icon: ICONS[index] ?? CalendarDays }));
+
   return (
     <section className="relative border-y border-brand-line bg-brand-paper-200">
       <ul className="container grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">

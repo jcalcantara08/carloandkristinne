@@ -17,8 +17,11 @@ Vercel. Dev port **3028** (the folder number).
 1. **`PROJECT_RULES.md` is the standard.** Not just at launch. Every session.
 2. **Never an em dash.** Commas, periods or parentheses. `npm run grammar`
    enforces it and gates the build.
-3. **Every wedding fact comes from `lib/constants.ts`.** Never hardcode a
-   date, a name or a venue in a component.
+3. **Every wedding fact comes from `lib/constants.ts` or the site document
+   (`lib/content-schema.ts`, edited under Edit the website).** Never hardcode
+   a date, a name, a venue or a paragraph of copy in a component. Dates, the
+   guest cap, form limits and the palette stay in constants; words and page
+   photographs live in the document, with defaults in `DEFAULT_CONTENT`.
 4. **Never invent a missing fact.** Anything undecided is `pending: true` in
    `constants.ts`. With `SHOW_PENDING` false (the live setting) it is simply
    not rendered; with it true, it renders as a "To be confirmed" chip so you
@@ -35,6 +38,8 @@ Vercel. Dev port **3028** (the folder number).
    blue-into-purple gradient (tried, looked like a different wedding).
 8. **`requireAuth()` on the first line of every admin Server Action and route
    handler.** A Server Action is a public endpoint.
+   **Nothing hard-deletes except `deleteForGood()`**, and only the recycle bin
+   and the daily purge call it. Delete means "to the bin for 14 days".
 9. **`lib/store.ts` is the only module that touches Supabase.**
 10. **Attribution to Erick Cabal stays in the footer.** Do not remove it.
 

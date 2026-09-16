@@ -9,6 +9,7 @@ import { UploadForm } from "@/components/forms/UploadForm";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 import { listPhotos } from "@/lib/store";
+import { getContent } from "@/lib/content";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
@@ -18,66 +19,49 @@ export const metadata: Metadata = pageMeta({
   path: "/gallery",
 });
 
-const HOW = [
-  {
-    icon: Camera,
-    title: "Anyone can add",
-    body: "No app and no account needed. Just choose the photographs from your phone and send them.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Checked first",
-    body: "Carlo and Kristinne see everything before it appears, which keeps the album lovely for everyone.",
-  },
-  {
-    icon: Download,
-    title: "Anyone can take",
-    body: "Every photograph in the album downloads at its original size, and the links never expire.",
-  },
-];
+const HOW_ICONS = [Camera, ShieldCheck, Download];
 
 export default async function GalleryPage() {
-  const photos = await listPhotos("approved");
+  const [photos, { gallery }] = await Promise.all([listPhotos("approved"), getContent()]);
 
   return (
     <>
       <PageHeader
-        eyebrow="The shared album"
-        title="Everything, from everyone"
-        intro={
-          <p>
-            The photographers will cover the day beautifully. This is for everything they cannot be
-            in two places for, which is often the best of it.
-          </p>
-        }
+        eyebrow={gallery.eyebrow}
+        title={gallery.title}
+        intro={gallery.intro ? <p>{gallery.intro}</p> : undefined}
       />
 
-      <Section>
-        <div className="container">
-          <ul className="grid gap-5 sm:grid-cols-3">
-            {HOW.map((item, index) => (
-              <Reveal as="li" key={item.title} delay={index * 80}>
-                <Card hover className="h-full">
-                  <item.icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
-                  <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
-                </Card>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </Section>
+      {gallery.how.length > 0 ? (
+        <Section>
+          <div className="container">
+            <ul className="grid gap-5 sm:grid-cols-3">
+              {gallery.how.map((item, index) => {
+                const Icon = HOW_ICONS[index] ?? Camera;
+                return (
+                  <Reveal as="li" key={item.title} delay={index * 80}>
+                    <Card hover className="h-full">
+                      <Icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
+                      <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
+                    </Card>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
 
       <Section id="upload">
         <div className="container">
           <SectionHeading
-            eyebrow="Add yours"
-            title="Upload what you took"
+            eyebrow={gallery.uploadEyebrow}
+            title={gallery.uploadTitle}
             intro={
               <p>
-                Tag anything you post elsewhere with{" "}
-                <span className="aurora-text font-semibold">{SITE.hashtag}</span> so it can be found
-                later.
+                {gallery.uploadIntro}{" "}
+                <span className="aurora-text font-semibold">{SITE.hashtag}</span>
               </p>
             }
           />
@@ -100,7 +84,7 @@ export default async function GalleryPage() {
                   ? "One photograph"
                   : `${photos.length} photographs`
             }
-            title="The album"
+            title={gallery.albumTitle}
           />
 
           <div className="mt-12">
@@ -110,11 +94,10 @@ export default async function GalleryPage() {
               <Reveal delay={80}>
                 <div className="mx-auto max-w-xl rounded-2xl border border-brand-line bg-brand-paper-200 p-10 text-center">
                   <Camera className="mx-auto h-6 w-6 text-brand-steel-500" aria-hidden="true" />
-                  <p className="mt-4 font-display text-display-md">Nothing here yet</p>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">
-                    The album fills up from the day of the wedding. Come back on the seventeenth, or
-                    any time after, and it will not be empty.
-                  </p>
+                  <p className="mt-4 font-display text-display-md">{gallery.emptyTitle}</p>
+                  {gallery.emptyBody ? (
+                    <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">{gallery.emptyBody}</p>
+                  ) : null}
                 </div>
               </Reveal>
             )}
@@ -123,8 +106,8 @@ export default async function GalleryPage() {
       </Section>
 
       <CtaBanner
-        title="First, the small matter of your reply"
-        body="The album will happily wait for you. The caterer, sadly, cannot."
+        title={gallery.ctaTitle}
+        body={gallery.ctaBody}
         secondary={{ href: "/guestbook", label: "Leave a message" }}
       />
 

@@ -8,6 +8,7 @@ import { GuestbookForm } from "@/components/forms/GuestbookForm";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 import { listGuestbook } from "@/lib/store";
+import { getContent } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = pageMeta({
@@ -18,19 +19,14 @@ export const metadata: Metadata = pageMeta({
 });
 
 export default async function GuestbookPage() {
-  const entries = await listGuestbook("approved");
+  const [entries, { guestbook }] = await Promise.all([listGuestbook("approved"), getContent()]);
 
   return (
     <>
       <PageHeader
-        eyebrow="Say something"
-        title="The wishing wall"
-        intro={
-          <p>
-            A wish, a blessing, or a story. Everything left here is read by both of them, and
-            printed for them to keep afterwards.
-          </p>
-        }
+        eyebrow={guestbook.eyebrow}
+        title={guestbook.title}
+        intro={guestbook.intro ? <p>{guestbook.intro}</p> : undefined}
       />
 
       <Section>
@@ -47,7 +43,7 @@ export default async function GuestbookPage() {
         <div className="container">
           <SectionHeading
             eyebrow={entries.length === 1 ? "One message so far" : `${entries.length} messages so far`}
-            title="What everyone has written"
+            title={guestbook.wallTitle}
           />
 
           {entries.length > 0 ? (
@@ -75,10 +71,10 @@ export default async function GuestbookPage() {
             <Reveal delay={80}>
               <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-dashed border-brand-line-strong bg-brand-paper-200 p-10 text-center">
                 <Quote className="mx-auto h-6 w-6 text-brand-steel-500" aria-hidden="true" />
-                <p className="mt-4 font-display text-display-md">Nothing here yet</p>
-                <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">
-                  The wall fills up as messages are approved. Yours could be the very first.
-                </p>
+                <p className="mt-4 font-display text-display-md">{guestbook.emptyTitle}</p>
+                {guestbook.emptyBody ? (
+                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">{guestbook.emptyBody}</p>
+                ) : null}
               </div>
             </Reveal>
           )}
@@ -86,8 +82,8 @@ export default async function GuestbookPage() {
       </Section>
 
       <CtaBanner
-        title="And are you coming?"
-        body="A message means a lot. A reply means the caterer can count you in."
+        title={guestbook.ctaTitle}
+        body={guestbook.ctaBody}
         secondary={{ href: "/gallery", label: "See the album" }}
       />
 

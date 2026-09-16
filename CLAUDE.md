@@ -20,8 +20,10 @@ Vercel. Dev port **3028** (the folder number).
 3. **Every wedding fact comes from `lib/constants.ts`.** Never hardcode a
    date, a name or a venue in a component.
 4. **Never invent a missing fact.** Anything undecided is `pending: true` in
-   `constants.ts` and renders as a "To be confirmed" chip. A plausible lie
-   about a venue could end up printed on an invitation.
+   `constants.ts`. With `SHOW_PENDING` false (the live setting) it is simply
+   not rendered; with it true, it renders as a "To be confirmed" chip so you
+   can see everything still missing. A plausible lie about a venue could end
+   up printed on an invitation.
 5. **No money, no vendors, no budget on the site or in this repo.** The
    planning workbook has all of it. The website is for guests only.
 6. **No hex codes in components.** `tailwind.config.ts` plus the semantic

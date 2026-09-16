@@ -5,11 +5,11 @@ import { PageHeader } from "@/components/PageHeader";
 import { Section, SectionHeading } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/Card";
-import { PendingChip, Value } from "@/components/Pending";
+import { Value } from "@/components/Pending";
 import { DressCode } from "@/components/sections/DressCode";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
-import { CONTACT, FAQ, OFFICIANT, VENUES, WEDDING_DAY } from "@/lib/constants";
+import { CONTACT, FAQ, OFFICIANT, SHOW_PENDING, VENUES, WEDDING_DAY } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "Details",
@@ -22,7 +22,7 @@ const PRACTICAL = [
   {
     icon: Car,
     title: "Parking",
-    body: "Parking is included at the reception venue. Church parking will be confirmed closer to the date.",
+    body: "Parking is included at the reception venue.",
   },
   {
     icon: Umbrella,
@@ -64,11 +64,9 @@ export default function DetailsPage() {
             title="Two places, one evening"
             intro={
               <p>
-                Both venue names and their exact addresses are still being confirmed with the
-                suppliers. They appear here, and on your printed invitation, as soon as they are
-                locked. The two are not in the same place, and the reception doors do not open
-                until a quarter past seven, so please read the timings below before you plan your
-                evening.
+                The ceremony and the reception are in different places, and the reception doors
+                do not open until a quarter past seven. Full addresses are on your invitation;
+                please read the timings below before you plan your evening.
               </p>
             }
           />
@@ -79,9 +77,14 @@ export default function DetailsPage() {
                 <Card hover className="h-full">
                   <p className="eyebrow">{venue.label}</p>
 
-                  <h2 className="mt-4 text-display-md">
-                    <Value of={venue.name} label="Venue to be confirmed" />
-                  </h2>
+                  {/* The venue name is the heading when it is known. When it
+                      is not, the label above already names the event, and an
+                      empty heading would be worse than none. */}
+                  {!venue.name.pending || SHOW_PENDING ? (
+                    <h2 className="mt-4 text-display-md">
+                      <Value of={venue.name} label="Venue to be confirmed" />
+                    </h2>
+                  ) : null}
 
                   <dl className="mt-6 space-y-4 text-sm">
                     <div className="flex items-start gap-3">
@@ -95,7 +98,7 @@ export default function DetailsPage() {
                       <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                       <dd className="text-brand-ink/80">
                         <Value of={venue.address} label="Address to be confirmed" />
-                        <span className="mt-1 block text-brand-ink/60">
+                        <span className={venue.address.pending && !SHOW_PENDING ? "block" : "mt-1 block text-brand-ink/60"}>
                           {WEDDING_DAY.town}, {WEDDING_DAY.province}
                         </span>
                       </dd>
@@ -108,10 +111,8 @@ export default function DetailsPage() {
                     </div>
                   </dl>
 
-                  <div className="mt-6 border-t border-brand-line pt-5">
-                    {venue.mapUrl.pending ? (
-                      <PendingChip label="Map link to come" />
-                    ) : (
+                  {!venue.mapUrl.pending ? (
+                    <div className="mt-6 border-t border-brand-line pt-5">
                       <a
                         href={venue.mapUrl.value}
                         target="_blank"
@@ -120,8 +121,8 @@ export default function DetailsPage() {
                       >
                         Open in Maps
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  ) : null}
                 </Card>
               </Reveal>
             ))}
@@ -163,28 +164,26 @@ export default function DetailsPage() {
               <p className="eyebrow">Point of contact</p>
               <p className="mt-3 font-display text-display-md">{CONTACT.pointOfContact.name}</p>
               <p className="mt-1 text-sm text-brand-ink/60">{CONTACT.pointOfContact.role}</p>
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm">
-                {CONTACT.pointOfContact.email.pending ? (
-                  <PendingChip label="Email to come" />
-                ) : (
-                  <a
-                    className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
-                    href={`mailto:${CONTACT.pointOfContact.email.value}`}
-                  >
-                    {CONTACT.pointOfContact.email.value}
-                  </a>
-                )}
-                {CONTACT.pointOfContact.phone.pending ? (
-                  <PendingChip label="Number to come" />
-                ) : (
-                  <a
-                    className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
-                    href={`tel:${CONTACT.pointOfContact.phone.value}`}
-                  >
-                    {CONTACT.pointOfContact.phone.value}
-                  </a>
-                )}
-              </div>
+              {!CONTACT.pointOfContact.email.pending || !CONTACT.pointOfContact.phone.pending ? (
+                <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm">
+                  {!CONTACT.pointOfContact.email.pending ? (
+                    <a
+                      className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
+                      href={`mailto:${CONTACT.pointOfContact.email.value}`}
+                    >
+                      {CONTACT.pointOfContact.email.value}
+                    </a>
+                  ) : null}
+                  {!CONTACT.pointOfContact.phone.pending ? (
+                    <a
+                      className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
+                      href={`tel:${CONTACT.pointOfContact.phone.value}`}
+                    >
+                      {CONTACT.pointOfContact.phone.value}
+                    </a>
+                  ) : null}
+                </div>
+              ) : null}
             </Card>
           </Reveal>
         </div>

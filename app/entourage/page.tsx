@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { PendingBlock } from "@/components/Pending";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
-import { ENTOURAGE_FOOTNOTE, ENTOURAGE_GROUPS } from "@/lib/constants";
+import { ENTOURAGE_FOOTNOTE, ENTOURAGE_GROUPS, SHOW_PENDING } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "Entourage",
@@ -24,8 +24,8 @@ export default function EntouragePage() {
         title="Who is standing with them"
         intro={
           <p>
-            Some of this list is settled and some is still being happily debated in a group chat.
-            Both are shown honestly below.
+            The people walking down the aisle with them, and the two very small ones carrying the
+            most important things.
           </p>
         }
       >
@@ -37,7 +37,7 @@ export default function EntouragePage() {
         </Link>
       </PageHeader>
 
-      {ENTOURAGE_GROUPS.map((group) => (
+      {ENTOURAGE_GROUPS.filter((group) => group.people.length > 0 || SHOW_PENDING).map((group) => (
         <Section key={group.key}>
           <div className="container">
             <SectionHeading

@@ -325,7 +325,9 @@ well-liked wedding site is a photograph of the couple.
 - Route groups parenthesised: `app/admin/(dashboard)/`
 - **Never an em dash**, anywhere, including comments. `npm run grammar` fails the build
 - Every wedding fact from `lib/constants.ts`. Never invent a missing one;
-  mark it `pending: true` and it renders as a "To be confirmed" chip
+  mark it `pending: true`. `SHOW_PENDING` in constants decides whether that
+  renders as a "To be confirmed" chip (planning) or nothing at all (live, the
+  current setting). Sections with no real content are not rendered either
 - No hex in components
 - `"use client"` at the leaf, never at a layout
 - Zod v4: `z.flattenError(error)`, not `error.flatten()`

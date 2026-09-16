@@ -52,7 +52,7 @@ const SECTIONS = [
     title: "Changing what the site says",
     body: [
       "Almost every fact on the public pages, the venue names, the times, the entourage, the dress code, the questions and answers, lives in one file: lib/constants.ts.",
-      "Anything not yet decided is marked as pending in that file, and the site shows a small To be confirmed chip in its place rather than a blank or an invented answer. Fill in the real value and the chip disappears by itself.",
+      "Anything not yet decided is marked as pending in that file. The public site simply does not show it: no chip, no blank, and never an invented answer. Fill in the real value and it appears by itself.",
       "Ask Erick to make these edits, or make them yourself and the site rebuilds automatically within about a minute.",
     ],
   },

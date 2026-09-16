@@ -4,7 +4,6 @@ import { PageHeader } from "@/components/PageHeader";
 import { Section, SectionHeading } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/Card";
-import { PhotoFrame } from "@/components/PhotoFrame";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { UploadForm } from "@/components/forms/UploadForm";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -108,27 +107,16 @@ export default async function GalleryPage() {
             {photos.length > 0 ? (
               <GalleryGrid photos={photos} />
             ) : (
-              <>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-                  {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => (
-                    <Reveal key={index} delay={Math.min(index, 8) * 80}>
-                      <PhotoFrame
-                        alt=""
-                        aspect="1/1"
-                        tone={index}
-                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                        placeholderLabel="17 October"
-                      />
-                    </Reveal>
-                  ))}
-                </div>
-                <Reveal delay={240}>
-                  <p className="mt-8 text-center text-sm text-brand-ink/60">
-                    The album stays empty until the wedding. Come back on the seventeenth, or any time
-                    after, and it will not be.
+              <Reveal delay={80}>
+                <div className="mx-auto max-w-xl rounded-2xl border border-brand-line bg-brand-paper-200 p-10 text-center">
+                  <Camera className="mx-auto h-6 w-6 text-brand-steel-500" aria-hidden="true" />
+                  <p className="mt-4 font-display text-display-md">Nothing here yet</p>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">
+                    The album fills up from the day of the wedding. Come back on the seventeenth, or
+                    any time after, and it will not be empty.
                   </p>
-                </Reveal>
-              </>
+                </div>
+              </Reveal>
             )}
           </div>
         </div>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
-import { PhotoFrame } from "@/components/PhotoFrame";
 
 /**
  * "What we do" in the house page arc, translated for a wedding: who these
@@ -10,10 +9,9 @@ import { PhotoFrame } from "@/components/PhotoFrame";
 export function StoryPreview() {
   return (
     <Section>
-      <div className="container grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6">
+      <div className="container">
+        <div className="mx-auto max-w-2xl text-center">
           <SectionHeading
-            align="left"
             eyebrow="Kaloob ng Diyos"
             title={
               <>
@@ -45,25 +43,6 @@ export function StoryPreview() {
           </Reveal>
         </div>
 
-        <Reveal delay={120} className="lg:col-span-6">
-          <div className="grid grid-cols-2 gap-4">
-            <PhotoFrame
-              alt="Carlo and Kristinne, portrait to come"
-              aspect="4/5"
-              tone={0}
-              sizes="(min-width: 1024px) 25vw, 50vw"
-              placeholderLabel="Prenup to come"
-            />
-            <PhotoFrame
-              alt="Carlo and Kristinne, second portrait to come"
-              aspect="4/5"
-              tone={1}
-              sizes="(min-width: 1024px) 25vw, 50vw"
-              className="mt-10"
-              placeholderLabel="Prenup to come"
-            />
-          </div>
-        </Reveal>
       </div>
     </Section>
   );

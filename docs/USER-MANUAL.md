@@ -128,11 +128,11 @@ Almost every fact on the public pages lives in one file, `lib/constants.ts`:
 venue names, times, the programme, the entourage, the dress code, the
 questions and answers.
 
-Anything not decided yet is marked as pending in that file, and the site shows
-a small **To be confirmed** chip in its place. Fill in the real value and the
-chip disappears by itself.
+Anything not decided yet is marked as pending in that file, and the public
+site simply leaves it out: no chip, no blank, and never a made-up answer. Fill
+in the real value and it appears by itself.
 
-Things currently showing that chip:
+Things guests currently cannot see because they are still pending:
 
 - the church name and address
 - the reception venue name and address
@@ -226,7 +226,7 @@ There are no payments, no analytics, and no advertising anywhere in the site.
 - Open the page on your phone, not just a laptop
 - Read it top to bottom for typos
 - Press every button on it
-- Check that nothing says "To be confirmed" that you have already confirmed
+- Check that anything you have confirmed is actually showing, and that nothing on the page reads as unfinished
 
 ## 14. Questions people ask
 

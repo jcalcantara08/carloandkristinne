@@ -32,7 +32,7 @@ export function Header() {
         <Link
           href="/"
           className="flex items-center gap-3 rounded-full focus-visible:ring-offset-brand-paper"
-          aria-label="Carlo & Kristinne, home"
+          aria-label="C&K Carlo & Kristinne, home"
         >
           <Monogram size="sm" />
           <span className="hidden font-display text-lg tracking-wide text-brand-ink sm:block">

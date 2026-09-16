@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
 import { Card } from "@/components/ui/Card";
 import { Value } from "@/components/Pending";
-import { VENUES } from "@/lib/constants";
+import { SHOW_PENDING, VENUES } from "@/lib/constants";
 
 export function DetailsPreview() {
   return (
@@ -27,9 +27,11 @@ export function DetailsPreview() {
               <Card hover className="h-full">
                 <p className="eyebrow">{venue.label}</p>
 
-                <h3 className="mt-4 text-display-md">
-                  <Value of={venue.name} label="Venue to be confirmed" />
-                </h3>
+                {!venue.name.pending || SHOW_PENDING ? (
+                  <h3 className="mt-4 text-display-md">
+                    <Value of={venue.name} label="Venue to be confirmed" />
+                  </h3>
+                ) : null}
 
                 <dl className="mt-6 space-y-3 text-sm">
                   <div className="flex items-start gap-3">

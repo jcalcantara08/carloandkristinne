@@ -1,74 +1,70 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { LogOut } from "lucide-react";
 
 import { requireAuth } from "@/lib/admin-guard";
 import { signOut } from "@/app/admin/login/actions";
 import { Monogram } from "@/components/Monogram";
 import { isDatabaseConfigured } from "@/lib/store";
+import { AdminNav } from "@/app/admin/(dashboard)/admin-nav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   robots: { index: false, follow: false },
 };
 
-const ADMIN_NAV = [
-  { href: "/admin", label: "Overview" },
-  { href: "/admin/rsvps", label: "Replies" },
-  { href: "/admin/guestbook", label: "Messages" },
-  { href: "/admin/photos", label: "Photographs" },
-  { href: "/admin/manual", label: "Manual" },
-];
-
+/**
+ * The dashboard frame: a side panel with the section list on the left, the
+ * page on the right. On phones the panel becomes a strip across the top.
+ */
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   // The gate. Middleware only redirects; this is what actually protects the page.
   await requireAuth();
 
   return (
-    <div className="container py-10">
-      <header className="flex flex-col gap-5 border-b border-brand-line pb-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-4">
-          <Monogram size="sm" />
-          <div>
-            <p className="eyebrow">Command centre</p>
-            <h1 className="mt-1 text-display-md">Carlo &amp; Kristinne</h1>
-          </div>
-        </div>
+    <div className="container py-8 lg:py-10">
+      <div className="lg:grid lg:grid-cols-[15rem_1fr] lg:gap-10">
+        {/* --- The side panel --- */}
+        <aside className="mb-6 border-b border-brand-line pb-6 lg:mb-0 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-8">
+          <div className="lg:sticky lg:top-24">
+            <div className="flex items-center gap-3">
+              <Monogram size="sm" />
+              <div className="min-w-0">
+                <p className="eyebrow">Dashboard</p>
+                <p className="mt-0.5 truncate font-display text-lg text-brand-ink">Carlo &amp; Kristinne</p>
+              </div>
+            </div>
 
-        <form action={signOut}>
-          <button type="submit" className="btn-outline px-5 py-2.5 text-xs">
-            <LogOut className="h-4 w-4" aria-hidden="true" />
-            Sign out
-          </button>
-        </form>
-      </header>
+            <div className="mt-6">
+              <AdminNav />
+            </div>
 
-      <nav aria-label="Admin" className="mt-6 overflow-x-auto">
-        <ul className="flex min-w-max gap-2">
-          {ADMIN_NAV.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="inline-flex min-h-[44px] items-center rounded-full border border-brand-line px-4 text-sm text-brand-ink/75 transition-colors duration-200 hover:border-brand-line-strong hover:text-brand-ink"
+            <form action={signOut} className="mt-6 border-t border-brand-line pt-5">
+              <button
+                type="submit"
+                className="flex min-h-[44px] w-full items-center gap-3 rounded-xl px-3.5 text-sm text-brand-ink/70 transition-colors duration-200 hover:bg-brand-paper-200 hover:text-brand-ink"
               >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+                <LogOut className="h-4 w-4 shrink-0" aria-hidden="true" />
+                Sign out
+              </button>
+            </form>
+          </div>
+        </aside>
 
-      {!isDatabaseConfigured() ? (
-        <div className="mt-6 rounded-xl border border-brand-steel-600/50 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600">
-          <p className="font-medium">The database is not connected yet.</p>
-          <p className="mt-1 text-brand-ink/70">
-            Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then redeploy. Until then,
-            replies, messages and uploads cannot be saved.
-          </p>
+        {/* --- The page --- */}
+        <div className="min-w-0">
+          {!isDatabaseConfigured() ? (
+            <div className="mb-6 rounded-xl border border-brand-steel-600/50 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600">
+              <p className="font-medium">The database is not connected yet.</p>
+              <p className="mt-1 text-brand-ink/70">
+                Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then redeploy. Until
+                then, replies, messages and uploads cannot be saved.
+              </p>
+            </div>
+          ) : null}
+
+          {children}
         </div>
-      ) : null}
-
-      <div className="mt-8">{children}</div>
+      </div>
     </div>
   );
 }

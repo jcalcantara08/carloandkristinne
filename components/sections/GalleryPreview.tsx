@@ -4,9 +4,14 @@ import { Section, SectionHeading } from "@/components/Section";
 import { PhotoFrame } from "@/components/PhotoFrame";
 import type { Photo } from "@/lib/types";
 
+/**
+ * Shown only once there is something to show. Before the wedding the album
+ * is empty, and a grid of "coming soon" frames on the home page reads as
+ * unfinished rather than anticipatory.
+ */
 export function GalleryPreview({ photos }: { photos: Photo[] }) {
+  if (photos.length === 0) return null;
   const shown = photos.slice(0, 6);
-  const placeholders = Array.from({ length: Math.max(0, 6 - shown.length) }, (_, i) => i);
 
   return (
     <Section>
@@ -31,17 +36,6 @@ export function GalleryPreview({ photos }: { photos: Photo[] }) {
                 aspect="1/1"
                 tone={index}
                 sizes="(min-width: 640px) 33vw, 50vw"
-              />
-            </Reveal>
-          ))}
-          {placeholders.map((index) => (
-            <Reveal key={`placeholder-${index}`} delay={(shown.length + index) * 80}>
-              <PhotoFrame
-                alt=""
-                aspect="1/1"
-                tone={shown.length + index}
-                sizes="(min-width: 640px) 33vw, 50vw"
-                placeholderLabel="After the day"
               />
             </Reveal>
           ))}

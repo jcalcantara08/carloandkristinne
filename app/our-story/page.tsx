@@ -8,7 +8,7 @@ import { PendingBlock } from "@/components/Pending";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Card } from "@/components/ui/Card";
 import { pageMeta } from "@/lib/seo";
-import { SITE } from "@/lib/constants";
+import { SHOW_PENDING, SITE } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "Our Story",
@@ -136,6 +136,7 @@ export default function OurStoryPage() {
         </div>
       </Section>
 
+      {SHOW_PENDING ? (
       <Section>
         <div className="container">
           <SectionHeading
@@ -174,6 +175,7 @@ export default function OurStoryPage() {
           </Reveal>
         </div>
       </Section>
+      ) : null}
 
       <Section>
         <div className="container text-center">

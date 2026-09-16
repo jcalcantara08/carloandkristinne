@@ -16,6 +16,18 @@ export type Pending<T> = { value: T; pending: false } | { value: null; pending: 
 export const tbc = <T,>(): Pending<T> => ({ value: null, pending: true });
 export const set = <T,>(value: T): Pending<T> => ({ value, pending: false });
 
+/**
+ * Whether undecided facts render as visible "To be confirmed" placeholders.
+ *
+ * During planning that honesty was useful. Once the site is in front of
+ * guests it is not: a live site shows what it knows and says nothing about
+ * what it does not. With this false, every pending chip, every "coming soon"
+ * frame and every section with no real content is simply not rendered, and
+ * nothing is ever invented in its place. Flip it back to true to see, in one
+ * glance, everything that is still missing.
+ */
+export const SHOW_PENDING = false;
+
 /* =========================
    Site
    ========================= */
@@ -225,8 +237,7 @@ export const ENTOURAGE_GROUPS: {
     title: "Bridesmaids & Groomsmen",
     blurb: "The half past eleven pictorial crew.",
     people: [],
-    pendingNote:
-      "Names and count are still being confirmed. Bridesmaids in shades of blue, groomsmen in black.",
+    pendingNote: "Bridesmaids in shades of blue, groomsmen in black.",
   },
 ];
 
@@ -423,7 +434,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 5,
     title: "The prayer",
-    detail: "Led by a speaker the couple are still choosing, and then we eat.",
+    detail: "A word of thanks before the meal, and then we eat.",
     phase: "reception",
   },
   {
@@ -438,7 +449,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 5,
     title: "The first dance",
-    detail: "The couple, and the floor is theirs. The song is theirs to choose, and they are still choosing.",
+    detail: "The couple, and the floor is theirs.",
     phase: "reception",
   },
   {
@@ -490,7 +501,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 10,
     title: "Dance with the parents",
-    detail: "The bride with her father, the groom with his mother, if they are willing. The songs are still being chosen.",
+    detail: "The bride with her father, the groom with his mother.",
     phase: "reception",
   },
   {
@@ -520,7 +531,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 10,
     title: "The same-day edit",
-    detail: "The film of the day so far, cut while the day was still happening, if it is ready in time.",
+    detail: "The film of the day so far, cut while the day was still happening.",
     phase: "reception",
   },
   {

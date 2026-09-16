@@ -1,6 +1,6 @@
 import { Clock3 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { Pending as PendingValue } from "@/lib/constants";
+import { SHOW_PENDING, type Pending as PendingValue } from "@/lib/constants";
 
 /**
  * The placeholder system.
@@ -22,6 +22,7 @@ export function PendingChip({
   label?: string;
   className?: string;
 }) {
+  if (!SHOW_PENDING) return null;
   return (
     <span
       className={cn(
@@ -48,7 +49,7 @@ export function Value({
   label?: string;
   className?: string;
 }) {
-  if (of.pending) return <PendingChip label={label} className={className} />;
+  if (of.pending) return SHOW_PENDING ? <PendingChip label={label} className={className} /> : null;
   return <span className={className}>{of.value}</span>;
 }
 
@@ -65,6 +66,7 @@ export function PendingBlock({
   note: string;
   className?: string;
 }) {
+  if (!SHOW_PENDING) return null;
   return (
     <div
       className={cn(

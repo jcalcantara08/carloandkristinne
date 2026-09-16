@@ -8,8 +8,10 @@ export default function manifest(): MetadataRoute.Manifest {
     description: SITE.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#05060E",
-    theme_color: "#05060E",
+    // Paper, not ink. The splash screen and the Android chrome match the
+    // page ground, which is white.
+    background_color: "#FFFFFF",
+    theme_color: "#FFFFFF",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
       { src: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },

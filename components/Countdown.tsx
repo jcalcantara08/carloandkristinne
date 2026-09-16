@@ -66,7 +66,7 @@ export function Countdown() {
 
       <ul className="grid grid-cols-4 gap-px overflow-hidden rounded-2xl border border-brand-line bg-brand-line">
         {LABELS.map((label, index) => (
-          <li key={label} className="bg-brand-paper-100 px-2 py-5 text-center sm:px-4 sm:py-6">
+          <li key={label} className="bg-brand-paper-100 px-2 py-5 text-center sm:px-4 sm:py-6 lg:px-1">
             <span
               className="block font-display text-3xl tabular-nums text-brand-ink sm:text-4xl"
               aria-hidden={values[index] === null ? "true" : undefined}
@@ -77,7 +77,12 @@ export function Countdown() {
                 String(values[index]).padStart(2, "0")
               )}
             </span>
-            <span className="mt-1.5 block text-[0.65rem] font-semibold uppercase tracking-eyebrow text-brand-ink/60">
+            {/* tracking-wider, not the eyebrow tracking. On desktop this sits in
+                the narrow right column of the hero, where each cell is about
+                80px wide, and at 0.28em the word SECONDS wraps mid-word. The
+                same tighter tracking is what Badge and PendingChip use for
+                captions of this size. */}
+            <span className="mt-1.5 block whitespace-nowrap text-[0.65rem] font-semibold uppercase tracking-wider text-brand-ink/60">
               {label}
             </span>
           </li>

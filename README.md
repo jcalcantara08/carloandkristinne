@@ -54,6 +54,9 @@ Runs `supabase/migrations/0001_init.sql` through `0003_storage.sql` in order.
 | `npm run security` | Fallback secrets, hardcoded keys, unguarded admin actions |
 | `npm run css` | Compiles `globals.css` and fails on an invalid `@apply` |
 | `npm run check` | All four of the above. Gates the Vercel build. |
+| `npm run verify` | typecheck, lint, check and a production build. The definition of done. |
+| `npm run doctor` | Does this laptop have what the project needs? Zero dependencies. |
+| `npm run clean` | Deletes build caches. Always safe. |
 
 ## Project structure
 
@@ -101,7 +104,7 @@ life, not just at launch. `WEBSITE_PLAYBOOK.md` in the same folder explains
 how to satisfy it.
 
 Deliberate deviations from the house build guide are documented in
-`handoff.md` section 8. The short version: no react-hook-form, and the single
+`docs/DEVELOPER-HANDOFF.md` section 17. The short version: no react-hook-form, and the single
 contrast band per page is dark rather than light, because the ground is
 already a light neutral.
 

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
  * The wash.
  *
  * Two very large, very soft radial blooms, one blue and one violet, drifting
- * a few percent over half a minute. On the ivory ground this reads as
+ * a few percent over half a minute. On the white ground this reads as
  * watercolour bleeding into paper rather than as light in a night sky, which
  * is the whole point of the palette flip.
  *

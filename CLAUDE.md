@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Condensed brief for an AI assistant working on this project. Read
-`handoff.md` for the full picture.
+`docs/DEVELOPER-HANDOFF.md` for the full picture.
 
 ## What this is
 
@@ -66,7 +66,7 @@ npm run build
 ## Definition of Done
 
 Feature, QA review, security review, mobile check, docs updated,
-`USER_MANUAL.md` updated if a workflow changed, `handoff.md` updated,
+`docs/USER-MANUAL.md` updated if a workflow changed, `docs/DEVELOPER-HANDOFF.md` updated,
 repository cleaned, zero console errors, branding consistent, accessibility
 reviewed, performance reviewed.
 

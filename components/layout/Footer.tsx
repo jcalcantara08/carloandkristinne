@@ -3,8 +3,11 @@ import { Monogram } from "@/components/Monogram";
 import { CREDITS, NAV, SITE, WEDDING_DAY } from "@/lib/constants";
 
 export function Footer() {
-  // Never hardcode the year. It is wrong every 1 January.
-  const year = new Date().getFullYear();
+  // The wedding year, not the clock. Every public page is prerendered once at
+  // build time, so new Date() here would freeze at whatever year the last
+  // build ran, which is the same trap the countdown fell into. For a site
+  // that exists for one wedding, the wedding year is correct forever.
+  const year = WEDDING_DAY.year;
 
   return (
     <footer className="relative border-t border-brand-line bg-brand-paper-200">
@@ -51,8 +54,16 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center gap-3 border-t border-brand-line pt-8 text-xs text-brand-ink/60 sm:flex-row sm:justify-between">
-          <p>
-            &copy; {year} {SITE.longName}
+          <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:justify-start">
+            <span>
+              &copy; {year} {SITE.longName}
+            </span>
+            <Link
+              href="/privacy"
+              className="inline-flex min-h-[24px] items-center text-brand-ink/60 underline decoration-brand-line-strong underline-offset-4 transition-colors duration-200 hover:text-brand-ink hover:decoration-brand-violet-500"
+            >
+              Privacy
+            </Link>
           </p>
           <p>
             Built with care by{" "}

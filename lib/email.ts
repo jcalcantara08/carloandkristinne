@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { escapeHtml } from "@/lib/sanitize";
+import { SITE, WEDDING_DAY } from "@/lib/constants";
 
 /**
  * Resend wrapper. Degrades to a no-op without an API key, so local dev and
@@ -46,6 +47,8 @@ export async function sendMail(options: MailOptions): Promise<{ skipped: boolean
 
 /** A minimal branded shell. Plain text is always sent alongside it. */
 export function emailShell(title: string, bodyLines: string[]): { html: string; text: string } {
+  // Every fact from constants, so the email can never drift from the site.
+  const footer = `${WEDDING_DAY.dateLong}, ${WEDDING_DAY.town}, ${WEDDING_DAY.province}. ${SITE.hashtag}`;
   const rows = bodyLines
     .map((line) => `<tr><td style="padding:4px 0;color:#2A2E52;font-size:14px;">${escapeHtml(line)}</td></tr>`)
     .join("");
@@ -54,14 +57,14 @@ export function emailShell(title: string, bodyLines: string[]): { html: string; 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 16px;">
 <tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;padding:32px;">
-<tr><td style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8B3FD4;padding-bottom:8px;">Carlo &amp; Kristinne</td></tr>
+<tr><td style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8B3FD4;padding-bottom:8px;">${escapeHtml(SITE.name)}</td></tr>
 <tr><td style="font-size:22px;color:#05060E;padding-bottom:16px;">${escapeHtml(title)}</td></tr>
 ${rows}
-<tr><td style="padding-top:24px;font-size:12px;color:#6b7280;">17 October 2026 &middot; Rosario, Cavite &middot; #CARLOobNgdiyoskayKRISTINNE</td></tr>
+<tr><td style="padding-top:24px;font-size:12px;color:#6b7280;">${escapeHtml(footer)}</td></tr>
 </table>
 </td></tr></table></body></html>`;
 
-  const text = [title, "", ...bodyLines, "", "17 October 2026, Rosario, Cavite", "#CARLOobNgdiyoskayKRISTINNE"].join("\n");
+  const text = [title, "", ...bodyLines, "", footer].join("\n");
 
   return { html, text };
 }

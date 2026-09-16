@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Download, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
@@ -17,8 +17,14 @@ import type { Photo } from "@/lib/types";
  */
 export function GalleryGrid({ photos }: { photos: Photo[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  // The thumbnail that opened the lightbox, so focus can go back to it.
+  const openerRef = useRef<HTMLElement | null>(null);
 
-  const close = useCallback(() => setOpenIndex(null), []);
+  const close = useCallback(() => {
+    setOpenIndex(null);
+    openerRef.current?.focus();
+  }, []);
   const move = useCallback(
     (delta: number) =>
       setOpenIndex((current) => {
@@ -35,9 +41,31 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
     document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+        return;
+      }
       if (event.key === "ArrowRight") move(1);
       if (event.key === "ArrowLeft") move(-1);
+      if (event.key !== "Tab") return;
+
+      // Trap focus. Same pattern as the mobile menu: Tab from the last
+      // control wraps to the first, Shift+Tab from the first wraps to the
+      // last, so keyboard focus can never wander into the page behind.
+      const focusables = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusables || focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -56,7 +84,10 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
           <Reveal as="li" key={photo.id} delay={Math.min(index, 12) * 80}>
             <button
               type="button"
-              onClick={() => setOpenIndex(index)}
+              onClick={(event) => {
+                openerRef.current = event.currentTarget;
+                setOpenIndex(index);
+              }}
               className="group relative block aspect-square w-full overflow-hidden rounded-xl border border-brand-line bg-brand-paper-200 shadow-soft"
             >
               <Image
@@ -77,6 +108,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
 
       {active ? (
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label={active.caption ?? "Photograph"}

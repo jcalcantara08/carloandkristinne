@@ -117,7 +117,16 @@ if (existsSync(publicDir)) {
 
 /* ---- 5. The documentation the rules require actually exists ---- */
 
-for (const doc of ["README.md", "USER_MANUAL.md", "handoff.md", "PROJECT_RULES.md"]) {
+// The two manuals live in docs/. The root USER_MANUAL.md and handoff.md are
+// short pointers kept so PROJECT_RULES.md and older references still resolve.
+for (const doc of [
+  "README.md",
+  "PROJECT_RULES.md",
+  "USER_MANUAL.md",
+  "handoff.md",
+  "docs/USER-MANUAL.md",
+  "docs/DEVELOPER-HANDOFF.md",
+]) {
   if (!existsSync(join(ROOT, doc))) {
     issues.push({ file: doc, line: 1, message: "Required document is missing." });
   }

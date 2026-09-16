@@ -23,7 +23,8 @@
     "db:reset": "supabase db reset",
     "doctor": "node scripts/doctor.mjs",
     "clean": "node scripts/clean.mjs",
-    "postinstall": "node scripts/stamp.mjs node_modules"
+    "postinstall": "node scripts/stamp.mjs node_modules",
+    "verify": "npm run typecheck && npm run lint && npm run check && npm run build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

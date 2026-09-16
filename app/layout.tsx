@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
+  // The homepage builds its metadata here rather than through pageMeta(),
+  // so it has to declare its own canonical. Child pages override this.
+  alternates: { canonical: SITE.url },
   applicationName: SITE.name,
   authors: [{ name: "Erick Cabal", url: "https://erickcabal.com" }],
   creator: "Erick Cabal",
@@ -42,9 +45,12 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
 };
 
+// Light only, and it has to say so. A leftover colorScheme: "dark" from the
+// abandoned dark build made the browser paint its own widgets (the RSVP
+// select, scrollbars, the pre-paint canvas) as if the page were black.
 export const viewport: Viewport = {
-  themeColor: "#05060E",
-  colorScheme: "dark",
+  themeColor: "#FFFFFF",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };

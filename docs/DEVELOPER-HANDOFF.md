@@ -381,8 +381,8 @@ Gitignore is not a security control here. Rotate anything sensitive.
 | In-memory rate limiter is per instance | Set Upstash if the address leaks |
 | HEIC from some desktop browsers reports an empty MIME type | iOS Safari, the main HEIC source, reports it correctly. Watch the upload rejections after the wedding |
 | Lighthouse performance 76 to 90 on mobile | 321 KB page, CLS 0. Driven by hydration on a 4x throttled CPU and the display heading waiting on Bodoni. Levers: fewer `Reveal` wrappers on the home page, `font-display: optional` for the display face |
-| Marquee direction | `PROJECT_RULES.md` says decorative moving text animates left to right. The marquee translates content leftward (text enters from the right, like a ticker). The code comment claims compliance by "reading order". Ambiguous; left for a decision |
-| Manual naming | `PROJECT_RULES.md` mandates `USER_MANUAL.md` and `handoff.md` at the root. The September QA brief asked for `docs/USER-MANUAL.md` and `docs/DEVELOPER-HANDOFF.md`. Both exist: the docs/ files are canonical, the root files are pointers. Reconcile the rule |
+| Marquee direction | `PROJECT_RULES.md` says decorative moving text animates left to right. The marquee translates content leftward, ticker-style. Raised in the September QA pass; Erick decided to leave it as is. Closed |
+| Manual naming | `PROJECT_RULES.md` mandates `USER_MANUAL.md` and `handoff.md` at the root. The September QA brief asked for `docs/USER-MANUAL.md` and `docs/DEVELOPER-HANDOFF.md`. Decided: the docs/ files are canonical, the root files are pointers, `qa-check` requires both. `PROJECT_RULES.md` is left unchanged because it is copied into every project verbatim |
 
 ## 17. Decisions worth keeping, and session notes
 

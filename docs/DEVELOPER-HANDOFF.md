@@ -3,7 +3,7 @@
 The project's shared memory. Another developer, or an AI assistant, should be
 able to continue confidently after reading only this file.
 
-Last updated: 16 September 2026.
+Last updated: 17 September 2026.
 
 ---
 
@@ -364,7 +364,14 @@ Only steel-500 and cornflower-500 ever carry text. Everything else is a wash,
 a rule, a ring or a swatch. Black appears as a field exactly once per page,
 the closing CTA, using `.on-ink`, which flips every child automatically.
 `ATTIRE_PALETTE` in constants holds the five named swatches for the dress
-code page.
+code page. Each `DRESS_CODE` row also carries an `outfit`: the garments as
+drawn on the two attire guides of 17 September 2026 (a three-piece dark steel
+suit for the best man; floor-length dusty blue gowns with straps, halter or
+off-the-shoulder for the bridesmaids; black suit, white shirt, blue tie for
+the groomsmen). The outfit is editable per row under Edit the website,
+Details. `DressCode.tsx` falls back to the code default for a saved row of
+the same role that predates the field, so an older saved document never
+shows a colour with no outfit.
 
 **Contrast floors, measured on the rendered page.** Body copy is 75 percent
 ink (9.5:1). **60 percent is the muted floor**: 55 measures 4.47:1 and fails.

@@ -13,9 +13,12 @@ export async function DressCode() {
   const { details } = await getContent();
   // Swatches stay in code (they are the palette, not copy) and follow the
   // row's position; a row the couple add beyond the known ones gets the
-  // last swatch rather than none.
+  // last swatch rather than none. The outfit was added after the document
+  // format existed, so a saved row without one falls back to the code
+  // default for the same role rather than showing the colour alone.
   const rows = details.dressCode.map((row, index) => ({
     ...row,
+    outfit: row.outfit || (DRESS_CODE.find((d) => d.role === row.role)?.outfit ?? ""),
     swatch: (DRESS_CODE[index] ?? DRESS_CODE[DRESS_CODE.length - 1]).swatch,
   }));
   return (
@@ -33,18 +36,23 @@ export async function DressCode() {
               as="li"
               key={role.role}
               delay={index * 80}
-              className="flex items-center gap-4 bg-brand-paper-100 px-5 py-5"
+              className="flex items-start gap-4 bg-brand-paper-100 px-5 py-5"
             >
               <span
                 aria-hidden="true"
-                className="h-9 w-9 shrink-0 rounded-full border border-brand-line-strong"
+                className="mt-0.5 h-9 w-9 shrink-0 rounded-full border border-brand-line-strong"
                 style={{
                   backgroundImage: `linear-gradient(135deg, ${role.swatch.join(", ")})`,
                 }}
               />
               <span className="min-w-0">
                 <span className="block text-sm font-medium text-brand-ink">{role.role}</span>
-                <span className="mt-0.5 block text-xs text-brand-ink/60">{role.colour}</span>
+                <span className="mt-0.5 block text-xs font-medium uppercase tracking-wider text-brand-steel-500">
+                  {role.colour}
+                </span>
+                {role.outfit ? (
+                  <span className="mt-2 block text-sm leading-relaxed text-brand-ink/70">{role.outfit}</span>
+                ) : null}
               </span>
             </Reveal>
           ))}

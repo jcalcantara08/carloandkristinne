@@ -98,7 +98,7 @@ export type SiteContent = {
     dressEyebrow: string;
     dressTitle: string;
     dressNote: string;
-    dressCode: { role: string; colour: string }[];
+    dressCode: { role: string; colour: string; outfit: string }[];
     practicalEyebrow: string;
     practicalTitle: string;
     practical: TitledBody[];
@@ -287,7 +287,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     dressEyebrow: "What to wear",
     dressTitle: "The blues, and white is theirs",
     dressNote: DRESS_NOTE,
-    dressCode: DRESS_CODE.map((d) => ({ role: d.role, colour: d.colour })),
+    dressCode: DRESS_CODE.map((d) => ({ role: d.role, colour: d.colour, outfit: d.outfit })),
     practicalEyebrow: "Good to know",
     practicalTitle: "The small print, kindly meant",
     practical: [
@@ -601,11 +601,13 @@ export const CONTENT_SECTIONS: ContentSection[] = [
         type: "list",
         path: "details.dressCode",
         label: "Who wears what",
+        help: "The outfit is the actual garments, as on the attire guide: cut, shirt, tie, shoes. Leave it empty for a role with no guide yet.",
         required: "role",
         spare: 1,
         itemFields: [
           { key: "role", label: "Who", type: "text" },
           { key: "colour", label: "Colour", type: "text" },
+          { key: "outfit", label: "The outfit", type: "textarea" },
         ],
       },
       text("details.practicalEyebrow", "Good to know eyebrow"),

@@ -7,7 +7,7 @@ manual's fault, not yours: tell Erick and he will fix the wording.
 Everything in Part 1 is also inside the site itself, one click from the
 dashboard, at `/admin/manual`.
 
-Last updated: 16 September 2026.
+Last updated: 17 September 2026.
 
 ---
 
@@ -176,6 +176,14 @@ Things guests currently cannot see because they are still empty:
 entourage groups and the small cards all work the same way: a blank row at
 the bottom adds one, and blanking a row's title removes it. Entourage names
 are typed one per line as `Name | Role | Note`; the note is optional.
+
+**The dress code.** Each row has three parts: who, the colour, and the
+outfit. The outfit is the actual clothes as drawn on your attire guides (a
+three-piece suit, a floor-length gown, a black suit with a blue tie), so a
+guest knows the cut and not only the shade. The rows for the best man, the
+bridesmaids and the groomsmen were read off the two guides you sent. The maid
+of honour's row says only "a floor-length gown in dusty blue" because there
+is no guide for her yet; edit it once there is.
 
 **Photographs on the pages.** The hero photograph is uploaded from the Home
 form. A landscape photograph of the two of you, under 12 MB. Guests' album

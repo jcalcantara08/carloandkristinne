@@ -136,23 +136,60 @@ export const OFFICIANT = {
 
 /* =========================
    Dress code
-   The couple's own colour coding, verbatim from the workbook.
+   The colours are the couple's own coding from the workbook. The outfits are
+   read off the two attire guides they sent on 17 September 2026 (Best Man;
+   Bridesmaids and Groomsmen), garment by garment, so a guest knows the cut
+   and not only the shade. Roles with no guide say only what is known.
    ========================= */
 
 export type DressRole = {
   role: string;
   colour: string;
+  /** The actual garments, as drawn on the attire guide. Empty when there is no guide for the role. */
+  outfit: string;
   /** Swatch stops. Rendered as a small gradient chip, never as the only cue. */
   swatch: string[];
 };
 
 export const DRESS_CODE: DressRole[] = [
-  { role: "The couple", colour: "White", swatch: ["#FFFFFF", "#D6E0E8"] },
-  { role: "Best Man", colour: "A blue suit", swatch: ["#3B5068", "#6B8BC9"] },
-  { role: "Maid of Honour", colour: "Dusty blue", swatch: ["#5B7590", "#A3B8CF"] },
-  { role: "Bridesmaids", colour: "Dusty blue, any shade", swatch: ["#3B5068", "#7A97B3", "#B9C9D6"] },
-  { role: "Groomsmen", colour: "Black suit, blue tie", swatch: ["#0B1220", "#7A97B3"] },
-  { role: "Our guests", colour: "Blue, violet or black", swatch: ["#6B8BC9", "#7A6B9E", "#0B1220"] },
+  {
+    role: "The couple",
+    colour: "White",
+    outfit: "Kristinne in her wedding gown, Carlo in his suit. White is theirs alone.",
+    swatch: ["#FFFFFF", "#D6E0E8"],
+  },
+  {
+    role: "Best Man",
+    colour: "Dark steel blue",
+    outfit:
+      "A three-piece suit in dark steel blue: jacket, waistcoat and trousers. White shirt, dusty blue tie, white pocket square, a boutonniere, dark brown shoes.",
+    swatch: ["#3B5068", "#6B8BC9"],
+  },
+  {
+    role: "Maid of Honour",
+    colour: "Dusty blue",
+    outfit: "A floor-length gown in dusty blue. The cut is hers to choose.",
+    swatch: ["#5B7590", "#A3B8CF"],
+  },
+  {
+    role: "Bridesmaids",
+    colour: "Dusty blue, any shade",
+    outfit:
+      "A floor-length, flowing gown in any shade of dusty blue. Thin straps, a halter neck or off the shoulder with short sleeves all sit on the guide, so choose the one you feel best in. A small bouquet is provided on the day.",
+    swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
+  },
+  {
+    role: "Groomsmen",
+    colour: "Black suit, blue tie",
+    outfit: "A black two-piece suit with a white shirt, a blue tie and a light blue pocket square. Black shoes.",
+    swatch: ["#0B1220", "#7A97B3"],
+  },
+  {
+    role: "Our guests",
+    colour: "Blue, violet or black",
+    outfit: "Formal or semi-formal. A suit and tie, or a dress, in blue, violet or black.",
+    swatch: ["#6B8BC9", "#7A6B9E", "#0B1220"],
+  },
 ];
 
 export const DRESS_NOTE =

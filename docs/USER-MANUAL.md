@@ -194,10 +194,10 @@ holds the logins and can add you to any of them.
 
 | Service | What it does | Where to find it |
 |---|---|---|
-| **Vercel** | Hosts the website itself and publishes changes | vercel.com. The project is not created yet as of this manual |
+| **Vercel** | Hosts the website itself and publishes changes | vercel.com, team `carloandkristinne`. The site is at carloandkristinne.vercel.app |
 | **Supabase** | The database (replies, messages, photo records) and the photo files | supabase.com. Not created yet |
 | **Resend** | Sends the reply notification email | resend.com. Optional; the site works without it |
-| **GitHub** | Stores the site's code and history | github.com. Not created yet |
+| **GitHub** | Stores the site's code and history | github.com, Carlo's account `jcalcantara08` |
 | **Domain registrar** | The web address itself | Not bought yet. The site is written for `carloandkristinne.com` |
 
 There are no payments, no analytics, and no advertising anywhere in the site.

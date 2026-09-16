@@ -23,22 +23,26 @@ makulit, masayahin, simple lang, at enjoy lang lahat."*
 
 ## 2. Current state, honestly
 
-**Built, verified, not deployed.** All nine public pages, the three guest
-forms, the admin dashboard, the full reception programme, and a privacy page.
+**Built, verified, and live at https://carloandkristinne.vercel.app since
+17 September 2026.** All nine public pages, the three guest forms, the admin
+dashboard, the full reception programme, and a privacy page.
 `npm run verify` is green. Lighthouse: 76 to 90 performance, 96 to 100
 accessibility, 100 best practices, 100 SEO, under the mobile profile.
 
+**What exists.** GitHub: `jcalcantara08/carloandkristinne`, on Carlo's own
+account (created Public; should be made Private). Vercel: team
+`carloandkristinne`, project `carloandkristinne`, auto-deploys from `main`.
+`NEXT_PUBLIC_SITE_URL` is set to the vercel.app address, so canonicals are
+correct.
+
 **What does not exist yet**, in the order it has to happen:
 
-1. A git remote. The repository is initialised with one commit and has never
-   been pushed. OneDrive and this laptop are the only copies.
-2. A Vercel project.
-3. A Supabase project. Until it exists every form says, honestly, that it is
-   not switched on.
-4. `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` on the host.
-5. The domain. Every canonical URL, the sitemap, `robots.txt` and the social
-   image URLs are built for `carloandkristinne.com`, which has not been
-   bought. See section 6.
+1. A Supabase project. Until it exists every form says, honestly, that it is
+   not switched on, and no RSVP can be collected.
+2. `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` on Vercel. Until then
+   `/admin/login` shows the "not configured" screen.
+3. The domain. When `carloandkristinne.com` is bought, add it in Vercel
+   Domains, change `NEXT_PUBLIC_SITE_URL` to match, and redeploy.
 
 The site's own RSVP deadline is 30 September 2026.
 
@@ -74,8 +78,8 @@ moved only the vulnerable packages. Lint passes; align it when convenient.
 
 | Service | Role | Account | Status |
 |---|---|---|---|
-| GitHub | Code and history | Erick's, `ericksleisure@gmail.com` | Repo not created |
-| Vercel | Hosting and deploys. Runs `npm run check && npm run build` | Erick's | Project not created |
+| GitHub | Code and history | Carlo's account, `jcalcantara08` | `jcalcantara08/carloandkristinne`. Make it Private |
+| Vercel | Hosting and deploys. Runs `npm run check && npm run build` | Team `carloandkristinne` | Live at carloandkristinne.vercel.app |
 | Supabase | Postgres (four tables) and Storage (one public bucket) | To be created on Erick's account | Not created |
 | Resend | Sends the RSVP notification email. Optional | To be created | Not created |
 | Upstash Redis | Shared rate limiting across serverless instances. Optional | Not needed unless the address leaks past the guest list | Not created |
@@ -137,7 +141,8 @@ runtime, not build time.
 
 ## 7. Deploying
 
-Not yet wired. When it is:
+Wired and working since 17 September 2026. The first deployment went live 60
+seconds after the first push.
 
 1. Push to `main` on GitHub.
 2. Vercel runs `npm run check && npm run build` (set in `vercel.json`) and
@@ -372,7 +377,7 @@ Gitignore is not a security control here. Rotate anything sensitive.
 
 | Item | Note |
 |---|---|
-| Not pushed, not deployed, no domain | Section 2. Everything else is downstream |
+| No Supabase, no admin secrets, no domain | Section 2, in that order |
 | `og.png` and `apple-touch-icon.png` are aurora fields with no text | Regenerate with the couple's names and date once a photograph exists |
 | `favicon.ico` is generated from `icon.svg`, which still uses the dark-build ink background | Reads fine as a favicon; matches the OG image. Regenerate together |
 | No Playwright tests | Section 14 |

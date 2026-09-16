@@ -42,7 +42,6 @@ export default function OurStoryPage() {
   return (
     <>
       <PageHeader
-        index="01"
         eyebrow="Kaloob ng Diyos"
         title={
           <>
@@ -62,6 +61,7 @@ export default function OurStoryPage() {
         <div className="container grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <SectionHeading
+              align="left"
               eyebrow="The hashtag"
               /* break-all, not the base break-word: only the former reduces
                  min-content width, and this heading sits in a grid item whose
@@ -88,7 +88,7 @@ export default function OurStoryPage() {
           </div>
 
           <Reveal delay={120} className="lg:col-span-5">
-            <Card className="border-brand-violet-600/30">
+            <Card className="border-brand-steel-600/30">
               <p className="eyebrow">In their own words</p>
               <blockquote className="mt-5 font-display text-display-md leading-tight">
                 &ldquo;Ilabas namin kung sino talaga kami: makulit, masayahin, simple lang, at enjoy
@@ -107,7 +107,6 @@ export default function OurStoryPage() {
       <Section>
         <div className="container">
           <SectionHeading
-            index="02"
             eyebrow="What matters to them"
             title="Three things, in order"
             intro={
@@ -140,7 +139,6 @@ export default function OurStoryPage() {
       <Section>
         <div className="container">
           <SectionHeading
-            index="03"
             eyebrow="Still being written"
             title="How they met, and how he asked"
           />

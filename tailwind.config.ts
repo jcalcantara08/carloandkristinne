@@ -2,22 +2,21 @@ import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 /**
- * Design tokens are derived from the couple's chosen motif:
- * "Blue - Violet - Black, couple in white."
+ * Design tokens are taken from the couple's attire guides of 17 September
+ * 2026, not from the workbook's one-line motif. The guides name five blues:
+ * dark steel, dusty, ice, light blue grey and cornflower. There is no violet
+ * anywhere on them. The earlier palette (electric blue into purple) was read
+ * off the motif words and looked like a different event next to the actual
+ * dresses and suits.
  *
- * A note on the reading, because an earlier version of this file got it
- * wrong. That motif describes the WEDDING: what the entourage wears. It is
- * not an instruction for the website's background. Treating "black" as the
- * page ground produced a near-black site that looked like a fashion editorial
- * and read as sombre, which is the opposite of what a Filipino wedding feels
- * like and hard work for an older guest reading it on a phone outdoors.
+ * White stays the ground: it is the couple's colour and it is what every
+ * well-liked wedding site in 2026 does. Ink is a cool navy-black to sit with
+ * the blues. Only dark steel blue is safe as text on white (8.3:1); dusty,
+ * ice and cornflower are washes, hairlines and swatches, never body text.
+ * A deepened cornflower (5.4:1) is the second text-safe accent.
  *
- * The correct reading: white is the couple, so white is the ground and the
- * dominant field of the whole site. Black is the ink: type, and one dark
- * band per page. Blue and violet are the accents, used as a soft wash, the
- * hairline rule, the monogram ring and the dress-code swatches.
- *
- * Same palette, right polarity.
+ * Every ratio below was measured, not assumed. 60 percent ink is the muted
+ * floor (4.9:1); 55 fails at 4.1.
  */
 const config: Config = {
   content: [
@@ -37,31 +36,40 @@ const config: Config = {
       colors: {
         brand: {
           // --- The couple. The ground, and most of what you see. ---
-          paper: { DEFAULT: "#FFFFFF", 100: "#FFFFFF", 200: "#F7F6FC", 300: "#EDEBF6" },
-          // --- Black: type, and the single dark band per page. ---
-          ink: { DEFAULT: "#05060E", 800: "#0B0D1A", 700: "#141733" },
-          // --- Hairlines. ---
-          line: { DEFAULT: "#E6E4F0", strong: "#D2CFE3" },
-          /* Blue: the cooler accent. 500 and 600 are safe on paper
-             (5.8:1 and 8.4:1). 200 and 300 are for use on the dark band. */
-          blue: { DEFAULT: "#3A55D9", 100: "#EEF1FF", 200: "#C2CEFF", 300: "#93A9FF", 400: "#5C74E8", 500: "#3A55D9", 600: "#2C41AB" },
-          /* Violet: the warmer accent, and the focus ring.
-             500 measures 5.4:1 on paper, so it is safe for the eyebrow. */
-          violet: { DEFAULT: "#8B3FD4", 100: "#F6EDFF", 200: "#E0CBFE", 300: "#C9A2FD", 400: "#A855F7", 500: "#8B3FD4", 600: "#6F2FAD" },
+          // 200 is an ice-blue tint for section rhythm, never a contrast band.
+          paper: { DEFAULT: "#FFFFFF", 100: "#FFFFFF", 200: "#F4F7FA", 300: "#E9EFF4" },
+          // --- Navy-black: type, the primary button, the one dark band. 18.7:1 on paper. ---
+          ink: { DEFAULT: "#0B1220", 800: "#141D2E", 700: "#1E2A3D" },
+          // --- Hairlines, in ice blue. ---
+          line: { DEFAULT: "#DDE5EC", strong: "#C4D0DB" },
+          /* Steel: dark steel blue from the attire guide, the primary accent.
+             500 is the guide's own swatch and measures 8.3:1 on paper, so it
+             carries the eyebrow, links and the focus ring. 300 is the
+             dusty-blue-grey used for the eyebrow on the dark band (9.2:1). */
+          steel: { DEFAULT: "#3B5068", 100: "#EDF2F6", 200: "#D6E0E8", 300: "#A3B8CF", 400: "#5B7590", 500: "#3B5068", 600: "#2E3F52" },
+          /* Cornflower: the lighter accent. 400 is the guide's own swatch and
+             is a wash only (3.4:1). 500 is deepened to 5.4:1 so it can be
+             text; 300 is for the dark band (9.0:1). */
+          cornflower: { DEFAULT: "#4A69AA", 100: "#EBF0F9", 200: "#C5D3EE", 300: "#9DB4E0", 400: "#6B8BC9", 500: "#4A69AA", 600: "#3B5590" },
+          /* Dusty: the bridesmaids' blue. Washes, swatches and photo
+             placeholders only; it never carries text. */
+          dusty: { DEFAULT: "#7A97B3", 300: "#B9C9D6", 400: "#7A97B3" },
         },
       },
       fontFamily: {
         // Always via next/font CSS variables, always with a system fallback.
-        display: ["var(--font-display)", "Didot", "Georgia", "serif"],
+        display: ["var(--font-display)", "Garamond", "Georgia", "serif"],
         body: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
         // Clamp tokens, so markup never carries a breakpoint ladder.
         // Line height shrinks as size grows.
-        "display-2xl": ["clamp(3rem, 11vw, 8rem)", { lineHeight: "0.92", letterSpacing: "-0.02em" }],
-        "display-xl": ["clamp(2.5rem, 6vw, 4.5rem)", { lineHeight: "1.02", letterSpacing: "-0.015em" }],
-        "display-lg": ["clamp(2rem, 4.2vw, 3.25rem)", { lineHeight: "1.08", letterSpacing: "-0.01em" }],
-        "display-md": ["clamp(1.5rem, 3vw, 2.25rem)", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
+        // Cormorant has a small x-height, so these run a touch larger than
+        // the Bodoni sizes did, and with normal tracking rather than tight.
+        "display-2xl": ["clamp(3rem, 9vw, 6.5rem)", { lineHeight: "1", letterSpacing: "0" }],
+        "display-xl": ["clamp(2.5rem, 6vw, 4.75rem)", { lineHeight: "1.05", letterSpacing: "0" }],
+        "display-lg": ["clamp(2.125rem, 4.4vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "0" }],
+        "display-md": ["clamp(1.625rem, 3vw, 2.375rem)", { lineHeight: "1.15", letterSpacing: "0" }],
       },
       letterSpacing: {
         // One eyebrow tracking value for the whole site. Do not add a second.
@@ -69,25 +77,22 @@ const config: Config = {
       },
       maxWidth: { prose: "68ch" },
       boxShadow: {
-        // Tinted with the brand ink, never black, never shadow-lg.
-        // rgba(20, 23, 51) is a blue-leaning ink, so shadows on paper stay
-        // cool rather than turning grey.
-        soft: "0 1px 2px rgba(20, 23, 51, 0.04), 0 6px 20px -8px rgba(20, 23, 51, 0.10)",
-        lift: "0 10px 34px -12px rgba(20, 23, 51, 0.18), 0 2px 6px rgba(20, 23, 51, 0.04)",
-        glow: "0 10px 30px -8px rgba(139, 63, 212, 0.30)",
+        // Tinted with the steel blue, never black, never shadow-lg, so
+        // shadows on paper stay cool rather than turning grey.
+        soft: "0 1px 2px rgba(59, 80, 104, 0.05), 0 6px 20px -8px rgba(59, 80, 104, 0.12)",
+        lift: "0 10px 34px -12px rgba(59, 80, 104, 0.20), 0 2px 6px rgba(59, 80, 104, 0.05)",
+        glow: "0 10px 30px -8px rgba(74, 105, 170, 0.30)",
       },
       backgroundImage: {
-        // The one gradient. Blue into violet, left to right.
-        aurora: "linear-gradient(90deg, #3A55D9 0%, #8B3FD4 100%)",
-        // The same gradient for use on the dark band, where the darker
-        // pair would drop under 4.5:1. See globals.css `.on-ink .aurora-text`.
-        "aurora-light": "linear-gradient(90deg, #93A9FF 0%, #C9A2FD 100%)",
-        // The ribbon reads top to bottom, so it needs a vertical ramp.
-        "aurora-down": "linear-gradient(180deg, #3A55D9 0%, #8B3FD4 55%, #3A55D9 100%)",
+        // The one gradient: dark steel into cornflower, left to right. Both
+        // stops are text-safe on paper (8.3:1 and 5.4:1), so it can carry
+        // the hashtag wordmark. The "aurora" name is historical.
+        aurora: "linear-gradient(90deg, #3B5068 0%, #4A69AA 100%)",
+        // The same ramp in the light pair, for the dark band (9.2:1, 9.0:1).
+        "aurora-light": "linear-gradient(90deg, #A3B8CF 0%, #9DB4E0 100%)",
+        // A soft horizontal rule that fades at both ends.
         "aurora-soft":
-          "linear-gradient(90deg, rgba(58,85,217,0) 0%, rgba(58,85,217,0.85) 25%, rgba(139,63,212,0.85) 75%, rgba(139,63,212,0) 100%)",
-        "aurora-v":
-          "linear-gradient(180deg, rgba(58,85,217,0) 0%, rgba(58,85,217,0.7) 30%, rgba(139,63,212,0.7) 70%, rgba(139,63,212,0) 100%)",
+          "linear-gradient(90deg, rgba(59,80,104,0) 0%, rgba(59,80,104,0.7) 25%, rgba(107,139,201,0.7) 75%, rgba(107,139,201,0) 100%)",
       },
       keyframes: {
         "fade-up": {

@@ -7,7 +7,6 @@ import { eventJsonLd, websiteJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/layout/SkipLink";
-import { Ribbon } from "@/components/Ribbon";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -70,11 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <SkipLink />
         <Header />
-        {/* The ribbon threads the whole document, so it lives here rather
-            than in any one section. `isolate` gives it a stacking context to
-            sit behind. */}
-        <main id="main" className="relative isolate pt-[4.5rem]">
-          <Ribbon />
+        <main id="main" className="relative pt-[4.5rem]">
           {children}
         </main>
         <Footer />

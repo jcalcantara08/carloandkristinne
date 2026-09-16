@@ -20,8 +20,8 @@ export function FormStatus({ state }: { state: ActionState }) {
       role="status"
       className={
         success
-          ? "flex items-start gap-3 rounded-xl border border-brand-blue-600/50 bg-brand-blue-600/10 px-4 py-3 text-sm text-brand-blue-600"
-          : "flex items-start gap-3 rounded-xl border border-brand-violet-600/50 bg-brand-violet-600/10 px-4 py-3 text-sm text-brand-violet-600"
+          ? "flex items-start gap-3 rounded-xl border border-brand-cornflower-600/50 bg-brand-cornflower-600/10 px-4 py-3 text-sm text-brand-cornflower-600"
+          : "flex items-start gap-3 rounded-xl border border-brand-steel-600/50 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600"
       }
     >
       {success ? (

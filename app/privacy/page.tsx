@@ -102,7 +102,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
       <p>
         Ask {CONTACT.pointOfContact.name}. He can correct a reply, take a message or a photograph
         down, or delete what you gave us entirely. His details are on the{" "}
-        <Link href="/details" className="underline decoration-brand-violet-500 decoration-2 underline-offset-4">
+        <Link href="/details" className="underline decoration-brand-steel-500 decoration-2 underline-offset-4">
           Details page
         </Link>
         .

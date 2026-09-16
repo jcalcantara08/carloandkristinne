@@ -23,7 +23,6 @@ export default async function GuestbookPage() {
   return (
     <>
       <PageHeader
-        index="07"
         eyebrow="Say something"
         title="The wishing wall"
         intro={
@@ -56,7 +55,7 @@ export default async function GuestbookPage() {
               {entries.map((entry, index) => (
                 <Reveal as="li" key={entry.id} delay={Math.min(index, 8) * 80}>
                   <Card hover className="flex h-full flex-col">
-                    <Quote className="h-5 w-5 text-brand-violet-500" aria-hidden="true" />
+                    <Quote className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
                     <blockquote className="mt-4 flex-1 whitespace-pre-line text-sm leading-relaxed text-brand-ink/75">
                       {entry.message}
                     </blockquote>
@@ -75,7 +74,7 @@ export default async function GuestbookPage() {
           ) : (
             <Reveal delay={80}>
               <div className="mx-auto mt-12 max-w-xl rounded-2xl border border-dashed border-brand-line-strong bg-brand-paper-200 p-10 text-center">
-                <Quote className="mx-auto h-6 w-6 text-brand-violet-500" aria-hidden="true" />
+                <Quote className="mx-auto h-6 w-6 text-brand-steel-500" aria-hidden="true" />
                 <p className="mt-4 font-display text-display-md">Nothing here yet</p>
                 <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">
                   The wall fills up as messages are approved. Yours could be the very first.

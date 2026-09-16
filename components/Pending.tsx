@@ -25,7 +25,7 @@ export function PendingChip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-dashed border-brand-violet-600/60 bg-brand-violet-600/10 px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-brand-violet-500",
+        "inline-flex items-center gap-1.5 rounded-full border border-dashed border-brand-steel-600/60 bg-brand-steel-600/10 px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-brand-steel-500",
         className,
       )}
     >
@@ -74,7 +74,7 @@ export function PendingBlock({
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(168,85,247,0.10),transparent_65%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(107,139,201,0.14),transparent_65%)]"
       />
       <div className="relative">
         <PendingChip />

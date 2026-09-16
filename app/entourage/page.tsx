@@ -20,7 +20,6 @@ export default function EntouragePage() {
   return (
     <>
       <PageHeader
-        index="04"
         eyebrow="The people"
         title="Who is standing with them"
         intro={
@@ -38,11 +37,10 @@ export default function EntouragePage() {
         </Link>
       </PageHeader>
 
-      {ENTOURAGE_GROUPS.map((group, groupIndex) => (
+      {ENTOURAGE_GROUPS.map((group) => (
         <Section key={group.key}>
           <div className="container">
             <SectionHeading
-              index={String(groupIndex + 1).padStart(2, "0")}
               eyebrow={group.blurb}
               title={group.title}
             />
@@ -77,7 +75,7 @@ export default function EntouragePage() {
       <Section>
         <div className="container">
           <Reveal>
-            <Card className="mx-auto max-w-2xl border-brand-violet-600/30 text-center">
+            <Card className="mx-auto max-w-2xl border-brand-steel-600/30 text-center">
               <p className="eyebrow">A note on flowers</p>
               <p className="mt-4 text-base leading-relaxed text-brand-ink/80">
                 {ENTOURAGE_FOOTNOTE}

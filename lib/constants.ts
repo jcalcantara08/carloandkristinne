@@ -49,6 +49,15 @@ export const COUPLE = {
 } as const;
 
 /* =========================
+   The hero photograph
+   Every well-liked wedding site leads with one. Until the couple send a
+   photograph this stays pending and the hero is set in type alone. Drop a
+   file into public/ and set it here; nothing else has to change.
+   ========================= */
+
+export const HERO_PHOTO: Pending<{ src: string; alt: string }> = tbc();
+
+/* =========================
    The day
    ========================= */
 
@@ -126,16 +135,28 @@ export type DressRole = {
 };
 
 export const DRESS_CODE: DressRole[] = [
-  { role: "The couple", colour: "White", swatch: ["#FFFFFF", "#E4E2F0"] },
-  { role: "Maid of Honour", colour: "Shades of violet", swatch: ["#C9A2FD", "#8B3FD4"] },
-  { role: "Best Man", colour: "Shades of blue", swatch: ["#93A9FF", "#3A55D9"] },
-  { role: "Bridesmaids", colour: "Shades of blue", swatch: ["#93A9FF", "#3A55D9"] },
-  { role: "Groomsmen", colour: "Black", swatch: ["#1E2140", "#05060E"] },
-  { role: "Our guests", colour: "Blue, violet or black", swatch: ["#4C6FFF", "#A855F7", "#05060E"] },
+  { role: "The couple", colour: "White", swatch: ["#FFFFFF", "#D6E0E8"] },
+  { role: "Best Man", colour: "A blue suit", swatch: ["#3B5068", "#6B8BC9"] },
+  { role: "Maid of Honour", colour: "Dusty blue", swatch: ["#5B7590", "#A3B8CF"] },
+  { role: "Bridesmaids", colour: "Dusty blue, any shade", swatch: ["#3B5068", "#7A97B3", "#B9C9D6"] },
+  { role: "Groomsmen", colour: "Black suit, blue tie", swatch: ["#0B1220", "#7A97B3"] },
+  { role: "Our guests", colour: "Blue, violet or black", swatch: ["#6B8BC9", "#7A6B9E", "#0B1220"] },
 ];
 
 export const DRESS_NOTE =
-  "Formal or semi-formal, please. Everyone in the entourage is buying their own outfit, so wear something you genuinely feel good in, as long as it sits within your colour. White is kept for the couple.";
+  "Formal or semi-formal, please. Everyone in the entourage is buying or renting their own outfit, so wear something you genuinely feel good in, as long as it sits within your colour. White is kept for the couple.";
+
+/**
+ * The blues, exactly as named on the attire guides the couple sent. These are
+ * the swatches guests can hold a dress or a tie up against.
+ */
+export const ATTIRE_PALETTE: { name: string; hex: string }[] = [
+  { name: "Dark steel blue", hex: "#3B5068" },
+  { name: "Dusty blue", hex: "#7A97B3" },
+  { name: "Ice blue", hex: "#D6E0E8" },
+  { name: "Light blue grey", hex: "#B9C9D6" },
+  { name: "Cornflower blue", hex: "#6B8BC9" },
+];
 
 /* =========================
    The people
@@ -352,13 +373,14 @@ export const SCHEDULE: ScheduleItem[] = [
   /* ---- The reception.
      Clock times below are derived from the 7:15 PM doors, using the
      durations on each item, so a change to one moves everything after it.
-     The order follows the host's programme sheet. ---- */
+     The order is the host's own revised sheet of 17 September 2026, twenty
+     items, with dinner brought forward to straight after the prayer. ---- */
   {
     time: tbc<string>(),
     minutes: 15,
     title: "The doors open, and we dance",
     detail:
-      "Everybody on their feet, ninongs and ninangs very much included. Erick leads it, the music plays, and whoever gives it the most wins. The prize is the first photograph with Carlo and Kristinne, and first place in the line for food.",
+      "Everybody on their feet, ninongs and ninangs very much included. Erick leads it, the music plays, and whoever gives it the most wins the first photograph with Carlo and Kristinne.",
     phase: "reception",
   },
   {
@@ -384,17 +406,9 @@ export const SCHEDULE: ScheduleItem[] = [
   },
   {
     time: tbc<string>(),
-    minutes: 10,
-    title: "The entourage parade",
-    detail:
-      "The secondary sponsors converge at the entrance and come in as a parade, then the rest of the wedding party.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 5,
-    title: "The save-the-date video",
-    detail: "Played if there is one by then.",
+    minutes: 15,
+    title: "The entourage comes in",
+    detail: "The wedding party and the groomsmen enter by group, and take their places.",
     phase: "reception",
   },
   {
@@ -408,8 +422,23 @@ export const SCHEDULE: ScheduleItem[] = [
   {
     time: tbc<string>(),
     minutes: 5,
+    title: "The prayer",
+    detail: "Led by a speaker the couple are still choosing, and then we eat.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 45,
+    title: "Dinner",
+    detail:
+      "Called table by table, early on purpose. Please eat properly, there is plenty, and the rest of the evening waits for you.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 5,
     title: "The first dance",
-    detail: "The couple dance, and the floor is theirs until the chorus.",
+    detail: "The couple, and the floor is theirs. The song is theirs to choose, and they are still choosing.",
     phase: "reception",
   },
   {
@@ -417,7 +446,7 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 15,
     title: "The prosperity dance",
     detail:
-      "The music changes and everyone is welcome to join them. Bring envelopes and pins if you would like to take part.",
+      "The music changes and you are invited up to hand your gift to the couple as they dance. Everyone is welcome on the floor.",
     phase: "reception",
   },
   {
@@ -437,37 +466,6 @@ export const SCHEDULE: ScheduleItem[] = [
   },
   {
     time: tbc<string>(),
-    minutes: 5,
-    title: "The prayer",
-    detail: "Led by a speaker the couple are still choosing, and then we eat.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
-    title: "Photographs with the couple",
-    detail:
-      "The winners of the opening dance go up first, exactly as promised, and carry on straight to the buffet.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 45,
-    title: "Dinner, with music",
-    detail:
-      "Dinner is called table by table, with the band and any brave guest singers playing through it. Please eat properly, there is plenty.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
-    title: "Under the chair",
-    detail:
-      "Ten cards are hidden under chairs around the room before you sit down. Check underneath yours, because one of them wins a prize.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
     minutes: 10,
     title: "The toasts",
     detail: "The best man and the maid of honour, in that order. Bring tissues.",
@@ -476,17 +474,9 @@ export const SCHEDULE: ScheduleItem[] = [
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "The slideshow",
-    detail:
-      "Growing up pictures, the two of them together, and the prenup photographs if they are ready in time.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
     title: "How well do you know them?",
     detail:
-      "Trivia about the bride and groom. Anyone who has known either of them for more than a year has no excuse.",
+      "Ten trivia questions about the bride and groom. Anyone who has known either of them for more than a year has no excuse.",
     phase: "reception",
   },
   {
@@ -500,14 +490,15 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 10,
     title: "Dance with the parents",
-    detail: "The bride with her father, the groom with his mother.",
+    detail: "The bride with her father, the groom with his mother, if they are willing. The songs are still being chosen.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
     title: "The bouquet toss",
-    detail: "Ribbons are handed out for this one, and Kristinne has a bouquet set aside to throw.",
+    detail:
+      "The coordinator brings the sinulid at karayom for the game, and Kristinne has a bouquet set aside to throw. Instructions on the night.",
     phase: "reception",
   },
   {
@@ -529,7 +520,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 10,
     title: "The same-day edit",
-    detail: "The film of the day so far, cut while the day was still happening.",
+    detail: "The film of the day so far, cut while the day was still happening, if it is ready in time.",
     phase: "reception",
   },
   {
@@ -614,11 +605,11 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How long does the reception run?",
-    a: "Doors open at 7:15 PM, the programme proper starts at 8:00 PM, and the send-off is at about half past eleven. Dinner is called at roughly a quarter to nine with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
+    a: "Doors open at 7:15 PM, the couple come in at 8:00 PM, and the send-off is at about eleven. Dinner is called early, at about ten past eight, with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
   },
   {
     q: "Will there be games?",
-    a: "Four, and you are in the first one whether you planned to be or not. The evening opens with a dance that Erick leads, and the winners take the first photograph with Carlo and Kristinne plus first place in the line for food. Later on there is a card hidden under ten of the chairs, trivia about the couple, and the Cinderella game for the gentlemen after the garter toss.",
+    a: "Three, and you are in the first one whether you planned to be or not. The evening opens with a dance that Erick leads, and the winners take the first photograph with Carlo and Kristinne. Later there are ten trivia questions about the couple, and the Cinderella game for the gentlemen after the garter toss.",
   },
   {
     q: "Is it true we have to sing?",

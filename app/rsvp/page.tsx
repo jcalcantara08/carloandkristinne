@@ -37,7 +37,6 @@ export default function RsvpPage() {
   return (
     <>
       <PageHeader
-        index="06"
         eyebrow={`Please reply by ${RSVP.deadlineLabel}`}
         title="Are you coming?"
         intro={
@@ -60,7 +59,7 @@ export default function RsvpPage() {
               {WHY.map((item, index) => (
                 <Reveal as="li" key={item.title} delay={index * 80}>
                   <Card>
-                    <item.icon className="h-5 w-5 text-brand-violet-500" aria-hidden="true" />
+                    <item.icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
                     <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
                     <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
                   </Card>
@@ -69,7 +68,7 @@ export default function RsvpPage() {
             </ul>
 
             <Reveal delay={240}>
-              <div className="mt-5 rounded-2xl border border-brand-violet-600/30 bg-brand-violet-600/5 p-6 text-center">
+              <div className="mt-5 rounded-2xl border border-brand-steel-600/30 bg-brand-steel-600/5 p-6 text-center">
                 <p className="eyebrow">The day itself</p>
                 <p className="mt-3 font-display text-display-md">{WEDDING_DAY.dateShort}</p>
                 <p className="mt-2 text-sm text-brand-ink/65">

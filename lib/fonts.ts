@@ -1,21 +1,23 @@
-import { Bodoni_Moda, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 
 /**
  * Two faces, no more.
  *
- * Bodoni Moda is a didone: very high stroke contrast, hairline serifs, a
- * fashion-magazine face. At display size on white it gives the names real
- * presence without needing a photograph behind them, which matters because
- * there are none yet. It is deliberately not Cormorant or a script, both of which are the default
- * wedding answer and would make this site look like every other one.
+ * Cormorant Garamond for display. An earlier build used Bodoni Moda, a
+ * didone, precisely to avoid looking like other wedding sites, and the
+ * client's verdict on the result was that it was ugly. The research done on
+ * 17 September 2026 across two dozen well-liked wedding sites found the same
+ * thing every time: a classic, readable serif for titles and a clean sans
+ * for everything else. Cormorant is that serif. It is soft where Bodoni was
+ * sharp, it sets warmly at large sizes, and older guests can read it.
  *
  * Inter carries everything a guest actually has to read.
  */
-export const display = Bodoni_Moda({
+export const display = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500"],
+  weight: ["500", "600"],
   style: ["normal", "italic"],
 });
 

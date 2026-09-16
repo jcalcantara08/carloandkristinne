@@ -56,7 +56,7 @@ function PhotoCard({ photo }: { photo: Photo }) {
           <input type="hidden" name="id" value={photo.id} />
           <button
             type="submit"
-            className="inline-flex min-h-[44px] items-center px-2 text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-violet-500"
+            className="inline-flex min-h-[44px] items-center px-2 text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-steel-500"
           >
             Delete
           </button>

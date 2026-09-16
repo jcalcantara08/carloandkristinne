@@ -66,7 +66,6 @@ export default function ProgrammePage() {
   return (
     <>
       <PageHeader
-        index="05"
         eyebrow="The run of show"
         title="One very long Saturday"
         intro={
@@ -84,7 +83,7 @@ export default function ProgrammePage() {
         </Link>
       </PageHeader>
 
-      {PHASES.map((phase, phaseIndex) => {
+      {PHASES.map((phase) => {
         const items = SCHEDULE.filter((item) => item.phase === phase.key);
         if (items.length === 0) return null;
 
@@ -92,7 +91,6 @@ export default function ProgrammePage() {
           <Section key={phase.key}>
             <div className="container">
               <SectionHeading
-                index={String(phaseIndex + 1).padStart(2, "0")}
                 eyebrow={phase.label}
                 title={phase.title}
                 intro={<p>{phase.blurb}</p>}
@@ -133,7 +131,6 @@ export default function ProgrammePage() {
       <Section on="tint">
         <div className="container">
           <SectionHeading
-            index="05"
             eyebrow="Reception"
             title="Then, the whole evening"
             intro={

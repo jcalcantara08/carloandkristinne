@@ -21,12 +21,12 @@ const ASPECTS = {
   "16/9": "aspect-video",
 } as const;
 
-// Pale washes on paper, cycling blue to violet.
+// Pale washes on paper, cycling through the attire blues.
 const TONES = [
-  "bg-[radial-gradient(120%_120%_at_20%_10%,rgba(58,85,217,0.16),rgba(251,250,255,1)_66%)]",
-  "bg-[radial-gradient(120%_120%_at_80%_20%,rgba(139,63,212,0.15),rgba(251,250,255,1)_66%)]",
-  "bg-[radial-gradient(120%_120%_at_50%_90%,rgba(92,116,232,0.14),rgba(251,250,255,1)_64%)]",
-  "bg-[radial-gradient(120%_120%_at_10%_80%,rgba(168,85,247,0.13),rgba(251,250,255,1)_66%)]",
+  "bg-[radial-gradient(120%_120%_at_20%_10%,rgba(122,151,179,0.28),rgba(244,247,250,1)_70%)]",
+  "bg-[radial-gradient(120%_120%_at_80%_20%,rgba(107,139,201,0.22),rgba(244,247,250,1)_70%)]",
+  "bg-[radial-gradient(120%_120%_at_50%_90%,rgba(59,80,104,0.18),rgba(244,247,250,1)_68%)]",
+  "bg-[radial-gradient(120%_120%_at_10%_80%,rgba(185,201,214,0.4),rgba(244,247,250,1)_70%)]",
 ] as const;
 
 export type PhotoFrameProps = {

@@ -60,7 +60,7 @@ export function Footer() {
             </span>
             <Link
               href="/privacy"
-              className="inline-flex min-h-[24px] items-center text-brand-ink/60 underline decoration-brand-line-strong underline-offset-4 transition-colors duration-200 hover:text-brand-ink hover:decoration-brand-violet-500"
+              className="inline-flex min-h-[24px] items-center text-brand-ink/60 underline decoration-brand-line-strong underline-offset-4 transition-colors duration-200 hover:text-brand-ink hover:decoration-brand-steel-500"
             >
               Privacy
             </Link>
@@ -71,7 +71,7 @@ export function Footer() {
               href={CREDITS.builder.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[24px] items-center text-brand-ink/70 underline decoration-brand-violet-500 decoration-2 underline-offset-4 transition-colors duration-200 hover:text-brand-ink"
+              className="inline-flex min-h-[24px] items-center text-brand-ink/70 underline decoration-brand-steel-500 decoration-2 underline-offset-4 transition-colors duration-200 hover:text-brand-ink"
             >
               {CREDITS.builder.name}
             </a>

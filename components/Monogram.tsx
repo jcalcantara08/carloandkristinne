@@ -33,7 +33,7 @@ export function Monogram({
     >
       <span
         aria-hidden="true"
-        className="absolute inset-0 animate-ring-spin rounded-full bg-[conic-gradient(from_0deg,#3A55D9,#8B3FD4,#3A55D9)] [mask:radial-gradient(farthest-side,transparent_calc(100%-1.5px),#000_calc(100%-1.5px))]"
+        className="absolute inset-0 animate-ring-spin rounded-full bg-[conic-gradient(from_0deg,#3B5068,#6B8BC9,#3B5068)] [mask:radial-gradient(farthest-side,transparent_calc(100%-1.5px),#000_calc(100%-1.5px))]"
       />
       <span
         aria-hidden="true"
@@ -46,7 +46,7 @@ export function Monogram({
         <span
           className={cn(
             "mx-0.5 align-middle text-[0.6em]",
-            on === "ink" ? "text-brand-violet-300" : "text-brand-violet-500",
+            on === "ink" ? "text-brand-cornflower-300" : "text-brand-cornflower-500",
           )}
         >
           &amp;

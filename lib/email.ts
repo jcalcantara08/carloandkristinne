@@ -53,12 +53,12 @@ export function emailShell(title: string, bodyLines: string[]): { html: string; 
     .map((line) => `<tr><td style="padding:4px 0;color:#2A2E52;font-size:14px;">${escapeHtml(line)}</td></tr>`)
     .join("");
 
-  const html = `<!doctype html><html lang="en"><body style="margin:0;background:#F6F5FB;font-family:-apple-system,Segoe UI,Roboto,sans-serif;">
+  const html = `<!doctype html><html lang="en"><body style="margin:0;background:#F4F7FA;font-family:-apple-system,Segoe UI,Roboto,sans-serif;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 16px;">
 <tr><td align="center">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;padding:32px;">
-<tr><td style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8B3FD4;padding-bottom:8px;">${escapeHtml(SITE.name)}</td></tr>
-<tr><td style="font-size:22px;color:#05060E;padding-bottom:16px;">${escapeHtml(title)}</td></tr>
+<tr><td style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#3B5068;padding-bottom:8px;">${escapeHtml(SITE.name)}</td></tr>
+<tr><td style="font-size:22px;color:#0B1220;padding-bottom:16px;">${escapeHtml(title)}</td></tr>
 ${rows}
 <tr><td style="padding-top:24px;font-size:12px;color:#6b7280;">${escapeHtml(footer)}</td></tr>
 </table>

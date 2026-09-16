@@ -43,7 +43,6 @@ export default async function GalleryPage() {
   return (
     <>
       <PageHeader
-        index="08"
         eyebrow="The shared album"
         title="Everything, from everyone"
         intro={
@@ -60,7 +59,7 @@ export default async function GalleryPage() {
             {HOW.map((item, index) => (
               <Reveal as="li" key={item.title} delay={index * 80}>
                 <Card hover className="h-full">
-                  <item.icon className="h-5 w-5 text-brand-violet-500" aria-hidden="true" />
+                  <item.icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
                   <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
                   <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
                 </Card>

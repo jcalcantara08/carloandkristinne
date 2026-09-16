@@ -36,7 +36,7 @@ export function Header() {
         >
           <Monogram size="sm" />
           <span className="hidden font-display text-lg tracking-wide text-brand-ink sm:block">
-            Carlo <span className="text-brand-violet-500">&amp;</span> Kristinne
+            Carlo <span className="text-brand-steel-500">&amp;</span> Kristinne
           </span>
         </Link>
 

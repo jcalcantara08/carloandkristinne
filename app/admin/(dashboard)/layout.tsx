@@ -59,7 +59,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       </nav>
 
       {!isDatabaseConfigured() ? (
-        <div className="mt-6 rounded-xl border border-brand-violet-600/50 bg-brand-violet-600/10 px-4 py-3 text-sm text-brand-violet-600">
+        <div className="mt-6 rounded-xl border border-brand-steel-600/50 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600">
           <p className="font-medium">The database is not connected yet.</p>
           <p className="mt-1 text-brand-ink/70">
             Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then redeploy. Until then,

@@ -12,7 +12,6 @@ export function GalleryPreview({ photos }: { photos: Photo[] }) {
     <Section>
       <div className="container">
         <SectionHeading
-          index="04"
           eyebrow="The album"
           title="Everything anyone photographs, in one place"
           intro={

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
 import { PhotoFrame } from "@/components/PhotoFrame";
-import { Aurora } from "@/components/Aurora";
 
 /**
  * "What we do" in the house page arc, translated for a wedding: who these
@@ -10,13 +9,11 @@ import { Aurora } from "@/components/Aurora";
  */
 export function StoryPreview() {
   return (
-    <Section className="overflow-hidden">
-      <Aurora intensity="soft" />
-
-      <div className="container relative grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+    <Section>
+      <div className="container grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-6">
           <SectionHeading
-            index="01"
+            align="left"
             eyebrow="Kaloob ng Diyos"
             title={
               <>

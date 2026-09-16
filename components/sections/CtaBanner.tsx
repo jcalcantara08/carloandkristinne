@@ -27,7 +27,7 @@ export function CtaBanner({
       {/* A soft bloom, so the black has depth rather than sitting flat. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(139,63,212,0.30),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_0%,rgba(74,105,170,0.35),transparent_70%)]"
       />
 
       <div className="container relative text-center">

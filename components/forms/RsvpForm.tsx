@@ -71,7 +71,7 @@ export function RsvpForm() {
               key={option.value}
               className={
                 attending === option.value
-                  ? "flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-brand-violet-500 bg-brand-violet-600/15 px-4 text-center text-sm font-medium text-brand-ink transition-colors duration-200"
+                  ? "flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-brand-steel-500 bg-brand-steel-600/15 px-4 text-center text-sm font-medium text-brand-ink transition-colors duration-200"
                   : "flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-brand-line bg-brand-paper-100 px-4 text-center text-sm text-brand-ink/70 transition-colors duration-200 hover:border-brand-line-strong"
               }
             >

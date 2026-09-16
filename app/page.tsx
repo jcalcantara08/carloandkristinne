@@ -6,15 +6,12 @@ import { DressCode } from "@/components/sections/DressCode";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
 import { GuestbookPreview } from "@/components/sections/GuestbookPreview";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { Marquee } from "@/components/sections/Marquee";
 import { listGuestbook, listPhotos } from "@/lib/store";
 
 /**
- * The page arc, house standard:
- * hero, proof strip, story, details, gallery, wishes, closing CTA.
- *
- * Grounds alternate white and a faint tint so a long scroll has rhythm, and
- * the single DARK band is the closing CTA. There is never a second dark band.
+ * The page arc: hero, proof strip, story, details, dress code, gallery,
+ * wishes, closing CTA. Grounds alternate white and a faint ice tint so a
+ * long scroll has rhythm, and the single DARK band is the closing CTA.
  */
 export default async function HomePage() {
   const [wishes, photos] = await Promise.all([listGuestbook("approved", 3), listPhotos("approved")]);
@@ -26,7 +23,6 @@ export default async function HomePage() {
       <StoryPreview />
       <DetailsPreview />
       <DressCode />
-      <Marquee />
       <GalleryPreview photos={photos} />
       <GuestbookPreview entries={wishes} />
       <CtaBanner />

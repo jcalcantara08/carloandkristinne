@@ -26,9 +26,11 @@ Vercel. Dev port **3028** (the folder number).
    planning workbook has all of it. The website is for guests only.
 6. **No hex codes in components.** `tailwind.config.ts` plus the semantic
    layer in `styles/globals.css`.
-7. **The motif is the wedding's, not the website's.** "Blue, violet, black,
-   couple in white" describes what the entourage wears. Do not turn black
-   back into the page background. That was tried and it read as sombre.
+7. **The palette is the attire guides', not the motif's.** The couple's
+   attire guides name five blues (dark steel, dusty, ice, light blue grey,
+   cornflower) and no violet. Do not turn black back into the page
+   background (tried, read as sombre) and do not bring back the electric
+   blue-into-purple gradient (tried, looked like a different wedding).
 8. **`requireAuth()` on the first line of every admin Server Action and route
    handler.** A Server Action is a public endpoint.
 9. **`lib/store.ts` is the only module that touches Supabase.**
@@ -36,23 +38,28 @@ Vercel. Dev port **3028** (the folder number).
 
 ## Design, in one paragraph
 
-Editorial, on white. Pure white ground (`brand.paper`), near-black type (`brand.ink`),
-blue and violet only as a soft wash, the hairline rule, the monogram ring and
-the dress-code swatches. Exactly one DARK band per page, the closing CTA,
-which uses the `.on-ink` class to flip every child automatically.
-Bodoni Moda display, Inter body. Eyebrow tracking is `tracking-eyebrow`
-(0.28em) everywhere, never a literal value. Stagger is `index * 80`. Easing is
-always expo-out. Sections are `py-16 sm:py-20 lg:py-28`. Body copy is 75
-percent ink, and 60 percent is the muted floor: 55 percent measures 4.47:1 on
-paper and fails.
+Classic, centred, on white. Pure white ground (`brand.paper`) with a faint
+ice-blue tint (`paper-200`) for rhythm, navy-black type (`brand.ink`), and the
+attire blues as accents: `steel-500` (dark steel blue, 8.3:1, the eyebrow and
+the focus ring) and `cornflower-500` (deepened to 5.4:1 for text). Dusty,
+ice and the raw cornflower are washes and swatches only, never text. Exactly
+one DARK band per page, the closing CTA, using `.on-ink`. Cormorant Garamond
+display at weight 500 and 600, Inter body. Eyebrow tracking is
+`tracking-eyebrow` (0.28em), never a literal. Stagger is `index * 80`, easing
+expo-out, sections `py-16 sm:py-20 lg:py-28`. Body copy is 75 percent ink; 60
+is the muted floor (4.9:1), 55 fails.
 
 Exactly two CTAs in every hero, primary plus outline. Never one, never three.
 
-**What stops it looking generic**, and what not to undo: the ribbon threading
-the whole document (`components/Ribbon.tsx`), the asymmetric left-aligned hero
-with the names at display-2xl, the ghosted folio numerals hanging in the
-margin, and `SectionHeading` defaulting to left rather than centre. A previous
-version centred everything and read as a template.
+**The design history, so it is not repeated.** Round one was near-black and
+read as sombre. Round two was white but centred and read as a template. Round
+three added a ribbon, an asymmetric Bodoni hero at 8rem, ghosted folio
+numerals and blurred colour blobs to look unique, and the client called it
+ugly. Round four (17 September 2026) followed what two dozen well-liked
+wedding sites actually do: soft palette from the real attire, classic serif
+plus clean sans, centred, generous space, no decoration, and a hero built to
+lead with a photograph. `HERO_PHOTO` in constants is pending until the couple
+send one. Do not reintroduce the ribbon, the blobs, the folios or Bodoni.
 
 ## Commands
 

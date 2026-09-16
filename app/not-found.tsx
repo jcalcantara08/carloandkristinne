@@ -5,14 +5,12 @@ export const metadata: Metadata = {
   title: "Page not found",
   robots: { index: false, follow: false },
 };
-import { Aurora } from "@/components/Aurora";
 import { Monogram } from "@/components/Monogram";
 
 export default function NotFound() {
   return (
-    <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden">
-      <Aurora intensity="soft" />
-      <div className="container relative py-20 text-center">
+    <section className="relative flex min-h-[70vh] items-center bg-brand-paper-200">
+      <div className="container py-20 text-center">
         <Monogram size="lg" className="mx-auto" />
         <p className="eyebrow mt-8">Nothing here</p>
         <h1 className="mt-5 text-display-xl">This page is not part of the wedding</h1>

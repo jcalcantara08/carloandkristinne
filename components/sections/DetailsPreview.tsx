@@ -11,7 +11,6 @@ export function DetailsPreview() {
     <Section id="details">
       <div className="container">
         <SectionHeading
-          index="02"
           eyebrow="Where and when"
           title="One town, one afternoon, two rooms"
           intro={
@@ -35,19 +34,19 @@ export function DetailsPreview() {
                 <dl className="mt-6 space-y-3 text-sm">
                   <div className="flex items-start gap-3">
                     <dt className="sr-only">Time</dt>
-                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                     <dd className="text-brand-ink/75">{venue.time}</dd>
                   </div>
                   <div className="flex items-start gap-3">
                     <dt className="sr-only">Address</dt>
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                     <dd className="text-brand-ink/75">
                       <Value of={venue.address} label="Address to be confirmed" />
                     </dd>
                   </div>
                   <div className="flex items-start gap-3">
                     <dt className="sr-only">Note</dt>
-                    <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                    <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                     <dd className="leading-relaxed text-brand-ink/65">{venue.note}</dd>
                   </div>
                 </dl>

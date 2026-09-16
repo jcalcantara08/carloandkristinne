@@ -40,7 +40,6 @@ export default function DetailsPage() {
   return (
     <>
       <PageHeader
-        index="02"
         eyebrow="Everything practical"
         title="The details"
         intro={
@@ -87,13 +86,13 @@ export default function DetailsPage() {
                   <dl className="mt-6 space-y-4 text-sm">
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Time</dt>
-                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                       <dd className="text-brand-ink/80">{venue.time}</dd>
                     </div>
 
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Address</dt>
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                       <dd className="text-brand-ink/80">
                         <Value of={venue.address} label="Address to be confirmed" />
                         <span className="mt-1 block text-brand-ink/60">
@@ -104,7 +103,7 @@ export default function DetailsPage() {
 
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Notes</dt>
-                      <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-violet-500" aria-hidden="true" />
+                      <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
                       <dd className="leading-relaxed text-brand-ink/65">{venue.note}</dd>
                     </div>
                   </dl>
@@ -137,13 +136,12 @@ export default function DetailsPage() {
       </Section>
 
       {/* --- Dress code. The palette, stated plainly. --- */}
-      <DressCode index="03" />
+      <DressCode />
 
       {/* --- Practical --- */}
       <Section>
         <div className="container">
           <SectionHeading
-            index="04"
             eyebrow="Good to know"
             title="The small print, kindly meant"
           />
@@ -152,7 +150,7 @@ export default function DetailsPage() {
             {PRACTICAL.map((item, index) => (
               <Reveal as="li" key={item.title} delay={index * 80}>
                 <Card hover className="h-full">
-                  <item.icon className="h-5 w-5 text-brand-violet-500" aria-hidden="true" />
+                  <item.icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
                   <h3 className="mt-4 text-display-md">{item.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-brand-ink/75">{item.body}</p>
                 </Card>
@@ -170,7 +168,7 @@ export default function DetailsPage() {
                   <PendingChip label="Email to come" />
                 ) : (
                   <a
-                    className="text-brand-ink/80 underline decoration-brand-violet-500 decoration-2 underline-offset-4"
+                    className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
                     href={`mailto:${CONTACT.pointOfContact.email.value}`}
                   >
                     {CONTACT.pointOfContact.email.value}
@@ -180,7 +178,7 @@ export default function DetailsPage() {
                   <PendingChip label="Number to come" />
                 ) : (
                   <a
-                    className="text-brand-ink/80 underline decoration-brand-violet-500 decoration-2 underline-offset-4"
+                    className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
                     href={`tel:${CONTACT.pointOfContact.phone.value}`}
                   >
                     {CONTACT.pointOfContact.phone.value}
@@ -196,7 +194,6 @@ export default function DetailsPage() {
       <Section id="faq">
         <div className="container">
           <SectionHeading
-            index="05"
             eyebrow="Questions"
             title="Asked and answered"
             intro={<p>If your question is not answered here, please ask Erick. He would genuinely rather you did.</p>}
@@ -210,7 +207,7 @@ export default function DetailsPage() {
                     <span>{item.q}</span>
                     <span
                       aria-hidden="true"
-                      className="relative h-4 w-4 shrink-0 text-brand-violet-500"
+                      className="relative h-4 w-4 shrink-0 text-brand-steel-500"
                     >
                       <span className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-current" />
                       <span className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-current transition-transform duration-300 ease-expo group-open:scale-y-0" />

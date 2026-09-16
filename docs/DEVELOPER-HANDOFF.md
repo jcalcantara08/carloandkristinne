@@ -268,25 +268,29 @@ real MIME and size check. 12 MB limit, JPEG, PNG, WebP, HEIC and HEIF.
 All in `tailwind.config.ts`. No component names a hex value; the semantic
 layer in `globals.css` maps tokens to intent.
 
-**Palette.** The couple's motif is "blue, violet, black, couple in white".
-**That describes the wedding, not the website.** The first build read it as a
-page background and shipped a near-black site. It was coherent and it was
-wrong: sombre, and hard to read on a phone outdoors. White is the couple, so
-white is the ground.
+**Palette.** Taken from the couple's attire guides of 17 September 2026,
+which name five blues and no violet: dark steel, dusty, ice, light blue grey,
+cornflower. The earlier electric blue into purple was read off the workbook's
+one-line motif and looked like a different event next to the real dresses.
+White stays the ground; ink is cooled to navy-black.
 
 | Token | Hex | Role |
 |---|---|---|
 | `brand.paper` | `#FFFFFF` | The ground |
-| `brand.paper-200` | `#F7F6FC` | A faint tint band for scroll rhythm. Not a second contrast band |
-| `brand.ink` | `#05060E` | Type, the primary button, and the one dark band per page |
-| `brand.line` / `-strong` | `#E6E4F0` / `#D2CFE3` | Hairlines |
-| `brand.blue-500` | `#3A55D9` | Cool accent. 5.8:1 on paper |
-| `brand.violet-500` | `#8B3FD4` | Warm accent, the eyebrow, the focus ring. 5.4:1 on paper |
+| `brand.paper-200` | `#F4F7FA` | Ice-blue tint for scroll rhythm and interior page headers. Not a contrast band |
+| `brand.ink` | `#0B1220` | Type, the primary button, the one dark band. 18.7:1 |
+| `brand.line` / `-strong` | `#DDE5EC` / `#C4D0DB` | Hairlines |
+| `brand.steel-500` | `#3B5068` | Dark steel blue, the guide's own swatch. Eyebrow, focus ring. 8.3:1 |
+| `brand.steel-300` | `#A3B8CF` | The eyebrow on the dark band. 9.2:1 on ink |
+| `brand.cornflower-500` | `#4A69AA` | Cornflower deepened to be text-safe. The ampersand. 5.4:1 |
+| `brand.cornflower-400` | `#6B8BC9` | The guide's own cornflower. Washes only, 3.4:1 |
+| `brand.dusty-400` | `#7A97B3` | The bridesmaids' blue. Swatches and photo placeholders only |
 
-Blue and violet appear only as a soft wash, the hairline rule, the monogram
-ring and the dress-code swatches, never as a large flat fill. Black appears as
-a field exactly once per page, the closing CTA, using `.on-ink`, which flips
-every child automatically.
+Only steel-500 and cornflower-500 ever carry text. Everything else is a wash,
+a rule, a ring or a swatch. Black appears as a field exactly once per page,
+the closing CTA, using `.on-ink`, which flips every child automatically.
+`ATTIRE_PALETTE` in constants holds the five named swatches for the dress
+code page.
 
 **Contrast floors, measured on the rendered page.** Body copy is 75 percent
 ink (9.5:1). **60 percent is the muted floor**: 55 measures 4.47:1 and fails.
@@ -294,10 +298,10 @@ Placeholders were at 50 (3.81:1) until the September QA pass and are now 60.
 The decorative folio numerals are 15 percent by design and are exempt as pure
 decoration; Lighthouse will always flag them.
 
-**Type.** Bodoni Moda (display) and Inter (body), via `next/font`, with
-`Didot, Georgia, serif` and `system-ui, sans-serif` fallbacks. Display
-sizes are clamp tokens `display-2xl` (up to 8rem) down to `display-md`, so
-markup never carries a breakpoint ladder. `html { font-size: 95% }` with
+**Type.** Cormorant Garamond (display, weights 500 and 600) and Inter
+(body), via `next/font`, with `Garamond, Georgia, serif` and `system-ui,
+sans-serif` fallbacks. Display sizes are clamp tokens `display-2xl` (up to
+6.5rem) down to `display-md`, so markup never carries a breakpoint ladder. `html { font-size: 95% }` with
 inputs pinned to 16px so iOS Safari does not zoom.
 
 **Spacing and motion.** Sections are `py-16 sm:py-20 lg:py-28`. Container
@@ -306,11 +310,14 @@ never a literal. Tiny captions (Badge, PendingChip, the countdown unit labels)
 use `tracking-wider`. Stagger is `index * 80` ms. Easing is always expo-out.
 Reduced motion is honoured by a blanket CSS rule.
 
-**The signature moves, and do not undo them.** The ribbon threading the whole
-document (`Ribbon.tsx`), the asymmetric left-aligned hero with the names at
-`display-2xl`, the ghosted folio numerals in the margin, and `SectionHeading`
-defaulting to left. A previous version centred everything and read as a
-template. Colour was never the problem with it; composition was.
+**Composition.** Centred and classic, on purpose. `SectionHeading` and
+`PageHeader` default to centre; only a heading that sits beside a card in a
+two-column grid is left-aligned. There is no decoration: the ribbon, the
+drifting colour blobs, the ghosted folio numerals and the hashtag marquee
+were all removed on 17 September 2026 after the client called the result
+ugly. The research behind that decision is in section 17. Do not bring them
+back to "make it unique"; that was tried, and the answer from every
+well-liked wedding site is a photograph of the couple.
 
 ## 13. Coding conventions
 
@@ -378,8 +385,8 @@ Gitignore is not a security control here. Rotate anything sensitive.
 | Item | Note |
 |---|---|
 | No Supabase, no admin secrets, no domain | Section 2, in that order |
-| `og.png` and `apple-touch-icon.png` are aurora fields with no text | Regenerate with the couple's names and date once a photograph exists |
-| `favicon.ico` is generated from `icon.svg`, which still uses the dark-build ink background | Reads fine as a favicon; matches the OG image. Regenerate together |
+| No photograph of the couple anywhere | The one thing every well-liked wedding site has. `HERO_PHOTO` is wired and waiting |
+| Prayer speaker, first-dance song, parents' dance songs | Pending on the programme sheet; the copy says so honestly |
 | No Playwright tests | Section 14 |
 | No CI workflows | Copy the UPWorth set, with triggers enabled |
 | Photo `width`/`height` columns unused | Store real dimensions at upload to remove the last gallery CLS risk |
@@ -447,6 +454,34 @@ Panalangin is sung by the room at the cake cutting.
 
 **Still open: the gap.** Guests are free around five and cannot get in until
 7:15. The site warns them plainly. That is not a solution.
+
+### The redesign (17 September 2026)
+
+The client's verdict on round three was "everything's ugly", with the
+couple's attire guides attached and an instruction to research good wedding
+sites first. Two dozen examples across three roundups (Site Builder Report,
+Colorlib, Dorik) and the 2026 trend writing agreed on five things: a limited
+palette matching the wedding, a classic serif for titles with a clean sans
+for details, a centred and generously spaced layout with no visual noise, a
+prominent RSVP, and, without exception, a photograph of the couple as the
+first thing on the page.
+
+Everything visual changed to match. Palette from the attire guides (section
+12). Cormorant Garamond for Bodoni. Ribbon, blobs, folios and marquee
+removed. `SectionHeading` and `PageHeader` centred. The hero rebuilt to lead
+with `HERO_PHOTO` when the couple supply one, and honest type until then.
+`icon.svg`, `favicon.ico`, `apple-touch-icon.png` and `og.png` regenerated;
+the OG image now carries the names and the date, which closes an old debt
+item. Contrast re-measured on 474 text elements, zero failures.
+
+The single biggest remaining reason the site can look unfinished is that it
+has no photograph of the couple. No palette fixes that.
+
+The programme was revised to the host's own twenty-item sheet at the same
+time: dinner brought forward to straight after the prayer (which answers the
+7:30 to 8:00 question), the save-the-date video, pictorial segment,
+under-the-chair game and slideshow dropped, the bouquet game now sinulid at
+karayom. Grand entrance still lands on 8:00 PM; the evening ends at 11:00.
 
 ### The QA pass (16 September 2026)
 

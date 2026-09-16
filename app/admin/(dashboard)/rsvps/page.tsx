@@ -113,7 +113,7 @@ export default async function AdminRsvpsPage() {
                     <input type="hidden" name="id" value={rsvp.id} />
                     <button
                       type="submit"
-                      className="text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-violet-500"
+                      className="text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-steel-500"
                     >
                       Delete this reply
                     </button>

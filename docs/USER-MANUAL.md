@@ -30,7 +30,7 @@ invitation and not an extra.
 |---|---|
 | Home | The date, a live countdown, and a short version of everything else |
 | Our Story | Who the two of you are, and what the hashtag means |
-| Details | Venues, dress code, parking, the rain plan, and the questions guests ask |
+| Details | Venues, the dress code with the five blues from your attire guides, parking, the rain plan, and the questions guests ask |
 | Programme | The whole day, from the seven in the morning start to the send-off at about half past eleven |
 | Entourage | Everyone standing with you |
 | Gallery | The shared photo album, and where guests upload |

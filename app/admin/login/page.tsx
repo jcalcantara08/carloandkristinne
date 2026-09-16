@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { LoginForm } from "@/app/admin/login/login-form";
 import { Monogram } from "@/components/Monogram";
-import { Aurora } from "@/components/Aurora";
 import { isAuthConfigured } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -21,10 +20,8 @@ export default async function AdminLoginPage({
   const next = params.next?.startsWith("/admin") ? params.next : "/admin";
 
   return (
-    <section className="relative isolate flex min-h-[80vh] items-center overflow-hidden">
-      <Aurora intensity="soft" />
-
-      <div className="container relative py-20">
+    <section className="relative flex min-h-[80vh] items-center bg-brand-paper-200">
+      <div className="container py-20">
         <div className="mx-auto max-w-md text-center">
           <Monogram size="md" className="mx-auto" />
           <p className="eyebrow mt-6">Wedding command centre</p>
@@ -39,8 +36,8 @@ export default async function AdminLoginPage({
             <div className="text-sm leading-relaxed text-brand-ink/75">
               <p className="font-medium text-brand-ink">The admin area is not configured yet.</p>
               <p className="mt-3">
-                Set <code className="text-brand-violet-500">ADMIN_PASSWORD</code> and{" "}
-                <code className="text-brand-violet-500">ADMIN_SESSION_SECRET</code> in the
+                Set <code className="text-brand-steel-500">ADMIN_PASSWORD</code> and{" "}
+                <code className="text-brand-steel-500">ADMIN_SESSION_SECRET</code> in the
                 environment, then redeploy. There is deliberately no default password.
               </p>
               <p className="mt-3 text-brand-ink/60">

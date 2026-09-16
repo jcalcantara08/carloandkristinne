@@ -3,7 +3,7 @@ import { COUPLE } from "@/lib/constants";
 
 /**
  * The monogram: the couple's initials inside a ring whose stroke is the
- * aurora gradient, turning once every twenty-four seconds. It is the site's
+ * steel-to-cornflower gradient, turning once every twenty-four seconds. It is the site's
  * one piece of iconography and it stands in for a logo the couple do not have.
  *
  * The ring is a conic-gradient disc masked to a hairline annulus, which keeps

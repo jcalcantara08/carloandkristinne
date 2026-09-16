@@ -35,14 +35,15 @@ account (created Public; should be made Private). Vercel: team
 `NEXT_PUBLIC_SITE_URL` is set to the vercel.app address, so canonicals are
 correct.
 
-**What does not exist yet**, in the order it has to happen:
+**Fully wired since 17 September 2026.** Supabase (project
+`hcekfkxuktnmkxivrecq`, Seoul) holds the four tables and the photo bucket,
+the migrations were run through the SQL Editor, and a live RSVP, guestbook
+message and photo upload were verified against the database. Resend is
+connected in test mode. The admin secrets are set on Vercel.
 
-1. A Supabase project. Until it exists every form says, honestly, that it is
-   not switched on, and no RSVP can be collected.
-2. `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` on Vercel. Until then
-   `/admin/login` shows the "not configured" screen.
-3. The domain. When `carloandkristinne.com` is bought, add it in Vercel
-   Domains, change `NEXT_PUBLIC_SITE_URL` to match, and redeploy.
+**What does not exist yet:** the domain. When `carloandkristinne.com` is
+bought, add it in Vercel Domains, change `NEXT_PUBLIC_SITE_URL` to match,
+verify the domain in Resend and change `FROM_EMAIL`, then redeploy.
 
 The site's own RSVP deadline is 30 September 2026.
 
@@ -80,8 +81,8 @@ moved only the vulnerable packages. Lint passes; align it when convenient.
 |---|---|---|---|
 | GitHub | Code and history | Carlo's account, `jcalcantara08` | `jcalcantara08/carloandkristinne`. Make it Private |
 | Vercel | Hosting and deploys. Runs `npm run check && npm run build` | Team `carloandkristinne` | Live at carloandkristinne.vercel.app |
-| Supabase | Postgres (four tables) and Storage (one public bucket) | To be created on Erick's account | Not created |
-| Resend | Sends the RSVP notification email. Optional | To be created | Not created |
+| Supabase | Postgres (four tables) and Storage (one public bucket) | Carlo's GitHub login, org `carloandkristinne` | Project `hcekfkxuktnmkxivrecq`, Seoul. Live |
+| Resend | Sends the RSVP notification email | Carlo's GitHub login | Test mode: delivers only to the account address until a domain is verified |
 | Upstash Redis | Shared rate limiting across serverless instances. Optional | Not needed unless the address leaks past the guest list | Not created |
 | Domain registrar | `carloandkristinne.com` | Not bought | Blocking the printed invitation |
 
@@ -98,11 +99,10 @@ and verified by the QA pass (`grep process.env` against the file).
 | `ADMIN_PASSWORD` | Yes for the admin area | You choose it. No default exists; `requiredEnv()` throws without it |
 | `ADMIN_SESSION_SECRET` | Yes for the admin area | `openssl rand -base64 32`. Signs the session cookie |
 | `NEXT_PUBLIC_SUPABASE_URL` | Yes for any saving | Supabase dashboard, Project Settings, API. Also allowlists the image host at build time |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Listed for completeness | Same place. The app never actually uses it; RLS grants it nothing |
 | `SUPABASE_SERVICE_ROLE_KEY` | Yes for any saving | Same place. Bypasses RLS. Server only, `lib/store.ts` is the only importer |
 | `RESEND_API_KEY` | No | resend.com. Without it, email is logged and skipped |
-| `FROM_EMAIL` | With Resend | A verified sending domain on Resend. Never a Gmail address, DMARC fails it |
-| `CONTACT_TO_EMAIL` | With Resend | Where RSVP notifications land |
+| `FROM_EMAIL` | With Resend | `onboarding@resend.dev` until the domain is verified in Resend, then `noreply@carloandkristinne.com`. Never a Gmail address, DMARC fails it |
+| `CONTACT_TO_EMAIL` | With Resend | Where RSVP notifications land. In test mode this must be the Resend account's own address |
 | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | No | upstash.com. Without them, rate limiting is in-memory per instance |
 | `NODE_ENV` | Set by Next | Only read to make the cookie `secure` in production |
 
@@ -384,7 +384,9 @@ Gitignore is not a security control here. Rotate anything sensitive.
 
 | Item | Note |
 |---|---|
-| No Supabase, no admin secrets, no domain | Section 2, in that order |
+| No domain | Section 2. Also blocks real email sending |
+| Supabase legacy keys | The project uses the legacy `service_role` JWT, which Supabase is phasing out in favour of `sb_secret_` keys. Both work with supabase-js 2.x. Migrate when convenient: new key in Vercel, redeploy, disable legacy keys in Supabase |
+| Three QA test rows in the live database | An RSVP, a guestbook message and a photo, all named "QA Test" or "delete me". Delete them from the admin dashboard; doing so also exercises the delete flow |
 | No photograph of the couple anywhere | The one thing every well-liked wedding site has. `HERO_PHOTO` is wired and waiting |
 | Prayer speaker, first-dance song, parents' dance songs | Pending on the programme sheet; the copy says so honestly |
 | No Playwright tests | Section 14 |

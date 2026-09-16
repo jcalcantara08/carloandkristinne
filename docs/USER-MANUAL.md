@@ -111,9 +111,11 @@ page, then approve them in the dashboard. One process to learn instead of two.
 
 ## 7. Where emails go
 
-The site sends one kind of email: a notification to Erick's inbox each time a
-guest replies to the invitation, with everything they typed. Guests do not
-receive any email from the site.
+The site sends one kind of email: a notification each time a guest replies to
+the invitation, with everything they typed. Right now it goes to Carlo's
+Gmail, because until the web address is bought the email service can only
+deliver to the address on its own account. Guests do not receive any email
+from the site.
 
 If those notifications stop arriving, replies are still being saved. The site
 always saves the reply to the database first and only then tries to send the
@@ -195,8 +197,8 @@ holds the logins and can add you to any of them.
 | Service | What it does | Where to find it |
 |---|---|---|
 | **Vercel** | Hosts the website itself and publishes changes | vercel.com, team `carloandkristinne`. The site is at carloandkristinne.vercel.app |
-| **Supabase** | The database (replies, messages, photo records) and the photo files | supabase.com. Not created yet |
-| **Resend** | Sends the reply notification email | resend.com. Optional; the site works without it |
+| **Supabase** | The database (replies, messages, photo records) and the photo files | supabase.com, sign in with GitHub as Carlo. Organisation `carloandkristinne` |
+| **Resend** | Sends the reply notification email to Carlo's Gmail | resend.com, sign in with GitHub as Carlo. Until the domain exists it can only send to that one address |
 | **GitHub** | Stores the site's code and history | github.com, Carlo's account `jcalcantara08` |
 | **Domain registrar** | The web address itself | Not bought yet. The site is written for `carloandkristinne.com` |
 

@@ -33,6 +33,8 @@ import {
  */
 
 export type Venue = { label: string; name: string; address: string; time: string; note: string; mapUrl: string };
+/** A photograph on Our Story. Shape decides the frame it is cropped into. */
+export type StoryPhoto = { src: string; alt: string; caption: string; shape: "landscape" | "portrait" };
 export type TitledBody = { title: string; body: string };
 export type Faq = { q: string; a: string };
 export type Phase = "morning" | "afternoon" | "ceremony" | "between" | "reception";
@@ -83,6 +85,10 @@ export type SiteContent = {
     storyEyebrow: string;
     storyTitle: string;
     storyBody: string;
+    photosEyebrow: string;
+    photosTitle: string;
+    photosIntro: string;
+    photos: StoryPhoto[];
     ctaTitle: string;
     ctaBody: string;
   };
@@ -198,8 +204,8 @@ export const DEFAULT_CONTENT: SiteContent = {
       "In their own words: makulit, masayahin, simple lang. You are warmly invited to be there when they promise it out loud.",
     primaryLabel: "RSVP",
     secondaryLabel: "The details",
-    heroPhoto: "",
-    heroPhotoAlt: "",
+    heroPhoto: "/photos/carlo-kristinne-beach-sunset.jpg",
+    heroPhotoAlt: "Carlo and Kristinne on a beach at sunset, both in white, palm trees behind them.",
     glance: [
       { label: "The date", value: WEDDING_DAY.dateShort, note: WEDDING_DAY.dayOfWeek },
       { label: "Ceremony", value: "4:00 PM", note: `${WEDDING_DAY.town}, ${WEDDING_DAY.province}` },
@@ -264,6 +270,38 @@ export const DEFAULT_CONTENT: SiteContent = {
     storyEyebrow: "How it happened",
     storyTitle: "How they met, and how he asked",
     storyBody: "",
+    photosEyebrow: "Photographs",
+    photosTitle: "A few of their favourites",
+    photosIntro:
+      "There was no engagement shoot. These are the pictures they already had, which is rather the point.",
+    // Files in public/photos, supplied by the couple on 17 September 2026.
+    // Captions describe what is in the frame and claim nothing else.
+    photos: [
+      {
+        src: "/photos/carlo-kristinne-studio-lean.jpg",
+        alt: "Carlo and Kristinne leaning towards each other in front of a white studio wall, both in blue.",
+        caption: "In their blues",
+        shape: "landscape",
+      },
+      {
+        src: "/photos/carlo-kristinne-studio-chin.jpg",
+        alt: "Kristinne resting her chin on Carlo's head, both smiling at the camera.",
+        caption: "Chin up",
+        shape: "landscape",
+      },
+      {
+        src: "/photos/carlo-kristinne-proposal-cave.jpg",
+        alt: "Kristinne holding up her hand to show her engagement ring, Carlo beside her in a rock cave by the sea.",
+        caption: "The ring",
+        shape: "portrait",
+      },
+      {
+        src: "/photos/carlo-kristinne-school-christmas.jpg",
+        alt: "Carlo and Kristinne in school uniforms making peace signs in front of a lit Christmas tree at night.",
+        caption: "Before all of this",
+        shape: "portrait",
+      },
+    ],
     ctaTitle: "Be in the room",
     ctaBody: "Photographs are lovely, but they would much rather have you there in person.",
   },
@@ -561,6 +599,23 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       text("ourStory.storyEyebrow", "Story eyebrow"),
       text("ourStory.storyTitle", "Story heading"),
       area("ourStory.storyBody", "The story", "How you met and how he asked. Leave empty and the section stays hidden. Blank lines make paragraphs."),
+      text("ourStory.photosEyebrow", "Photographs eyebrow"),
+      text("ourStory.photosTitle", "Photographs heading"),
+      area("ourStory.photosIntro", "Photographs introduction"),
+      {
+        type: "list",
+        path: "ourStory.photos",
+        label: "The photographs",
+        help: "The address is where the photograph lives. The four here are files on the site. A photograph you upload through the Gallery and publish can be used too: open it in the album and paste its address. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "caption", label: "Caption", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("ourStory.ctaTitle", "Closing heading"),
       area("ourStory.ctaBody", "Closing text"),
     ],

@@ -28,13 +28,13 @@ export function pageMeta({ title, description, path, noIndex }: PageMetaInput): 
       siteName: SITE.name,
       locale: SITE.locale,
       type: "website",
-      images: [{ url: `${SITE.url}/og.png`, width: 1200, height: 630, alt: SITE.name }],
+      images: [{ url: `${SITE.url}/og.jpg`, width: 1200, height: 630, alt: SITE.name }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${SITE.name}`,
       description,
-      images: [`${SITE.url}/og.png`],
+      images: [`${SITE.url}/og.jpg`],
     },
   };
 }
@@ -54,7 +54,7 @@ export function eventJsonLd() {
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     url: SITE.url,
-    image: `${SITE.url}/og.png`,
+    image: `${SITE.url}/og.jpg`,
     isAccessibleForFree: true,
     maximumAttendeeCapacity: WEDDING_DAY.guestCount,
     location: {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
@@ -8,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { pageMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 import { SITE } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMeta({
   title: "Our Story",
@@ -68,6 +70,44 @@ export default async function OurStoryPage() {
           ) : null}
         </div>
       </Section>
+
+      {/* --- The photographs. Landscape frames 3:2, portrait 4:5, two per row. --- */}
+      {ourStory.photos.length > 0 ? (
+        <Section on="tint">
+          <div className="container">
+            <SectionHeading
+              eyebrow={ourStory.photosEyebrow}
+              title={ourStory.photosTitle}
+              intro={ourStory.photosIntro ? <p>{ourStory.photosIntro}</p> : undefined}
+            />
+            <ul className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 sm:gap-5">
+              {ourStory.photos.map((photo, index) => (
+                <Reveal as="li" key={photo.src} delay={index * 80}>
+                  <figure>
+                    <div
+                      className={cn(
+                        "relative overflow-hidden rounded-2xl border border-brand-line bg-brand-paper-200",
+                        photo.shape === "portrait" ? "aspect-[4/5]" : "aspect-[3/2]",
+                      )}
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        sizes="(min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                    {photo.caption ? (
+                      <figcaption className="mt-3 text-center text-sm text-brand-ink/60">{photo.caption}</figcaption>
+                    ) : null}
+                  </figure>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
 
       {ourStory.values.length > 0 ? (
         <Section>

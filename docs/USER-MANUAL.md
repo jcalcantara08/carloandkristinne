@@ -170,7 +170,6 @@ Things guests currently cannot see because they are still empty:
   (Entourage)
 - your own story, how you met and how he asked (Our story)
 - Erick's guest-facing email and phone number (Details)
-- the hero photograph (Home)
 
 **Lists.** The questions and answers, the programme, the dress code rows, the
 entourage groups and the small cards all work the same way: a blank row at
@@ -185,8 +184,12 @@ bridesmaids and the groomsmen were read off the two guides you sent. The maid
 of honour's row says only "a floor-length gown in dusty blue" because there
 is no guide for her yet; edit it once there is.
 
-**Photographs on the pages.** The hero photograph is uploaded from the Home
-form. A landscape photograph of the two of you, under 12 MB. Guests' album
+**Photographs on the pages.** The five photographs you sent are on the site:
+the beach one beside your names on the Home page, the other four under
+"A few of their favourites" on Our Story, each with a short caption you can
+change. To swap the Home photograph, upload a new one from the Home form
+(landscape, under 12 MB). To change an Our Story photograph, paste the
+address of a published album photograph into its row. Guests' album
 photographs still come in through the Gallery page and are approved under
 Photographs.
 

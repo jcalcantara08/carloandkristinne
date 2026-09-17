@@ -65,8 +65,10 @@ numerals and blurred colour blobs to look unique, and the client called it
 ugly. Round four (17 September 2026) followed what two dozen well-liked
 wedding sites actually do: soft palette from the real attire, classic serif
 plus clean sans, centred, generous space, no decoration, and a hero built to
-lead with a photograph. `HERO_PHOTO` in constants is pending until the couple
-send one. Do not reintroduce the ribbon, the blobs, the folios or Bodoni.
+lead with a photograph. The couple's photographs arrived on 17 September and
+live in `public/photos`; the hero shows one beside the type (never a veil
+with the names over their faces, tried, read badly). Do not reintroduce the
+ribbon, the blobs, the folios or Bodoni.
 
 ## Commands
 

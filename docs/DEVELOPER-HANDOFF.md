@@ -470,7 +470,6 @@ Gitignore is not a security control here. Rotate anything sensitive.
 | No domain | Section 2. Also blocks real email sending |
 | Supabase legacy keys | The project uses the legacy `service_role` JWT, which Supabase is phasing out in favour of `sb_secret_` keys. Both work with supabase-js 2.x. Migrate when convenient: new key in Vercel, redeploy, disable legacy keys in Supabase |
 | Three QA test rows in the live database | An RSVP, a guestbook message and a photo, all named "QA Test" or "delete me". Delete them from the admin dashboard; doing so also exercises the delete flow |
-| No photograph of the couple anywhere | The one thing every well-liked wedding site has. `HERO_PHOTO` is wired and waiting |
 | Prayer speaker, first-dance song, parents' dance songs | Pending on the programme sheet; the copy says so honestly |
 | No Playwright tests | Section 14 |
 | No CI workflows | Copy the UPWorth set, with triggers enabled |
@@ -554,8 +553,8 @@ first thing on the page.
 Everything visual changed to match. Palette from the attire guides (section
 12). Cormorant Garamond for Bodoni. Ribbon, blobs, folios and marquee
 removed. `SectionHeading` and `PageHeader` centred. The hero rebuilt to lead
-with `HERO_PHOTO` when the couple supply one, and honest type until then.
-`icon.svg`, `favicon.ico`, `apple-touch-icon.png` and `og.png` regenerated;
+with a photograph when the couple supply one, and honest type until then.
+`icon.svg`, `favicon.ico`, `apple-touch-icon.png` and `og.jpg` regenerated;
 the OG image now carries the names and the date, which closes an old debt
 item. Contrast re-measured on 474 text elements, zero failures.
 
@@ -617,6 +616,32 @@ permanent delete). Retention here is 14 days, the studio's house number.
 - Test and template rows: the owner asked that everything test-like be
   deleted. That is done from the dashboard (Delete, or Empty the bin), not by
   a migration, so it goes through the audit log like everything else.
+
+### 17 September 2026, the photographs
+
+The couple had no engagement shoot and sent five photographs they already
+had, edited for clothing colour and clutter. Web copies (70 to 206 KB, JPEG
+quality 82) are in `public/photos`; the masters are in the sibling folder
+`28. CARLOobNgdiyoskayKRISTINNE - photos/edited`, outside git.
+
+- **Hero.** `home.heroPhoto` defaults to the beach photograph. The hero is
+  now side by side when a photograph exists: type left, photograph framed
+  right (3:2 on phones, 4:5 from `lg`), stacked photograph-first on a
+  phone. The full-bleed veil version put the names across their faces
+  because the couple stand centred in every photograph; it was replaced the
+  same day. Without a photograph the hero is the centred type version.
+- **Our Story.** New `ourStory.photos` list (`src`, `alt`, `caption`,
+  `shape`), rendered two per row between the hashtag and the values.
+  Landscape frames are 3:2, portrait 4:5, `object-cover`. Editable under
+  Edit the website, Our story.
+- **Share card.** `og.jpg` is now 1200 by 630: the beach photograph on the
+  left, the existing type card on the right. Composed with sharp from the
+  previous card, so no font rendering was needed.
+- `HERO_PHOTO` in constants is gone; the site document owns the photographs.
+- If the live site still shows the type-only hero after deploy, a saved site
+  document with an empty `home.heroPhoto` is overriding the default (stored
+  scalars win). Upload the beach photograph from the Home form once and it
+  sticks.
 
 ## 18. Future improvements
 

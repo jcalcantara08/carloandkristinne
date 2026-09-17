@@ -61,13 +61,13 @@ export const COUPLE = {
 } as const;
 
 /* =========================
-   The hero photograph
-   Every well-liked wedding site leads with one. Until the couple send a
-   photograph this stays pending and the hero is set in type alone. Drop a
-   file into public/ and set it here; nothing else has to change.
+   The photographs
+   The couple had no engagement shoot, so on 17 September 2026 they sent five
+   photographs they already had. They live in public/photos and are wired in
+   through the site document (`home.heroPhoto`, `ourStory.photos` in
+   DEFAULT_CONTENT), so the couple can swap any of them from the dashboard.
+   The masters sit beside the repo, outside git.
    ========================= */
-
-export const HERO_PHOTO: Pending<{ src: string; alt: string }> = tbc();
 
 /* =========================
    The day

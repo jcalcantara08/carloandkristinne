@@ -1,5 +1,6 @@
 import {
   CONTACT,
+  COUPLE,
   DRESS_CODE,
   DRESS_NOTE,
   ENTOURAGE_FOOTNOTE,
@@ -446,17 +447,20 @@ export const DEFAULT_CONTENT: SiteContent = {
   entourage: {
     eyebrow: "The people",
     title: "Who is standing with them",
+    // Kristinne first, as on the invitation. The captions are the couple's
+    // formal names from the entourage card; the old "The Couple" group of
+    // two text cards is gone because these portraits are that group.
     headerPhotos: [
-      {
-        src: "/photos/carlo-studio-2.jpg",
-        alt: "Carlo in a light blue shirt, checking his watch, in front of a white studio wall.",
-        caption: "",
-        shape: "portrait",
-      },
       {
         src: "/photos/kristinne-studio-2.jpg",
         alt: "Kristinne leaning on the back of a chair, smiling, in front of a white studio wall.",
-        caption: "",
+        caption: `${COUPLE.bride.formalName} · Bride`,
+        shape: "portrait",
+      },
+      {
+        src: "/photos/carlo-studio-2.jpg",
+        alt: "Carlo in a dark steel blue shirt, checking his watch, in front of a white studio wall.",
+        caption: `${COUPLE.groom.formalName} · Groom`,
         shape: "portrait",
       },
     ],
@@ -1033,7 +1037,11 @@ export function healContent(content: SiteContent): SiteContent {
     if (!match || linesToPeople(match.people).length === 0) return code;
     return coveredByCode(match.people, code.people) ? code : match;
   });
+  // Groups that once existed in code and were removed on purpose. A saved
+  // copy of one must not be treated as something the couple added.
+  const retired = ["The Couple"];
   for (const g of saved) {
+    if (retired.includes(g.title)) continue;
     if (!healed.some((h) => h.title === g.title) && linesToPeople(g.people).length > 0) healed.push(g);
   }
   return { ...content, entourage: { ...content.entourage, groups: healed } };

@@ -65,7 +65,7 @@ export async function Hero() {
           <div className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14 lg:pb-16">
             <div className="container text-center">
               <Reveal>
-                <p className="eyebrow">
+                <p className="eyebrow !text-brand-paper/85">
                   {WEDDING_DAY.dayOfWeek} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
                 </p>
               </Reveal>

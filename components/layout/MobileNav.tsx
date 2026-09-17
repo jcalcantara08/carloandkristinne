@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
  * context for good. No mounted flag is needed: open starts false, so the
  * server never renders the portal and document is always there when it does.
  */
-export function MobileNav() {
+export function MobileNav({ overPhoto = false }: { overPhoto?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -86,7 +86,12 @@ export function MobileNav() {
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-line text-brand-ink transition-colors duration-200 hover:border-brand-line-strong lg:hidden"
+        className={cn(
+          "inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-200 lg:hidden",
+          overPhoto
+            ? "border-brand-paper/50 text-brand-paper hover:border-brand-paper"
+            : "border-brand-line text-brand-ink hover:border-brand-line-strong",
+        )}
       >
         <Menu className="h-5 w-5" aria-hidden="true" />
         <span className="sr-only">Open menu</span>

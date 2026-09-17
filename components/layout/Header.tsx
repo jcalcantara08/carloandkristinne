@@ -11,6 +11,10 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  // The home hero is a photograph that runs under the header, so until the
+  // page scrolls the header's text is paper, not ink, or it vanishes into
+  // the palm trees. Every other page opens on the ice tint.
+  const overPhoto = pathname === "/" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -34,9 +38,9 @@ export function Header() {
           className="flex items-center gap-3 rounded-full focus-visible:ring-offset-brand-paper"
           aria-label="KC Kristinne & Carlo, home"
         >
-          <Monogram size="sm" />
-          <span className="hidden font-display text-lg tracking-wide text-brand-ink sm:block">
-            Kristinne <span className="text-brand-plum-500">&amp;</span> Carlo
+          <Monogram size="sm" on={overPhoto ? "ink" : "paper"} />
+          <span className={cn("hidden font-display text-lg tracking-wide sm:block", overPhoto ? "text-brand-paper" : "text-brand-ink")}>
+            Kristinne <span className={overPhoto ? "text-brand-mauve-300" : "text-brand-plum-500"}>&amp;</span> Carlo
           </span>
         </Link>
 
@@ -51,9 +55,13 @@ export function Header() {
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "relative inline-flex min-h-[44px] items-center rounded-full px-3.5 text-sm transition-colors duration-200",
-                      active
-                        ? "text-brand-ink"
-                        : "text-brand-ink/65 hover:text-brand-ink",
+                      overPhoto
+                        ? active
+                          ? "text-brand-paper"
+                          : "text-brand-paper/80 hover:text-brand-paper"
+                        : active
+                          ? "text-brand-ink"
+                          : "text-brand-ink/65 hover:text-brand-ink",
                     )}
                   >
                     {item.label}
@@ -74,7 +82,7 @@ export function Header() {
           <Link href={PRIMARY_CTA.href} className="btn-primary hidden px-5 py-2.5 text-xs sm:inline-flex">
             {PRIMARY_CTA.label}
           </Link>
-          <MobileNav />
+          <MobileNav overPhoto={overPhoto} />
         </div>
       </div>
     </header>

@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { Section, SectionHeading } from "@/components/Section";
 import { ATTIRE_PALETTE, DRESS_CODE } from "@/lib/constants";
 import { getContent } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 /**
  * The dress code, which is also the clearest statement of the site's palette.
@@ -46,15 +47,22 @@ export async function DressCode() {
           intro={details.dressNote ? <p>{details.dressNote}</p> : undefined}
         />
 
-        <ul className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Four across from lg so related cards sit side by side: parents,
+            principal and secondary sponsors, bearers on the first row; best
+            man beside maid of honour, groomsmen beside bridesmaids on the
+            second; guests and the couple wider on the last. */}
+        <ul className="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {rows.map((role, index) => (
             <Reveal
               as="li"
               key={role.role}
               delay={Math.min(index, 6) * 80}
-              className="flex flex-col overflow-hidden rounded-2xl border border-brand-line bg-brand-paper-100"
+              className={cn(
+                "flex flex-col overflow-hidden rounded-2xl border border-brand-line bg-brand-paper-100",
+                index >= rows.length - 2 && rows.length % 4 === 2 ? "lg:col-span-2" : undefined,
+              )}
             >
-              <div className="relative aspect-[4/3] bg-brand-paper">
+              <div className="relative aspect-[5/4] bg-brand-paper">
                 {role.figure ? (
                   <Image
                     src={role.figure}
@@ -72,7 +80,7 @@ export async function DressCode() {
                 )}
               </div>
               <div className="flex flex-1 flex-col px-5 py-5">
-                <span className="block font-display text-xl text-brand-ink">{role.role}</span>
+                <span className="block font-display text-lg text-brand-ink lg:text-xl">{role.role}</span>
                 <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-brand-plum-500">
                   {role.colour}
                 </span>

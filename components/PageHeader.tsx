@@ -70,22 +70,26 @@ export function PageHeader({
               )}
             >
               {shown.map((photo) => (
-                <div
-                  key={photo.src}
-                  className={cn(
-                    "relative overflow-hidden rounded-3xl border border-brand-line bg-brand-paper-100 shadow-soft",
-                    shown.length > 1 ? "aspect-[4/5]" : "aspect-[3/2] lg:aspect-[21/9]",
-                  )}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    priority
-                    sizes={shown.length > 1 ? "(min-width: 640px) 50vw, 100vw" : "100vw"}
-                    className="object-cover object-[50%_28%]"
-                  />
-                </div>
+                <figure key={photo.src}>
+                  <div
+                    className={cn(
+                      "relative overflow-hidden rounded-3xl border border-brand-line bg-brand-paper-100 shadow-soft",
+                      shown.length > 1 ? "aspect-[4/5]" : "aspect-[3/2] lg:aspect-[21/9]",
+                    )}
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      priority
+                      sizes={shown.length > 1 ? "(min-width: 640px) 50vw, 100vw" : "100vw"}
+                      className="object-cover object-[50%_28%]"
+                    />
+                  </div>
+                  {photo.caption ? (
+                    <figcaption className="mt-3 text-center font-display text-lg text-brand-ink">{photo.caption}</figcaption>
+                  ) : null}
+                </figure>
               ))}
             </div>
           </Reveal>

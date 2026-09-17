@@ -100,7 +100,7 @@ const config: Config = {
         "aurora-light": "linear-gradient(90deg, #C3AEDD 0%, #D9B8D4 100%)",
         // The hero fade: clear over the upper part of a photograph, ink at
         // the foot so the names read on any picture. Ink is #0B1220.
-        veil: "linear-gradient(180deg, rgba(11, 18, 32, 0) 38%, rgba(11, 18, 32, 0.78) 100%)",
+        veil: "linear-gradient(180deg, rgba(11, 18, 32, 0.42) 0%, rgba(11, 18, 32, 0) 22%, rgba(11, 18, 32, 0) 38%, rgba(11, 18, 32, 0.78) 100%)",
         // A soft horizontal rule that fades at both ends.
         "aurora-soft":
           "linear-gradient(90deg, rgba(90,61,120,0) 0%, rgba(90,61,120,0.7) 25%, rgba(140,90,140,0.7) 75%, rgba(140,90,140,0) 100%)",

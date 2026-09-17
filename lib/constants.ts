@@ -180,13 +180,9 @@ export type DressRole = {
 };
 
 export const DRESS_CODE: DressRole[] = [
-  {
-    role: "The couple",
-    colour: "White",
-    outfit: "Kristinne in her wedding gown, Carlo in his suit. White is theirs alone.",
-    figure: "",
-    swatch: ["#FFFFFF", "#D6E0E8"],
-  },
+  // Card order on the Details page, four across: the family and sponsor
+  // groups on the first row, the wedding party on the second, guests and
+  // the couple on a wider last row.
   {
     role: "Parents of the bride and groom",
     colour: "Lavender to deep purple",
@@ -204,27 +200,12 @@ export const DRESS_CODE: DressRole[] = [
     swatch: ["#9A8577", "#A89484", "#D9C6BC", "#EAE0CC"],
   },
   {
-    role: "Best Man",
-    colour: "Dark steel blue",
-    outfit:
-      "A three-piece suit in dark steel blue: jacket, waistcoat and trousers. White shirt, dusty blue tie, white pocket square, a boutonniere, dark brown shoes.",
-    figure: "/photos/attire-best-man.jpg",
-    swatch: ["#3B5068", "#6B8BC9"],
-  },
-  {
     role: "Secondary sponsors",
     colour: "The blues",
     outfit:
       "Candle, veil and cord. Women: a floor-length gown in dusty blue with soft flutter sleeves or a sheer cape, any shade on the guide. Men: a Barong Tagalog with black trousers and black shoes.",
     figure: "/photos/attire-secondary-sponsors.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
-  },
-  {
-    role: "Maid of Honour",
-    colour: "Lavender",
-    outfit: "A floor-length gown in lavender with thin straps, holding a small bouquet, as on the guide. Any shade from lilac to deep purple.",
-    figure: "/photos/attire-maid-of-honour.jpg",
-    swatch: ["#D8C3EA", "#9B7CC0", "#5E3A80"],
   },
   {
     role: "The bearers",
@@ -235,12 +216,19 @@ export const DRESS_CODE: DressRole[] = [
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
-    role: "Bridesmaids",
-    colour: "Dusty blue, any shade",
+    role: "Best Man",
+    colour: "Dark steel blue",
     outfit:
-      "A floor-length, flowing gown in any shade of dusty blue. Thin straps, a halter neck or off the shoulder with short sleeves all sit on the guide, so choose the one you feel best in. A small bouquet is provided on the day.",
-    figure: "/photos/attire-bridesmaids.jpg",
-    swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
+      "A three-piece suit in dark steel blue: jacket, waistcoat and trousers. White shirt, dusty blue tie, white pocket square, a boutonniere, dark brown shoes.",
+    figure: "/photos/attire-best-man.jpg",
+    swatch: ["#3B5068", "#6B8BC9"],
+  },
+  {
+    role: "Maid of Honour",
+    colour: "Lavender",
+    outfit: "A floor-length gown in lavender with thin straps, holding a small bouquet, as on the guide. Any shade from lilac to deep purple.",
+    figure: "/photos/attire-maid-of-honour.jpg",
+    swatch: ["#D8C3EA", "#9B7CC0", "#5E3A80"],
   },
   {
     role: "Groomsmen",
@@ -250,12 +238,27 @@ export const DRESS_CODE: DressRole[] = [
     swatch: ["#0B1220", "#7A97B3"],
   },
   {
+    role: "Bridesmaids",
+    colour: "Dusty blue, any shade",
+    outfit:
+      "A floor-length, flowing gown in any shade of dusty blue. Thin straps, a halter neck or off the shoulder with short sleeves all sit on the guide, so choose the one you feel best in. A small bouquet is provided on the day.",
+    figure: "/photos/attire-bridesmaids.jpg",
+    swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
+  },
+  {
     role: "Our guests",
     colour: "The blues",
     outfit:
       "Formal attire in any of the blues on the guide: a dress in dusty, slate or light blue, or a suit in navy, slate or grey-blue. Please choose colours other than red or black, and leave white to the couple.",
     figure: "/photos/attire-guests.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6", "#6B8BC9"],
+  },
+  {
+    role: "The couple",
+    colour: "White",
+    outfit: "Kristinne in her wedding gown, Carlo in his suit. White is theirs alone.",
+    figure: "",
+    swatch: ["#FFFFFF", "#D6E0E8"],
   },
 ];
 
@@ -300,15 +303,6 @@ export const ENTOURAGE_GROUPS: {
   people: Person[];
   pendingNote?: string;
 }[] = [
-  {
-    key: "principal",
-    title: "The Couple",
-    blurb: "The two this whole day is for.",
-    people: [
-      { name: COUPLE.groom.fullName, role: "Groom" },
-      { name: COUPLE.bride.fullName, role: "Bride" },
-    ],
-  },
   {
     key: "parents",
     title: "The Parents",

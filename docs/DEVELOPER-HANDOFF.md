@@ -771,8 +771,9 @@ workbook the print won:
   live site had a document saved before the card arrived, and a saved list
   wins over new defaults, so the entourage stayed on the July snapshot after
   deploy. The heal walks the code's groups in order: a saved group with
-  names wins, unless it holds exactly the code's names (then the code's
-  roles win, which is how the bearers got their printed roles); an empty
+  names wins, unless every saved name is contained in a code name (then the
+  code's fuller, newer group wins: the bearers' printed roles, and the
+  second officiant); an empty
   saved group gives way to code; groups the document lacks are appended;
   groups the couple added are kept. Same idea as `DressCode.tsx` merging
   rows by role.

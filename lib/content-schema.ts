@@ -1014,14 +1014,16 @@ export function setPath(obj: Record<string, unknown>, path: string, value: unkno
  * empty saved group gives way to the code's group, and groups the saved
  * document has never heard of are appended in code order. Groups the couple
  * added themselves are kept at the end. A group is matched by title. One
- * refinement: when the saved group holds exactly the same names as the
- * code's group, the code's version is used, because the only thing that can
- * differ is the roles, and the roles in code come from the printed card
- * (the bearers were reassigned between the workbook and the print).
+ * refinement: when every name in the saved group is contained in a name in
+ * the code's group, the code's version is used. That covers the same people
+ * with reassigned roles (the bearers, between the workbook and the print)
+ * and a shorter earlier list ("Pastor Jomar" before "Pastor Jomar Antalan"
+ * and Pastora Lorna arrived). Names the couple typed themselves would not
+ * all be fragments of the code's names.
  */
-const sameNames = (a: string, b: string) => {
-  const names = (lines: string) => linesToPeople(lines).map((p) => p.name).sort().join("|");
-  return names(a) === names(b);
+const coveredByCode = (saved: string, code: string) => {
+  const codeNames = linesToPeople(code).map((p) => p.name.toLowerCase());
+  return linesToPeople(saved).every((p) => codeNames.some((name) => name.includes(p.name.toLowerCase())));
 };
 
 export function healContent(content: SiteContent): SiteContent {
@@ -1029,7 +1031,7 @@ export function healContent(content: SiteContent): SiteContent {
   const healed: EntourageGroup[] = DEFAULT_CONTENT.entourage.groups.map((code) => {
     const match = saved.find((g) => g.title === code.title);
     if (!match || linesToPeople(match.people).length === 0) return code;
-    return sameNames(match.people, code.people) ? code : match;
+    return coveredByCode(match.people, code.people) ? code : match;
   });
   for (const g of saved) {
     if (!healed.some((h) => h.title === g.title) && linesToPeople(g.people).length > 0) healed.push(g);

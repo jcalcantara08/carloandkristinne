@@ -778,6 +778,17 @@ workbook the print won:
   groups the couple added are kept. Same idea as `DressCode.tsx` merging
   rows by role.
 
+### The arrival prompt (17 September 2026)
+
+Requested by the couple through Erick: a guest who opens the invitation
+link should be invited to leave a greeting and upload a photograph, as a
+pop-up rather than a section. `components/WelcomePrompt.tsx`, mounted in
+the root layout, portalled to body: a dialog with focus moved in, Escape to
+close, body scroll locked, two links (`/guestbook`, `/gallery#upload`) and
+"Maybe later". Shown once per browser via `localStorage` key
+`kc-welcome-seen` (try/catch, private windows see it again), after 1.8 s,
+never on `/admin`, `/guestbook` or `/gallery`.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

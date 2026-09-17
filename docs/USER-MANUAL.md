@@ -38,6 +38,14 @@ invitation and not an extra.
 | RSVP | The reply form |
 | Privacy | What the site does with what guests give it. Required, because the RSVP form asks about allergies |
 
+## 2a. The welcome card
+
+A guest who opens the site sees, after a moment, a small card inviting them
+to write a greeting or upload a photograph. It shows once per phone or
+browser, never on the Guestbook or Gallery pages themselves, and "Maybe
+later" or the X puts it away. Nothing is collected by the card itself; it
+only points to the two pages, where the usual approval rules apply.
+
 ## 3. The most important thing to know
 
 **Nothing a guest writes or uploads appears in public until you approve it.**

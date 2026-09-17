@@ -7,6 +7,7 @@ import { eventJsonLd, websiteJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { EditPageButton } from "@/components/EditPageButton";
+import { WelcomePrompt } from "@/components/WelcomePrompt";
 import { SkipLink } from "@/components/layout/SkipLink";
 
 export const metadata: Metadata = {
@@ -76,6 +77,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         {/* Only the couple ever see this: it reads the sign-in hint cookie. */}
         <EditPageButton />
+        {/* Guests arriving from the invitation link are invited to write and upload. */}
+        <WelcomePrompt />
 
         <script
           type="application/ld+json"

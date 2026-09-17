@@ -789,6 +789,18 @@ close, body scroll locked, two links (`/guestbook`, `/gallery#upload`) and
 `kc-welcome-seen` (try/catch, private windows see it again), after 1.8 s,
 never on `/admin`, `/guestbook` or `/gallery`.
 
+### The studio card and the credit line (17 September 2026)
+
+Erick promotes Enclave on the site he built. `components/EnclavePromo.tsx`
+(mounted in the root layout) is a corner card, not a modal, shown at the
+minute marks in `PROMO.minutes` (1, 3, 5) of a visit, counted from the first
+page opened (`kc-promo-start` in localStorage) so navigation does not reset
+it; each mark shows once (`kc-promo-shown`), closing one does not cancel
+the next, and it never shows on `/admin`. Copy and the link
+(erickcabal.com/enclave) are `PROMO` in constants. `CREDITS.note` adds
+Erick's own line to the footer attribution on every page: he is Carlo's
+kababata. The attribution itself stays, per rule 10.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

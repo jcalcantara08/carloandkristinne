@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { EditPageButton } from "@/components/EditPageButton";
 import { WelcomePrompt } from "@/components/WelcomePrompt";
+import { EnclavePromo } from "@/components/EnclavePromo";
 import { SkipLink } from "@/components/layout/SkipLink";
 
 export const metadata: Metadata = {
@@ -79,6 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <EditPageButton />
         {/* Guests arriving from the invitation link are invited to write and upload. */}
         <WelcomePrompt />
+        {/* Erick's studio card, at the first, third and fifth minute of a visit. */}
+        <EnclavePromo />
 
         <script
           type="application/ld+json"

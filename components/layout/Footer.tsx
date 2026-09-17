@@ -75,6 +75,7 @@ export function Footer() {
             >
               {CREDITS.builder.name}
             </a>
+            , {CREDITS.note}.
           </p>
         </div>
       </div>

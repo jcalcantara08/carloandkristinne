@@ -46,6 +46,14 @@ browser, never on the Guestbook or Gallery pages themselves, and "Maybe
 later" or the X puts it away. Nothing is collected by the card itself; it
 only points to the two pages, where the usual approval rules apply.
 
+## 2b. The Enclave card
+
+A small card in the corner of the screen offers Erick's studio, Enclave, to
+guests who might want a site like this one. It appears at the first, third
+and fifth minute of a visit, once each, and the X puts it away. It is
+Erick's, and he can switch it off or change its words; tell him if you
+would rather it were not there.
+
 ## 3. The most important thing to know
 
 **Nothing a guest writes or uploads appears in public until you approve it.**

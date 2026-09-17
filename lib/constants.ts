@@ -890,4 +890,23 @@ export const GALLERY = {
 
 export const CREDITS = {
   builder: { name: "Erick Cabal", url: "https://erickcabal.com" },
+  /** Erick's own line, in the footer of every page. He is Carlo's kababata. */
+  note: "kababata ni Carlo, grateful to have helped make this day",
+} as const;
+
+/**
+ * The studio card. Erick builds these sites, and a guest who likes this one
+ * is the next client, so a small corner card offers Enclave at the first,
+ * third and fifth minute of a visit (Erick's numbers), once each, and never
+ * on the dashboard. Copy and link live here so the card has no words of its
+ * own.
+ */
+export const PROMO = {
+  eyebrow: "Enclave",
+  headline: "Need a website like this for your wedding?",
+  body: "This one was designed and built by Erick Cabal. Yours can be too.",
+  cta: "See Enclave",
+  url: "https://erickcabal.com/enclave",
+  /** Minutes into a visit at which the card appears, once each. */
+  minutes: [1, 3, 5],
 } as const;

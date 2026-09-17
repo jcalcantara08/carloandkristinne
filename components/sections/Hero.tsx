@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Countdown } from "@/components/Countdown";
 import { Monogram } from "@/components/Monogram";
 import { Reveal } from "@/components/Reveal";
-import { COUPLE, SITE, WEDDING_DAY } from "@/lib/constants";
+import { COUPLE, HERO_TONE, SITE, WEDDING_DAY } from "@/lib/constants";
 import { getContent } from "@/lib/content";
 import { DEFAULT_CONTENT } from "@/lib/content-schema";
 import { cn } from "@/lib/utils";
@@ -48,8 +48,37 @@ export async function Hero() {
 
   return (
     <section>
-      {/* Pulled up under the transparent header so the photograph starts at the very top. */}
-      {photo ? (
+      {/* Light tone: a studio photograph on white. Names first, in ink, then
+          the picture beneath on the same white, edges softened into the page
+          with a mask so no rectangle shows, never cropped, so both faces are
+          always in frame whatever the screen. */}
+      {photo && HERO_TONE === "light" ? (
+        <div className="bg-brand-paper-200 pt-10 sm:pt-14 lg:pt-16">
+          <div className="container">
+            <div className="mx-auto max-w-3xl text-center">
+              <Reveal>
+                <p className="eyebrow">
+                  {WEDDING_DAY.dayOfWeek} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
+                </p>
+              </Reveal>
+              <Reveal delay={80}>
+                <h1 className="mt-5">{names("text-brand-mauve-500")}</h1>
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="mt-5 font-display text-display-md">{WEDDING_DAY.dateLong}</p>
+              </Reveal>
+            </div>
+          </div>
+          <Reveal delay={240}>
+            <div className="relative mx-auto mt-4 aspect-[3/2] w-full max-w-5xl [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,transparent,#000_18%,#000_100%),linear-gradient(to_right,transparent,#000_14%,#000_86%,transparent)] sm:mt-2">
+              <Image src={photo.src} alt={photo.alt} fill priority sizes="(min-width: 1152px) 1152px, 100vw" className="object-contain" />
+            </div>
+          </Reveal>
+        </div>
+      ) : null}
+
+      {/* Dark tone: pulled up under the transparent header so the photograph starts at the very top. */}
+      {photo && HERO_TONE === "dark" ? (
         <div className="on-ink relative -mt-[4.5rem] h-[80vh] max-h-[56rem] min-h-[34rem] w-full overflow-hidden">
           <Image
             src={photo.src}
@@ -105,7 +134,7 @@ export async function Hero() {
       )}
 
       {/* The practical block, on paper, under the photograph. */}
-      <div className="bg-brand-paper pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24">
+      <div className={cn("pb-16 sm:pb-20 lg:pb-24", HERO_TONE === "light" ? "bg-brand-paper-200 pt-2 sm:pt-4" : "bg-brand-paper pt-10 sm:pt-12")}>
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>

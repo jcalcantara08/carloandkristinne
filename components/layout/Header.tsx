@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Monogram } from "@/components/Monogram";
 import { MobileNav } from "@/components/layout/MobileNav";
-import { NAV, PRIMARY_CTA } from "@/lib/constants";
+import { HERO_TONE, NAV, PRIMARY_CTA } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -14,7 +14,7 @@ export function Header() {
   // The home hero is a photograph that runs under the header, so until the
   // page scrolls the header's text is paper, not ink, or it vanishes into
   // the palm trees. Every other page opens on the ice tint.
-  const overPhoto = pathname === "/" && !scrolled;
+  const overPhoto = HERO_TONE === "dark" && pathname === "/" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

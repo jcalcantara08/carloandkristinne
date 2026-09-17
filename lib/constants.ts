@@ -85,6 +85,18 @@ export const COUPLE = {
    The masters sit beside the repo, outside git.
    ========================= */
 
+/**
+ * How the home hero treats its photograph. "light" is a studio photograph on
+ * a white background: names in ink above it, the picture beneath on the
+ * same white, never cropped. "dark" is an outdoor photograph: full-bleed,
+ * names in paper over an ink fade, header text in paper until scrolled.
+ * Chosen here rather than per photograph because the header has to know
+ * before anything renders. The studio "lean" photograph (both in the
+ * wedding blues) replaced the beach one on 17 September 2026: the sunset
+ * fought the plum and blue branding.
+ */
+export const HERO_TONE: "light" | "dark" = "light";
+
 /* =========================
    The day
    ========================= */

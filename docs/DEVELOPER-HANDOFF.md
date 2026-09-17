@@ -803,6 +803,19 @@ the next, and it never shows on `/admin`. Copy and the link
 Erick's own line to the footer attribution on every page: he is Carlo's
 kababata. The attribution itself stays, per rule 10.
 
+### The hero tone (17 September 2026, evening)
+
+Erick: the sunset beach photograph fought the plum and blue branding. The
+hero now shows the studio "lean" photograph (both in the wedding blues) in
+a light treatment: names in ink above, the picture beneath on the ice tint
+with a four-edge mask (`mask-composite: intersect`, two linear gradients)
+so the studio grey has no rectangle, `object-contain`, never cropped.
+`HERO_TONE` in constants picks "light" or "dark"; the dark branch (full
+bleed, paper names over an ink fade, paper header until scrolled) is kept
+for an outdoor photograph and the header reads the constant so it knows
+which text colour to use before anything paints. The beach photograph
+remains on the RSVP page. `og.jpg` re-rendered with the studio photograph.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

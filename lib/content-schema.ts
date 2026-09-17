@@ -213,8 +213,8 @@ export const DEFAULT_CONTENT: SiteContent = {
       "In their own words: makulit, masayahin, simple lang. You are warmly invited to be there when they promise it out loud.",
     primaryLabel: "RSVP",
     secondaryLabel: "The details",
-    heroPhoto: "/photos/carlo-kristinne-beach-sunset.jpg",
-    heroPhotoAlt: "Carlo and Kristinne on a beach at sunset, both in white, palm trees behind them.",
+    heroPhoto: "/photos/carlo-kristinne-studio-lean.jpg",
+    heroPhotoAlt: "Kristinne and Carlo leaning towards each other in front of a white studio wall, both in blue.",
     glance: [
       { label: "The date", value: WEDDING_DAY.dateShort, note: WEDDING_DAY.dayOfWeek },
       { label: "Ceremony", value: "4:00 PM", note: `${WEDDING_DAY.town}, ${WEDDING_DAY.province}` },

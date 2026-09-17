@@ -776,7 +776,9 @@ workbook the print won:
   second officiant); an empty
   saved group gives way to code; groups the document lacks are appended;
   groups the couple added are kept. Same idea as `DressCode.tsx` merging
-  rows by role.
+  rows by role, where a saved row without the `outfit` field is a pre-guide
+  snapshot and gives way to code (Kristinne spotted "Dusty blue" over the
+  lavender maid of honour gown on 17 September; that was the cause).
 
 ### The arrival prompt (17 September 2026)
 

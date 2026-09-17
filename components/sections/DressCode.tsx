@@ -23,10 +23,15 @@ export async function DressCode() {
   const stored = details.dressCode;
   const rows = DRESS_CODE.map((code) => {
     const saved = stored.find((row) => row.role === code.role);
+    // A row saved before the outfit field existed is a snapshot of old code,
+    // not the couple's words (the maid of honour read "Dusty blue" over a
+    // lavender gown until 17 September). Such a row gives way to code; a row
+    // saved since, with the outfit field present, is theirs and wins.
+    const stale = !saved || !("outfit" in saved);
     return {
       role: code.role,
-      colour: saved?.colour || code.colour,
-      outfit: saved?.outfit || code.outfit,
+      colour: stale ? code.colour : saved.colour || code.colour,
+      outfit: stale ? code.outfit : saved.outfit || code.outfit,
       figure: code.figure,
       swatch: code.swatch,
     };

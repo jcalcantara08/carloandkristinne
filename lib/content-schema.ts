@@ -1040,10 +1040,24 @@ export function healContent(content: SiteContent): SiteContent {
   // A saved doors time equal to a superseded default gives way as well.
   const supersededDoors = ["7:15 PM"];
   const doors = supersededDoors.includes(content.programme.doors.trim()) ? DEFAULT_CONTENT.programme.doors : content.programme.doors;
+  // Venues: the couple's own name, address and map link win when they have
+  // typed one; the time and the note are derived facts (doors, the gap) and
+  // always come from code. A saved list was still saying "Doors at 7:15 PM"
+  // after Carlo confirmed six.
+  const venues = DEFAULT_CONTENT.details.venues.map((code) => {
+    const saved = content.details.venues.find((v) => v.label === code.label);
+    return {
+      ...code,
+      name: saved?.name || code.name,
+      address: saved?.address || code.address,
+      mapUrl: saved?.mapUrl || code.mapUrl,
+    };
+  });
   return {
     ...content,
     home: { ...content.home, glance: DEFAULT_CONTENT.home.glance },
     programme: { ...content.programme, doors },
+    details: { ...content.details, venues },
     entourage: { ...content.entourage, groups: healed },
   };
 }

@@ -844,7 +844,10 @@ minutes in `SCHEDULE` are the only thing to edit.
 (it is four facts from constants and a saved copy was still showing Rosario,
 7:15 and violet on phones), and its form field is gone; a saved
 `programme.doors` equal to a superseded default ("7:15 PM") gives way to
-the current one. The 7:15 timeline notes above are history now.
+the current one; and `details.venues` keeps the couple's saved name, address
+and map link per venue but takes `time` and `note` from code, because a
+saved list was still saying "Doors at 7:15 PM". The 7:15 timeline notes
+above are history now.
 
 ## 18. Future improvements
 

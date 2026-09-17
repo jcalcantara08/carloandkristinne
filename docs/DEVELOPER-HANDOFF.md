@@ -816,6 +816,19 @@ for an outdoor photograph and the header reads the constant so it knows
 which text colour to use before anything paints. The beach photograph
 remains on the RSVP page. `og.jpg` re-rendered with the studio photograph.
 
+**Same evening, the above-the-fold pass.** Erick found the stacked light
+hero left the buttons and countdown below a very tall photograph, and a
+leftover branch rendered the type-only hero a second time beneath it. The
+light hero is now two columns from `lg` (words 5/12 on the left: eyebrow,
+names at `display-xl`, date, ceremony time, intro, the two buttons, the
+countdown, the hashtag; photograph 7/12 on the right, uncropped, masked)
+and photograph-first on a phone with the RSVP button inside the first
+screen at 375 by 812. A `<wbr>` after the ampersand is the only place the
+names may wrap; without it "Kristinne&Carlo" is one word and broke inside
+"Carlo". The practical block renders beneath only for the dark and type-only
+heroes. Sources: the hero guidance at Shopify, Webflow and Site Builder
+Report, 17 September 2026.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

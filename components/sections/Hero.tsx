@@ -11,94 +11,113 @@ import { cn } from "@/lib/utils";
 /**
  * The hero.
  *
- * Every one of the two dozen well-liked wedding sites reviewed on
- * 17 September 2026 leads with a photograph of the couple. When the site
- * document carries one it sits beside the type: names on the left, the
- * photograph framed on the right, stacked on a phone with the photograph
- * first. Without one it is a calm, centred type hero.
+ * What the well-liked wedding sites do (reviewed 17 September 2026, and
+ * again the same night): one photograph across the full width, the names
+ * low on the image over a soft dark fade, and the practical block (the
+ * invitation line, two buttons, the countdown) directly beneath on paper.
+ * The couple's faces sit in the clear upper part of the photograph; the
+ * fade only ever covers shoulders and sand.
  *
- * Side by side rather than full-bleed with the names over the top: the
- * couple stand in the centre of every photograph they have, so a veil and
- * centred type put "Carlo & Kristinne" straight across their faces. Tried on
- * 17 September, read badly, replaced the same day.
- *
- * Centred on purpose. The earlier asymmetric, oversized-type hero was the
- * design's attempt to stand out without a photograph, and the client called
- * it ugly.
+ * Two versions were tried first and rejected the same day: a full-height
+ * veil with the whole block centred over the photograph (the names landed
+ * across their faces, since the couple stand centred in every photograph),
+ * and a side-by-side card (read as a brochure). Without a photograph the
+ * hero is the calm centred type version.
  */
 export async function Hero() {
   const { home } = await getContent();
-  // Set from the dashboard (Edit the website, Home). A page save snapshots
-  // the whole document, so a document saved before the photographs arrived
-  // carries an empty heroPhoto the couple never chose; fall back to the
-  // default photograph rather than the type-only hero. Empty means type
-  // only just when there is no default either.
+  // A page save snapshots the whole document, so a document saved before
+  // the photographs existed carries an empty heroPhoto the couple never
+  // chose; fall back to the default rather than the type-only hero.
   const src = home.heroPhoto || DEFAULT_CONTENT.home.heroPhoto;
   const alt = home.heroPhoto ? home.heroPhotoAlt : DEFAULT_CONTENT.home.heroPhotoAlt;
   const photo = src ? { src, alt } : null;
 
-  return (
-    <section className="bg-brand-paper pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
-      <div className="container">
-        <div className={cn(photo ? "grid items-center gap-10 lg:grid-cols-2 lg:gap-16" : undefined)}>
-          {photo ? (
-            <Reveal className="lg:order-last">
-              <div className="relative mx-auto aspect-[3/2] w-full max-w-2xl overflow-hidden rounded-3xl border border-brand-line bg-brand-paper-200 shadow-soft lg:aspect-[4/5] lg:max-w-none">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </Reveal>
-          ) : null}
+  const names = (ampersand: string) => (
+    <>
+      <span className="sr-only">
+        {COUPLE.groom.fullName} and {COUPLE.bride.fullName} are getting married on {WEDDING_DAY.dateLong}
+      </span>
+      <span aria-hidden="true" className="block text-display-2xl">
+        {COUPLE.groom.shortName}
+        <span className={cn("mx-[0.18em] font-display italic", ampersand)}>&amp;</span>
+        {COUPLE.bride.firstName}
+      </span>
+    </>
+  );
 
+  return (
+    <section>
+      {/* Pulled up under the transparent header so the photograph starts at the very top. */}
+      {photo ? (
+        <div className="on-ink relative -mt-[4.5rem] h-[80vh] max-h-[56rem] min-h-[34rem] w-full overflow-hidden">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[50%_30%]"
+          />
+          {/* Clear at the top where the faces are, ink at the foot where the names sit. */}
+          <div aria-hidden="true" className="absolute inset-0 bg-veil" />
+
+          <div className="absolute inset-x-0 bottom-0 pb-10 sm:pb-14 lg:pb-16">
+            <div className="container text-center">
+              <Reveal>
+                <p className="eyebrow">
+                  {WEDDING_DAY.dayOfWeek} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
+                </p>
+              </Reveal>
+              <Reveal delay={80}>
+                <h1 className="mt-4">{names("text-brand-cornflower-300")}</h1>
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="mt-4 font-display text-display-md">{WEDDING_DAY.dateLong}</p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="bg-brand-paper pt-12 sm:pt-16 lg:pt-20">
+          <div className="container">
+            <div className="mx-auto max-w-3xl text-center">
+              <Reveal>
+                <Monogram size="lg" on="paper" className="mx-auto" />
+              </Reveal>
+              <Reveal delay={80}>
+                <p className="eyebrow mt-8">
+                  {WEDDING_DAY.dayOfWeek} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
+                </p>
+              </Reveal>
+              <Reveal delay={120}>
+                <h1 className="mt-6">{names("text-brand-cornflower-500")}</h1>
+              </Reveal>
+              <Reveal delay={160}>
+                <div aria-hidden="true" className="rule mx-auto mt-8" />
+              </Reveal>
+              <Reveal delay={200}>
+                <p className="mt-8 font-display text-display-md">{WEDDING_DAY.dateLong}</p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* The practical block, on paper, under the photograph. */}
+      <div className="bg-brand-paper pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24">
+        <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <Monogram size="lg" on="paper" className="mx-auto" />
-            </Reveal>
-
-            <Reveal delay={80}>
-              <p className="eyebrow mt-8">
-                {WEDDING_DAY.dayOfWeek} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
-              </p>
-            </Reveal>
-
-            <Reveal delay={120}>
-              <h1 className="mt-6">
-                <span className="sr-only">
-                  {COUPLE.groom.fullName} and {COUPLE.bride.fullName} are getting married on{" "}
-                  {WEDDING_DAY.dateLong}
-                </span>
-                <span aria-hidden="true" className={cn("block", photo ? "text-display-xl" : "text-display-2xl")}>
-                  {COUPLE.groom.shortName}
-                  <span className="mx-[0.18em] font-display italic text-brand-cornflower-500">&amp;</span>
-                  {COUPLE.bride.firstName}
-                </span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={160}>
-              <div aria-hidden="true" className="rule mx-auto mt-8" />
-            </Reveal>
-
-            <Reveal delay={200}>
-              <p className="mt-8 font-display text-display-md">{WEDDING_DAY.dateLong}</p>
-              <p className="mt-2 text-sm text-brand-ink/65">Ceremony at {WEDDING_DAY.ceremonyTime}</p>
-            </Reveal>
-
-            <Reveal delay={240}>
+              <p className="text-sm text-brand-ink/65">Ceremony at {WEDDING_DAY.ceremonyTime}</p>
               {home.intro ? (
-                <p className="mx-auto mt-6 max-w-md text-base leading-relaxed text-brand-ink/75">{home.intro}</p>
+                <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-brand-ink/75">{home.intro}</p>
               ) : null}
             </Reveal>
 
             {/* Always exactly two. Primary plus outline. */}
-            <Reveal delay={280}>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Reveal delay={80}>
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link href="/rsvp" className="btn-primary w-full sm:w-auto">
                   {home.primaryLabel || "RSVP"}
                 </Link>
@@ -108,13 +127,13 @@ export async function Hero() {
               </div>
             </Reveal>
 
-            <Reveal delay={320}>
+            <Reveal delay={160}>
               <div className="mx-auto mt-12 max-w-lg">
                 <Countdown />
               </div>
             </Reveal>
 
-            <Reveal delay={360}>
+            <Reveal delay={240}>
               <p className="mt-8 break-all text-[0.7rem] font-semibold uppercase tracking-eyebrow">
                 <span className="aurora-text">{SITE.hashtag}</span>
               </p>

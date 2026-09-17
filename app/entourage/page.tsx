@@ -33,6 +33,7 @@ export default async function EntouragePage() {
         eyebrow={entourage.eyebrow}
         title={entourage.title}
         intro={entourage.intro ? <p>{entourage.intro}</p> : undefined}
+        photos={entourage.headerPhotos}
       >
         <Link href="/programme" className="btn-primary w-full sm:w-auto">
           The programme

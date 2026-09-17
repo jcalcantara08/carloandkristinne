@@ -42,6 +42,7 @@ export default async function ProgrammePage() {
         eyebrow={programme.eyebrow}
         title={programme.title}
         intro={programme.intro ? <p>{programme.intro}</p> : undefined}
+        photos={programme.headerPhotos}
       >
         <Link href="/rsvp" className="btn-primary w-full sm:w-auto">
           RSVP

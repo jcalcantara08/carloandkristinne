@@ -85,6 +85,9 @@ export type SiteContent = {
     storyEyebrow: string;
     storyTitle: string;
     storyBody: string;
+    pairEyebrow: string;
+    pairTitle: string;
+    pair: StoryPhoto[];
     photosEyebrow: string;
     photosTitle: string;
     photosIntro: string;
@@ -96,6 +99,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    headerPhotos: StoryPhoto[];
     venuesEyebrow: string;
     venuesTitle: string;
     venuesIntro: string;
@@ -124,6 +128,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    headerPhotos: StoryPhoto[];
     phases: { morning: PhaseCopy; afternoon: PhaseCopy; ceremony: PhaseCopy; between: PhaseCopy };
     items: ProgrammeItem[];
     doors: string;
@@ -142,6 +147,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    headerPhotos: StoryPhoto[];
     groups: EntourageGroup[];
     footnoteEyebrow: string;
     footnote: string;
@@ -166,6 +172,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     intro: string;
+    headerPhotos: StoryPhoto[];
     wallTitle: string;
     emptyTitle: string;
     emptyBody: string;
@@ -176,6 +183,7 @@ export type SiteContent = {
     deadlineLabel: string;
     title: string;
     intro: string;
+    headerPhotos: StoryPhoto[];
     why: TitledBody[];
     dayEyebrow: string;
     dayNote: string;
@@ -270,6 +278,22 @@ export const DEFAULT_CONTENT: SiteContent = {
     storyEyebrow: "How it happened",
     storyTitle: "How they met, and how he asked",
     storyBody: "",
+    pairEyebrow: "The two of them",
+    pairTitle: "Carlo, and Kristinne",
+    pair: [
+      {
+        src: "/photos/carlo-studio-1.jpg",
+        alt: "Carlo in a light blue shirt, in front of a white studio wall.",
+        caption: "Carlo",
+        shape: "portrait",
+      },
+      {
+        src: "/photos/kristinne-studio-1.jpg",
+        alt: "Kristinne resting her chin on her hand, leaning on the back of a chair.",
+        caption: "Kristinne",
+        shape: "portrait",
+      },
+    ],
     photosEyebrow: "Photographs",
     photosTitle: "A few of their favourites",
     photosIntro:
@@ -278,16 +302,16 @@ export const DEFAULT_CONTENT: SiteContent = {
     // Captions describe what is in the frame and claim nothing else.
     photos: [
       {
-        src: "/photos/carlo-kristinne-studio-lean.jpg",
-        alt: "Carlo and Kristinne leaning towards each other in front of a white studio wall, both in blue.",
-        caption: "In their blues",
-        shape: "landscape",
+        src: "/photos/carlo-waterfall.jpg",
+        alt: "Carlo sitting on a rock in front of a waterfall, in a colourful shirt.",
+        caption: "Carlo, somewhere with a waterfall",
+        shape: "portrait",
       },
       {
-        src: "/photos/carlo-kristinne-studio-chin.jpg",
-        alt: "Kristinne resting her chin on Carlo's head, both smiling at the camera.",
-        caption: "Chin up",
-        shape: "landscape",
+        src: "/photos/kristinne-elephants.jpg",
+        alt: "Kristinne making a peace sign in a garden with elephant statues behind her.",
+        caption: "Kristinne, with the elephants",
+        shape: "portrait",
       },
       {
         src: "/photos/carlo-kristinne-proposal-cave.jpg",
@@ -309,6 +333,14 @@ export const DEFAULT_CONTENT: SiteContent = {
     eyebrow: "Everything practical",
     title: "The details",
     intro: "One Saturday, one town, and a few things worth knowing before you set your alarm.",
+    headerPhotos: [
+      {
+        src: "/photos/carlo-kristinne-studio-chin.jpg",
+        alt: "Kristinne resting her chin on Carlo's head, both smiling at the camera.",
+        caption: "",
+        shape: "landscape",
+      },
+    ],
     venuesEyebrow: "Where",
     venuesTitle: "Two places, one evening",
     venuesIntro:
@@ -323,7 +355,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     })),
     officiantLine: `The ceremony is by ${OFFICIANT.rite}, officiated by ${OFFICIANT.name}.`,
     dressEyebrow: "What to wear",
-    dressTitle: "The blues, and white is theirs",
+    dressTitle: "Who wears what",
     dressNote: DRESS_NOTE,
     dressCode: DRESS_CODE.map((d) => ({ role: d.role, colour: d.colour, outfit: d.outfit })),
     practicalEyebrow: "Good to know",
@@ -355,6 +387,14 @@ export const DEFAULT_CONTENT: SiteContent = {
   programme: {
     eyebrow: "The run of show",
     title: "One very long Saturday",
+    headerPhotos: [
+      {
+        src: "/photos/carlo-kristinne-studio-lean.jpg",
+        alt: "Carlo and Kristinne leaning towards each other in front of a white studio wall, both in blue.",
+        caption: "",
+        shape: "landscape",
+      },
+    ],
     intro:
       "It starts at seven in the morning and finishes near midnight. Here is the whole of it, including the parts you are not expected to be awake for.",
     phases: {
@@ -406,6 +446,20 @@ export const DEFAULT_CONTENT: SiteContent = {
   entourage: {
     eyebrow: "The people",
     title: "Who is standing with them",
+    headerPhotos: [
+      {
+        src: "/photos/carlo-studio-2.jpg",
+        alt: "Carlo in a light blue shirt, checking his watch, in front of a white studio wall.",
+        caption: "",
+        shape: "portrait",
+      },
+      {
+        src: "/photos/kristinne-studio-2.jpg",
+        alt: "Kristinne leaning on the back of a chair, smiling, in front of a white studio wall.",
+        caption: "",
+        shape: "portrait",
+      },
+    ],
     intro:
       "The people walking down the aisle with them, and the two very small ones carrying the most important things.",
     groups: ENTOURAGE_GROUPS.map((g) => ({
@@ -452,6 +506,14 @@ export const DEFAULT_CONTENT: SiteContent = {
   guestbook: {
     eyebrow: "Say something",
     title: "The wishing wall",
+    headerPhotos: [
+      {
+        src: "/photos/carlo-kristinne-proposal-cave.jpg",
+        alt: "Kristinne holding up her hand to show her engagement ring, Carlo beside her in a rock cave by the sea.",
+        caption: "",
+        shape: "portrait",
+      },
+    ],
     intro:
       "A wish, a blessing, or a story. Everything left here is read by both of them, and printed for them to keep afterwards.",
     wallTitle: "What everyone has written",
@@ -464,6 +526,14 @@ export const DEFAULT_CONTENT: SiteContent = {
     deadlineLabel: RSVP.deadlineLabel,
     title: "Are you coming?",
     intro: "One short form, two minutes, and then Carlo and Kristinne can stop refreshing their phones.",
+    headerPhotos: [
+      {
+        src: "/photos/carlo-kristinne-beach-sunset.jpg",
+        alt: "Carlo and Kristinne on a beach at sunset, both in white, palm trees behind them.",
+        caption: "",
+        shape: "landscape",
+      },
+    ],
     why: [
       {
         title: "The list is 100",
@@ -599,6 +669,22 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       text("ourStory.storyEyebrow", "Story eyebrow"),
       text("ourStory.storyTitle", "Story heading"),
       area("ourStory.storyBody", "The story", "How you met and how he asked. Leave empty and the section stays hidden. Blank lines make paragraphs."),
+      text("ourStory.pairEyebrow", "Portraits eyebrow"),
+      text("ourStory.pairTitle", "Portraits heading"),
+      {
+        type: "list",
+        path: "ourStory.pair",
+        label: "The two portraits",
+        help: "One of each of you, side by side. The caption is the name under the photograph.",
+        required: "src",
+        spare: 0,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "caption", label: "Caption", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("ourStory.photosEyebrow", "Photographs eyebrow"),
       text("ourStory.photosTitle", "Photographs heading"),
       area("ourStory.photosIntro", "Photographs introduction"),
@@ -628,6 +714,20 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     fields: [
       text("details.eyebrow", "Eyebrow"),
       text("details.title", "Heading"),
+      {
+        type: "list",
+        path: "details.headerPhotos",
+        label: "Header photographs",
+        help: "One photograph makes a wide band under the heading; two make a pair. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
+
       area("details.intro", "Introduction"),
       text("details.venuesEyebrow", "Venues eyebrow"),
       text("details.venuesTitle", "Venues heading"),
@@ -698,6 +798,19 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     description: "The run of the day. Reception times are worked out from the doors time and each item's minutes, so they never disagree.",
     preview: "/programme",
     fields: [
+      {
+        type: "list",
+        path: "programme.headerPhotos",
+        label: "Header photographs",
+        help: "One photograph makes a wide band under the heading; two make a pair. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("programme.eyebrow", "Eyebrow"),
       text("programme.title", "Heading"),
       area("programme.intro", "Introduction"),
@@ -743,6 +856,19 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     description: "Every group of people standing with you. A group with no names yet stays hidden from guests.",
     preview: "/entourage",
     fields: [
+      {
+        type: "list",
+        path: "entourage.headerPhotos",
+        label: "Header photographs",
+        help: "One photograph makes a wide band under the heading; two make a pair. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("entourage.eyebrow", "Eyebrow"),
       text("entourage.title", "Heading"),
       area("entourage.intro", "Introduction"),
@@ -792,6 +918,19 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     description: "The wishing wall: the invitation to write, and what shows before the first message.",
     preview: "/guestbook",
     fields: [
+      {
+        type: "list",
+        path: "guestbook.headerPhotos",
+        label: "Header photographs",
+        help: "One photograph makes a wide band under the heading; two make a pair. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("guestbook.eyebrow", "Eyebrow"),
       text("guestbook.title", "Heading"),
       area("guestbook.intro", "Introduction"),
@@ -808,6 +947,19 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     description: "The reply page. The form itself and the guest cap are fixed; the words around them are yours.",
     preview: "/rsvp",
     fields: [
+      {
+        type: "list",
+        path: "rsvp.headerPhotos",
+        label: "Header photographs",
+        help: "One photograph makes a wide band under the heading; two make a pair. Blank the address to remove one.",
+        required: "src",
+        spare: 1,
+        itemFields: [
+          { key: "src", label: "Address", type: "text" },
+          { key: "alt", label: "Description for screen readers", type: "textarea" },
+          { key: "shape", label: "Shape", type: "select", options: ["landscape", "portrait"] },
+        ],
+      },
       text("rsvp.deadlineLabel", "Reply-by date, as shown to guests", "Also used on every closing banner."),
       text("rsvp.title", "Heading"),
       area("rsvp.intro", "Introduction"),

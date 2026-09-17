@@ -27,6 +27,7 @@ export default async function RsvpPage() {
         eyebrow={rsvp.deadlineLabel ? `Please reply by ${rsvp.deadlineLabel}` : "Please reply"}
         title={rsvp.title}
         intro={rsvp.intro ? <p>{rsvp.intro}</p> : undefined}
+        photos={rsvp.headerPhotos}
       />
 
       <Section>

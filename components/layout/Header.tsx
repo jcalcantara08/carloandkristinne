@@ -22,9 +22,9 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-expo",
+        "fixed inset-x-0 top-0 z-40 transition-colors duration-300 ease-expo",
         scrolled
-          ? "border-b border-brand-line bg-brand-paper/90 backdrop-blur-xl"
+          ? "border-b border-brand-line bg-brand-paper/95"
           : "border-b border-transparent bg-transparent",
       )}
     >

@@ -90,6 +90,9 @@ const config: Config = {
         aurora: "linear-gradient(90deg, #3B5068 0%, #4A69AA 100%)",
         // The same ramp in the light pair, for the dark band (9.2:1, 9.0:1).
         "aurora-light": "linear-gradient(90deg, #A3B8CF 0%, #9DB4E0 100%)",
+        // The hero fade: clear over the upper part of a photograph, ink at
+        // the foot so the names read on any picture. Ink is #0B1220.
+        veil: "linear-gradient(180deg, rgba(11, 18, 32, 0) 38%, rgba(11, 18, 32, 0.78) 100%)",
         // A soft horizontal rule that fades at both ends.
         "aurora-soft":
           "linear-gradient(90deg, rgba(59,80,104,0) 0%, rgba(59,80,104,0.7) 25%, rgba(107,139,201,0.7) 75%, rgba(107,139,201,0) 100%)",

@@ -71,6 +71,35 @@ export default async function OurStoryPage() {
         </div>
       </Section>
 
+      {/* --- One of each of them, side by side. --- */}
+      {ourStory.pair.length > 0 ? (
+        <Section>
+          <div className="container">
+            <SectionHeading eyebrow={ourStory.pairEyebrow} title={ourStory.pairTitle} />
+            <ul className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2 sm:gap-5">
+              {ourStory.pair.slice(0, 2).map((photo, index) => (
+                <Reveal as="li" key={photo.src} delay={index * 80}>
+                  <figure>
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-brand-line bg-brand-paper-200">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        sizes="(min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                    {photo.caption ? (
+                      <figcaption className="mt-3 text-center font-display text-xl text-brand-ink">{photo.caption}</figcaption>
+                    ) : null}
+                  </figure>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
+
       {/* --- The photographs. Landscape frames 3:2, portrait 4:5, two per row. --- */}
       {ourStory.photos.length > 0 ? (
         <Section on="tint">

@@ -137,9 +137,11 @@ export const OFFICIANT = {
 /* =========================
    Dress code
    The colours are the couple's own coding from the workbook. The outfits are
-   read off the two attire guides they sent on 17 September 2026 (Best Man;
-   Bridesmaids and Groomsmen), garment by garment, so a guest knows the cut
-   and not only the shade. Roles with no guide say only what is known.
+   read off the three attire guides they sent on 17 September 2026 (Best
+   Man; Bridesmaids and Groomsmen; Principal Sponsors), garment by garment,
+   so a guest knows the cut and not only the shade. Roles with no guide say
+   only what is known. The figure is the guide's own illustration, cropped;
+   an empty figure means the guide has not been sent yet.
    ========================= */
 
 export type DressRole = {
@@ -147,6 +149,8 @@ export type DressRole = {
   colour: string;
   /** The actual garments, as drawn on the attire guide. Empty when there is no guide for the role. */
   outfit: string;
+  /** The guide's illustration of the outfit, under public/. Empty when there is none. */
+  figure: string;
   /** Swatch stops. Rendered as a small gradient chip, never as the only cue. */
   swatch: string[];
 };
@@ -156,19 +160,30 @@ export const DRESS_CODE: DressRole[] = [
     role: "The couple",
     colour: "White",
     outfit: "Kristinne in her wedding gown, Carlo in his suit. White is theirs alone.",
+    figure: "",
     swatch: ["#FFFFFF", "#D6E0E8"],
+  },
+  {
+    role: "Principal sponsors",
+    colour: "Earth tones: taupe, mocha, blush, champagne",
+    outfit:
+      "Ninangs: a floor-length gown in taupe, mocha, blush or champagne, with lace or flutter sleeves and a small clutch, as on the guide. Ninongs: a Barong Tagalog with black trousers and black shoes.",
+    figure: "",
+    swatch: ["#9A8577", "#A89484", "#D9C6BC", "#EAE0CC"],
   },
   {
     role: "Best Man",
     colour: "Dark steel blue",
     outfit:
       "A three-piece suit in dark steel blue: jacket, waistcoat and trousers. White shirt, dusty blue tie, white pocket square, a boutonniere, dark brown shoes.",
+    figure: "/photos/attire-best-man.jpg",
     swatch: ["#3B5068", "#6B8BC9"],
   },
   {
     role: "Maid of Honour",
     colour: "Dusty blue",
     outfit: "A floor-length gown in dusty blue. The cut is hers to choose.",
+    figure: "",
     swatch: ["#5B7590", "#A3B8CF"],
   },
   {
@@ -176,24 +191,27 @@ export const DRESS_CODE: DressRole[] = [
     colour: "Dusty blue, any shade",
     outfit:
       "A floor-length, flowing gown in any shade of dusty blue. Thin straps, a halter neck or off the shoulder with short sleeves all sit on the guide, so choose the one you feel best in. A small bouquet is provided on the day.",
+    figure: "/photos/attire-bridesmaids.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
     role: "Groomsmen",
     colour: "Black suit, blue tie",
     outfit: "A black two-piece suit with a white shirt, a blue tie and a light blue pocket square. Black shoes.",
+    figure: "/photos/attire-groomsmen.jpg",
     swatch: ["#0B1220", "#7A97B3"],
   },
   {
     role: "Our guests",
     colour: "Blue, violet or black",
     outfit: "Formal or semi-formal. A suit and tie, or a dress, in blue, violet or black.",
+    figure: "",
     swatch: ["#6B8BC9", "#7A6B9E", "#0B1220"],
   },
 ];
 
 export const DRESS_NOTE =
-  "Formal or semi-formal, please. Everyone in the entourage is buying or renting their own outfit, so wear something you genuinely feel good in, as long as it sits within your colour. White is kept for the couple.";
+  "Formal or semi-formal, please. Everyone in the entourage is buying or renting their own outfit, so wear something you genuinely feel good in, as long as it sits within your colour. The entourage wears the blues, the principal sponsors wear earth tones, and white is kept for the couple.";
 
 /**
  * The blues, exactly as named on the attire guides the couple sent. These are

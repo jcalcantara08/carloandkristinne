@@ -27,6 +27,7 @@ export default async function GuestbookPage() {
         eyebrow={guestbook.eyebrow}
         title={guestbook.title}
         intro={guestbook.intro ? <p>{guestbook.intro}</p> : undefined}
+        photos={guestbook.headerPhotos}
       />
 
       <Section>

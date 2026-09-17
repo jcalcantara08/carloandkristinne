@@ -33,6 +33,7 @@ export default async function DetailsPage() {
         eyebrow={details.eyebrow}
         title={details.title}
         intro={details.intro ? <p>{details.intro}</p> : undefined}
+        photos={details.headerPhotos}
       >
         <Link href="/rsvp" className="btn-primary w-full sm:w-auto">
           RSVP

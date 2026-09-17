@@ -638,10 +638,11 @@ quality 82) are in `public/photos`; the masters are in the sibling folder
   left, the existing type card on the right. Composed with sharp from the
   previous card, so no font rendering was needed.
 - `HERO_PHOTO` in constants is gone; the site document owns the photographs.
-- If the live site still shows the type-only hero after deploy, a saved site
-  document with an empty `home.heroPhoto` is overriding the default (stored
-  scalars win). Upload the beach photograph from the Home form once and it
-  sticks.
+- A saved site document carried an empty `home.heroPhoto` from before the
+  photographs existed, because a page save snapshots the whole document and
+  stored scalars win. The hero now falls back to the default photograph when
+  the stored value is empty, so a photograph is always shown; uploading one
+  from the Home form replaces it.
 
 ## 18. Future improvements
 

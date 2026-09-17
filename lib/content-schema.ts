@@ -541,7 +541,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
     description: "The first page a guest sees: the hero, the four facts, and the previews of every other page.",
     preview: "/",
     fields: [
-      { type: "image", path: "home.heroPhoto", label: "Hero photograph", help: "Leave empty for the type-only hero. A landscape photograph of the two of you works best." },
+      { type: "image", path: "home.heroPhoto", label: "Hero photograph", help: "A landscape photograph of the two of you. Upload one to replace the beach photograph; empty shows the beach photograph again." },
       text("home.heroPhotoAlt", "Photograph description", "Read out by screen readers. One sentence."),
       area("home.intro", "Hero introduction"),
       text("home.primaryLabel", "Main button"),

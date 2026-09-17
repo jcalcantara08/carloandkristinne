@@ -5,6 +5,7 @@ import { Monogram } from "@/components/Monogram";
 import { Reveal } from "@/components/Reveal";
 import { COUPLE, SITE, WEDDING_DAY } from "@/lib/constants";
 import { getContent } from "@/lib/content";
+import { DEFAULT_CONTENT } from "@/lib/content-schema";
 import { cn } from "@/lib/utils";
 
 /**
@@ -27,8 +28,14 @@ import { cn } from "@/lib/utils";
  */
 export async function Hero() {
   const { home } = await getContent();
-  // Set from the dashboard (Edit the website, Home). Empty means type only.
-  const photo = home.heroPhoto ? { src: home.heroPhoto, alt: home.heroPhotoAlt } : null;
+  // Set from the dashboard (Edit the website, Home). A page save snapshots
+  // the whole document, so a document saved before the photographs arrived
+  // carries an empty heroPhoto the couple never chose; fall back to the
+  // default photograph rather than the type-only hero. Empty means type
+  // only just when there is no default either.
+  const src = home.heroPhoto || DEFAULT_CONTENT.home.heroPhoto;
+  const alt = home.heroPhoto ? home.heroPhotoAlt : DEFAULT_CONTENT.home.heroPhotoAlt;
+  const photo = src ? { src, alt } : null;
 
   return (
     <section className="bg-brand-paper pb-16 pt-12 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">

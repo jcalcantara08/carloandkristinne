@@ -638,6 +638,68 @@ quality 82) are in `public/photos`; the masters are in the sibling folder
   left, the existing type card on the right. Composed with sharp from the
   previous card, so no font rendering was needed.
 - `HERO_PHOTO` in constants is gone; the site document owns the photographs.
+
+**Later the same night, second round.** The client rejected the side-by-side
+hero ("hindi bagay"), sent seven more photographs (two studio portraits
+each, one candid each, a taller Christmas-tree copy) and a third attire
+guide (principal sponsors), and asked for the actual outfits as pictures,
+in HD, with every photograph used.
+
+- **Hero, third and final layout.** Full-width photograph, `80vh` capped at
+  `56rem`, pulled up under the transparent header (`-mt-[4.5rem]`),
+  `object-[50%_30%]` so the faces stay in the clear upper part, the names
+  and date low over `bg-veil` (a tailwind `backgroundImage` token: clear
+  to 38 percent, ink 78 percent at the foot). The practical block (ceremony
+  time, intro, two CTAs, countdown, hashtag) sits beneath on paper. This is
+  what the well-liked wedding sites do; the two earlier attempts are
+  recorded in the Hero's own comment so they are not repeated.
+- **Page header photographs.** `PageHeader` takes `photos?: StoryPhoto[]`:
+  one is a wide band (`3:2`, `21:9` from `lg`), two are a `4:5` pair.
+  Details, Programme, Entourage, Guestbook and RSVP each carry a
+  `headerPhotos` list in the site document, editable per page.
+- **Our Story.** `ourStory.pair` (one portrait of each) renders as "The two
+  of them" above the favourites grid, which now holds the four candids.
+- **Photograph files.** Web copies in `public/photos` (all under the 300 KB
+  QA budget; the elephants photograph needed quality 76 at 1400 px).
+  Masters beside the repo in `28. CARLOobNgdiyoskayKRISTINNE - photos/`:
+  `originals/` (as sent, renamed `*-original.jpg`), `edited/` (ChatGPT
+  results), `attire-guides/` (the guides as sent), `attire-hd/` (the HD
+  figures). `carlo-kristinne-school-christmas-tall` is a duplicate crop and
+  is in `public/photos` but not placed anywhere.
+- **Dress code figures.** `DressRole.figure` points at an HD illustration
+  generated in ChatGPT from the guides' own style (faceless figures, white
+  background, the hex values of the attire palette in the prompt). Four
+  exist: principal sponsors, best man, bridesmaids, groomsmen. The maid of
+  honour, the couple and the guests have none; those cards show the swatch.
+  The sponsors' guide image could not be saved as a file (a mid-turn
+  attachment never reaches the transcript), so `attire-guides/` holds only
+  the first two guides; the HD figure was drawn from the description.
+- **Principal sponsors row.** New in `DRESS_CODE`, from the third guide:
+  gowns in taupe, mocha, blush or champagne with lace or flutter sleeves and
+  a clutch; Barong Tagalog with black trousers for the men. Swatch stops
+  are the guide's five earth tones. `DressCode.tsx` now merges by role: the
+  saved document's words win for a known role, and a role in code that the
+  saved document lacks is appended in code order, so this row reached the
+  live site without a re-save. A row the couple add themselves still shows.
+- **Portrait recolours.** The four solo studio portraits were in the
+  original light blue and sage. Each was re-edited in ChatGPT (upload,
+  "change only the shirt colour", faces untouched) to dark steel blue for
+  Carlo and dusty blue for Kristinne, to match the couple shots.
+
+### The mobile menu (17 September 2026, night)
+
+Reported by the client: on a phone, once the page was scrolled even a
+little, the menu button "did nothing". Cause: the header gained
+`backdrop-blur-xl` on scroll, and a backdrop filter makes an element the
+containing block for its `position: fixed` descendants. The menu panel was
+a fixed child of the header, so its `inset-0` became the header's 4.5rem
+box: the menu opened, 68 px tall, behind the bar. Measured with
+`getBoundingClientRect` before and after. Fix: the panel is portalled to
+`document.body` (`createPortal`, after mount), and the header blur is
+gone in favour of `bg-brand-paper/95` with `transition-colors`, since iOS
+Safari also mishandles fixed elements with backdrop filters. Rule going
+forward: nothing `fixed` lives inside anything with a transform, filter or
+backdrop filter.
 - A saved site document carried an empty `home.heroPhoto` from before the
   photographs existed, because a page save snapshots the whole document and
   stored scalars win. The hero now falls back to the default photograph when

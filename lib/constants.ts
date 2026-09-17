@@ -140,8 +140,9 @@ export const OFFICIANT = {
    read off the three attire guides they sent on 17 September 2026 (Best
    Man; Bridesmaids and Groomsmen; Principal Sponsors), garment by garment,
    so a guest knows the cut and not only the shade. Roles with no guide say
-   only what is known. The figure is the guide's own illustration, cropped;
-   an empty figure means the guide has not been sent yet.
+   only what is known. The figures are HD redraws of the guides' illustrations (ChatGPT,
+   17 September 2026, masters in the sibling photos folder under
+   attire-hd); an empty figure means the guide has not been sent yet.
    ========================= */
 
 export type DressRole = {
@@ -168,7 +169,7 @@ export const DRESS_CODE: DressRole[] = [
     colour: "Earth tones: taupe, mocha, blush, champagne",
     outfit:
       "Ninangs: a floor-length gown in taupe, mocha, blush or champagne, with lace or flutter sleeves and a small clutch, as on the guide. Ninongs: a Barong Tagalog with black trousers and black shoes.",
-    figure: "",
+    figure: "/photos/attire-principal-sponsors.jpg",
     swatch: ["#9A8577", "#A89484", "#D9C6BC", "#EAE0CC"],
   },
   {

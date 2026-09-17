@@ -179,19 +179,30 @@ are typed one per line as `Name | Role | Note`; the note is optional.
 **The dress code.** Each row has three parts: who, the colour, and the
 outfit. The outfit is the actual clothes as drawn on your attire guides (a
 three-piece suit, a floor-length gown, a black suit with a blue tie), so a
-guest knows the cut and not only the shade. The rows for the best man, the
-bridesmaids and the groomsmen were read off the two guides you sent. The maid
-of honour's row says only "a floor-length gown in dusty blue" because there
-is no guide for her yet; edit it once there is.
+guest knows the cut and not only the shade. The rows for the principal
+sponsors, the best man, the bridesmaids and the groomsmen were read off the
+three guides you sent. The maid of honour's row says only "a floor-length
+gown in dusty blue" because there is no guide for her yet; edit it once
+there is.
 
-**Photographs on the pages.** The five photographs you sent are on the site:
-the beach one beside your names on the Home page, the other four under
-"A few of their favourites" on Our Story, each with a short caption you can
+**Photographs on the pages.** All twelve photographs you sent are on the
+site. The beach one is the big picture at the top of the Home page and on
+the RSVP page. Every other page opens with a photograph under its heading
+(Details, Programme, Guestbook) or a pair (Entourage: one of each of you).
+Our Story has "The two of them" (your two studio portraits, recoloured into
+the wedding blues) and "A few of their favourites" (the waterfall, the
+elephants, the ring, the Christmas tree), each with a short caption you can
 change. To swap the Home photograph, upload a new one from the Home form
-(landscape, under 12 MB). To change an Our Story photograph, paste the
-address of a published album photograph into its row. Guests' album
-photographs still come in through the Gallery page and are approved under
-Photographs.
+(landscape, under 12 MB). To change any other photograph, paste the address
+of a published album photograph into its row under Edit the website. Guests'
+album photographs still come in through the Gallery page and are approved
+under Photographs.
+
+**The dress code pictures.** Each dress code card shows an illustration of
+the outfit in the same style as your attire guides, drawn in high
+resolution from those guides. The principal sponsors have their own card
+from the third guide (earth-tone gowns, Barong Tagalog). The pictures are
+part of the design and need Erick to change; the words are yours to edit.
 
 Three things stay in code on purpose and need Erick: the wedding date (it
 drives the countdown and the calendar), the guest cap of 100 and the RSVP

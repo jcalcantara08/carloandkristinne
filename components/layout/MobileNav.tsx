@@ -20,16 +20,14 @@ import { cn } from "@/lib/utils";
  * became the containing block for the panel's own `position: fixed`, so
  * `inset-0` meant the header's 4.5rem box and the menu opened invisibly.
  * A portal keeps the panel out of every ancestor's stacking and containing
- * context for good.
+ * context for good. No mounted flag is needed: open starts false, so the
+ * server never renders the portal and document is always there when it does.
  */
 export function MobileNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => setMounted(true), []);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -94,7 +92,7 @@ export function MobileNav() {
         <span className="sr-only">Open menu</span>
       </button>
 
-      {open && mounted
+      {open
         ? createPortal(
             <div className="fixed inset-0 z-50 lg:hidden">
               <button

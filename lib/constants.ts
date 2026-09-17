@@ -185,78 +185,71 @@ export const DRESS_CODE: DressRole[] = [
   // the couple on a wider last row.
   {
     role: "Parents of the bride and groom",
-    colour: "Lavender to deep purple",
-    outfit:
-      "Mothers: a floor-length gown in lavender, orchid or plum, with soft flutter or lace sleeves, as on the guide. Fathers: a Barong Tagalog with black trousers and black shoes.",
+    colour: "Purples",
+    outfit: "Long gowns for the mothers. Barong Tagalog and black trousers for the fathers.",
     figure: "/photos/attire-parents.jpg",
     swatch: ["#C9A8E0", "#9B7CC0", "#7B4FA6", "#3F2A5A"],
   },
   {
     role: "Principal sponsors",
-    colour: "Earth tones: taupe, mocha, blush, champagne",
-    outfit:
-      "Ninangs: a floor-length gown in taupe, mocha, blush or champagne, with lace or flutter sleeves and a small clutch, as on the guide. Ninongs: a Barong Tagalog with black trousers and black shoes.",
+    colour: "Earth tones",
+    outfit: "Long gowns for the ninangs. Barong Tagalog and black trousers for the ninongs.",
     figure: "/photos/attire-principal-sponsors.jpg",
     swatch: ["#9A8577", "#A89484", "#D9C6BC", "#EAE0CC"],
   },
   {
     role: "Secondary sponsors",
-    colour: "The blues",
-    outfit:
-      "Candle, veil and cord. Women: a floor-length gown in dusty blue with soft flutter sleeves or a sheer cape, any shade on the guide. Men: a Barong Tagalog with black trousers and black shoes.",
+    colour: "Blues",
+    outfit: "Long gowns for the women. Barong Tagalog and black trousers for the men.",
     figure: "/photos/attire-secondary-sponsors.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
     role: "The bearers",
-    colour: "The blues",
-    outfit:
-      "As on the guide: a light blue dress for the little ones, a black suit with a bow tie for the boys, and dusty blue for whoever walks with them.",
+    colour: "Blues",
+    outfit: "A blue dress for the girls. A black suit with a bow tie for the boys.",
     figure: "/photos/attire-bearers.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
     role: "Best Man",
-    colour: "Dark steel blue",
-    outfit:
-      "A three-piece suit in dark steel blue: jacket, waistcoat and trousers. White shirt, dusty blue tie, white pocket square, a boutonniere, dark brown shoes.",
+    colour: "Dark blue",
+    outfit: "A dark blue suit, white shirt, blue tie.",
     figure: "/photos/attire-best-man.jpg",
     swatch: ["#3B5068", "#6B8BC9"],
   },
   {
     role: "Maid of Honour",
     colour: "Lavender",
-    outfit: "A floor-length gown in lavender with thin straps, holding a small bouquet, as on the guide. Any shade from lilac to deep purple.",
+    outfit: "A long lavender gown.",
     figure: "/photos/attire-maid-of-honour.jpg",
     swatch: ["#D8C3EA", "#9B7CC0", "#5E3A80"],
   },
   {
     role: "Groomsmen",
     colour: "Black suit, blue tie",
-    outfit: "A black two-piece suit with a white shirt, a blue tie and a light blue pocket square. Black shoes.",
+    outfit: "A black suit, white shirt, blue tie.",
     figure: "/photos/attire-groomsmen.jpg",
     swatch: ["#0B1220", "#7A97B3"],
   },
   {
     role: "Bridesmaids",
-    colour: "Dusty blue, any shade",
-    outfit:
-      "A floor-length, flowing gown in any shade of dusty blue. Thin straps, a halter neck or off the shoulder with short sleeves all sit on the guide, so choose the one you feel best in. A small bouquet is provided on the day.",
+    colour: "Dusty blue",
+    outfit: "A long dusty blue gown, any shade.",
     figure: "/photos/attire-bridesmaids.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
     role: "Our guests",
-    colour: "The blues",
-    outfit:
-      "Formal attire in any of the blues on the guide: a dress in dusty, slate or light blue, or a suit in navy, slate or grey-blue. Please choose colours other than red or black, and leave white to the couple.",
+    colour: "Blues",
+    outfit: "Formal attire in any shade of blue. Please choose colours other than red or black. White is for the couple.",
     figure: "/photos/attire-guests.jpg",
     swatch: ["#3B5068", "#7A97B3", "#B9C9D6", "#6B8BC9"],
   },
   {
     role: "The couple",
     colour: "White",
-    outfit: "Kristinne in her wedding gown, Carlo in his suit. White is theirs alone.",
+    outfit: "White is theirs.",
     figure: "",
     swatch: ["#FFFFFF", "#D6E0E8"],
   },

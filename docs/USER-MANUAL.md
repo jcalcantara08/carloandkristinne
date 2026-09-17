@@ -193,14 +193,11 @@ entourage groups and the small cards all work the same way: a blank row at
 the bottom adds one, and blanking a row's title removes it. Entourage names
 are typed one per line as `Name | Role | Note`; the note is optional.
 
-**The dress code.** Each row has three parts: who, the colour, and the
-outfit. The outfit is the actual clothes as drawn on your attire guides (a
-three-piece suit, a floor-length gown, a black suit with a blue tie), so a
-guest knows the cut and not only the shade. The rows for the principal
-sponsors, the best man, the bridesmaids and the groomsmen were read off the
-three guides you sent. The maid of honour's row says only "a floor-length
-gown in dusty blue" because there is no guide for her yet; edit it once
-there is.
+**The dress code.** Each card has the picture from your attire guide, the
+colour, and one or two short lines saying what the guide shows: long gowns,
+barong, a black suit and blue tie, and so on. The words stay short on
+purpose; the picture does the explaining. Edit any card under Edit the
+website, Details.
 
 **Photographs on the pages.** All twelve photographs you sent are on the
 site. The beach one is the big picture at the top of the Home page and on

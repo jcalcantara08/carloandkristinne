@@ -22,7 +22,7 @@ export function readView(value: string | undefined): ListView {
 }
 
 const quiet =
-  "inline-flex min-h-[44px] items-center px-2 text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-steel-500";
+  "inline-flex min-h-[44px] items-center px-2 text-xs font-medium text-brand-ink/60 underline underline-offset-4 transition-colors duration-200 hover:text-brand-plum-500";
 
 /** Active / Archived / Recycle bin chips above a list. */
 export function ViewChips({
@@ -49,8 +49,8 @@ export function ViewChips({
           className={cn(
             "inline-flex min-h-[36px] items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors duration-200",
             chip.key === view
-              ? "border-brand-steel-600 bg-brand-steel-100 text-brand-steel-600"
-              : "border-brand-line text-brand-ink/70 hover:border-brand-steel-600/50 hover:text-brand-ink",
+              ? "border-brand-plum-600 bg-brand-plum-100 text-brand-plum-600"
+              : "border-brand-line text-brand-ink/70 hover:border-brand-plum-600/50 hover:text-brand-ink",
           )}
         >
           {chip.label}

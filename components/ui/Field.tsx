@@ -17,7 +17,7 @@ export function Label({
     <label className={cn("field-label", className)} {...props}>
       {children}
       {required ? (
-        <span className="ml-1 text-brand-steel-500" aria-hidden="true">
+        <span className="ml-1 text-brand-plum-500" aria-hidden="true">
           *
         </span>
       ) : null}

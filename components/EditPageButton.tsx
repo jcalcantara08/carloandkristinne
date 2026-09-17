@@ -32,7 +32,7 @@ export function EditPageButton() {
   return (
     <Link
       href={`/admin/pages?section=${section.id}`}
-      className="fixed bottom-4 right-4 z-40 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand-line-strong bg-brand-paper px-4 text-xs font-medium text-brand-ink shadow-lg transition-colors duration-200 hover:border-brand-steel-600 hover:text-brand-steel-600"
+      className="fixed bottom-4 right-4 z-40 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand-line-strong bg-brand-paper px-4 text-xs font-medium text-brand-ink shadow-lg transition-colors duration-200 hover:border-brand-plum-600 hover:text-brand-plum-600"
     >
       <PencilLine className="h-4 w-4" aria-hidden="true" />
       Edit this page

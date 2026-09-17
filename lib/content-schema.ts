@@ -217,18 +217,18 @@ export const DEFAULT_CONTENT: SiteContent = {
     glance: [
       { label: "The date", value: WEDDING_DAY.dateShort, note: WEDDING_DAY.dayOfWeek },
       { label: "Ceremony", value: "4:00 PM", note: `${WEDDING_DAY.town}, ${WEDDING_DAY.province}` },
-      { label: "Reception", value: "Doors at 7:15 PM", note: "Second venue, programme at 8" },
-      { label: "Dress code", value: "Blue, violet or black", note: "White is for the couple" },
+      { label: "Reception", value: "Doors at 7:15 PM", note: `${WEDDING_DAY.receptionTown}, programme at 8` },
+      { label: "Dress code", value: "Formal, in the blues", note: "White is for the couple" },
     ],
     storyEyebrow: "Kaloob ng Diyos",
     storyTitle: "A gift, and the two people lucky enough to find it",
     storyP1:
-      "The hashtag came before almost anything else. #CARLOobNgdiyoskayKRISTINNE reads as “Carlo, a gift from God to Kristinne”, and the moment it was said out loud, everyone knew that was the one.",
+      "The hashtag came before almost anything else. #CARLOobngDiyoskayKRISTINNE reads as “Carlo, a gift from God to Kristinne”, and the moment it was said out loud, everyone knew that was the one.",
     storyP2:
       "That is the tone of the whole day. Makulit, masayahin, simple lang. They have said plainly that they want the day to feel like them rather than look like a magazine, and the three things worth spending on are the church moment, the food, and the photographs.",
     storyLink: "Read the whole story",
     detailsEyebrow: "Where and when",
-    detailsTitle: "One town, one afternoon, two rooms",
+    detailsTitle: "One afternoon, two towns, two rooms",
     detailsIntro:
       "Everything happens in Rosario, Cavite, on a single Saturday. The ceremony is indoors and so is the reception, which in October is not a small thing.",
     detailsLink: "Maps, dress code and questions",
@@ -332,7 +332,7 @@ export const DEFAULT_CONTENT: SiteContent = {
   details: {
     eyebrow: "Everything practical",
     title: "The details",
-    intro: "One Saturday, one town, and a few things worth knowing before you set your alarm.",
+    intro: "One Saturday, two towns, and a few things worth knowing before you set your alarm.",
     headerPhotos: [
       {
         src: "/photos/carlo-kristinne-studio-chin.jpg",
@@ -353,7 +353,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       note: v.note,
       mapUrl: str(v.mapUrl),
     })),
-    officiantLine: `The ceremony is by ${OFFICIANT.rite}, officiated by ${OFFICIANT.name}.`,
+    officiantLine: `The ceremony is by ${OFFICIANT.rite}, officiated by ${OFFICIANT.name} and ${OFFICIANT.coOfficiant}.`,
     dressEyebrow: "What to wear",
     dressTitle: "Who wears what",
     dressNote: DRESS_NOTE,

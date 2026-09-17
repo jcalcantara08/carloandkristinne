@@ -36,12 +36,12 @@ export async function Hero() {
   const names = (ampersand: string) => (
     <>
       <span className="sr-only">
-        {COUPLE.groom.fullName} and {COUPLE.bride.fullName} are getting married on {WEDDING_DAY.dateLong}
+        {COUPLE.bride.fullName} and {COUPLE.groom.fullName} are getting married on {WEDDING_DAY.dateLong}
       </span>
       <span aria-hidden="true" className="block text-display-2xl">
-        {COUPLE.groom.shortName}
-        <span className={cn("mx-[0.18em] font-display italic", ampersand)}>&amp;</span>
         {COUPLE.bride.firstName}
+        <span className={cn("mx-[0.18em] font-display italic", ampersand)}>&amp;</span>
+        {COUPLE.groom.shortName}
       </span>
     </>
   );
@@ -70,7 +70,7 @@ export async function Hero() {
                 </p>
               </Reveal>
               <Reveal delay={80}>
-                <h1 className="mt-4">{names("text-brand-cornflower-300")}</h1>
+                <h1 className="mt-4">{names("text-brand-mauve-300")}</h1>
               </Reveal>
               <Reveal delay={160}>
                 <p className="mt-4 font-display text-display-md">{WEDDING_DAY.dateLong}</p>
@@ -91,7 +91,7 @@ export async function Hero() {
                 </p>
               </Reveal>
               <Reveal delay={120}>
-                <h1 className="mt-6">{names("text-brand-cornflower-500")}</h1>
+                <h1 className="mt-6">{names("text-brand-mauve-500")}</h1>
               </Reveal>
               <Reveal delay={160}>
                 <div aria-hidden="true" className="rule mx-auto mt-8" />

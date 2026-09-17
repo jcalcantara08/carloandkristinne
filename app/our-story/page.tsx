@@ -57,7 +57,7 @@ export default async function OurStoryPage() {
 
           {ourStory.quote ? (
             <Reveal delay={120} className="lg:col-span-5">
-              <Card className="border-brand-steel-600/30">
+              <Card className="border-brand-plum-600/30">
                 <p className="eyebrow">{ourStory.quoteEyebrow}</p>
                 <blockquote className="mt-5 font-display text-display-md leading-tight">
                   &ldquo;{ourStory.quote}&rdquo;

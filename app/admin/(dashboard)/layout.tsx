@@ -31,7 +31,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               <Monogram size="sm" />
               <div className="min-w-0">
                 <p className="eyebrow">Dashboard</p>
-                <p className="mt-0.5 truncate font-display text-lg text-brand-ink">Carlo &amp; Kristinne</p>
+                <p className="mt-0.5 truncate font-display text-lg text-brand-ink">Kristinne &amp; Carlo</p>
               </div>
             </div>
 
@@ -57,7 +57,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         {/* --- The page --- */}
         <div className="min-w-0">
           {!isDatabaseConfigured() ? (
-            <div className="mb-6 rounded-xl border border-brand-steel-600/50 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600">
+            <div className="mb-6 rounded-xl border border-brand-plum-600/50 bg-brand-plum-600/10 px-4 py-3 text-sm text-brand-plum-600">
               <p className="font-medium">The database is not connected yet.</p>
               <p className="mt-1 text-brand-ink/70">
                 Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then redeploy. Until

@@ -17,7 +17,7 @@
     --text-muted: rgba(11, 18, 32, 0.6);
     --text-inverse: theme(colors.brand.paper.DEFAULT);
     --border-subtle: theme(colors.brand.line.DEFAULT);
-    --focus-ring: theme(colors.brand.steel.500);
+    --focus-ring: theme(colors.brand.plum.500);
   }
 
   /* Scales every rem utility down slightly. Pinned inputs below stop iOS
@@ -47,11 +47,11 @@
 
   /* Focus ring in the accent, offset in the ground, so the halo reads. */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-steel-500 ring-offset-2 ring-offset-brand-paper;
+    @apply outline-none ring-2 ring-brand-plum-500 ring-offset-2 ring-offset-brand-paper;
   }
 
   ::selection {
-    background-color: theme(colors.brand.steel.200);
+    background-color: theme(colors.brand.plum.200);
     color: theme(colors.brand.ink.DEFAULT);
   }
 
@@ -102,7 +102,7 @@
   }
 
   .on-ink :focus-visible {
-    @apply ring-brand-steel-300 ring-offset-brand-ink;
+    @apply ring-brand-plum-300 ring-offset-brand-ink;
   }
 
   /* --- Actions --- */
@@ -117,7 +117,7 @@
   }
 
   .btn-outline {
-    @apply btn border border-brand-line-strong bg-transparent text-brand-ink hover:border-brand-steel-500 hover:bg-brand-steel-100;
+    @apply btn border border-brand-line-strong bg-transparent text-brand-ink hover:border-brand-plum-500 hover:bg-brand-plum-100;
   }
 
   /* Inside the dark band the polarity inverts. */
@@ -144,11 +144,11 @@
 
   /* --- Type --- */
   .eyebrow {
-    @apply font-body text-xs font-semibold uppercase tracking-eyebrow text-brand-steel-500;
+    @apply font-body text-xs font-semibold uppercase tracking-eyebrow text-brand-plum-500;
   }
 
   .on-ink .eyebrow {
-    @apply text-brand-steel-300;
+    @apply text-brand-plum-300;
   }
 
   /* Body copy is never full-strength ink. 75 percent, which measures 9.5:1. */
@@ -196,7 +196,7 @@
 
   /* --- Forms --- */
   .field {
-    @apply w-full rounded-xl border border-brand-line bg-brand-paper-100 px-4 py-3 text-brand-ink placeholder:text-brand-ink/60 transition-colors duration-200 hover:border-brand-line-strong focus:border-brand-steel-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-steel-500 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper;
+    @apply w-full rounded-xl border border-brand-line bg-brand-paper-100 px-4 py-3 text-brand-ink placeholder:text-brand-ink/60 transition-colors duration-200 hover:border-brand-line-strong focus:border-brand-plum-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-plum-500 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper;
   }
 
   .field-label {
@@ -208,7 +208,7 @@
   }
 
   .field-error {
-    @apply mt-1.5 flex items-start gap-1.5 text-xs font-medium text-brand-steel-600;
+    @apply mt-1.5 flex items-start gap-1.5 text-xs font-medium text-brand-plum-600;
   }
 }
 

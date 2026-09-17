@@ -169,8 +169,8 @@ export default async function EditPagesPage({
             className={cn(
               "inline-flex min-h-[36px] items-center rounded-full border px-4 text-xs font-medium transition-colors duration-200",
               s.id === section.id
-                ? "border-brand-steel-600 bg-brand-steel-100 text-brand-steel-600"
-                : "border-brand-line text-brand-ink/70 hover:border-brand-steel-600/50 hover:text-brand-ink",
+                ? "border-brand-plum-600 bg-brand-plum-100 text-brand-plum-600"
+                : "border-brand-line text-brand-ink/70 hover:border-brand-plum-600/50 hover:text-brand-ink",
             )}
           >
             {s.label}
@@ -179,7 +179,7 @@ export default async function EditPagesPage({
       </nav>
 
       {params.saved ? (
-        <p role="status" className="rounded-xl border border-brand-steel-600/40 bg-brand-steel-600/10 px-4 py-3 text-sm text-brand-steel-600">
+        <p role="status" className="rounded-xl border border-brand-plum-600/40 bg-brand-plum-600/10 px-4 py-3 text-sm text-brand-plum-600">
           Saved. The public site shows your changes now.{" "}
           <Link href={section.preview} target="_blank" className="underline underline-offset-4">
             Open the page

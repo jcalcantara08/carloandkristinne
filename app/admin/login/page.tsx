@@ -36,8 +36,8 @@ export default async function AdminLoginPage({
             <div className="text-sm leading-relaxed text-brand-ink/75">
               <p className="font-medium text-brand-ink">The admin area is not configured yet.</p>
               <p className="mt-3">
-                Set <code className="text-brand-steel-500">ADMIN_PASSWORD</code> and{" "}
-                <code className="text-brand-steel-500">ADMIN_SESSION_SECRET</code> in the
+                Set <code className="text-brand-plum-500">ADMIN_PASSWORD</code> and{" "}
+                <code className="text-brand-plum-500">ADMIN_SESSION_SECRET</code> in the
                 environment, then redeploy. There is deliberately no default password.
               </p>
               <p className="mt-3 text-brand-ink/60">

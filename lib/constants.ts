@@ -6,9 +6,13 @@
  * "To be confirmed" chip instead of a plausible lie, and the admin manual
  * tells the couple this file is the one place to update.
  *
- * Source: "Tin Carlo Wedding Workbook.docx" and the answered questionnaire,
- * as of 22 July 2026. Budget figures, vendor negotiations and internal
- * planning flags are deliberately NOT in this file. This site is for guests.
+ * Sources: "Tin Carlo Wedding Workbook.docx" and the answered questionnaire
+ * (22 July 2026), then the printed invitation suite the couple sent on
+ * 17 September 2026 (entourage card, save the date, invitation, attire
+ * guide, finer details). Where the two disagree the printed suite wins: it is
+ * what guests hold in their hands. Budget figures, vendor negotiations and
+ * internal planning flags are deliberately NOT in this file. This site is for
+ * guests.
  */
 
 export type Pending<T> = { value: T; pending: false } | { value: null; pending: true };
@@ -32,17 +36,25 @@ export const SHOW_PENDING = false;
    Site
    ========================= */
 
+/**
+ * Kristinne's name comes first everywhere, and the monogram is KC: that is
+ * how the printed invitation has it. The hashtag keeps Carlo first because
+ * it is a sentence ("Carlo, a gift from God to Kristinne"), and its casing
+ * is exactly as printed.
+ */
 export const SITE = {
-  name: "Carlo & Kristinne",
-  longName: "John Carlo & Kristinne",
+  name: "Kristinne & Carlo",
+  longName: "Kristinne & Carlo",
   tagline: "Kaloob ng Diyos",
   description:
-    "John Carlo Alcantara and Kristinne Monzon are getting married on 17 October 2026 in Rosario, Cavite. Ceremony details, the day's programme, RSVP and the shared photo album.",
+    "Kristinne Monzon and John Carlo Alcantara are getting married on 17 October 2026: the ceremony at Jesus the Counselor Church in General Trias, the reception at Servando's Restaurant in Rosario, Cavite. Details, the day's programme, RSVP and the shared photo album.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://carloandkristinne.com",
   locale: "en_PH",
-  hashtag: "#CARLOobNgdiyoskayKRISTINNE",
+  hashtag: "#CARLOobngDiyoskayKRISTINNE",
   /** Used in the wordmark, where the hashtag is split for emphasis. */
-  hashtagParts: { prefix: "#CARLO", middle: "obNgdiyoskay", suffix: "KRISTINNE" },
+  hashtagParts: { prefix: "#CARLO", middle: "obngDiyoskay", suffix: "KRISTINNE" },
+  /** The two initials of the monogram, in the order the invitation prints them. */
+  monogram: ["K", "C"],
 } as const;
 
 export const COUPLE = {
@@ -51,12 +63,16 @@ export const COUPLE = {
     shortName: "Carlo",
     lastName: "Alcantara",
     fullName: "John Carlo Alcantara",
+    /** As printed on the entourage card. */
+    formalName: "John Carlo Y. Alcantara",
   },
   bride: {
     firstName: "Kristinne",
     shortName: "Tin",
     lastName: "Monzon",
     fullName: "Kristinne Monzon",
+    /** As printed on the entourage card. */
+    formalName: "Kristinne Joy G. Monzon",
   },
 } as const;
 
@@ -85,16 +101,22 @@ export const WEDDING_DAY = {
   month: "October",
   year: "2026",
   ceremonyTime: "4:00 in the afternoon",
+  /** From the finer details card: guests are welcome from three. */
+  doorsTime: "3:00 PM",
   guestCount: 100,
-  town: "Rosario",
+  /** The ceremony's town. The reception is in `receptionTown`. */
+  town: "General Trias",
+  receptionTown: "Rosario",
   province: "Cavite",
   country: "Philippines",
 } as const;
 
 /* =========================
    Venues
-   The church and reception names are not in the workbook yet.
-   They render as "To be confirmed" until they are filled in here.
+   Names and addresses as printed on the invitation. The map links are the
+   destinations of the two QR codes on the finer details card, decoded on
+   17 September 2026 (they were Canva short links that redirect to Google
+   Maps places).
    ========================= */
 
 export type Venue = {
@@ -111,25 +133,26 @@ export const VENUES: Venue[] = [
   {
     key: "ceremony",
     label: "The Ceremony",
-    name: tbc<string>(),
-    address: tbc<string>(),
+    name: set("Jesus the Counselor Church"),
+    address: set("428A Saint Francis Subdivision, San Juan I, General Trias, Cavite"),
     time: "4:00 PM",
-    note: "Christian rites, officiated by Pastor Jomar. Please be seated by 3:30 PM so the processional can begin on time.",
-    mapUrl: tbc<string>(),
+    note: "Christian rites, officiated by Pastor Jomar Antalan and Pastora Lorna Antalan. Guests are warmly welcome from 3:00 PM; the ceremony begins promptly at 4:00 PM.",
+    mapUrl: set("https://www.google.com/maps/place/JTC+Christian+Ministries/@14.3850742,120.8766708,17z"),
   },
   {
     key: "reception",
     label: "The Reception",
-    name: tbc<string>(),
-    address: tbc<string>(),
+    name: set("Servando's Restaurant"),
+    address: set("Beside MV Soriano Medical Clinic, Rosario, Cavite 4106"),
     time: "Doors at 7:15 PM",
-    note: "There is a gap after the ceremony while the couple finish their photographs and everyone travels over, so please do not head straight here. Doors open at 7:15 PM, the programme starts at 8:00 PM, and parking is available on site.",
-    mapUrl: tbc<string>(),
+    note: "There is a gap after the ceremony while the couple finish their photographs and everyone travels over from General Trias, so please do not head straight here. Doors open at 7:15 PM, the programme starts at 8:00 PM, and parking is available on site.",
+    mapUrl: set("https://www.google.com/maps/place/Servando's+Restaurant/@14.4084224,120.8585391,17z"),
   },
 ];
 
 export const OFFICIANT = {
-  name: "Pastor Jomar",
+  name: "Pastor Jomar Antalan",
+  coOfficiant: "Pastora Lorna Antalan",
   rite: "Christian rites",
   note: "A PSA-registered solemnizing officer.",
 } as const;
@@ -165,6 +188,14 @@ export const DRESS_CODE: DressRole[] = [
     swatch: ["#FFFFFF", "#D6E0E8"],
   },
   {
+    role: "Parents of the bride and groom",
+    colour: "Lavender to deep purple",
+    outfit:
+      "Mothers: a floor-length gown in lavender, orchid or plum, with soft flutter or lace sleeves, as on the guide. Fathers: a Barong Tagalog with black trousers and black shoes.",
+    figure: "/photos/attire-parents.jpg",
+    swatch: ["#C9A8E0", "#9B7CC0", "#7B4FA6", "#3F2A5A"],
+  },
+  {
     role: "Principal sponsors",
     colour: "Earth tones: taupe, mocha, blush, champagne",
     outfit:
@@ -181,11 +212,27 @@ export const DRESS_CODE: DressRole[] = [
     swatch: ["#3B5068", "#6B8BC9"],
   },
   {
+    role: "Secondary sponsors",
+    colour: "The blues",
+    outfit:
+      "Candle, veil and cord. Women: a floor-length gown in dusty blue with soft flutter sleeves or a sheer cape, any shade on the guide. Men: a Barong Tagalog with black trousers and black shoes.",
+    figure: "/photos/attire-secondary-sponsors.jpg",
+    swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
+  },
+  {
     role: "Maid of Honour",
-    colour: "Dusty blue",
-    outfit: "A floor-length gown in dusty blue. The cut is hers to choose.",
-    figure: "",
-    swatch: ["#5B7590", "#A3B8CF"],
+    colour: "Lavender",
+    outfit: "A floor-length gown in lavender with thin straps, holding a small bouquet, as on the guide. Any shade from lilac to deep purple.",
+    figure: "/photos/attire-maid-of-honour.jpg",
+    swatch: ["#D8C3EA", "#9B7CC0", "#5E3A80"],
+  },
+  {
+    role: "The bearers",
+    colour: "The blues",
+    outfit:
+      "As on the guide: a light blue dress for the little ones, a black suit with a bow tie for the boys, and dusty blue for whoever walks with them.",
+    figure: "/photos/attire-bearers.jpg",
+    swatch: ["#3B5068", "#7A97B3", "#B9C9D6"],
   },
   {
     role: "Bridesmaids",
@@ -204,26 +251,39 @@ export const DRESS_CODE: DressRole[] = [
   },
   {
     role: "Our guests",
-    colour: "Blue, violet or black",
-    outfit: "Formal or semi-formal. A suit and tie, or a dress, in blue, violet or black.",
-    figure: "",
-    swatch: ["#6B8BC9", "#7A6B9E", "#0B1220"],
+    colour: "The blues",
+    outfit:
+      "Formal attire in any of the blues on the guide: a dress in dusty, slate or light blue, or a suit in navy, slate or grey-blue. Please choose colours other than red or black, and leave white to the couple.",
+    figure: "/photos/attire-guests.jpg",
+    swatch: ["#3B5068", "#7A97B3", "#B9C9D6", "#6B8BC9"],
   },
 ];
 
+/** The attire guide's own words, lightly joined. */
 export const DRESS_NOTE =
-  "Formal or semi-formal, please. Everyone in the entourage is buying or renting their own outfit, so wear something you genuinely feel good in, as long as it sits within your colour. The entourage wears the blues, the principal sponsors wear earth tones, and white is kept for the couple.";
+  "We kindly ask you to wear formal attire in any of the elegant shades from our chosen palette. White is reserved for the bride and the groom; please choose colours other than red or black.";
 
 /**
- * The blues, exactly as named on the attire guides the couple sent. These are
- * the swatches guests can hold a dress or a tie up against.
+ * The three palettes on the printed attire guide, as swatches guests can
+ * hold a dress or a tie up against. The blues are named exactly as on the
+ * first guides; the purples and earth tones are read off the full guide.
  */
-export const ATTIRE_PALETTE: { name: string; hex: string }[] = [
-  { name: "Dark steel blue", hex: "#3B5068" },
-  { name: "Dusty blue", hex: "#7A97B3" },
-  { name: "Ice blue", hex: "#D6E0E8" },
-  { name: "Light blue grey", hex: "#B9C9D6" },
-  { name: "Cornflower blue", hex: "#6B8BC9" },
+export const ATTIRE_PALETTE: { family: string; name: string; hex: string }[] = [
+  { family: "The blues: guests, entourage, sponsors and bearers", name: "Dark steel blue", hex: "#3B5068" },
+  { family: "The blues: guests, entourage, sponsors and bearers", name: "Dusty blue", hex: "#7A97B3" },
+  { family: "The blues: guests, entourage, sponsors and bearers", name: "Ice blue", hex: "#D6E0E8" },
+  { family: "The blues: guests, entourage, sponsors and bearers", name: "Light blue grey", hex: "#B9C9D6" },
+  { family: "The blues: guests, entourage, sponsors and bearers", name: "Cornflower blue", hex: "#6B8BC9" },
+  { family: "The purples: parents and the maid of honour", name: "Lilac", hex: "#D8C3EA" },
+  { family: "The purples: parents and the maid of honour", name: "Lavender", hex: "#B89BD0" },
+  { family: "The purples: parents and the maid of honour", name: "Orchid", hex: "#7B4FA6" },
+  { family: "The purples: parents and the maid of honour", name: "Plum", hex: "#5E3A80" },
+  { family: "The purples: parents and the maid of honour", name: "Deep purple", hex: "#3F2A5A" },
+  { family: "The earth tones: principal sponsors", name: "Taupe", hex: "#9A8577" },
+  { family: "The earth tones: principal sponsors", name: "Mocha", hex: "#A89484" },
+  { family: "The earth tones: principal sponsors", name: "Mauve grey", hex: "#A99A9B" },
+  { family: "The earth tones: principal sponsors", name: "Blush", hex: "#D9C6BC" },
+  { family: "The earth tones: principal sponsors", name: "Champagne", hex: "#EAE0CC" },
 ];
 
 /* =========================
@@ -250,10 +310,30 @@ export const ENTOURAGE_GROUPS: {
     ],
   },
   {
+    key: "parents",
+    title: "The Parents",
+    blurb: "The four people who were there first.",
+    people: [
+      { name: "Carlito P. Alcantara", role: "Father of the Groom" },
+      { name: "Noreen Y. Alcantara", role: "Mother of the Groom" },
+      { name: "Ariel B. Monzon", role: "Father of the Bride" },
+      { name: "Debora G. Monzon", role: "Mother of the Bride" },
+    ],
+  },
+  {
+    key: "grandparent",
+    title: "Grandparent",
+    blurb: "With love, across the generations.",
+    people: [{ name: "Lily F. Gragas", role: "Grandparent" }],
+  },
+  {
     key: "officiant",
     title: "Officiating",
     blurb: "Who will marry them.",
-    people: [{ name: OFFICIANT.name, role: "Officiant", note: OFFICIANT.rite }],
+    people: [
+      { name: OFFICIANT.name, role: "Wedding Officiant", note: OFFICIANT.rite },
+      { name: OFFICIANT.coOfficiant, role: "Wedding Officiant" },
+    ],
   },
   {
     key: "honour",
@@ -268,32 +348,73 @@ export const ENTOURAGE_GROUPS: {
     key: "bearers",
     title: "The Bearers",
     blurb: "The smallest members of the party, with the most important jobs.",
+    // As printed on the entourage card, which reassigns the three roles
+    // compared with the July workbook.
     people: [
-      { name: "Ruri Chan Monzon", role: "Ring Bearer" },
-      { name: "Zephanie Bible Capoon", role: "Bible Bearer" },
-      { name: "KD Trey Nicolas", role: "Coin Bearer" },
+      { name: "KD Trey Nicolas", role: "Ring Bearer" },
+      { name: "Ruri Chan Monzon", role: "Bible Bearer" },
+      { name: "Zephanie Bible Capoon", role: "Coin Bearer" },
     ],
   },
   {
     key: "sponsors",
     title: "Principal Sponsors",
-    blurb: "Our ninong and ninang.",
-    people: [],
-    pendingNote: "The list is still being finalised. Names go up here as soon as they are set.",
+    blurb: "Our ninong and ninang, in the pairs they will be called.",
+    people: [
+      { name: "Mr. Juancho Mores", role: "Ninong" },
+      { name: "Mrs. Josephine Mores", role: "Ninang" },
+      { name: "Mr. Aquilino Vistan Jr.", role: "Ninong" },
+      { name: "Mrs. Amelita Vistan", role: "Ninang" },
+      { name: "Mr. Rodulfo Hernandez", role: "Ninong" },
+      { name: "Mrs. Darlene Hernandez", role: "Ninang" },
+      { name: "Mr. Restituto Landero", role: "Ninong" },
+      { name: "Mrs. Lilibeth Landero", role: "Ninang" },
+      { name: "Mr. Ereberto Aguilar", role: "Ninong" },
+      { name: "Mrs. Maria Loida Nuniala", role: "Ninang" },
+      { name: "Mr. Hope Fransisco", role: "Ninong" },
+      { name: "Mrs. Marissa Sabandal", role: "Ninang" },
+      { name: "Mr. Rolando Pallera", role: "Ninong" },
+      { name: "Mrs. Donna Dee Cabal", role: "Ninang" },
+    ],
   },
   {
     key: "secondary",
     title: "Secondary Sponsors",
     blurb: "Candle, veil and cord.",
-    people: [],
-    pendingNote: "Still being arranged, and worth the wait.",
+    people: [
+      { name: "Bryan Kyle Monzon", role: "Candle" },
+      { name: "Kimberly Monzon", role: "Candle" },
+      { name: "Apolinario Nicolas", role: "Veil" },
+      { name: "Emelita Nicolas", role: "Veil" },
+      { name: "Carlito Monzon", role: "Cord" },
+      { name: "Jennette Monzon", role: "Cord" },
+    ],
   },
   {
-    key: "party",
-    title: "Bridesmaids & Groomsmen",
-    blurb: "The half past eleven pictorial crew.",
-    people: [],
-    pendingNote: "Bridesmaids in shades of blue, groomsmen in black.",
+    key: "groomsmen",
+    title: "Groomsmen",
+    blurb: "Black suits, blue ties.",
+    people: [
+      { name: "John Reuben Javier", role: "Groomsman" },
+      { name: "Leodegario Capoon IV", role: "Groomsman" },
+      { name: "Zonite Quimno", role: "Groomsman" },
+      { name: "Mar Alen Alamo", role: "Groomsman" },
+      { name: "Ivan Benedict Barron", role: "Groomsman" },
+      { name: "Triston Danlag", role: "Groomsman" },
+    ],
+  },
+  {
+    key: "bridesmaids",
+    title: "Bridesmaids",
+    blurb: "In the dusty blues.",
+    people: [
+      { name: "Joahnna Alcantara", role: "Bridesmaid" },
+      { name: "Amarah Nayeli Monzon", role: "Bridesmaid" },
+      { name: "Michelle Anne Golimlim", role: "Bridesmaid" },
+      { name: "Thea Mae Signo", role: "Bridesmaid" },
+      { name: "Irish Mae Agudo", role: "Bridesmaid" },
+      { name: "Graciene Magsino", role: "Bridesmaid" },
+    ],
   },
 ];
 
@@ -407,10 +528,10 @@ export const SCHEDULE: ScheduleItem[] = [
 
   /* ---- The ceremony. ---- */
   {
-    time: set("3:30 PM"),
-    title: "Guests are seated",
+    time: set("3:00 PM"),
+    title: "Guests arrive",
     detail:
-      "The ushers will show you to your seat. The front rows are kept for the parents and the sponsors.",
+      "You are warmly welcome from three. The ushers will show you to your seat; the front rows are kept for the parents and the sponsors. The ceremony begins promptly at four.",
     phase: "ceremony",
   },
   {
@@ -648,15 +769,15 @@ export const RECEPTION_RUNTIME_MINUTES = RECEPTION_TIMELINE.reduce(
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "When and where is the wedding?",
-    a: "Saturday, 17 October 2026, at 4:00 in the afternoon, in Rosario, Cavite. The reception is at a second venue and its doors open at 7:15 PM, so there is a wait in between while the couple finish their photographs and everyone travels over. Exact addresses and maps are on the Details page and will be printed on your invitation.",
+    a: "Saturday, 17 October 2026, at 4:00 in the afternoon, at Jesus the Counselor Church, 428A Saint Francis Subdivision, San Juan I, General Trias, Cavite. The reception follows at Servando's Restaurant, beside MV Soriano Medical Clinic in Rosario, Cavite; its doors open at 7:15 PM, so there is a wait in between while the couple finish their photographs and everyone travels over. Both maps are on the Details page.",
   },
   {
     q: "What should I wear?",
-    a: "Formal or semi-formal, in blue, violet or black. Please leave white to the couple. If you are in the entourage, your colour is listed on the Details page.",
+    a: "Formal attire in any of the blues from the attire guide. White is reserved for the bride and the groom, and please choose colours other than red or black. If you are in the entourage, your outfit is drawn out on the Details page.",
   },
   {
     q: "Do I need to RSVP, and by when?",
-    a: "Yes please, and as early as you can manage. The final headcount goes to the caterer about two weeks before the day, so replying early is a real help. It takes two minutes on the RSVP page.",
+    a: "Yes please, by 5 October 2026, and as early as you can manage before that. The final headcount goes to the caterer about two weeks before the day, so replying early is a real help. It takes two minutes on the RSVP page.",
   },
   {
     q: "Can I bring a plus one or my children?",
@@ -664,11 +785,11 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "What time should I actually arrive?",
-    a: "Please be seated by 3:30 PM. The processional begins at 4:00 PM, and it would be a shame to miss the walk down the aisle.",
+    a: "Guests are warmly invited to arrive from 3:00 PM onwards. The ceremony begins promptly at 4:00 PM, and it would be a shame to miss the walk down the aisle.",
   },
   {
     q: "Why is there a gap between the ceremony and the reception?",
-    a: "Carlo and Kristinne have their photographs taken at the church after the recessional, and the reception is at a second venue that everyone has to travel to. The doors there open at 7:15 PM and the programme starts at 8:00 PM. Please do not drive straight over after the ceremony, and if you are not sure what to do with the time in between, ask Erick.",
+    a: "Carlo and Kristinne have their photographs taken at the church after the recessional, and the reception is in Rosario, about half an hour from the church in General Trias. The doors there open at 7:15 PM and the programme starts at 8:00 PM. Please do not drive straight over after the ceremony, and if you are not sure what to do with the time in between, ask Erick.",
   },
   {
     q: "How long does the reception run?",
@@ -688,7 +809,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Are you doing a gift registry?",
-    a: "There is no registry, and there is no expectation. Having you in the room is genuinely the gift. If you would still like to give something, an envelope at the reception or joining the prosperity dance is more than enough.",
+    a: "No registry. In their own words: your presence on our special day is the greatest gift we could ask for. If you wish to bless us with a gift, a monetary gift would be sincerely appreciated as we begin this new chapter of our lives together. Thank you for your love, prayers and generosity.",
   },
   {
     q: "What is the hashtag?",
@@ -754,8 +875,8 @@ export const RSVP = {
   /** Hard cap per invitation. The list is 100 and every seat is allocated. */
   maxPartySize: 6,
   /** Shown on the form, and the date the caterer needs the final count. */
-  deadlineLabel: "30 September 2026",
-  deadlineIso: "2026-09-30",
+  deadlineLabel: "5 October 2026",
+  deadlineIso: "2026-10-05",
 } as const;
 
 /* =========================

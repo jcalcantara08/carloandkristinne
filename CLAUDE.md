@@ -5,9 +5,11 @@ Condensed brief for an AI assistant working on this project. Read
 
 ## What this is
 
-The wedding website for John Carlo Alcantara and Kristinne Monzon.
-17 October 2026, 4:00 PM, Rosario, Cavite. 100 guests.
-Hashtag `#CARLOobNgdiyoskayKRISTINNE`.
+The wedding website for Kristinne Monzon and John Carlo Alcantara.
+17 October 2026, 4:00 PM: ceremony at Jesus the Counselor Church, General
+Trias, Cavite; reception at Servando's Restaurant, Rosario, Cavite. 100
+guests. Hashtag `#CARLOobngDiyoskayKRISTINNE`. Kristinne's name comes first
+and the monogram is KC, because that is how the printed invitation has it.
 
 Next.js 16 App Router, React 19, TypeScript strict, Tailwind 3.4, Supabase,
 Vercel. Dev port **3028** (the folder number).
@@ -31,11 +33,15 @@ Vercel. Dev port **3028** (the folder number).
    planning workbook has all of it. The website is for guests only.
 6. **No hex codes in components.** `tailwind.config.ts` plus the semantic
    layer in `styles/globals.css`.
-7. **The palette is the attire guides', not the motif's.** The couple's
-   attire guides name five blues (dark steel, dusty, ice, light blue grey,
-   cornflower) and no violet. Do not turn black back into the page
-   background (tried, read as sombre) and do not bring back the electric
-   blue-into-purple gradient (tried, looked like a different wedding).
+7. **The branding is the printed invitation suite's** (five cards the
+   couple sent on 17 September 2026, filed in the sibling photos folder under
+   `invitation-suite/`). Its type is a deep plum, its names are a rose
+   purple, its florals are pink, lavender and dusty blue on white. So: plum
+   and mauve are the accents, the attire blues are swatches and washes, and
+   white is the ground. Do not turn black back into the page background
+   (tried, read as sombre). The earlier "no violet" rule came from the first
+   two attire guides; the full guide has purples for the parents and the maid
+   of honour, and the invitation itself is plum.
 8. **`requireAuth()` on the first line of every admin Server Action and route
    handler.** A Server Action is a public endpoint.
    **Nothing hard-deletes except `deleteForGood()`**, and only the recycle bin
@@ -47,9 +53,10 @@ Vercel. Dev port **3028** (the folder number).
 
 Classic, centred, on white. Pure white ground (`brand.paper`) with a faint
 ice-blue tint (`paper-200`) for rhythm, navy-black type (`brand.ink`), and the
-attire blues as accents: `steel-500` (dark steel blue, 8.3:1, the eyebrow and
-the focus ring) and `cornflower-500` (deepened to 5.4:1 for text). Dusty,
-ice and the raw cornflower are washes and swatches only, never text. Exactly
+invitation's purples as accents: `plum-500` (8.9:1, the eyebrow, links and
+the focus ring) and `mauve-500` (5.3:1, the ampersand). The attire blues
+(`steel`, `cornflower`, `dusty`) stay defined for swatches, the monogram
+ring and washes, never text. Exactly
 one DARK band per page, the closing CTA, using `.on-ink`. Cormorant Garamond
 display at weight 500 and 600, Inter body. Eyebrow tracking is
 `tracking-eyebrow` (0.28em), never a literal. Stagger is `index * 80`, easing

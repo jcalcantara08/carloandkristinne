@@ -38,7 +38,7 @@ const linkClass = (active: boolean) =>
   cn(
     "flex min-h-[44px] items-center gap-3 rounded-xl px-3.5 text-sm transition-colors duration-200",
     active
-      ? "bg-brand-steel-100 font-medium text-brand-steel-600"
+      ? "bg-brand-plum-100 font-medium text-brand-plum-600"
       : "text-brand-ink/70 hover:bg-brand-paper-200 hover:text-brand-ink",
   );
 

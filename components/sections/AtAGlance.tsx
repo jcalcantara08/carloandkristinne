@@ -25,7 +25,7 @@ export async function AtAGlance() {
             className="flex items-start gap-4 py-7 sm:py-8 lg:px-6"
           >
             <fact.icon
-              className="mt-0.5 h-5 w-5 shrink-0 text-brand-steel-500"
+              className="mt-0.5 h-5 w-5 shrink-0 text-brand-plum-500"
               aria-hidden="true"
             />
             <div className="min-w-0">

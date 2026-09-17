@@ -26,7 +26,7 @@ export function PendingChip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-dashed border-brand-steel-600/60 bg-brand-steel-600/10 px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-brand-steel-500",
+        "inline-flex items-center gap-1.5 rounded-full border border-dashed border-brand-plum-600/60 bg-brand-plum-600/10 px-2.5 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-brand-plum-500",
         className,
       )}
     >

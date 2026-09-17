@@ -10,6 +10,7 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 import { linesToPeople } from "@/lib/content-schema";
 import { SHOW_PENDING } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = pageMeta({
   title: "Entourage",
@@ -50,8 +51,14 @@ export default async function EntouragePage() {
             <div className="container">
               <SectionHeading eyebrow={group.blurb} title={group.title} />
 
+              {/* Sponsors are read in pairs, so their grid stays two across. */}
               {group.list.length > 0 ? (
-                <ul className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <ul
+                  className={cn(
+                    "mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-2",
+                    /sponsors/i.test(group.title) ? "max-w-3xl" : "lg:grid-cols-3",
+                  )}
+                >
                   {group.list.map((person, index) => (
                     <Reveal as="li" key={`${person.name}-${index}`} delay={index * 80}>
                       <Card hover className="h-full text-center">
@@ -81,7 +88,7 @@ export default async function EntouragePage() {
         <Section>
           <div className="container">
             <Reveal>
-              <Card className="mx-auto max-w-2xl border-brand-steel-600/30 text-center">
+              <Card className="mx-auto max-w-2xl border-brand-plum-600/30 text-center">
                 <p className="eyebrow">{entourage.footnoteEyebrow}</p>
                 <p className="mt-4 text-base leading-relaxed text-brand-ink/80">{entourage.footnote}</p>
               </Card>

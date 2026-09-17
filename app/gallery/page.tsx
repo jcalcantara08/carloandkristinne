@@ -41,7 +41,7 @@ export default async function GalleryPage() {
                 return (
                   <Reveal as="li" key={item.title} delay={index * 80}>
                     <Card hover className="h-full">
-                      <Icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />
                       <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
                       <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
                     </Card>
@@ -93,7 +93,7 @@ export default async function GalleryPage() {
             ) : (
               <Reveal delay={80}>
                 <div className="mx-auto max-w-xl rounded-2xl border border-brand-line bg-brand-paper-200 p-10 text-center">
-                  <Camera className="mx-auto h-6 w-6 text-brand-steel-500" aria-hidden="true" />
+                  <Camera className="mx-auto h-6 w-6 text-brand-plum-500" aria-hidden="true" />
                   <p className="mt-4 font-display text-display-md">{gallery.emptyTitle}</p>
                   {gallery.emptyBody ? (
                     <p className="mt-3 text-sm leading-relaxed text-brand-ink/70">{gallery.emptyBody}</p>

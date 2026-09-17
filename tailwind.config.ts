@@ -47,6 +47,14 @@ const config: Config = {
              carries the eyebrow, links and the focus ring. 300 is the
              dusty-blue-grey used for the eyebrow on the dark band (9.2:1). */
           steel: { DEFAULT: "#3B5068", 100: "#EDF2F6", 200: "#D6E0E8", 300: "#A3B8CF", 400: "#5B7590", 500: "#3B5068", 600: "#2E3F52" },
+          /* Plum: the deep purple of the printed invitation's type, the
+             primary accent since 17 September 2026. 500 measures 8.9:1 on
+             paper (eyebrow, links, focus ring); 300 is the lavender used
+             for the eyebrow on the dark band (9.3:1). */
+          plum: { DEFAULT: "#5A3D78", 100: "#F1EBF6", 200: "#E0D3EC", 300: "#C3AEDD", 400: "#7A5C99", 500: "#5A3D78", 600: "#4A2F63" },
+          /* Mauve: the rose-purple of the names on the save the date, the
+             second accent. 500 is 5.3:1 on paper, so it may carry text. */
+          mauve: { DEFAULT: "#8C5A8C", 100: "#F6EDF5", 200: "#E9D5E7", 300: "#D9B8D4", 400: "#A87AA6", 500: "#8C5A8C", 600: "#74477A" },
           /* Cornflower: the lighter accent. 400 is the guide's own swatch and
              is a wash only (3.4:1). 500 is deepened to 5.4:1 so it can be
              text; 300 is for the dark band (9.0:1). */
@@ -79,23 +87,23 @@ const config: Config = {
       boxShadow: {
         // Tinted with the steel blue, never black, never shadow-lg, so
         // shadows on paper stay cool rather than turning grey.
-        soft: "0 1px 2px rgba(59, 80, 104, 0.05), 0 6px 20px -8px rgba(59, 80, 104, 0.12)",
-        lift: "0 10px 34px -12px rgba(59, 80, 104, 0.20), 0 2px 6px rgba(59, 80, 104, 0.05)",
-        glow: "0 10px 30px -8px rgba(74, 105, 170, 0.30)",
+        soft: "0 1px 2px rgba(90, 61, 120, 0.05), 0 6px 20px -8px rgba(90, 61, 120, 0.12)",
+        lift: "0 10px 34px -12px rgba(90, 61, 120, 0.20), 0 2px 6px rgba(90, 61, 120, 0.05)",
+        glow: "0 10px 30px -8px rgba(140, 90, 140, 0.30)",
       },
       backgroundImage: {
         // The one gradient: dark steel into cornflower, left to right. Both
         // stops are text-safe on paper (8.3:1 and 5.4:1), so it can carry
         // the hashtag wordmark. The "aurora" name is historical.
-        aurora: "linear-gradient(90deg, #3B5068 0%, #4A69AA 100%)",
+        aurora: "linear-gradient(90deg, #5A3D78 0%, #8C5A8C 100%)",
         // The same ramp in the light pair, for the dark band (9.2:1, 9.0:1).
-        "aurora-light": "linear-gradient(90deg, #A3B8CF 0%, #9DB4E0 100%)",
+        "aurora-light": "linear-gradient(90deg, #C3AEDD 0%, #D9B8D4 100%)",
         // The hero fade: clear over the upper part of a photograph, ink at
         // the foot so the names read on any picture. Ink is #0B1220.
         veil: "linear-gradient(180deg, rgba(11, 18, 32, 0) 38%, rgba(11, 18, 32, 0.78) 100%)",
         // A soft horizontal rule that fades at both ends.
         "aurora-soft":
-          "linear-gradient(90deg, rgba(59,80,104,0) 0%, rgba(59,80,104,0.7) 25%, rgba(107,139,201,0.7) 75%, rgba(107,139,201,0) 100%)",
+          "linear-gradient(90deg, rgba(90,61,120,0) 0%, rgba(90,61,120,0.7) 25%, rgba(140,90,140,0.7) 75%, rgba(140,90,140,0) 100%)",
       },
       keyframes: {
         "fade-up": {

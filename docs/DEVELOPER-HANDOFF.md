@@ -9,10 +9,14 @@ Last updated: 17 September 2026.
 
 ## 1. What this is
 
-The wedding website for **John Carlo Alcantara and Kristinne Monzon**,
-17 October 2026 at 4:00 PM in Rosario, Cavite, 100 guests, officiated by
-Pastor Jomar under Christian rites. Hashtag `#CARLOobNgdiyoskayKRISTINNE`,
-which reads as "Carlo, kaloob ng Diyos kay Kristinne".
+The wedding website for **Kristinne Monzon and John Carlo Alcantara**,
+17 October 2026 at 4:00 PM. Ceremony at Jesus the Counselor Church, 428A
+Saint Francis Subdivision, San Juan I, General Trias, Cavite; reception at
+Servando's Restaurant, beside MV Soriano Medical Clinic, Rosario, Cavite.
+100 guests, officiated by Pastor Jomar Antalan and Pastora Lorna Antalan
+under Christian rites. Hashtag `#CARLOobngDiyoskayKRISTINNE`, which reads
+as "Carlo, kaloob ng Diyos kay Kristinne". Kristinne's name is printed first
+on the invitation and the monogram is KC; the site follows the print.
 
 Commissioned through Erick Cabal, who is simultaneously the best man, the
 emcee, and the developer. That triple role shows up in the copy, which is
@@ -52,7 +56,7 @@ code. Until the secret is set, the recycle bin never purges by itself.
 bought, add it in Vercel Domains, change `NEXT_PUBLIC_SITE_URL` to match,
 verify the domain in Resend and change `FROM_EMAIL`, then redeploy.
 
-The site's own RSVP deadline is 30 September 2026.
+The RSVP deadline, on the site and on the printed invitation, is 5 October 2026.
 
 ## 3. Tech stack, exact versions
 
@@ -354,13 +358,27 @@ White stays the ground; ink is cooled to navy-black.
 | `brand.paper-200` | `#F4F7FA` | Ice-blue tint for scroll rhythm and interior page headers. Not a contrast band |
 | `brand.ink` | `#0B1220` | Type, the primary button, the one dark band. 18.7:1 |
 | `brand.line` / `-strong` | `#DDE5EC` / `#C4D0DB` | Hairlines |
-| `brand.steel-500` | `#3B5068` | Dark steel blue, the guide's own swatch. Eyebrow, focus ring. 8.3:1 |
-| `brand.steel-300` | `#A3B8CF` | The eyebrow on the dark band. 9.2:1 on ink |
-| `brand.cornflower-500` | `#4A69AA` | Cornflower deepened to be text-safe. The ampersand. 5.4:1 |
-| `brand.cornflower-400` | `#6B8BC9` | The guide's own cornflower. Washes only, 3.4:1 |
-| `brand.dusty-400` | `#7A97B3` | The bridesmaids' blue. Swatches and photo placeholders only |
+| `brand.plum-500` | `#5A3D78` | The invitation's type colour. Eyebrow, links, focus ring. 8.9:1 |
+| `brand.plum-300` | `#C3AEDD` | The eyebrow on the dark band. 9.3:1 on ink |
+| `brand.mauve-500` | `#8C5A8C` | The rose purple of the names on the save the date. The ampersand. 5.3:1 |
+| `brand.mauve-300` | `#D9B8D4` | The ampersand on the dark band. 10.5:1 on ink |
+| `brand.steel-500` | `#3B5068` | Dark steel blue from the attire guide. Swatches and the monogram ring only since the rebrand |
+| `brand.cornflower-400` | `#6B8BC9` | The guide's own cornflower. Washes and swatches only |
+| `brand.dusty-400` | `#7A97B3` | The bridesmaids' blue. Swatches and the monogram ring |
 
-Only steel-500 and cornflower-500 ever carry text. Everything else is a wash,
+**The plum rebrand (17 September 2026, morning).** The couple sent the
+printed invitation suite: plum type, rose-purple names, pink and lavender
+and dusty blue florals on white, a KC monogram with Kristinne's name first.
+Every `brand-steel-*` and `brand-cornflower-*` class in `app`,
+`components` and `styles` was renamed to `brand-plum-*` and
+`brand-mauve-*` (29 files), the `aurora` gradients and the shadow tints
+moved to the purples, and the monogram became KC on a plum-to-dusty-blue
+ring. The steel and cornflower scales remain in the config for swatches.
+`og.jpg` is rendered from `scratchpad/og.html` with headless Chrome so the
+real fonts are used; `icon.svg`, `favicon.ico` (an ICO of 16, 32 and 48 px
+PNGs) and `apple-touch-icon.png` are generated from it with sharp.
+
+Only plum-500 and mauve-500 ever carry text. Everything else is a wash,
 a rule, a ring or a swatch. Black appears as a field exactly once per page,
 the closing CTA, using `.on-ink`, which flips every child automatically.
 `ATTIRE_PALETTE` in constants holds the five named swatches for the dress
@@ -716,6 +734,39 @@ The remote now carries the username,
 `https://jcalcantara08@github.com/jcalcantara08/carloandkristinne.git`, so
 GCM goes straight to Carlo's stored token. On a new laptop, sign in once as
 `jcalcantara08` when GCM asks, and keep the username in the remote URL.
+
+### The printed invitation suite (17 September 2026, morning)
+
+Five cards arrived (entourage, save the date, invitation, attire guide,
+finer details), filed as `invitation-suite/` beside the repo. Everything on
+them is now in `constants.ts`, and where the print disagreed with the July
+workbook the print won:
+
+- **Venues.** Jesus the Counselor Church, General Trias (ceremony) and
+  Servando's Restaurant, Rosario (reception), with addresses. The map links
+  are the QR codes' destinations, decoded with `jsqr` after a slight blur
+  (the codes are stylised with a logo) and followed through Canva's short
+  links to Google Maps places. `WEDDING_DAY.town` is now General Trias and
+  `receptionTown` Rosario; the Details page no longer prints a town line
+  under an address that already carries one.
+- **Entourage.** Every name on the card: parents, grandparent, both
+  officiants, seven pairs of principal sponsors, candle/veil/cord, six
+  groomsmen, six bridesmaids, three bearers. The bearers' roles differ from
+  the workbook (ring KD Trey Nicolas, bible Ruri Chan Monzon, coin Zephanie
+  Bible Capoon); the emcee script was corrected to match. Sponsor groups
+  render two across so the pairs stay side by side.
+- **Times.** Guests welcome from 3:00 PM (`WEDDING_DAY.doorsTime`), ceremony
+  promptly at 4:00 PM. RSVP deadline 5 October 2026. The "seated by 3:30"
+  wording is gone.
+- **Attire.** The full guide adds parents (purples, barong), secondary
+  sponsors (blues, barong), maid of honour (lavender, not the workbook's
+  dusty blue), bearers (blues), and guests (the blues; not white, red or
+  black). `DRESS_NOTE` is the guide's own sentence. `ATTIRE_PALETTE` now
+  carries three families (blues, purples, earth tones) and the Details page
+  shows them grouped. Figures for the five new rows were generated the same
+  way as the first four.
+- **Gift note.** The registry FAQ answer is the couple's printed wording.
+- **Hashtag casing** is now as printed: `#CARLOobngDiyoskayKRISTINNE`.
 
 ## 18. Future improvements
 

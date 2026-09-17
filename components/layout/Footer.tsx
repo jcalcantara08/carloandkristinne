@@ -16,7 +16,7 @@ export function Footer() {
           <Monogram size="md" />
 
           <p className="mt-6 font-display text-display-md">
-            Carlo <span className="aurora-text">&amp;</span> Kristinne
+            Kristinne <span className="aurora-text">&amp;</span> Carlo
           </p>
 
           <p className="mt-3 text-sm text-brand-ink/65">
@@ -60,7 +60,7 @@ export function Footer() {
             </span>
             <Link
               href="/privacy"
-              className="inline-flex min-h-[24px] items-center text-brand-ink/60 underline decoration-brand-line-strong underline-offset-4 transition-colors duration-200 hover:text-brand-ink hover:decoration-brand-steel-500"
+              className="inline-flex min-h-[24px] items-center text-brand-ink/60 underline decoration-brand-line-strong underline-offset-4 transition-colors duration-200 hover:text-brand-ink hover:decoration-brand-plum-500"
             >
               Privacy
             </Link>
@@ -71,7 +71,7 @@ export function Footer() {
               href={CREDITS.builder.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[24px] items-center text-brand-ink/70 underline decoration-brand-steel-500 decoration-2 underline-offset-4 transition-colors duration-200 hover:text-brand-ink"
+              className="inline-flex min-h-[24px] items-center text-brand-ink/70 underline decoration-brand-plum-500 decoration-2 underline-offset-4 transition-colors duration-200 hover:text-brand-ink"
             >
               {CREDITS.builder.name}
             </a>

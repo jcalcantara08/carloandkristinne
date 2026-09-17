@@ -67,26 +67,28 @@ export default async function DetailsPage() {
                     {venue.time ? (
                       <div className="flex items-start gap-3">
                         <dt className="sr-only">Time</dt>
-                        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                         <dd className="text-brand-ink/80">{venue.time}</dd>
                       </div>
                     ) : null}
 
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Address</dt>
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                       <dd className="text-brand-ink/80">
-                        {venue.address ? <span>{venue.address}</span> : null}
-                        <span className={venue.address ? "mt-1 block text-brand-ink/60" : "block"}>
-                          {WEDDING_DAY.town}, {WEDDING_DAY.province}
-                        </span>
+                        {/* The printed address carries its own town; the province line is only for a venue with no address yet. */}
+                        {venue.address ? (
+                          <span>{venue.address}</span>
+                        ) : (
+                          <span className="block">{WEDDING_DAY.province}</span>
+                        )}
                       </dd>
                     </div>
 
                     {venue.note ? (
                       <div className="flex items-start gap-3">
                         <dt className="sr-only">Notes</dt>
-                        <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                        <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                         <dd className="leading-relaxed text-brand-ink/65">{venue.note}</dd>
                       </div>
                     ) : null}
@@ -132,7 +134,7 @@ export default async function DetailsPage() {
                 return (
                   <Reveal as="li" key={item.title} delay={index * 80}>
                     <Card hover className="h-full">
-                      <Icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />
                       <h3 className="mt-4 text-display-md">{item.title}</h3>
                       <p className="mt-3 text-sm leading-relaxed text-brand-ink/75">{item.body}</p>
                     </Card>
@@ -154,7 +156,7 @@ export default async function DetailsPage() {
                   <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm">
                     {details.contactEmail ? (
                       <a
-                        className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
+                        className="text-brand-ink/80 underline decoration-brand-plum-500 decoration-2 underline-offset-4"
                         href={`mailto:${details.contactEmail}`}
                       >
                         {details.contactEmail}
@@ -162,7 +164,7 @@ export default async function DetailsPage() {
                     ) : null}
                     {details.contactPhone ? (
                       <a
-                        className="text-brand-ink/80 underline decoration-brand-steel-500 decoration-2 underline-offset-4"
+                        className="text-brand-ink/80 underline decoration-brand-plum-500 decoration-2 underline-offset-4"
                         href={`tel:${details.contactPhone}`}
                       >
                         {details.contactPhone}
@@ -194,7 +196,7 @@ export default async function DetailsPage() {
                       <span>{item.q}</span>
                       <span
                         aria-hidden="true"
-                        className="relative h-4 w-4 shrink-0 text-brand-steel-500"
+                        className="relative h-4 w-4 shrink-0 text-brand-plum-500"
                       >
                         <span className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-current" />
                         <span className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-current transition-transform duration-300 ease-expo group-open:scale-y-0" />

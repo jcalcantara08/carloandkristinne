@@ -45,7 +45,7 @@ export default async function RsvpPage() {
                 return (
                   <Reveal as="li" key={item.title} delay={index * 80}>
                     <Card>
-                      <Icon className="h-5 w-5 text-brand-steel-500" aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />
                       <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
                       <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">
                         {index === rsvp.why.length - 1 && rsvp.deadlineLabel
@@ -59,7 +59,7 @@ export default async function RsvpPage() {
             </ul>
 
             <Reveal delay={240}>
-              <div className="mt-5 rounded-2xl border border-brand-steel-600/30 bg-brand-steel-600/5 p-6 text-center">
+              <div className="mt-5 rounded-2xl border border-brand-plum-600/30 bg-brand-plum-600/5 p-6 text-center">
                 <p className="eyebrow">{rsvp.dayEyebrow}</p>
                 <p className="mt-3 font-display text-display-md">{WEDDING_DAY.dateShort}</p>
                 {rsvp.dayNote ? <p className="mt-2 text-sm text-brand-ink/65">{rsvp.dayNote}</p> : null}

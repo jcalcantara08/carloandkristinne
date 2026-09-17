@@ -73,7 +73,7 @@ export async function DressCode() {
               </div>
               <div className="flex flex-1 flex-col px-5 py-5">
                 <span className="block font-display text-xl text-brand-ink">{role.role}</span>
-                <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-brand-steel-500">
+                <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-brand-plum-500">
                   {role.colour}
                 </span>
                 {role.outfit ? (
@@ -84,22 +84,25 @@ export async function DressCode() {
           ))}
         </ul>
 
-        {/* The five blues, named exactly as on the attire guides the couple
-            sent, so a guest can hold a dress or a tie up against them. */}
-        <Reveal delay={480}>
-          <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap items-start justify-center gap-x-8 gap-y-6">
-            {ATTIRE_PALETTE.map((swatch) => (
-              <li key={swatch.name} className="flex w-24 flex-col items-center text-center">
-                <span
-                  aria-hidden="true"
-                  className="h-12 w-12 rounded-full border border-brand-line-strong"
-                  style={{ backgroundColor: swatch.hex }}
-                />
-                <span className="mt-2 text-xs leading-snug text-brand-ink/65">{swatch.name}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        {/* The three palettes from the printed attire guide, named, so a
+            guest can hold a dress or a tie up against them. */}
+        {[...new Set(ATTIRE_PALETTE.map((s) => s.family))].map((family, index) => (
+          <Reveal key={family} delay={480 + index * 80}>
+            <p className="eyebrow mt-12 text-center">{family}</p>
+            <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap items-start justify-center gap-x-8 gap-y-6">
+              {ATTIRE_PALETTE.filter((s) => s.family === family).map((swatch) => (
+                <li key={swatch.name} className="flex w-24 flex-col items-center text-center">
+                  <span
+                    aria-hidden="true"
+                    className="h-12 w-12 rounded-full border border-brand-line-strong"
+                    style={{ backgroundColor: swatch.hex }}
+                  />
+                  <span className="mt-2 text-xs leading-snug text-brand-ink/65">{swatch.name}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ))}
       </div>
     </Section>
   );

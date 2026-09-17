@@ -8,8 +8,8 @@ const badgeVariants = cva(
     variants: {
       tone: {
         neutral: "border-brand-line bg-brand-paper-100 text-brand-ink/70",
-        pending: "border-brand-steel-600/50 bg-brand-steel-600/10 text-brand-steel-600",
-        approved: "border-brand-cornflower-600/50 bg-brand-cornflower-600/10 text-brand-cornflower-600",
+        pending: "border-brand-plum-600/50 bg-brand-plum-600/10 text-brand-plum-600",
+        approved: "border-brand-mauve-600/50 bg-brand-mauve-600/10 text-brand-mauve-600",
         hidden: "border-brand-line-strong bg-brand-paper-200 text-brand-ink/60",
       },
     },

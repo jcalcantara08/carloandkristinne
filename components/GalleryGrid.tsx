@@ -124,7 +124,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
               <a
                 href={active.publicUrl}
                 download
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/25 px-4 text-xs font-semibold text-brand-paper transition-colors duration-200 hover:border-brand-steel-300"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/25 px-4 text-xs font-semibold text-brand-paper transition-colors duration-200 hover:border-brand-plum-300"
               >
                 <Download className="h-4 w-4" aria-hidden="true" />
                 Download

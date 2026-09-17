@@ -53,9 +53,9 @@ export function UploadForm() {
 
         <label
           htmlFor={field("photos")}
-          className="mt-1 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-brand-line-strong bg-brand-paper-100 px-6 py-10 text-center transition-colors duration-200 hover:border-brand-steel-500"
+          className="mt-1 flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-brand-line-strong bg-brand-paper-100 px-6 py-10 text-center transition-colors duration-200 hover:border-brand-plum-500"
         >
-          <ImagePlus className="h-7 w-7 text-brand-steel-500" aria-hidden="true" />
+          <ImagePlus className="h-7 w-7 text-brand-plum-500" aria-hidden="true" />
           <span className="mt-3 text-sm font-medium text-brand-ink">
             Tap to choose from your phone
           </span>

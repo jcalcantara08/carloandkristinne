@@ -118,7 +118,8 @@ for dietary notes. That file is what you send to the caterer, and what you
 build the seating plan from.
 
 Do this about two weeks before the wedding, and again the day before in case
-of late replies. The reply deadline printed on the site is 30 September 2026.
+of late replies. The reply deadline printed on the site and on the invitation
+is 5 October 2026.
 
 ### Messages
 
@@ -276,7 +277,7 @@ There are no payments, no analytics, and no advertising anywhere in the site.
 - Publish any waiting messages
 - Glance at the headcount on Overview
 
-**Two weeks before (around 3 October)**
+**Two weeks before (around 3 October), and again after the 5 October deadline**
 - Download the CSV and send the final number and the allergy list to the
   caterer
 

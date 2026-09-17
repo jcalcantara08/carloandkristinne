@@ -27,20 +27,20 @@ export async function DetailsPreview() {
                 <dl className="mt-6 space-y-3 text-sm">
                   <div className="flex items-start gap-3">
                     <dt className="sr-only">Time</dt>
-                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                    <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                     <dd className="text-brand-ink/75">{venue.time}</dd>
                   </div>
                   {venue.address ? (
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Address</dt>
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                       <dd className="text-brand-ink/75">{venue.address}</dd>
                     </div>
                   ) : null}
                   {venue.note ? (
                     <div className="flex items-start gap-3">
                       <dt className="sr-only">Note</dt>
-                      <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-steel-500" aria-hidden="true" />
+                      <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-plum-500" aria-hidden="true" />
                       <dd className="leading-relaxed text-brand-ink/65">{venue.note}</dd>
                     </div>
                   ) : null}

@@ -829,6 +829,23 @@ names may wrap; without it "Kristinne&Carlo" is one word and broke inside
 heroes. Sources: the hero guidance at Shopify, Webflow and Site Builder
 Report, 17 September 2026.
 
+### Doors at six (17 September 2026, night)
+
+Carlo, on Messenger: "6 po start na sa venue". `RECEPTION_DOORS` is now
+"6:00 PM" (and the hand-kept `RECEPTION_DOORS_MINUTES` beside it), so
+every derived reception time moved 75 minutes earlier: grand entrance 6:45,
+dinner 6:55, cake 8:00, goodnight 9:40, doors to goodnight still 225
+minutes. Every sentence that quoted the old times (venue note, three FAQ
+answers, the programme intros, the manual) was rewritten. Erick told Carlo
+he will tighten the running order ("bibilisan"); when he does, the per-item
+minutes in `SCHEDULE` are the only thing to edit.
+
+`healContent` grew two more rules: `home.glance` is always taken from code
+(it is four facts from constants and a saved copy was still showing Rosario,
+7:15 and violet on phones), and its form field is gone; a saved
+`programme.doors` equal to a superseded default ("7:15 PM") gives way to
+the current one. The 7:15 timeline notes above are history now.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

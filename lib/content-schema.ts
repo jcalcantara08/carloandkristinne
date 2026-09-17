@@ -218,7 +218,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     glance: [
       { label: "The date", value: WEDDING_DAY.dateShort, note: WEDDING_DAY.dayOfWeek },
       { label: "Ceremony", value: "4:00 PM", note: `${WEDDING_DAY.town}, ${WEDDING_DAY.province}` },
-      { label: "Reception", value: "Doors at 7:15 PM", note: `${WEDDING_DAY.receptionTown}, programme at 8` },
+      { label: "Reception", value: `Doors at ${RECEPTION_DOORS}`, note: `${WEDDING_DAY.receptionTown}, programme at a quarter to seven` },
       { label: "Dress code", value: "Formal, in the blues", note: "White is for the couple" },
     ],
     storyEyebrow: "Kaloob ng Diyos",
@@ -345,7 +345,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     venuesEyebrow: "Where",
     venuesTitle: "Two places, one evening",
     venuesIntro:
-      "The ceremony and the reception are in different places, and the reception doors do not open until a quarter past seven. Full addresses are on your invitation; please read the timings below before you plan your evening.",
+      "The ceremony and the reception are in different places, half an hour apart, and the reception doors open at six. Full addresses are on your invitation; please read the timings below before you plan your evening.",
     venues: VENUES.map((v) => ({
       label: v.label,
       name: str(v.name),
@@ -418,7 +418,7 @@ export const DEFAULT_CONTENT: SiteContent = {
         label: "In between",
         title: "The gap, and why it is there",
         blurb:
-          "The photographs at the church take a while, and the reception is somewhere else. Please do not drive straight over: the doors do not open until a quarter past seven.",
+          "The photographs at the church take a while, and the reception is half an hour away in Rosario. The doors there open at six.",
       },
     },
     items: SCHEDULE.map((s) => ({
@@ -434,7 +434,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     receptionIntro:
       "The full running order, in the order your host will actually call it. It opens with everybody on their feet and it ends near midnight, with a proper three quarters of an hour in the middle for dinner.",
     receptionNote:
-      "Every time below is worked out from the quarter past seven doors, so treat them as close rather than exact. A ceremony that runs long, or a room that will not stop dancing, moves everything after it. Nobody minds.",
+      "Every time below is worked out from the six o'clock doors, so treat them as close rather than exact. A ceremony that runs long, or a room that will not stop dancing, moves everything after it. Nobody minds.",
     hostEyebrow: "Your host",
     hostTitle: "Erick is running the evening",
     hostP1:
@@ -620,18 +620,8 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       area("home.intro", "Hero introduction"),
       text("home.primaryLabel", "Main button"),
       text("home.secondaryLabel", "Second button"),
-      {
-        type: "list",
-        path: "home.glance",
-        label: "The four facts under the hero",
-        required: "label",
-        spare: 0,
-        itemFields: [
-          { key: "label", label: "Label", type: "text" },
-          { key: "value", label: "Value", type: "text" },
-          { key: "note", label: "Note", type: "text" },
-        ],
-      },
+      // The four facts under the hero come from constants (date, ceremony,
+      // doors, dress code) and are not editable here; see healContent.
       text("home.storyEyebrow", "Story eyebrow"),
       text("home.storyTitle", "Story heading"),
       area("home.storyP1", "Story, first paragraph"),
@@ -841,7 +831,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
           { key: "detail", label: "Detail", type: "textarea" },
         ],
       },
-      text("programme.doors", "Reception doors open at", "Written like 7:15 PM. Every reception time is counted from here."),
+      text("programme.doors", "Reception doors open at", "Written like 6:00 PM. Every reception time is counted from here."),
       text("programme.receptionEyebrow", "Reception eyebrow"),
       text("programme.receptionTitle", "Reception heading"),
       area("programme.receptionIntro", "Reception introduction"),
@@ -1044,7 +1034,18 @@ export function healContent(content: SiteContent): SiteContent {
     if (retired.includes(g.title)) continue;
     if (!healed.some((h) => h.title === g.title) && linesToPeople(g.people).length > 0) healed.push(g);
   }
-  return { ...content, entourage: { ...content.entourage, groups: healed } };
+  // The home "at a glance" list is made of facts that live in constants (date,
+  // ceremony, doors, dress code), so it is always taken from code; a saved
+  // copy was showing "Rosario", "7:15" and "violet" after all three changed.
+  // A saved doors time equal to a superseded default gives way as well.
+  const supersededDoors = ["7:15 PM"];
+  const doors = supersededDoors.includes(content.programme.doors.trim()) ? DEFAULT_CONTENT.programme.doors : content.programme.doors;
+  return {
+    ...content,
+    home: { ...content.home, glance: DEFAULT_CONTENT.home.glance },
+    programme: { ...content.programme, doors },
+    entourage: { ...content.entourage, groups: healed },
+  };
 }
 
 /**
@@ -1070,10 +1071,10 @@ export function mergeContent<T>(defaults: T, stored: unknown): T {
    Programme helpers, shared by the page and the editor
    ========================= */
 
-/** "7:15 PM" to minutes from midnight. Anything unreadable falls back to 7:15 PM. */
+/** "6:00 PM" to minutes from midnight. Anything unreadable falls back to 6:00 PM. */
 export function clockToMinutes(label: string): number {
   const match = /^(\d{1,2})(?::(\d{2}))?\s*(AM|PM|NN)?$/i.exec(label.trim());
-  if (!match) return 19 * 60 + 15;
+  if (!match) return 18 * 60;
   let hours = Number(match[1]) % 12;
   const minutes = Number(match[2] ?? 0);
   const suffix = (match[3] ?? "").toUpperCase();

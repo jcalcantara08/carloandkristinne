@@ -31,7 +31,7 @@ invitation and not an extra.
 | Home | The date, a live countdown, and a short version of everything else |
 | Our Story | Who the two of you are, and what the hashtag means |
 | Details | Venues, the dress code with the five blues from your attire guides, parking, the rain plan, and the questions guests ask |
-| Programme | The whole day, from the seven in the morning start to the send-off at about half past eleven |
+| Programme | The whole day, from the seven in the morning start to the send-off at about a quarter to ten |
 | Entourage | Everyone standing with you |
 | Gallery | The shared photo album, and where guests upload |
 | Guestbook | The wishing wall |
@@ -232,8 +232,10 @@ a number of minutes, and the site works every time out from the doors time
 on the Programme form. Change one length and everything after it moves by
 itself. Day items (morning to the church) carry their own clock time.
 
-Two numbers worth knowing: dinner is called at about a quarter to nine, and
-the evening finishes at about half past eleven.
+Two numbers worth knowing: dinner is called at about seven, and the evening
+finishes at about a quarter to ten. Carlo confirmed on 17 September that the
+venue is yours from six, which moved everything 75 minutes earlier than the
+coordinator's first timeline.
 
 ## 9. How to check the site is running
 

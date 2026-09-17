@@ -156,8 +156,8 @@ export const VENUES: Venue[] = [
     label: "The Reception",
     name: set("Servando's Restaurant"),
     address: set("Beside MV Soriano Medical Clinic, Rosario, Cavite 4106"),
-    time: "Doors at 7:15 PM",
-    note: "There is a gap after the ceremony while the couple finish their photographs and everyone travels over from General Trias, so please do not head straight here. Doors open at 7:15 PM, the programme starts at 8:00 PM, and parking is available on site.",
+    time: "Doors at 6:00 PM",
+    note: "The venue is theirs from six. The couple finish their photographs at the church first, so give yourself the drive from General Trias without rushing. Doors open at 6:00 PM, the programme starts at a quarter to seven, and parking is available on site.",
     mapUrl: set("https://www.google.com/maps/place/Servando's+Restaurant/@14.4084224,120.8585391,17z"),
   },
 ];
@@ -553,7 +553,7 @@ export const SCHEDULE: ScheduleItem[] = [
     time: set("6:00 PM"),
     title: "Everyone travels to the reception",
     detail:
-      "The couple go ahead for the empty-hall photographs and their third look. The doors open to guests at a quarter past seven.",
+      "The couple go ahead for the empty-hall photographs and their third look. The doors open to guests at six.",
     phase: "between",
   },
 
@@ -727,12 +727,17 @@ export const SCHEDULE: ScheduleItem[] = [
 ];
 
 /**
- * The reception opens when the venue doors do, at 7:15 PM, per the
+ * The reception opens when the venue doors do. Carlo confirmed 6:00 PM on
+ * 17 September 2026 ("6 po start na sa venue"), which supersedes the
+ * coordinator's earlier 7:15 PM; the programme moved 75 minutes earlier
+ * with it. Originally 7:15 PM, per the
  * coordinator's on-the-day timeline. Everything after that is derived from
  * the durations above rather than written down twice.
  */
-export const RECEPTION_DOORS = "7:15 PM";
-const RECEPTION_DOORS_MINUTES = 19 * 60 + 15;
+export const RECEPTION_DOORS = "6:00 PM";
+// Kept in step with RECEPTION_DOORS by hand; the site pages derive their
+// clock from the site document's doors field via clockToMinutes instead.
+const RECEPTION_DOORS_MINUTES = 18 * 60;
 
 /**
  * The reception, each item carrying both its offset from the doors opening
@@ -768,7 +773,7 @@ export const RECEPTION_RUNTIME_MINUTES = RECEPTION_TIMELINE.reduce(
 export const FAQ: { q: string; a: string }[] = [
   {
     q: "When and where is the wedding?",
-    a: "Saturday, 17 October 2026, at 4:00 in the afternoon, at Jesus the Counselor Church, 428A Saint Francis Subdivision, San Juan I, General Trias, Cavite. The reception follows at Servando's Restaurant, beside MV Soriano Medical Clinic in Rosario, Cavite; its doors open at 7:15 PM, so there is a wait in between while the couple finish their photographs and everyone travels over. Both maps are on the Details page.",
+    a: "Saturday, 17 October 2026, at 4:00 in the afternoon, at Jesus the Counselor Church, 428A Saint Francis Subdivision, San Juan I, General Trias, Cavite. The reception follows at Servando's Restaurant, beside MV Soriano Medical Clinic in Rosario, Cavite; its doors open at 6:00 PM, after the couple's photographs at the church and the drive over. Both maps are on the Details page.",
   },
   {
     q: "What should I wear?",
@@ -788,11 +793,11 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Why is there a gap between the ceremony and the reception?",
-    a: "Carlo and Kristinne have their photographs taken at the church after the recessional, and the reception is in Rosario, about half an hour from the church in General Trias. The doors there open at 7:15 PM and the programme starts at 8:00 PM. Please do not drive straight over after the ceremony, and if you are not sure what to do with the time in between, ask Erick.",
+    a: "Carlo and Kristinne have their photographs taken at the church after the recessional, and the reception is in Rosario, about half an hour from the church in General Trias. The doors there open at 6:00 PM and the programme starts at a quarter to seven, so there is time for the drive and not much more. If you are not sure what to do in between, ask Erick.",
   },
   {
     q: "How long does the reception run?",
-    a: "Doors open at 7:15 PM, the couple come in at 8:00 PM, and the send-off is at about eleven. Dinner is called early, at about ten past eight, with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
+    a: "Doors open at 6:00 PM, the couple come in at a quarter to seven, and the send-off is at about a quarter to ten. Dinner is called early, at about seven, with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
   },
   {
     q: "Will there be games?",

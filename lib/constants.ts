@@ -82,7 +82,7 @@ export const COUPLE = {
    photographs they already had. They live in public/photos and are wired in
    through the site document (`home.heroPhoto`, `ourStory.photos` in
    DEFAULT_CONTENT), so the couple can swap any of them from the dashboard.
-   The masters sit beside the repo, outside git.
+   The masters sit in photos-master/, inside the project folder for OneDrive and gitignored.
    ========================= */
 
 /**
@@ -176,8 +176,7 @@ export const OFFICIANT = {
    Man; Bridesmaids and Groomsmen; Principal Sponsors), garment by garment,
    so a guest knows the cut and not only the shade. Roles with no guide say
    only what is known. The figures are HD redraws of the guides' illustrations (ChatGPT,
-   17 September 2026, masters in the sibling photos folder under
-   attire-hd); an empty figure means the guide has not been sent yet.
+   17 September 2026, masters in photos-master/attire-hd); an empty figure means the guide has not been sent yet.
    ========================= */
 
 export type DressRole = {

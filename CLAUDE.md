@@ -34,8 +34,7 @@ Vercel. Dev port **3028** (the folder number).
 6. **No hex codes in components.** `tailwind.config.ts` plus the semantic
    layer in `styles/globals.css`.
 7. **The branding is the printed invitation suite's** (five cards the
-   couple sent on 17 September 2026, filed in the sibling photos folder under
-   `invitation-suite/`). Its type is a deep plum, its names are a rose
+   couple sent on 17 September 2026, filed in `photos-master/invitation-suite/`). Its type is a deep plum, its names are a rose
    purple, its florals are pink, lavender and dusty blue on white. So: plum
    and mauve are the accents, the attire blues are swatches and washes, and
    white is the ground. Do not turn black back into the page background

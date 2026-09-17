@@ -639,8 +639,8 @@ permanent delete). Retention here is 14 days, the studio's house number.
 
 The couple had no engagement shoot and sent five photographs they already
 had, edited for clothing colour and clutter. Web copies (70 to 206 KB, JPEG
-quality 82) are in `public/photos`; the masters are in the sibling folder
-`28. CARLOobNgdiyoskayKRISTINNE - photos/edited`, outside git.
+quality 82) are in `public/photos`; the masters are in
+`photos-master/edited`, outside git.
 
 - **Hero.** `home.heroPhoto` defaults to the beach photograph. The hero is
   now side by side when a photograph exists: type left, photograph framed
@@ -679,7 +679,7 @@ in HD, with every photograph used.
   of them" above the favourites grid, which now holds the four candids.
 - **Photograph files.** Web copies in `public/photos` (all under the 300 KB
   QA budget; the elephants photograph needed quality 76 at 1400 px).
-  Masters beside the repo in `28. CARLOobNgdiyoskayKRISTINNE - photos/`:
+  Masters in `photos-master/` inside the repo folder, gitignored:
   `originals/` (as sent, renamed `*-original.jpg`), `edited/` (ChatGPT
   results), `attire-guides/` (the guides as sent), `attire-hd/` (the HD
   figures). `carlo-kristinne-school-christmas-tall` is a duplicate crop and
@@ -738,7 +738,7 @@ GCM goes straight to Carlo's stored token. On a new laptop, sign in once as
 ### The printed invitation suite (17 September 2026, morning)
 
 Five cards arrived (entourage, save the date, invitation, attire guide,
-finer details), filed as `invitation-suite/` beside the repo. Everything on
+finer details), filed as `photos-master/invitation-suite/`. Everything on
 them is now in `constants.ts`, and where the print disagreed with the July
 workbook the print won:
 
@@ -848,6 +848,15 @@ the current one; and `details.venues` keeps the couple's saved name, address
 and map link per venue but takes `time` and `note` from code, because a
 saved list was still saying "Doors at 7:15 PM". The 7:15 timeline notes
 above are history now.
+
+### One project folder (18 September 2026)
+
+The photo masters used to live in a sibling folder so they could never be
+committed. Erick wanted one folder, so they now live in `photos-master/`
+inside the project, listed in `.gitignore`. OneDrive syncs them, git does
+not see them, and the web copies in `public/photos` are the only ones the
+site serves. Subfolders: `originals/` (as sent), `edited/` (ChatGPT
+results), `attire-guides/`, `attire-hd/`, `invitation-suite/`.
 
 ## 18. Future improvements
 

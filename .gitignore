@@ -53,3 +53,8 @@ yarn-error.log*
 # settings.local.json can capture secrets inside approved-command strings.
 .claude/settings.local.json
 .claude/worktrees/
+
+# Photo masters (originals, ChatGPT edits, attire guides, invitation suite).
+# Kept in the project folder for OneDrive, kept out of git because they are
+# large and never served; the web copies live in public/photos.
+photos-master/

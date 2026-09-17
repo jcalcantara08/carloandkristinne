@@ -767,6 +767,15 @@ workbook the print won:
   way as the first four.
 - **Gift note.** The registry FAQ answer is the couple's printed wording.
 - **Hashtag casing** is now as printed: `#CARLOobngDiyoskayKRISTINNE`.
+- **`healContent`** (`lib/content-schema.ts`, called from `getContent`). The
+  live site had a document saved before the card arrived, and a saved list
+  wins over new defaults, so the entourage stayed on the July snapshot after
+  deploy. The heal walks the code's groups in order: a saved group with
+  names wins, unless it holds exactly the code's names (then the code's
+  roles win, which is how the bearers got their printed roles); an empty
+  saved group gives way to code; groups the document lacks are appended;
+  groups the couple added are kept. Same idea as `DressCode.tsx` merging
+  rows by role.
 
 ## 18. Future improvements
 

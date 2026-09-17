@@ -2,7 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import { readSiteDoc, writeSiteDoc } from "@/lib/store";
-import { DEFAULT_CONTENT, mergeContent, type SiteContent } from "@/lib/content-schema";
+import { DEFAULT_CONTENT, healContent, mergeContent, type SiteContent } from "@/lib/content-schema";
 
 export const CONTENT_KEY = "content";
 
@@ -13,7 +13,7 @@ export const CONTENT_KEY = "content";
  */
 export const getContent = cache(async (): Promise<SiteContent> => {
   const stored = await readSiteDoc<Partial<SiteContent>>(CONTENT_KEY, {});
-  return mergeContent(DEFAULT_CONTENT, stored);
+  return healContent(mergeContent(DEFAULT_CONTENT, stored));
 });
 
 export const saveContent = (data: SiteContent) => writeSiteDoc(CONTENT_KEY, data);

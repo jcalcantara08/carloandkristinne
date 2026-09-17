@@ -1004,6 +1004,40 @@ export function setPath(obj: Record<string, unknown>, path: string, value: unkno
 }
 
 /**
+ * Facts that arrive in code after the couple have saved the document.
+ *
+ * A dashboard save snapshots the whole document, so every list that existed
+ * at that moment is frozen, and a fact added to code later (the printed
+ * entourage card, a new dress code row) never reaches the live site. This
+ * heals the two lists where that has actually happened. For each group the
+ * code knows, the saved group wins only if the couple put names in it; an
+ * empty saved group gives way to the code's group, and groups the saved
+ * document has never heard of are appended in code order. Groups the couple
+ * added themselves are kept at the end. A group is matched by title. One
+ * refinement: when the saved group holds exactly the same names as the
+ * code's group, the code's version is used, because the only thing that can
+ * differ is the roles, and the roles in code come from the printed card
+ * (the bearers were reassigned between the workbook and the print).
+ */
+const sameNames = (a: string, b: string) => {
+  const names = (lines: string) => linesToPeople(lines).map((p) => p.name).sort().join("|");
+  return names(a) === names(b);
+};
+
+export function healContent(content: SiteContent): SiteContent {
+  const saved = content.entourage.groups;
+  const healed: EntourageGroup[] = DEFAULT_CONTENT.entourage.groups.map((code) => {
+    const match = saved.find((g) => g.title === code.title);
+    if (!match || linesToPeople(match.people).length === 0) return code;
+    return sameNames(match.people, code.people) ? code : match;
+  });
+  for (const g of saved) {
+    if (!healed.some((h) => h.title === g.title) && linesToPeople(g.people).length > 0) healed.push(g);
+  }
+  return { ...content, entourage: { ...content.entourage, groups: healed } };
+}
+
+/**
  * Stored over defaults. Objects merge key by key; arrays and scalars are
  * taken whole from the stored side when present, so a saved list replaces
  * the default list rather than being spliced into it.

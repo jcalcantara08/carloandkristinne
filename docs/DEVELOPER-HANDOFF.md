@@ -706,6 +706,17 @@ backdrop filter.
   the stored value is empty, so a photograph is always shown; uploading one
   from the Home form replaces it.
 
+### Pushing from a laptop with several GitHub accounts (17 September 2026)
+
+Windows Credential Manager on Erick's laptop holds tokens for six GitHub
+accounts. With the remote set to a bare  URL, Git
+Credential Manager cannot tell which one to use and opens an account picker
+on every push, which looks like a hung push when nobody is at the screen.
+The remote now carries the username:
+, so
+GCM goes straight to Carlo's stored token. On a new laptop, sign in once as
+ when GCM asks, and keep the username in the remote URL.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

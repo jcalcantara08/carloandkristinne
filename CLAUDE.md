@@ -109,3 +109,9 @@ reviewed, performance reviewed.
   guests be able to download the photographs.
 - **`.env.local` syncs to OneDrive** even though git ignores it. Gitignore is
   not a security control here.
+- **After changing any default in `lib/constants.ts` or
+  `lib/content-schema.ts`, run `npm run retired` and commit
+  `lib/retired-defaults.json`.** The saved site document used to snapshot
+  every default; that list is how an old snapshot is told apart from the
+  couple's edits. `npm run qa` fails if it is stale. See the handoff, "The
+  saved-document trap, closed for good".

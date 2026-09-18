@@ -273,7 +273,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
       {
         title: "The photographs",
-        body: "A photographer and videographer on them from ten in the morning until nearly midnight, and an entourage who agreed to a half past eleven call with a speed they may come to question, and will absolutely be glad about.",
+        body: "A photographer and videographer on them from ten in the morning until the send-off at about ten at night, and an entourage who agreed to a half past eleven call with a speed they may come to question, and will absolutely be glad about.",
       },
     ],
     storyEyebrow: "How it happened",
@@ -397,7 +397,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
     ],
     intro:
-      "It starts at seven in the morning and finishes near midnight. Here is the whole of it, including the parts you are not expected to be awake for.",
+      "It starts at seven in the morning and finishes at about ten at night. Here is the whole of it, including the parts you are not expected to be awake for.",
     phases: {
       morning: {
         label: "Morning",
@@ -432,7 +432,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     receptionEyebrow: "Reception",
     receptionTitle: "Then, the whole evening",
     receptionIntro:
-      "The full running order, in the order your host will actually call it. It opens with everybody on their feet and it ends near midnight, with a proper three quarters of an hour in the middle for dinner.",
+      "The full running order, in the order your host will actually call it. It opens with everybody on their feet and it ends at about ten, with a proper three quarters of an hour in the middle for dinner.",
     receptionNote:
       "Every time below is worked out from the six o'clock doors, so treat them as close rather than exact. A ceremony that runs long, or a room that will not stop dancing, moves everything after it. Nobody minds.",
     hostEyebrow: "Your host",

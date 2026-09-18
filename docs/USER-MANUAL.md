@@ -188,6 +188,11 @@ Things guests currently cannot see because they are still empty:
 - your own story, how you met and how he asked (Our story)
 - Erick's guest-facing email and phone number (Details)
 
+**What a save keeps.** Only the words you actually changed are stored. Any
+field you leave as it came is not saved at all, so when Erick updates a fact
+in the site's own copy (a time, a name, the running order), it shows on the
+live page without you re-saving anything. A field you rewrote stays yours.
+
 **Lists.** The questions and answers, the programme, the dress code rows, the
 entourage groups and the small cards all work the same way: a blank row at
 the bottom adds one, and blanking a row's title removes it. Entourage names

@@ -19,12 +19,13 @@
     "security": "tsx scripts/security-check.ts",
     "css": "tsx scripts/css-check.ts",
     "check": "npm run qa && npm run grammar && npm run security && npm run css",
+    "retired": "tsx scripts/retired-defaults.ts",
     "db:push": "supabase db push",
     "db:reset": "supabase db reset",
     "doctor": "node scripts/doctor.mjs",
     "clean": "node scripts/clean.mjs",
     "postinstall": "node scripts/stamp.mjs node_modules",
-    "verify": "npm run typecheck && npm run lint && npm run check && npm run build"
+    "verify": "npm run retired && npm run typecheck && npm run lint && npm run check && npm run build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

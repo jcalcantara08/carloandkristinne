@@ -849,6 +849,45 @@ and map link per venue but takes `time` and `note` from code, because a
 saved list was still saying "Doors at 7:15 PM". The 7:15 timeline notes
 above are history now.
 
+### The saved-document trap, closed for good (18 September 2026)
+
+The programme rebuilt in the previous note did not reach the live site
+either: the Programme page still showed the July order, "Kindly reply by
+30 September", and "the doors do not open until a quarter past seven",
+because the saved document is a whole snapshot and each of those is a
+default that has since changed. That was the fifth fact pinned this way,
+each fixed by another hand-written rule in `healContent`. Two general rules
+now replace the whack-a-mole, in `lib/content-diff.ts`:
+
+1. **Saves are sparse.** `saveContent` stores only what differs from
+   `DEFAULT_CONTENT` (`sparse`). A field the couple never touched is not in
+   the database, so the code's current default always shows. The editor is
+   unchanged; it still reads the merged document.
+2. **Old defaults are dropped on read.** `lib/retired-defaults.json` holds a
+   fingerprint (path plus canonical value) of every default value from every
+   earlier commit that the code no longer ships. `getContent` runs
+   `dropRetired` over the stored document before the merge: a stored value
+   that matches one of them is a leftover snapshot, not an edit, and gives
+   way. A value the couple typed themselves never matches. Lists are
+   fingerprinted whole, and an object key that is empty or missing is
+   ignored, so a row the editor rebuilt with `""` fields still matches the
+   row the code shipped without them.
+
+The list is generated from git history by `npm run retired`
+(`scripts/retired-defaults.ts`: evaluates `DEFAULT_CONTENT` at every commit
+that touched `lib/constants.ts` or `lib/content-schema.ts`). It is part of
+`npm run verify`, and `npm run qa` fails with the exact instruction if the
+defaults in code have changed since the file was generated (a digest of the
+current defaults is stored in it), so it cannot silently go stale, on any
+machine, without git. **Run it and commit the JSON after any change to a
+default.** The earlier `healContent` rules stay; they handle a saved list
+that is partly the couple's.
+
+Also in this pass: the programme intros said the evening "finishes near
+midnight" (a default nobody had rewritten when the doors moved to six);
+they now say about ten. `.env.local` is not on this laptop, so nothing in
+the database was touched by hand; the fix is entirely in code.
+
 ### One project folder (18 September 2026)
 
 The photo masters used to live in a sibling folder so they could never be

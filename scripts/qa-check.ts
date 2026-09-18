@@ -1,6 +1,8 @@
 import { readFileSync, existsSync, statSync } from "node:fs";
 import { relative, join } from "node:path";
 import { walk, report, type Issue } from "./lib/walk";
+import { DEFAULT_CONTENT } from "../lib/content-schema";
+import { fingerprint } from "../lib/content-diff";
 
 /**
  * Broken internal links, missing alt text, missing metadata, oversized
@@ -129,6 +131,32 @@ for (const doc of [
 ]) {
   if (!existsSync(join(ROOT, doc))) {
     issues.push({ file: doc, line: 1, message: "Required document is missing." });
+  }
+}
+
+/* ---- 6. The retired-defaults list matches the defaults in code ---- */
+
+// lib/retired-defaults.json tells old snapshots of the site document apart
+// from the couple's edits. It is generated from git history, so it goes stale
+// the moment a default changes; the digest of the current defaults is stored
+// with it and checked here, on any machine, without git.
+{
+  const file = join(ROOT, "lib", "retired-defaults.json");
+  const digest = fingerprint("DEFAULT_CONTENT", DEFAULT_CONTENT);
+  let stored: { digest?: string } | null = null;
+  try {
+    stored = JSON.parse(readFileSync(file, "utf8")) as { digest?: string };
+  } catch {
+    stored = null;
+  }
+  if (!stored) {
+    issues.push({ file: "lib/retired-defaults.json", line: 1, message: "Missing. Run npm run retired." });
+  } else if (stored.digest !== digest) {
+    issues.push({
+      file: "lib/retired-defaults.json",
+      line: 1,
+      message: "The defaults in code changed since this was generated. Run npm run retired and commit the result.",
+    });
   }
 }
 

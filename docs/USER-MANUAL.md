@@ -31,7 +31,7 @@ invitation and not an extra.
 | Home | The date, a live countdown, and a short version of everything else |
 | Our Story | Who the two of you are, and what the hashtag means |
 | Details | Venues, the dress code with the five blues from your attire guides, parking, the rain plan, and the questions guests ask |
-| Programme | The whole day, from the seven in the morning start to the send-off at about a quarter to ten |
+| Programme | The whole day, from the seven in the morning start to the send-off at about ten |
 | Entourage | Everyone standing with you |
 | Gallery | The shared photo album, and where guests upload |
 | Guestbook | The wishing wall |
@@ -225,15 +225,18 @@ minute after he publishes it.
 
 ### The reception programme
 
-The Programme page shows the full traditional running order from the host's
-programme sheet, from the opening dance to the closing remark. The clock
+The Programme page shows the running order from Tin and Carlo's own
+programme sheet (18 September), from the opening dance to the send-off: the
+trivia before dinner, a prosperity dance with no pins, the cake and the wine
+toast inside one song, the games for the bouquet and the garter, and Guess
+the song as the last game. The clock
 times for the reception are not typed in anywhere: each reception item has
 a number of minutes, and the site works every time out from the doors time
 on the Programme form. Change one length and everything after it moves by
 itself. Day items (morning to the church) carry their own clock time.
 
 Two numbers worth knowing: dinner is called at about seven, and the evening
-finishes at about a quarter to ten. Carlo confirmed on 17 September that the
+finishes at about ten. Carlo confirmed on 17 September that the
 venue is yours from six, which moved everything 75 minutes earlier than the
 coordinator's first timeline.
 

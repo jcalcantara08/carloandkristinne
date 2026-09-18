@@ -557,10 +557,14 @@ export const SCHEDULE: ScheduleItem[] = [
   },
 
   /* ---- The reception.
-     Clock times below are derived from the 7:15 PM doors, using the
+     Clock times below are derived from the 6:00 PM doors, using the
      durations on each item, so a change to one moves everything after it.
-     The order is the host's own revised sheet of 17 September 2026, twenty
-     items, with dinner brought forward to straight after the prayer. ---- */
+     The order is the couple's own programme sheet of 18 September 2026
+     (twenty-one numbered items) with Erick's opening dance kept at the
+     doors: trivia before dinner, a prosperity dance with no pins, the cake
+     and the wine toast inside one song, speeches from loved ones, the
+     mothers before the fathers, the couple's own two games at the end, and
+     no same-day edit. ---- */
   {
     time: tbc<string>(),
     minutes: 15,
@@ -573,28 +577,32 @@ export const SCHEDULE: ScheduleItem[] = [
     time: tbc<string>(),
     minutes: 5,
     title: "Welcome from your host",
-    detail: "Erick opens the evening properly.",
+    detail:
+      "Erick opens the evening, and announces that there is a special game at the end with packages to be won.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "The parents",
-    detail: "Both sets of parents are acknowledged from where they are sitting.",
+    detail:
+      "Introduced from where they are seated.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "The principal sponsors",
-    detail: "The ninongs and ninangs, introduced from their seats.",
+    detail:
+      "The ninongs and ninangs, from where they are seated.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 15,
     title: "The entourage comes in",
-    detail: "The wedding party and the groomsmen enter by group, and take their places.",
+    detail:
+      "By group: the secondary sponsors, the bearers, then Team Bride and Team Groom, each to their own song.",
     phase: "reception",
   },
   {
@@ -602,59 +610,15 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "Grand entrance",
     detail:
-      "Carlo and Kristinne come in to something loud and happy. Cameras up for this one.",
+      "Carlo and Kristinne walk in as husband and wife for the first time. Phones up.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "The prayer",
-    detail: "A word of thanks before the meal, and then we eat.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 45,
-    title: "Dinner",
     detail:
-      "Called table by table, early on purpose. Please eat properly, there is plenty, and the rest of the evening waits for you.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 5,
-    title: "The first dance",
-    detail: "The couple, and the floor is theirs.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 15,
-    title: "The prosperity dance",
-    detail:
-      "The music changes and you are invited up to hand your gift to the couple as they dance. Everyone is welcome on the floor.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
-    title: "Cake cutting, and everyone sings",
-    detail:
-      "Carlo and Kristinne slice the cake and blow out the candle while the whole room sings Panalangin to them. You are not an audience for this one, so please do sing.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 5,
-    title: "The wine toast",
-    detail: "A glass raised to the two of them.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
-    title: "The toasts",
-    detail: "The best man and the maid of honour, in that order. Bring tissues.",
+      "Led by Mar Alen Alamo.",
     phase: "reception",
   },
   {
@@ -662,65 +626,127 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 10,
     title: "How well do you know them?",
     detail:
-      "Ten trivia questions about the bride and groom. Anyone who has known either of them for more than a year has no excuse.",
+      "Ten trivia questions about the bride and groom, before anyone eats. The winners are first in line for dinner, with a photograph with the couple first.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 45,
+    title: "Dinner",
+    detail:
+      "Called table by table. Please eat well; there is a lot of evening left.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 5,
+    title: "The first dance",
+    detail:
+      "Their first dance as husband and wife.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 15,
+    title: "The prosperity dance",
+    detail:
+      "No pins, no envelopes, no props. Come up, hold them for a moment, whisper them a blessing, and dance a few steps with them. That is the whole tradition, done the way they want it.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 10,
+    title: "Cake cutting, the wine toast, and everyone sings",
+    detail:
+      "Carlo and Kristinne slice the cake, blow out the candle and raise their glasses while the whole room sings Panalangin to them. You are not an audience for this one, so please do sing.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 10,
+    title: "The toasts",
+    detail:
+      "The best man and the maid of honour, in that order. Bring tissues.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 10,
+    title: "A word from loved ones",
+    detail:
+      "Short messages for the couple from the people closest to them.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
     title: "The parents speak",
-    detail: "Whoever would like to say something, and nobody who would rather not.",
+    detail:
+      "The two mothers first, then the two fathers.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
     title: "Dance with the parents",
-    detail: "The bride with her father, the groom with his mother.",
+    detail:
+      "Kristinne with her father, then Carlo with his mother.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "The bouquet toss",
+    title: "The bouquet game",
     detail:
-      "The coordinator brings the sinulid at karayom for the game, and Kristinne has a bouquet set aside to throw. Instructions on the night.",
+      "Sinulid at karayom for the single ladies. The first to thread the needle takes the bouquet.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "The garter",
-    detail: "Carlo removes it. You know how this goes.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 15,
-    title: "The garter toss, and the Cinderella game",
     detail:
-      "Gentlemen, take off your left shoe. Carlo collects them all, carries them to the far side of the room and scatters them. The last man back with his own shoe on is Mr Bachelor.",
+      "Carlo does the honours.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "The same-day edit",
-    detail: "The film of the day so far, cut while the day was still happening.",
+    title: "The Cinderella game",
+    detail:
+      "The single gentlemen lose a shoe, then race to find it. The last one back is Mr Bachelor and gets the garter.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 5,
+    title: "The winners' game",
+    detail:
+      "The bouquet and garter winners copy whatever the couple do. Nobody is warned in advance.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 10,
+    title: "Guess the song",
+    detail:
+      "The last game, for five players, with packages to be won. Trips, of a sort.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "Thank you, from Carlo and Kristinne",
-    detail: "The two of them say their piece, and they mean every word of it.",
+    detail:
+      "The two of them say their piece, and they mean every word of it.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
     title: "Goodnight",
-    detail: "Erick closes the evening, and then we send them off properly.",
+    detail:
+      "Erick closes the evening, and then we send them off properly.",
     phase: "reception",
   },
 ];
@@ -758,7 +784,7 @@ export const RECEPTION_TIMELINE: {
   });
 })();
 
-/** Doors to goodnight, in minutes. Currently 255, which is 4 hours 15. */
+/** Doors to goodnight, in minutes. Currently 230, which is 3 hours 50: doors at 6:00, goodnight at 9:50. */
 export const RECEPTION_RUNTIME_MINUTES = RECEPTION_TIMELINE.reduce(
   (total, { item }) => total + (item.minutes ?? 0),
   0,
@@ -796,15 +822,15 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How long does the reception run?",
-    a: "Doors open at 6:00 PM, the couple come in at a quarter to seven, and the send-off is at about a quarter to ten. Dinner is called early, at about seven, with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
+    a: "Doors open at 6:00 PM, the couple come in at a quarter to seven, and the send-off is at about ten. Dinner is called early, at about seven, with a full 45 minutes set aside for it. Nobody is counting who leaves early, so please do what suits you.",
   },
   {
     q: "Will there be games?",
-    a: "Three, and you are in the first one whether you planned to be or not. The evening opens with a dance that Erick leads, and the winners take the first photograph with Carlo and Kristinne. Later there are ten trivia questions about the couple, and the Cinderella game for the gentlemen after the garter toss.",
+    a: "Several, and you are in the first one whether you planned to be or not. The evening opens with a dance that Erick leads, and the winners take the first photograph with Carlo and Kristinne. Before dinner there are ten trivia questions about the couple, and the winners eat first. After the bouquet and the garter come the Cinderella game for the gentlemen, a game for the two winners, and a last game where five players guess song titles for prizes that are described as trips.",
   },
   {
     q: "Is it true we have to sing?",
-    a: "Yes, once, and it is the loveliest part of the evening. When Carlo and Kristinne cut the cake, the whole room sings Panalangin to them while they slice it and blow out the candle. Nobody is being auditioned, so please just join in. If you do not know it, there is time to learn it before October.",
+    a: "Yes, once, and it is the loveliest part of the evening. When Carlo and Kristinne cut the cake and raise their glasses, the whole room sings Panalangin to them, karaoke style, slow version. Nobody is being auditioned, so please just join in. If you do not know it, there is time to learn it before October.",
   },
   {
     q: "Is there parking?",

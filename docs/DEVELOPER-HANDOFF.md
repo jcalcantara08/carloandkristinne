@@ -858,6 +858,30 @@ not see them, and the web copies in `public/photos` are the only ones the
 site serves. Subfolders: `originals/` (as sent), `edited/` (ChatGPT
 results), `attire-guides/`, `attire-hd/`, `invitation-suite/`.
 
+### The programme is the couple's own (18 September 2026)
+
+Tin and Carlo annotated the first emcee script and sent their own programme
+sheet, so the reception `SCHEDULE` in `lib/constants.ts` was rebuilt to
+follow it, 23 items from the 6:00 PM doors to a 9:50 PM send-off. What
+changed, in their words: the trivia comes before dinner and the winners eat
+first; the entourage enters as Team Bride then Team Groom; the couple are
+announced as Mr. and Mrs. Alcantara; the prosperity dance has no pins, no
+envelopes and no props, only blessings; the cake, the candle and the wine
+toast happen inside one song, Panalangin, sung by the whole room; there is
+no bouquet throw, the bouquet goes to the winner of sinulid at karayom among
+five single ladies from their list, and the garter to Mr. Bachelor from the
+Cinderella game among five single men; the two winners then play a copy-the-
+couple game; the mothers speak before the fathers; loved ones (Tin's brother,
+Carlo's close friend and sister) get short messages after the toasts; the
+same-day edit is gone, replaced by a Guess the song game with "trip" prizes
+that are announced at the welcome; the prayer is led by Mar Alen Alamo; and
+the music plays from a phone over the venue's Bluetooth, so the script carries
+a playlist in running order and a rule that someone other than the host holds
+the phone. The FAQ answers about games and singing were reworded to match.
+The script itself lives in Google Drive (id in Claude's memory), regenerated
+from the Claude Doc on every revision because the Drive connector cannot
+rewrite a file in place.
+
 ## 18. Future improvements
 
 - A private, tokenised guest link so each invitation prefills its own names

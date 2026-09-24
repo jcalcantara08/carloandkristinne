@@ -67,6 +67,14 @@ is the muted floor (4.9:1), 55 fails.
 
 Exactly two CTAs in every hero, primary plus outline. Never one, never three.
 
+**One decoration, and only one.** The bouquet from the printed cards sits in
+the top right corner of interior page headers (`components/PageHeader.tsx`),
+which is where the cards put it. Erick approved it on 25 September 2026 from
+a mockup, having first asked for it on the dark closing band; it was moved
+because pastel florals go muddy on near-black. Smaller and fainter on a
+phone. Do not put florals anywhere else, and do not read this as permission
+for the round-three decoration to come back.
+
 **The design history, so it is not repeated.** Round one was near-black and
 read as sombre. Round two was white but centred and read as a template. Round
 three added a ribbon, an asymmetric Bodoni hero at 8rem, ghosted folio

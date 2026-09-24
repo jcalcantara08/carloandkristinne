@@ -850,6 +850,36 @@ and map link per venue but takes `time` and `note` from code, because a
 saved list was still saying "Doors at 7:15 PM". The 7:15 timeline notes
 above are history now.
 
+### The floral corner (25 September 2026)
+
+The site now carries one piece of ornament: the bouquet from the printed
+cards, top right of every interior page header.
+
+It was mocked up first, at Erick's request, in seven versions rendered from
+real screenshots of the running site. Two findings worth keeping. On the dark
+closing band, which is where it was first proposed, the pastel pink and blue
+go muddy at any opacity that does not also wash out the type; a single-colour
+lavender ghost reads, but it looks like a smudge rather than their flowers.
+On the light page header, which is where the cards themselves put florals, it
+reads as the suite immediately. Erick approved the mockups and the corner
+went to the page header only.
+
+`public/floral-corner.webp` (560 px wide, 152 KB, master in
+`photos-master/florals/`) is cut out of
+`invitation-suite/invitation-finer-details.jpg` on saturation, because the
+damask ground is near neutral and the flowers are not, then faded towards the
+middle of the page so it dissolves instead of ending on a straight edge. The
+white gypsophila drops out of the matte with the background; at these sizes
+nobody can tell.
+
+It is decorative, so `alt=""` and `aria-hidden`. The section is
+`relative overflow-hidden` and the bouquet is absolutely positioned, so the
+negative right offset on phones cannot start a horizontal scroll (checked:
+`scrollWidth` is 375 at 375). Sizes are `w-32` at 40 percent on a phone,
+`w-48` at 60 from `sm`, `w-[18rem]` at 75 from `lg`: at full strength on a
+phone it crowded the heading, which is why it steps down rather than simply
+scaling. Checked at 375, 768 and 1440.
+
 ### Their own logo, everywhere (25 September 2026)
 
 Erick filed the couple's logo, the KC mark from the invitation suite, with

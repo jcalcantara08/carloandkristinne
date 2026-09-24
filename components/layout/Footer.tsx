@@ -13,13 +13,11 @@ export function Footer() {
     <footer className="relative border-t border-brand-line bg-brand-paper-200">
       <div className="container py-14 sm:py-16">
         <div className="flex flex-col items-center text-center">
-          <Monogram size="md" />
+          {/* The couple's own lockup, so the foot of every page signs off in
+              their mark rather than in our typography. */}
+          <Monogram size="lg" variant="lockup" />
 
-          <p className="mt-6 font-display text-display-md">
-            Kristinne <span className="aurora-text">&amp;</span> Carlo
-          </p>
-
-          <p className="mt-3 text-sm text-brand-ink/65">
+          <p className="mt-5 text-sm text-brand-ink/65">
             {WEDDING_DAY.dateLong} &middot; {WEDDING_DAY.town}, {WEDDING_DAY.province}
           </p>
 

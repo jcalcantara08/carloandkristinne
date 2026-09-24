@@ -36,7 +36,7 @@ export async function CtaBanner({
 
       <div className="container relative text-center">
         <Reveal>
-          <Monogram size="md" on="ink" />
+          <Monogram size="md" on="ink" className="mx-auto" />
         </Reveal>
 
         <Reveal delay={80}>

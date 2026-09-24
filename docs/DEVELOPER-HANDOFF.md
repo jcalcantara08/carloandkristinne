@@ -362,9 +362,9 @@ White stays the ground; ink is cooled to navy-black.
 | `brand.plum-300` | `#C3AEDD` | The eyebrow on the dark band. 9.3:1 on ink |
 | `brand.mauve-500` | `#8C5A8C` | The rose purple of the names on the save the date. The ampersand. 5.3:1 |
 | `brand.mauve-300` | `#D9B8D4` | The ampersand on the dark band. 10.5:1 on ink |
-| `brand.steel-500` | `#3B5068` | Dark steel blue from the attire guide. Swatches and the monogram ring only since the rebrand |
+| `brand.steel-500` | `#3B5068` | Dark steel blue from the attire guide. Swatches only since the rebrand; 300 also tints the laurel in the logo for the dark band |
 | `brand.cornflower-400` | `#6B8BC9` | The guide's own cornflower. Washes and swatches only |
-| `brand.dusty-400` | `#7A97B3` | The bridesmaids' blue. Swatches and the monogram ring |
+| `brand.dusty-400` | `#7A97B3` | The bridesmaids' blue. Swatches and washes |
 
 **The plum rebrand (17 September 2026, morning).** The couple sent the
 printed invitation suite: plum type, rose-purple names, pink and lavender
@@ -375,8 +375,9 @@ Every `brand-steel-*` and `brand-cornflower-*` class in `app`,
 moved to the purples, and the monogram became KC on a plum-to-dusty-blue
 ring. The steel and cornflower scales remain in the config for swatches.
 `og.jpg` is rendered from `scratchpad/og.html` with headless Chrome so the
-real fonts are used; `icon.svg`, `favicon.ico` (an ICO of 16, 32 and 48 px
-PNGs) and `apple-touch-icon.png` are generated from it with sharp.
+real fonts are used; `favicon.ico` (an ICO of 16, 32 and 48 px PNGs),
+`icon.png` and `apple-touch-icon.png` are generated with sharp. Both were
+remade from the couple's own logo on 25 September; see that note below.
 
 Only plum-500 and mauve-500 ever carry text. Everything else is a wash,
 a rule, a ring or a swatch. Black appears as a field exactly once per page,
@@ -572,7 +573,7 @@ Everything visual changed to match. Palette from the attire guides (section
 12). Cormorant Garamond for Bodoni. Ribbon, blobs, folios and marquee
 removed. `SectionHeading` and `PageHeader` centred. The hero rebuilt to lead
 with a photograph when the couple supply one, and honest type until then.
-`icon.svg`, `favicon.ico`, `apple-touch-icon.png` and `og.jpg` regenerated;
+`icon.png`, `favicon.ico`, `apple-touch-icon.png` and `og.jpg` regenerated;
 the OG image now carries the names and the date, which closes an old debt
 item. Contrast re-measured on 474 text elements, zero failures.
 
@@ -848,6 +849,44 @@ the current one; and `details.venues` keeps the couple's saved name, address
 and map link per venue but takes `time` and `note` from code, because a
 saved list was still saying "Doors at 7:15 PM". The 7:15 timeline notes
 above are history now.
+
+### Their own logo, everywhere (25 September 2026)
+
+Erick filed the couple's logo, the KC mark from the invitation suite, with
+soft copies of the four printed cards. The typographic KC in a spinning ring
+was always a stand-in for it, so it is gone.
+
+The master is `photos-master/logo/kc-logo-master.jpg` (2000 px square, the
+mark over the names, on white). Four web cuts live in `public/`, made with
+sharp: the white is knocked out to alpha (alpha is `1 - min(r,g,b)/255`, then
+the colour is un-premultiplied against white) so the mark sits on the ice
+tint with no rectangle around it, and the lockup is split from the mark at
+the widest blank row band:
+
+| File | What it is | Where |
+|---|---|---|
+| `logo-mark.png` | KC alone, plum and blue-grey | Header, mobile drawer, admin, error pages, the arrival dialog |
+| `logo-mark-paper.png` | The same in paper and steel 300 | The one dark band per page |
+| `logo-lockup.png` | KC over "Kristinne & Carlo" | The footer of every page |
+| `logo-lockup-paper.png` | The lockup for ink | Kept for a dark footer, not yet used |
+
+`components/Monogram.tsx` takes `variant` (`mark`, the default, or `lockup`)
+alongside `size` and `on`, and keeps the old call sites working. Two artworks
+rather than a CSS filter, because `brightness-0 invert` would flatten the
+laurel into the letters. Note that Tailwind's preflight makes an `img`
+block-level, so a centred call site needs `mx-auto`: the mark on the dark
+band was left-aligned until it got one.
+
+The footer's separate "Kristinne & Carlo" display line went, because the
+lockup already carries the names. `SITE.monogram` (the letters `K` and `C`)
+went with the old component. `icon.png` (512), `apple-touch-icon.png` (180)
+and `favicon.ico` (16, 32, 48) are cut from the mark on white, replacing
+`icon.svg`, and `og.jpg` now puts the lockup beside the studio photograph.
+
+The four soft copies are in `photos-master/invitation-suite/soft-copies/`.
+They are the same five cards at 640x960, so the 1200x1800 masters beside
+them stay the ones to read; every fact on the site was already taken from
+them on 17 September and nothing in them has changed.
 
 ### The saved-document trap, closed for good (18 September 2026)
 

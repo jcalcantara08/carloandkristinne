@@ -10,6 +10,9 @@ The wedding website for Kristinne Monzon and John Carlo Alcantara.
 Trias, Cavite; reception at Servando's Restaurant, Rosario, Cavite. 100
 guests. Hashtag `#CARLOobngDiyoskayKRISTINNE`. Kristinne's name comes first
 and the monogram is KC, because that is how the printed invitation has it.
+The couple's own KC logo is the mark: `components/Monogram.tsx` serves it
+from `public/logo-*.png`, cut from `photos-master/logo/`. Never redraw it in
+type or CSS.
 
 Next.js 16 App Router, React 19, TypeScript strict, Tailwind 3.4, Supabase,
 Vercel. Dev port **3028** (the folder number).
@@ -54,8 +57,8 @@ Classic, centred, on white. Pure white ground (`brand.paper`) with a faint
 ice-blue tint (`paper-200`) for rhythm, navy-black type (`brand.ink`), and the
 invitation's purples as accents: `plum-500` (8.9:1, the eyebrow, links and
 the focus ring) and `mauve-500` (5.3:1, the ampersand). The attire blues
-(`steel`, `cornflower`, `dusty`) stay defined for swatches, the monogram
-ring and washes, never text. Exactly
+(`steel`, `cornflower`, `dusty`) stay defined for swatches and washes,
+never text. Exactly
 one DARK band per page, the closing CTA, using `.on-ink`. Cormorant Garamond
 display at weight 500 and 600, Inter body. Eyebrow tracking is
 `tracking-eyebrow` (0.28em), never a literal. Stagger is `index * 80`, easing

@@ -53,8 +53,6 @@ export const SITE = {
   hashtag: "#CARLOobngDiyoskayKRISTINNE",
   /** Used in the wordmark, where the hashtag is split for emphasis. */
   hashtagParts: { prefix: "#CARLO", middle: "obngDiyoskay", suffix: "KRISTINNE" },
-  /** The two initials of the monogram, in the order the invitation prints them. */
-  monogram: ["K", "C"],
 } as const;
 
 export const COUPLE = {

@@ -67,13 +67,16 @@ is the muted floor (4.9:1), 55 fails.
 
 Exactly two CTAs in every hero, primary plus outline. Never one, never three.
 
-**One decoration, and only one.** The bouquet from the printed cards sits in
-the top right corner of interior page headers (`components/PageHeader.tsx`),
-which is where the cards put it. Erick approved it on 25 September 2026 from
-a mockup, having first asked for it on the dark closing band; it was moved
-because pastel florals go muddy on near-black. Smaller and fainter on a
-phone. Do not put florals anywhere else, and do not read this as permission
-for the round-three decoration to come back.
+**One decoration, and only one.** The bouquet from the printed cards,
+`components/FloralCorner.tsx`, in the top right corner of the home hero and
+of every interior page header, which is where the cards put it. Erick
+approved it on 25 September 2026 from a mockup, having first asked for it on
+the dark closing band; it moved because pastel florals go muddy on
+near-black. On 26 September he could not see it on his phone, so it is now
+bolder at every width. Two placements are settled by trial: never on the
+left of the hero (it sat behind the names) and never over centred copy. Do
+not put florals anywhere else, and do not read this as permission for the
+round-three decoration to come back.
 
 **The design history, so it is not repeated.** Round one was near-black and
 read as sombre. Round two was white but centred and read as a template. Round

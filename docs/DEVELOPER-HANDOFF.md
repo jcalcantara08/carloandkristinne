@@ -872,6 +872,16 @@ middle of the page so it dissolves instead of ending on a straight edge. The
 white gypsophila drops out of the matte with the background; at these sizes
 nobody can tell.
 
+**Bolder, and on the home page too (26 September 2026).** Erick's first
+reaction to the live site was "i don't see the flowey designs", which was
+fair: at 40 percent and `w-32` on a phone it was a rumour, the arrival dialog
+dims the page behind it on a first visit, and the home page had none at all
+because the hero is not a `PageHeader`. So the markup moved into
+`components/FloralCorner.tsx`, the opacities went up (70 percent on a phone,
+85 at `lg`), and the hero got one. In the hero it has to be on the right,
+over the masked edge of the photograph: on the left it sat behind "Kristinne
+& Carlo", which is the one thing no ornament may do.
+
 It is decorative, so `alt=""` and `aria-hidden`. The section is
 `relative overflow-hidden` and the bouquet is absolutely positioned, so the
 negative right offset on phones cannot start a horizontal scroll (checked:

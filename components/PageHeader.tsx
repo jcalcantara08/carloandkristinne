@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { FloralCorner } from "@/components/FloralCorner";
 import { Reveal } from "@/components/Reveal";
 import type { StoryPhoto } from "@/lib/content-schema";
 import { cn } from "@/lib/utils";
@@ -12,15 +13,10 @@ import { cn } from "@/lib/utils";
  * chapters of the same book as the home page. Interior pages are shorter,
  * so this sits at a comfortable height instead of filling the viewport.
  *
- * The one piece of decoration on the site: the bouquet from the printed
- * cards, in the top right corner, where the cards themselves put it (Erick
- * approved it on 25 September 2026 from a mockup). It is cut from
- * `photos-master/florals/`, faded towards the middle of the page so it
- * dissolves rather than ending on an edge, and it is quieter and smaller on
- * a phone, where the heading is close to it. It never sits behind the type:
- * the copy is centred in a `max-w-3xl` column and the bouquet is outside it.
- * It is not the ribbon and the blobs of round three coming back; if it is
- * ever put anywhere other than a page header, that is the line.
+ * The bouquet from the printed cards sits in the top right corner, where the
+ * cards themselves put it. It never sits behind the type: the copy is centred
+ * in a `max-w-3xl` column and the bouquet is outside it. See
+ * `components/FloralCorner.tsx`.
  */
 export function PageHeader({
   eyebrow,
@@ -40,15 +36,7 @@ export function PageHeader({
   const shown = (photos ?? []).filter((photo) => photo.src).slice(0, 2);
   return (
     <section className="relative overflow-hidden bg-brand-paper-200 pb-14 pt-12 sm:pb-16 lg:pb-20 lg:pt-16">
-      <Image
-        src="/floral-corner.webp"
-        alt=""
-        aria-hidden="true"
-        width={560}
-        height={725}
-        priority
-        className="pointer-events-none absolute -right-6 -top-4 w-32 select-none opacity-40 sm:right-0 sm:w-48 sm:opacity-60 lg:-top-6 lg:w-[18rem] lg:opacity-75"
-      />
+      <FloralCorner className="-right-5 -top-8 w-44 opacity-70 sm:right-0 sm:top-0 sm:w-52 sm:opacity-75 lg:-top-6 lg:w-[19rem] lg:opacity-85" />
 
       <div className="container relative">
         <div className="mx-auto max-w-3xl text-center">

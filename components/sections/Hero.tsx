@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Countdown } from "@/components/Countdown";
+import { FloralCorner } from "@/components/FloralCorner";
 import { Monogram } from "@/components/Monogram";
 import { Reveal } from "@/components/Reveal";
 import { COUPLE, HERO_TONE, SITE, WEDDING_DAY } from "@/lib/constants";
@@ -97,8 +98,13 @@ export async function Hero() {
   return (
     <section>
       {light && photo ? (
-        <div className="bg-brand-paper-200 pb-14 pt-6 sm:pb-16 sm:pt-8 lg:pb-20 lg:pt-10">
-          <div className="container">
+        <div className="relative overflow-hidden bg-brand-paper-200 pb-14 pt-6 sm:pb-16 sm:pt-8 lg:pb-20 lg:pt-10">
+          {/* The home page gets the bouquet too. It goes on the right, over
+              the masked edge of the photograph: on the left it sat behind the
+              names, which is the one thing nothing may do. */}
+          <FloralCorner className="-right-4 -top-4 w-40 opacity-65 sm:right-0 sm:w-52 sm:opacity-70 lg:w-64 lg:opacity-75" />
+
+          <div className="container relative">
             <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
               {/* The photograph: first on a phone, right of the words from lg.
                   Uncropped, with a four-edge fade so the studio grey has no

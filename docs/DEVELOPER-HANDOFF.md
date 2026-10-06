@@ -1049,7 +1049,7 @@ rewrite a file in place.
   `PROMO.minutes`; the card comes back at every two-minute mark of a visit,
   counted from `kc-promo-start`, and now lists Erick's five content accounts
   (`PROMO.socials`, taken from erickcabal.com's `lib/site.ts`).
-- **Layouts, same night.** The Wishing Wall sorts greetings longest first so
+- **Layouts, same night.** The Wishing Wall sorts greetings shortest first so
   each grid row holds messages of similar length (a row stretches every card
   to its tallest), and runs four columns from `lg`. The Gallery shows the
   album first, then "how it works" and the upload form (`#upload`) last, and its grid runs five columns from `lg` (image

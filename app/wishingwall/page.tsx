@@ -22,11 +22,12 @@ export default async function GuestbookPage() {
   const [entries, { guestbook }] = await Promise.all([listGuestbook("visible"), getContent()]);
   // Rows of similar length (Erick, 6 October 2026: "hindi pantay-pantay").
   // A grid row stretches every card to its tallest, so a one-line greeting
-  // beside a long letter left a mostly empty box. Sorted longest first, each
+  // beside a long letter left a mostly empty box. Sorted shortest first
+  // (Erick, 7 October 2026), each
   // row holds messages of about the same size at every column count. A line
   // break counts as a short line of text.
   const weight = (message: string) => message.length + message.split("\n").length * 40;
-  const wall = [...entries].sort((a, b) => weight(b.message) - weight(a.message));
+  const wall = [...entries].sort((a, b) => weight(a.message) - weight(b.message));
 
   return (
     <>

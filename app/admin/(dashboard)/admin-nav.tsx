@@ -24,9 +24,9 @@ import { cn } from "@/lib/utils";
  */
 const RECORDS = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
-  { href: "/admin/rsvps", label: "Replies", icon: Users },
-  { href: "/admin/guestbook", label: "Messages", icon: MessageSquareHeart },
-  { href: "/admin/photos", label: "Photographs", icon: Camera },
+  { href: "/admin/rsvps", label: "RSVP", icon: Users },
+  { href: "/admin/guestbook", label: "Wishing Wall", icon: MessageSquareHeart },
+  { href: "/admin/photos", label: "Gallery", icon: Camera },
 ];
 
 const HOUSEKEEPING = [

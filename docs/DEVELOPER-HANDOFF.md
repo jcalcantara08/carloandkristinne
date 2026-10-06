@@ -1029,6 +1029,20 @@ rewrite a file in place.
   Each item has Hide, Show again (when hidden), Archive and Delete. Public
   pages read `listGuestbook("visible")` / `listPhotos("visible")`, meaning
   everything not hidden, so rows left `pending` from before are shown.
+- **The RSVP dashboard is a guest list** (later the same night). "Replies"
+  is now "RSVP" in the dashboard, and the page is a table on tablets and up
+  (compact tap-to-open rows on phones) with All / Coming / Not coming, a name
+  search, Newest or A to Z, totals, and an "Everyone coming" tab that numbers
+  every person, guests and unnamed extras included. Filters are URL params
+  (`show`, `q`, `sort`, `tab`). The dashboard sections are named after the
+  public pages they manage: RSVP, Wishing Wall, Gallery.
+- **Public guest list on /rsvp.** Erick asked that guests can see their names.
+  `listGuestList()` in `lib/store.ts` selects only `name` and `guests` of
+  active replies that said yes; nothing else reaches the page. Archiving an
+  RSVP takes it off the list. `/rsvp` is now `noIndex` and out of the
+  sitemap. The form and the privacy page say plainly that names are shown.
+  Replies sent before 6 October were sent under "replies are private"; the
+  couple were advised to tell guests, and to archive anyone who asks.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from

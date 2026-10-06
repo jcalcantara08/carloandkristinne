@@ -192,6 +192,10 @@ export type SiteContent = {
     mapsEyebrow: string;
     mapsTitle: string;
     mapsIntro: string;
+    listEyebrow: string;
+    listTitle: string;
+    listIntro: string;
+    listEmpty: string;
   };
 };
 
@@ -561,6 +565,10 @@ export const DEFAULT_CONTENT: SiteContent = {
     mapsEyebrow: "Getting there",
     mapsTitle: "The church and the reception",
     mapsIntro: "Scan a code with your phone camera to open the map, or tap the button if you are already on your phone.",
+    listEyebrow: "Guest list",
+    listTitle: "Who is coming",
+    listIntro: "Everyone who has said yes, with the guests they named. Only names are shown here. If your name is missing or wrong, message Erick.",
+    listEmpty: "The list fills up as replies come in. Yours could be the first.",
   },
 };
 
@@ -970,6 +978,10 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       text("rsvp.mapsEyebrow", "Map codes eyebrow"),
       text("rsvp.mapsTitle", "Map codes heading"),
       area("rsvp.mapsIntro", "Map codes introduction", "The codes themselves come from each venue's map link under Details."),
+      text("rsvp.listEyebrow", "Guest list eyebrow"),
+      text("rsvp.listTitle", "Guest list heading"),
+      area("rsvp.listIntro", "Guest list introduction", "Only names of people who said yes are shown. Archive an RSVP to take it off the list."),
+      text("rsvp.listEmpty", "Guest list, when nobody has replied yet"),
     ],
   },
 ];

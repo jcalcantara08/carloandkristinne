@@ -84,7 +84,7 @@ export default async function AdminPhotosPage({
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-display-md">Photographs</h2>
+        <h2 className="text-display-md">Gallery</h2>
         <p className="mt-2 text-sm text-brand-ink/70">
           Every upload goes into the public album the moment it is sent. Hide takes one down;
           Delete moves it to the recycle bin, and the file itself only goes when the bin is emptied.

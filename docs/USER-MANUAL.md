@@ -60,9 +60,9 @@ would rather it were not there.
 need to approve anything (Erick's decision, 6 October 2026, so greetings and
 photographs appear live on the day).
 
-If something should not be there, open Messages or Photographs in the
+If something should not be there, open Wishing Wall or Gallery in the
 dashboard and press Hide, or Delete. Nobody is told either way. Glance at both
-pages now and then on the day and in the week after.
+sections now and then on the day and in the week after.
 
 ## 4. Logging in
 
@@ -79,14 +79,14 @@ fifteen minutes.
 **Overview.** Days to go, how many seats are confirmed out of 100, how many
 replies you have had, and how many things are waiting for you.
 
-**Replies.** Every RSVP, newest first, with names, contact details, dietary
-notes and song requests. The Download CSV button is here.
+**RSVP.** Every reply as a list you can filter, search and sort, newest first, with names, contact details, dietary
+notes and song requests. The Download spreadsheet button is here, and the Everyone coming tab numbers every single person for the seating plan.
 
-**Messages.** The wishing wall. Every message is on the public wall as soon
+**Wishing Wall.** The greetings. Every message is on the public wall as soon
 as it is sent. Hide takes one down without deleting it; Show again puts it
 back.
 
-**Photographs.** Guest uploads. Every one goes straight into the public
+**Gallery.** Guest photo uploads. Every one goes straight into the public
 album, where anyone can view and download it at full size. Hide takes one
 down; Show again puts it back. Delete moves one to the recycle
 bin; the file itself only goes when the bin lets it go.
@@ -103,7 +103,7 @@ good. Restore or Delete for good from here. See section 6.
 
 ## 6. Handling what comes in
 
-### Replies (RSVPs)
+### RSVP
 
 Replies cannot be edited by guests once sent. If somebody needs to change
 theirs, they message Erick and he changes it in the database. If somebody
@@ -131,7 +131,7 @@ bin** removes all of it now.
 
 ### The number the caterer needs
 
-On the Replies page, press **Download CSV**. That gives you a spreadsheet that
+On the RSVP page, press **Download spreadsheet**. That gives you a spreadsheet that
 opens in Excel, Numbers or Google Sheets, with a row per reply and a column
 for dietary notes. That file is what you send to the caterer, and what you
 build the seating plan from.
@@ -140,15 +140,15 @@ Do this about two weeks before the wedding, and again the day before in case
 of late replies. The reply deadline printed on the site and on the invitation
 is 5 October 2026.
 
-### Messages
+### Wishing Wall
 
 They are already on the wall. Read them now and then, and press Hide (or
 Delete) on anything that should not be there. The writer is not told.
 
-### Photographs
+### Gallery
 
 These arrive after the wedding, mostly in the week after. Check the
-Photographs page daily that week. They are already in the album; Hide
+Gallery page daily that week. They are already in the album; Hide
 anything that should not be there. Archive keeps one out of the way; Delete sends it
 to the recycle bin, and the file leaves storage only when the bin lets it go.
 
@@ -165,7 +165,7 @@ from the site.
 
 If those notifications stop arriving, replies are still being saved. The site
 always saves the reply to the database first and only then tries to send the
-email, so a broken email service can never lose a reply. Check the Replies
+email, so a broken email service can never lose a reply. Check the RSVP
 page in the dashboard; it is the source of truth.
 
 ## 8. Changing what the site says
@@ -261,7 +261,7 @@ There is nothing else to check day to day.
 ## 10. When something breaks
 
 **A guest says their reply did not go through.**
-Check the Replies page first. If it is not there, ask them to try again,
+Check the RSVP page first. If it is not there, ask them to try again,
 then tell Erick.
 
 **The RSVP form says replies are not switched on.**
@@ -298,7 +298,7 @@ There are no payments, no analytics, and no advertising anywhere in the site.
 ## 12. Your routine
 
 **Now until the wedding**
-- Check Replies once or twice a week
+- Check RSVP once or twice a week
 - Glance at the wishing wall for anything to hide
 - Glance at the headcount on Overview
 

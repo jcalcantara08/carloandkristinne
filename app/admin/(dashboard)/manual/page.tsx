@@ -27,21 +27,21 @@ const SECTIONS = [
     ],
   },
   {
-    title: "Replies, and the number the caterer needs",
+    title: "RSVP, and the number the caterer needs",
     body: [
-      "Open Replies to see every RSVP. The Overview page shows the confirmed headcount against the 100 seats.",
-      "Press Download CSV to get a spreadsheet. That file is what you send to the caterer and what you build the seating plan from. It opens in Excel, Numbers and Google Sheets.",
+      "Open RSVP to see every reply as a list you can filter (Coming, Not coming), search by name and sort A to Z. The Everyone coming tab numbers every single person, guests included, for the seating plan and the door.",
+      "Press Download spreadsheet to get the list as a file. That file is what you send to the caterer and what you build the seating plan from. It opens in Excel, Numbers and Google Sheets.",
       "Deleting a reply is permanent. Only do it for an obvious duplicate or a test entry.",
     ],
   },
   {
-    title: "Messages",
+    title: "Wishing Wall",
     body: [
       "Every message is on the public wall as soon as it is sent. Hide takes one down without deleting it, and Show again puts it back. Nobody is notified either way.",
     ],
   },
   {
-    title: "Photographs",
+    title: "Gallery",
     body: [
       "Guests upload from the Gallery page on their phone, and each photograph goes straight into the public album, where anyone can view and download it at full size. Hide takes one down.",
       "Delete moves a photograph to the recycle bin. The file itself only goes when the bin lets it go, 14 days later, or when you delete it for good.",
@@ -74,7 +74,7 @@ const SECTIONS = [
   {
     title: "Before the wedding, a short routine",
     body: [
-      "Once a week: check Replies, publish any waiting messages, and glance at the headcount.",
+      "Once a week: check RSVP, glance at the wishing wall, and look at the headcount.",
       "Two weeks before: download the CSV and send the final number to the caterer.",
       "On the day and after: check Photographs daily, since that is when the uploads arrive.",
     ],
@@ -83,7 +83,7 @@ const SECTIONS = [
     title: "If something looks wrong",
     body: [
       "A banner at the top of this dashboard tells you if the database is not connected. If you see it, nothing can be saved and Erick needs to know immediately.",
-      "If a guest says their reply did not go through, check Replies first. If it is not there, ask them to try again and tell Erick.",
+      "If a guest says their reply did not go through, check RSVP first. If it is not there, ask them to try again and tell Erick.",
       "Sign out when you are finished on a shared or borrowed device. Sessions last eight hours.",
     ],
   },

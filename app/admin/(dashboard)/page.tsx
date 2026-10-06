@@ -32,7 +32,7 @@ export default async function AdminOverviewPage() {
       value: totals.headcount,
       note: `of ${WEDDING_DAY.guestCount} seats`,
     },
-    { label: "Replies received", value: totals.responses, note: `${totals.declined} cannot make it` },
+    { label: "RSVPs received", value: totals.responses, note: `${totals.declined} cannot make it` },
     {
       label: "Greetings and photos",
       value: wallMessages.length + albumPhotos.length,
@@ -97,24 +97,24 @@ export default async function AdminOverviewPage() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>
-          <h2 className="text-display-md">Messages</h2>
+          <h2 className="text-display-md">Wishing Wall</h2>
           <p className="mt-3 text-sm text-brand-ink/75">
             {wallMessages.length === 1 ? "1 message" : `${wallMessages.length} messages`} on the wall.
             Everything posts at once; hide or delete anything that should not be there.
           </p>
           <Link href="/admin/guestbook" className="btn-outline mt-5 px-5 py-2.5 text-xs">
-            Review messages
+            Open the Wishing Wall
           </Link>
         </Card>
 
         <Card>
-          <h2 className="text-display-md">Photographs</h2>
+          <h2 className="text-display-md">Gallery</h2>
           <p className="mt-3 text-sm text-brand-ink/75">
             {albumPhotos.length} in the album. Everything posts at once; hide or delete anything
             that should not be there.
           </p>
           <Link href="/admin/photos" className="btn-outline mt-5 px-5 py-2.5 text-xs">
-            Review photographs
+            Open the Gallery
           </Link>
         </Card>
       </div>

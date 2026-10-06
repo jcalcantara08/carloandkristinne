@@ -134,6 +134,37 @@ export async function listRsvps(view: RecordView = "active"): Promise<Rsvp[]> {
   return (data as RsvpRow[]).map(toRsvp);
 }
 
+/**
+ * The public guest list on /rsvp (Erick, 6 October 2026): names only, of
+ * active replies that said yes, A to Z. Only the two name columns are
+ * selected, so contact details, food notes and messages never leave the
+ * database for a public page. Archiving a reply takes it off the list.
+ */
+export type GuestListEntry = { name: string; guests: string[] };
+
+export async function listGuestList(): Promise<GuestListEntry[]> {
+  const supabase = createAdminClient();
+  if (!supabase) return [];
+
+  const { data, error } = await applyView(
+    supabase.from("rsvps").select("name, guests").eq("attending", "yes"),
+    "active",
+  );
+
+  if (error) {
+    console.error("[store] listGuestList failed:", error.message);
+    return [];
+  }
+  return (data as { name: string; guests: { name?: unknown }[] | null }[])
+    .map((row) => ({
+      name: row.name,
+      guests: (row.guests ?? [])
+        .map((guest) => (typeof guest?.name === "string" ? guest.name.trim() : ""))
+        .filter(Boolean),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 /** Active replies only. Archived and binned replies never count towards seats. */
 export async function rsvpTotals(): Promise<{
   responses: number;

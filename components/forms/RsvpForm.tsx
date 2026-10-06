@@ -229,7 +229,8 @@ export function RsvpForm() {
 
       <div className="flex flex-col gap-4 border-t border-brand-line pt-7 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-brand-ink/60">
-          Kindly reply by {RSVP.deadlineLabel}.
+          Kindly reply by {RSVP.deadlineLabel}. If you are coming, your name and your guests&apos;
+          names appear on the guest list on this page. Nothing else you write is shown.
         </p>
         <SubmitButton attending={attending} />
       </div>

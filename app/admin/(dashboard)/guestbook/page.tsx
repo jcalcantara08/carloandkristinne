@@ -84,7 +84,7 @@ export default async function AdminGuestbookPage({
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-display-md">Messages</h2>
+        <h2 className="text-display-md">Wishing Wall</h2>
         <p className="mt-2 text-sm text-brand-ink/70">
           Every message goes on the public wall the moment it is sent. Hide takes one down; Delete moves it to the recycle bin.
         </p>

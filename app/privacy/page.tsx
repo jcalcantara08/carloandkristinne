@@ -63,8 +63,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
       <>
         <p>
           If you say yes, your name and the names of the guests you list appear on the{" "}
-          <strong>public guest list</strong> on the RSVP page, so everyone can check they are on
-          it. That page is kept out of search engines. Everything else in your reply (contact
+          <strong>public Guest List page</strong>, so everyone can check they are on it. That page is kept out of search engines. Everything else in your reply (contact
           details, food notes, song and message) is private: only {COUPLE.groom.shortName},{" "}
           {COUPLE.bride.firstName} and {CONTACT.pointOfContact.name} can see it, and the dietary
           notes go to the caterer as a headcount list. To be taken off the list, message{" "}

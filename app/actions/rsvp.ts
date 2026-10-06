@@ -150,8 +150,9 @@ export async function submitRsvp(_prev: ActionState, formData: FormData): Promis
 
   revalidatePath("/admin");
   revalidatePath("/admin/rsvps");
-  // The public guest list on /rsvp shows names of those coming.
+  // /rsvp shows the count and /guest-list the names of those coming.
   revalidatePath("/rsvp");
+  revalidatePath("/guest-list");
 
   return {
     status: "success",

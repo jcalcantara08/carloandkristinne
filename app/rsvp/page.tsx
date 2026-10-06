@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CalendarCheck, Users, Utensils } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Section, SectionHeading } from "@/components/Section";
@@ -15,8 +16,6 @@ export const metadata: Metadata = pageMeta({
   title: "RSVP",
   description: `Let Carlo and Kristinne know whether you can make it on ${WEDDING_DAY.dateLong}. Please reply by ${RSVP.deadlineLabel}.`,
   path: "/rsvp",
-  // The guest list below carries real names, so the page stays out of search results.
-  noIndex: true,
 });
 
 const WHY_ICONS = [Users, Utensils, CalendarCheck];
@@ -109,39 +108,16 @@ export default async function RsvpPage() {
         </Section>
       ) : null}
 
-      {/* --- The guest list. Names only, of everyone who said yes (Erick, 6 October 2026). --- */}
-      <Section id="guest-list">
-        <div className="container">
-          <SectionHeading eyebrow={rsvp.listEyebrow} title={rsvp.listTitle} />
-          {rsvp.listIntro ? (
-            <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-brand-ink/70">{rsvp.listIntro}</p>
-          ) : null}
-
-          {guestList.length === 0 ? (
-            rsvp.listEmpty ? (
-              <p className="mx-auto mt-10 max-w-xl rounded-2xl border border-dashed border-brand-line-strong bg-brand-paper-200 p-8 text-center text-sm text-brand-ink/70">
-                {rsvp.listEmpty}
-              </p>
-            ) : null
-          ) : (
-            <Reveal>
-              <Card className="mx-auto mt-10 max-w-4xl p-0">
-                <p className="border-b border-brand-line px-6 py-4 text-center text-xs uppercase tracking-wider text-brand-ink/60">
-                  {peopleOnList} {peopleOnList === 1 ? "person" : "people"} so far
-                </p>
-                <ol className="grid gap-x-8 px-6 py-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {guestList.map((entry, index) => (
-                    <li key={`${entry.name}-${index}`} className="border-b border-brand-line py-3 text-sm last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0">
-                      <span className="font-medium text-brand-ink">{entry.name}</span>
-                      {entry.guests.length > 0 ? (
-                        <span className="mt-0.5 block text-xs text-brand-ink/60">with {entry.guests.join(", ")}</span>
-                      ) : null}
-                    </li>
-                  ))}
-                </ol>
-              </Card>
-            </Reveal>
-          )}
+      {/* --- The guest list has its own page (Erick, 6 October 2026). --- */}
+      <Section>
+        <div className="container text-center">
+          <p className="eyebrow">{rsvp.listEyebrow}</p>
+          <p className="mt-3 text-sm text-brand-ink/70">
+            {peopleOnList > 0 ? `${peopleOnList} ${peopleOnList === 1 ? "person has" : "people have"} said yes so far.` : null}
+          </p>
+          <Link href="/guest-list" className="btn-outline mt-5">
+            See the guest list
+          </Link>
         </div>
       </Section>
 

@@ -3,9 +3,9 @@ import { NAV, PRIMARY_CTA, SITE } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  // /rsvp carries the public guest list, so it is noindex and left out here.
+  // /guest-list carries real names, so it is noindex and left out here.
   const routes = [...new Set(["/", ...NAV.map((item) => item.href), PRIMARY_CTA.href, "/privacy"])].filter(
-    (route) => route !== "/rsvp",
+    (route) => route !== "/guest-list",
   );
 
   return routes.map((route) => ({

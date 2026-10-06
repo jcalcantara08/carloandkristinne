@@ -31,7 +31,7 @@ const statusSchema = z.enum(["pending", "approved", "hidden"]);
 const tableSchema = z.enum(["rsvps", "guestbook", "photos"]);
 
 const PATHS: Record<RecordTable, string[]> = {
-  rsvps: ["/admin/rsvps", "/admin", "/rsvp"],
+  rsvps: ["/admin/rsvps", "/admin", "/rsvp", "/guest-list"],
   guestbook: ["/admin/guestbook", "/wishingwall", "/", "/admin"],
   photos: ["/admin/photos", "/gallery", "/", "/admin"],
 };

@@ -1036,10 +1036,10 @@ rewrite a file in place.
   every person, guests and unnamed extras included. Filters are URL params
   (`show`, `q`, `sort`, `tab`). The dashboard sections are named after the
   public pages they manage: RSVP, Wishing Wall, Gallery.
-- **Public guest list on /rsvp.** Erick asked that guests can see their names.
+- **Public guest list, its own page `/guest-list`** ("Guest List" in the menu; first built at the foot of `/rsvp`, moved the same night because nobody scrolled to it). `/rsvp` keeps a count and a "See the guest list" button. Erick asked that guests can see their names.
   `listGuestList()` in `lib/store.ts` selects only `name` and `guests` of
   active replies that said yes; nothing else reaches the page. Archiving an
-  RSVP takes it off the list. `/rsvp` is now `noIndex` and out of the
+  RSVP takes it off the list. `/guest-list` is `noIndex` and out of the
   sitemap. The form and the privacy page say plainly that names are shown.
   Replies sent before 6 October were sent under "replies are private"; the
   couple were advised to tell guests, and to archive anyone who asks.

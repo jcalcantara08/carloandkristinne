@@ -135,7 +135,7 @@ export async function listRsvps(view: RecordView = "active"): Promise<Rsvp[]> {
 }
 
 /**
- * The public guest list on /rsvp (Erick, 6 October 2026): names only, of
+ * The public guest list on /guest-list (Erick, 6 October 2026): names only, of
  * active replies that said yes, A to Z. Only the two name columns are
  * selected, so contact details, food notes and messages never leave the
  * database for a public page. Archiving a reply takes it off the list.

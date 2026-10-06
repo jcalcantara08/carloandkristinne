@@ -890,6 +890,7 @@ export const NAV: { href: string; label: string }[] = [
   { href: "/entourage", label: "Entourage" },
   { href: "/gallery", label: "Gallery" },
   { href: "/wishingwall", label: "Wishing Wall" },
+  { href: "/guest-list", label: "Guest List" },
 ];
 
 export const PRIMARY_CTA = { href: "/rsvp", label: "RSVP" } as const;

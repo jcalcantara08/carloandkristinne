@@ -31,7 +31,7 @@ export function WelcomePrompt() {
   const [open, setOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const excluded = pathname.startsWith("/admin") || pathname.startsWith("/guestbook") || pathname.startsWith("/gallery");
+  const excluded = pathname.startsWith("/admin") || pathname.startsWith("/wishingwall") || pathname.startsWith("/gallery");
 
   useEffect(() => {
     if (excluded) return;
@@ -110,7 +110,7 @@ export function WelcomePrompt() {
         </p>
 
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          <Link href="/guestbook" onClick={close} className="btn-primary w-full">
+          <Link href="/wishingwall#write" onClick={close} className="btn-primary w-full">
             <PenLine className="h-4 w-4" aria-hidden="true" />
             Write a greeting
           </Link>

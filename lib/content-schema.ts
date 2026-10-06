@@ -189,6 +189,9 @@ export type SiteContent = {
     dayEyebrow: string;
     dayNote: string;
     closingLine: string;
+    mapsEyebrow: string;
+    mapsTitle: string;
+    mapsIntro: string;
   };
 };
 
@@ -239,7 +242,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       "From the day of the wedding onwards, anyone can add the photographs they took, and anyone can download them at full size. No app, no account, nothing to sign up for.",
     wishesEyebrow: "From everyone else",
     wishesTitle: "Wishes for the two of them",
-    wishesIntro: "Anyone can leave a note. Every one of them is read by both of them before it goes up.",
+    wishesIntro: "Anyone can leave a note, and it goes up on the wall the moment you send it.",
     ctaTitle: "Will we see you there?",
     ctaBody:
       "There are a hundred seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.",
@@ -490,7 +493,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
       {
         title: "Checked first",
-        body: "Carlo and Kristinne see everything before it appears, which keeps the album lovely for everyone.",
+        body: "Your photographs go straight into the album for everyone to see and download.",
       },
       {
         title: "Anyone can take",
@@ -522,7 +525,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       "A wish, a blessing, or a story. Everything left here is read by both of them, and printed for them to keep afterwards.",
     wallTitle: "What everyone has written",
     emptyTitle: "Nothing here yet",
-    emptyBody: "The wall fills up as messages are approved. Yours could be the very first.",
+    emptyBody: "The wall fills up as messages come in. Yours could be the very first.",
     ctaTitle: "And are you coming?",
     ctaBody: "A message means a lot. A reply means the caterer can count you in.",
   },
@@ -553,8 +556,11 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
     ],
     dayEyebrow: "The day itself",
-    dayNote: `Ceremony at ${WEDDING_DAY.ceremonyTime}. Be seated by 3:30 PM.`,
+    dayNote: `Ceremony at ${WEDDING_DAY.ceremonyTime}. Guests are welcome from ${WEDDING_DAY.doorsTime}.`,
     closingLine: "Kindly reply by",
+    mapsEyebrow: "Getting there",
+    mapsTitle: "The church and the reception",
+    mapsIntro: "Scan a code with your phone camera to open the map, or tap the button if you are already on your phone.",
   },
 };
 
@@ -908,9 +914,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
   },
   {
     id: "guestbook",
-    label: "Guestbook",
+    label: "Wishing wall",
     description: "The wishing wall: the invitation to write, and what shows before the first message.",
-    preview: "/guestbook",
+    preview: "/wishingwall",
     fields: [
       {
         type: "list",
@@ -961,6 +967,9 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       text("rsvp.dayEyebrow", "Day box eyebrow"),
       text("rsvp.dayNote", "Day box note"),
       text("rsvp.closingLine", "Closing banner line", "Shown before the reply-by date."),
+      text("rsvp.mapsEyebrow", "Map codes eyebrow"),
+      text("rsvp.mapsTitle", "Map codes heading"),
+      area("rsvp.mapsIntro", "Map codes introduction", "The codes themselves come from each venue's map link under Details."),
     ],
   },
 ];

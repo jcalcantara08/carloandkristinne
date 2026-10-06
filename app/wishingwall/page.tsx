@@ -12,14 +12,14 @@ import { getContent } from "@/lib/content";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = pageMeta({
-  title: "Guestbook",
+  title: "Wishing wall",
   description:
     "Leave a message for Carlo and Kristinne, and read what everyone else has written.",
-  path: "/guestbook",
+  path: "/wishingwall",
 });
 
 export default async function GuestbookPage() {
-  const [entries, { guestbook }] = await Promise.all([listGuestbook("approved"), getContent()]);
+  const [entries, { guestbook }] = await Promise.all([listGuestbook("visible"), getContent()]);
 
   return (
     <>
@@ -29,16 +29,6 @@ export default async function GuestbookPage() {
         intro={guestbook.intro ? <p>{guestbook.intro}</p> : undefined}
         photos={guestbook.headerPhotos}
       />
-
-      <Section>
-        <div className="container">
-          <Reveal>
-            <Card className="mx-auto max-w-2xl p-6 sm:p-8">
-              <GuestbookForm />
-            </Card>
-          </Reveal>
-        </div>
-      </Section>
 
       <Section>
         <div className="container">
@@ -82,6 +72,19 @@ export default async function GuestbookPage() {
         </div>
       </Section>
 
+      {/* The wall comes first and the form last (Erick, 6 October 2026): guests
+          arrive to read the greetings, then add their own. Links that mean
+          "write one" point at #write. */}
+      <Section id="write" on="tint">
+        <div className="container">
+          <Reveal>
+            <Card className="mx-auto max-w-2xl p-6 sm:p-8">
+              <GuestbookForm />
+            </Card>
+          </Reveal>
+        </div>
+      </Section>
+
       <CtaBanner
         title={guestbook.ctaTitle}
         body={guestbook.ctaBody}
@@ -94,7 +97,7 @@ export default async function GuestbookPage() {
           __html: JSON.stringify(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
-              { name: "Guestbook", path: "/guestbook" },
+              { name: "Wishing wall", path: "/wishingwall" },
             ]),
           ),
         }}

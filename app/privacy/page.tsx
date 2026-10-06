@@ -67,9 +67,9 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           headcount list. Nobody else can see who replied.
         </p>
         <p className="mt-4">
-          Messages and photographs are checked by the couple first, and once they approve one it
-          is <strong>public</strong>. Anyone with the address of this site can read an approved
-          message, and can view and download an approved photograph at full size. That is by
+          Messages and photographs are <strong>public</strong> as soon as you send them. Anyone
+          with the address of this site can read a message, and can view and download a
+          photograph at full size. The couple can take any of them down at any time. That is by
           design, so that everyone can keep the pictures from the day. Please do not upload a
           photograph you would not want shared.
         </p>
@@ -137,7 +137,7 @@ export default function PrivacyPage() {
 
             <Reveal delay={480}>
               <p className="text-sm text-brand-ink/60">
-                Last reviewed 16 September 2026. If anything on this page stops being true, it
+                Last reviewed 6 October 2026. If anything on this page stops being true, it
                 gets changed here first.
               </p>
             </Reveal>

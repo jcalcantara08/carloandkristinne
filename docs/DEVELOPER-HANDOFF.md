@@ -3,7 +3,7 @@
 The project's shared memory. Another developer, or an AI assistant, should be
 able to continue confidently after reading only this file.
 
-Last updated: 17 September 2026.
+Last updated: 6 October 2026.
 
 ---
 
@@ -999,6 +999,49 @@ the phone. The FAQ answers about games and singing were reworded to match.
 The script itself lives in Google Drive (id in Claude's memory), regenerated
 from the Claude Doc on every revision because the Drive connector cannot
 rewrite a file in place.
+
+### Map codes, instant posting, and two wrong facts (6 October 2026)
+
+- **Map QR codes.** The couple asked for the church and reception QR codes on
+  the RSVP page. `components/VenueQr.tsx` draws each one on the server from the
+  venue's `mapUrl` in the site document (package `qrcode`), black on white,
+  error correction M, so a code always matches the map link the couple can
+  edit. Shown in a new "Getting there" section on `/rsvp` (words in
+  `rsvp.mapsEyebrow`, `mapsTitle`, `mapsIntro`) and above "Open in Maps" on
+  each venue card on `/details`. Both codes were decoded back with `jsqr` and
+  match the live map links.
+- **No approval step.** Erick's decision: greetings and photographs post at
+  once. `createGuestbookEntry` and the photo insert in `lib/store.ts` now write
+  `status: "approved"`, and both actions revalidate `/guestbook` or `/gallery`
+  plus `/`, since those pages are static. Every sentence that promised a
+  review (forms, gallery and guestbook copy, FAQ, privacy page, both
+  manuals) was rewritten. The dashboard still has Hide, Archive and Delete.
+  Rows that were already pending stay pending until someone presses Publish.
+- **The Wishing Wall.** The guestbook page is now `/wishingwall` (folder
+  `app/wishingwall`), "Wishing Wall" in the menu, to match its title.
+  `/guestbook` redirects there permanently (`next.config.mjs`). The admin
+  page keeps `/admin/guestbook` and the code keeps the `guestbook` names
+  (table, action, form). The greetings sit straight under the title and the
+  form is the last section (`id="write"`); the arrival prompt and the
+  Gallery's "Leave a message" link to `/wishingwall#write`.
+- **No approve buttons anywhere.** The dashboard's "Waiting for you" lists
+  and Publish buttons are gone from Messages, Photographs and the Overview.
+  Each item has Hide, Show again (when hidden), Archive and Delete. Public
+  pages read `listGuestbook("visible")` / `listPhotos("visible")`, meaning
+  everything not hidden, so rows left `pending` from before are shown.
+- **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
+  (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
+  by 3:30 PM" (now "Guests are welcome from 3:00 PM", from
+  `WEDDING_DAY.doorsTime`, as printed on the invitation).
+- **Security.** `next` 16.3.5 had a critical advisory in `next/og`
+  (GHSA-vcvr-r3jv-pc5j). The site does not use `next/og`, but it is now
+  16.3.8 and the floor in `package.json` is `^16.3.8`. The remaining audit
+  item is `braces` through Tailwind 3's file watcher, build time only; the fix
+  is Tailwind 4, deliberately not taken before the wedding.
+- **Folder.** The project now lives under `Systems and Websites/6. One-Time
+  Clients/`. A local `Enclave Engagement/` folder (sales notes) sits inside it
+  and is excluded through `.git/info/exclude`; it must never be committed.
+  `npm run grammar` reports it locally; Vercel never sees it.
 
 ## 18. Future improvements
 

@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMeta({
 const HOW_ICONS = [Camera, ShieldCheck, Download];
 
 export default async function GalleryPage() {
-  const [photos, { gallery }] = await Promise.all([listPhotos("approved"), getContent()]);
+  const [photos, { gallery }] = await Promise.all([listPhotos("visible"), getContent()]);
 
   return (
     <>
@@ -108,7 +108,7 @@ export default async function GalleryPage() {
       <CtaBanner
         title={gallery.ctaTitle}
         body={gallery.ctaBody}
-        secondary={{ href: "/guestbook", label: "Leave a message" }}
+        secondary={{ href: "/wishingwall#write", label: "Leave a message" }}
       />
 
       <script

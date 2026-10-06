@@ -54,7 +54,7 @@ export async function GuestbookPreview({ entries }: { entries: GuestbookEntry[] 
 
         <Reveal delay={160}>
           <div className="mt-10 text-center">
-            <Link href="/guestbook" className="btn-outline">
+            <Link href="/wishingwall" className="btn-outline">
               Leave a message
             </Link>
           </div>

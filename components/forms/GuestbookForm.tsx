@@ -69,7 +69,7 @@ export function GuestbookForm() {
           placeholder="A wish, a warning, or a story they would rather you did not tell"
         />
         <Hint id={field("message-hint")}>
-          Up to 800 characters. Messages are read before they appear on the wall.
+          Up to 800 characters. Your message appears on the wall as soon as you send it.
         </Hint>
         <FieldError id={field("message-error")} messages={errors?.message} />
       </div>

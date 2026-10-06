@@ -7,11 +7,10 @@ import { RSVP, WEDDING_DATE_ISO, WEDDING_DAY } from "@/lib/constants";
 export default async function AdminOverviewPage() {
   await requireAuth();
 
-  const [totals, pendingMessages, pendingPhotos, approvedPhotos, trash] = await Promise.all([
+  const [totals, wallMessages, albumPhotos, trash] = await Promise.all([
     rsvpTotals(),
-    listGuestbook("pending"),
-    listPhotos("pending"),
-    listPhotos("approved"),
+    listGuestbook("visible"),
+    listPhotos("visible"),
     listTrash(),
   ]);
 
@@ -35,9 +34,9 @@ export default async function AdminOverviewPage() {
     },
     { label: "Replies received", value: totals.responses, note: `${totals.declined} cannot make it` },
     {
-      label: "Waiting for you",
-      value: pendingMessages.length + pendingPhotos.length,
-      note: `${pendingMessages.length} messages, ${pendingPhotos.length} photographs`,
+      label: "Greetings and photos",
+      value: wallMessages.length + albumPhotos.length,
+      note: `${wallMessages.length} messages, ${albumPhotos.length} photographs`,
     },
   ];
 
@@ -100,9 +99,8 @@ export default async function AdminOverviewPage() {
         <Card>
           <h2 className="text-display-md">Messages</h2>
           <p className="mt-3 text-sm text-brand-ink/75">
-            {pendingMessages.length === 0
-              ? "Nothing waiting. The wall is up to date."
-              : `${pendingMessages.length} waiting to be approved before they appear on the wall.`}
+            {wallMessages.length === 1 ? "1 message" : `${wallMessages.length} messages`} on the wall.
+            Everything posts at once; hide or delete anything that should not be there.
           </p>
           <Link href="/admin/guestbook" className="btn-outline mt-5 px-5 py-2.5 text-xs">
             Review messages
@@ -112,10 +110,8 @@ export default async function AdminOverviewPage() {
         <Card>
           <h2 className="text-display-md">Photographs</h2>
           <p className="mt-3 text-sm text-brand-ink/75">
-            {approvedPhotos.length} in the album.{" "}
-            {pendingPhotos.length === 0
-              ? "Nothing waiting."
-              : `${pendingPhotos.length} waiting for you.`}
+            {albumPhotos.length} in the album. Everything posts at once; hide or delete anything
+            that should not be there.
           </p>
           <Link href="/admin/photos" className="btn-outline mt-5 px-5 py-2.5 text-xs">
             Review photographs

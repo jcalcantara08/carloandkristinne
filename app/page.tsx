@@ -14,7 +14,7 @@ import { listGuestbook, listPhotos } from "@/lib/store";
  * long scroll has rhythm, and the single DARK band is the closing CTA.
  */
 export default async function HomePage() {
-  const [wishes, photos] = await Promise.all([listGuestbook("approved", 3), listPhotos("approved")]);
+  const [wishes, photos] = await Promise.all([listGuestbook("visible", 3), listPhotos("visible")]);
 
   return (
     <>

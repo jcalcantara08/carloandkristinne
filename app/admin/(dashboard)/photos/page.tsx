@@ -39,12 +39,12 @@ function PhotoCard({ photo, view }: { photo: Photo; view: ListView }) {
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-brand-line pt-4">
-        {view === "active" && photo.status !== "approved" ? (
+        {view === "active" && photo.status === "hidden" ? (
           <form action={moderatePhoto}>
             <input type="hidden" name="id" value={photo.id} />
             <input type="hidden" name="status" value="approved" />
             <button type="submit" className="btn-outline px-4 py-2 text-xs">
-              Publish
+              Show again
             </button>
           </form>
         ) : null}
@@ -79,16 +79,15 @@ export default async function AdminPhotosPage({
     listPhotos("all", "trash"),
   ]);
   const photos = view === "active" ? active : view === "archived" ? archived : trash;
-  const pending = view === "active" ? photos.filter((photo) => photo.status === "pending") : [];
-  const rest = view === "active" ? photos.filter((photo) => photo.status !== "pending") : photos;
+  const rest = photos;
 
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-display-md">Photographs</h2>
         <p className="mt-2 text-sm text-brand-ink/70">
-          Uploads are invisible on the public album until you publish them. Delete moves a
-          photograph to the recycle bin; the file itself only goes when the bin is emptied.
+          Every upload goes into the public album the moment it is sent. Hide takes one down;
+          Delete moves it to the recycle bin, and the file itself only goes when the bin is emptied.
         </p>
       </div>
 
@@ -101,27 +100,10 @@ export default async function AdminPhotosPage({
         <ViewNote view={view} trashDays={TRASH_DAYS} />
       </div>
 
-      {view === "active" ? (
-        <section>
-          <h3 className="eyebrow">Waiting for you ({pending.length})</h3>
-          {pending.length === 0 ? (
-            <Card className="mt-4 text-center text-sm text-brand-ink/70">Nothing waiting.</Card>
-          ) : (
-            <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {pending.map((photo) => (
-                <li key={photo.id}>
-                  <PhotoCard photo={photo} view={view} />
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      ) : null}
-
       <section>
         <h3 className="eyebrow">
           {view === "active"
-            ? `Everything else (${rest.length})`
+            ? `In the album (${rest.length})`
             : view === "archived"
               ? `Archived (${rest.length})`
               : `In the recycle bin (${rest.length})`}

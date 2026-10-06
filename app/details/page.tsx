@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/Card";
 import { DressCode } from "@/components/sections/DressCode";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { VenueQr } from "@/components/VenueQr";
 import { breadcrumbJsonLd, faqJsonLd, pageMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 import { WEDDING_DAY } from "@/lib/constants";
@@ -96,6 +97,7 @@ export default async function DetailsPage() {
 
                   {venue.mapUrl ? (
                     <div className="mt-6 border-t border-brand-line pt-5">
+                      <VenueQr url={venue.mapUrl} venueName={venue.name || venue.label} className="mx-auto mb-4 h-32 w-32 rounded-lg border border-brand-line bg-brand-paper" />
                       <a
                         href={venue.mapUrl}
                         target="_blank"

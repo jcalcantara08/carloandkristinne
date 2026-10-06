@@ -22,8 +22,8 @@ const SECTIONS = [
   {
     title: "The one thing to know",
     body: [
-      "Nothing a guest uploads or writes appears in public until you approve it. Messages and photographs both arrive as pending, and both sit under Waiting for you until you press Publish.",
-      "That is deliberate. An open upload box on a public address needs a human in the loop.",
+      "Messages and photographs go up the moment a guest sends them. You do not need to approve anything.",
+      "If something should not be there, press Hide on it, or Delete. Check the Messages and Photographs pages now and then on the day and the week after.",
     ],
   },
   {
@@ -37,14 +37,13 @@ const SECTIONS = [
   {
     title: "Messages",
     body: [
-      "Publish puts a message on the public wall. Hide takes it down again without deleting it. Back to pending is there if you want to think about it.",
-      "Messages you never publish simply never appear. Nobody is notified either way.",
+      "Every message is on the public wall as soon as it is sent. Hide takes one down without deleting it, and Show again puts it back. Nobody is notified either way.",
     ],
   },
   {
     title: "Photographs",
     body: [
-      "Guests upload from the Gallery page on their phone. Publish adds a photograph to the public album, where anyone can view and download it at full size.",
+      "Guests upload from the Gallery page on their phone, and each photograph goes straight into the public album, where anyone can view and download it at full size. Hide takes one down.",
       "Delete moves a photograph to the recycle bin. The file itself only goes when the bin lets it go, 14 days later, or when you delete it for good.",
     ],
   },

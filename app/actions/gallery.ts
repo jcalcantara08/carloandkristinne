@@ -20,9 +20,9 @@ const metaSchema = z.object({
  * Guest photo upload.
  *
  * Type and size are checked on the server against the real File, not against
- * whatever the client claimed. Uploads land as `pending` and are invisible
- * until the couple approve them, because an open upload box on a public URL
- * is an open upload box.
+ * whatever the client claimed. Uploads go into the album at once
+ * (Erick, 6 October 2026); the couple can hide, archive or delete any of them
+ * from the dashboard. The honeypot and the rate limit are the guard.
  */
 export async function submitPhotos(_prev: ActionState, formData: FormData): Promise<ActionState> {
   if (String(formData.get("website") ?? "").length > 0) {
@@ -105,6 +105,8 @@ export async function submitPhotos(_prev: ActionState, formData: FormData): Prom
     else rejected.push(`${file.name} could not be saved.`);
   }
 
+  revalidatePath("/gallery");
+  revalidatePath("/");
   revalidatePath("/admin/photos");
 
   if (uploaded === 0) {
@@ -119,6 +121,6 @@ export async function submitPhotos(_prev: ActionState, formData: FormData): Prom
 
   return {
     status: "success",
-    message: `Thank you. ${uploaded} ${noun} received and waiting to be approved.${tail}`,
+    message: `Thank you. ${uploaded} ${noun} now in the album.${tail}`,
   };
 }

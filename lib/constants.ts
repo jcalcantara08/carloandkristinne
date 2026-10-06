@@ -852,7 +852,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Where do I upload the photos I took?",
-    a: "On the Gallery page, from the day of the wedding onwards. Uploads are checked before they appear, and everything in the album can be downloaded at full size by anyone.",
+    a: "On the Gallery page, from the day of the wedding onwards. Uploads appear in the album straight away, and everything in it can be downloaded at full size by anyone.",
   },
   {
     q: "Who do I ask if something is not answered here?",
@@ -889,7 +889,7 @@ export const NAV: { href: string; label: string }[] = [
   { href: "/programme", label: "Programme" },
   { href: "/entourage", label: "Entourage" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/guestbook", label: "Guestbook" },
+  { href: "/wishingwall", label: "Wishing Wall" },
 ];
 
 export const PRIMARY_CTA = { href: "/rsvp", label: "RSVP" } as const;

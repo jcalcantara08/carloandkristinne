@@ -42,9 +42,9 @@ invitation and not an extra.
 
 A guest who opens the site sees, after a moment, a small card inviting them
 to write a greeting or upload a photograph. It shows once per phone or
-browser, never on the Guestbook or Gallery pages themselves, and "Maybe
+browser, never on the Wishing Wall or Gallery pages themselves, and "Maybe
 later" or the X puts it away. Nothing is collected by the card itself; it
-only points to the two pages, where the usual approval rules apply.
+only points to the two pages.
 
 ## 2b. The Enclave card
 
@@ -56,12 +56,13 @@ would rather it were not there.
 
 ## 3. The most important thing to know
 
-**Nothing a guest writes or uploads appears in public until you approve it.**
+**Messages and photographs go up the moment a guest sends them.** You do not
+need to approve anything (Erick's decision, 6 October 2026, so greetings and
+photographs appear live on the day).
 
-Messages and photographs arrive as *pending*. They sit in the dashboard under
-"Waiting for you" until you press Publish. Nothing is lost and nobody is told
-either way. An open upload box on a public address needs a human looking at
-it, and that human is you.
+If something should not be there, open Messages or Photographs in the
+dashboard and press Hide, or Delete. Nobody is told either way. Glance at both
+pages now and then on the day and in the week after.
 
 ## 4. Logging in
 
@@ -81,11 +82,13 @@ replies you have had, and how many things are waiting for you.
 **Replies.** Every RSVP, newest first, with names, contact details, dietary
 notes and song requests. The Download CSV button is here.
 
-**Messages.** The guestbook. Publish puts a message on the public wall. Hide
-takes it down again without deleting it.
+**Messages.** The wishing wall. Every message is on the public wall as soon
+as it is sent. Hide takes one down without deleting it; Show again puts it
+back.
 
-**Photographs.** Guest uploads. Publish adds one to the public album, where
-anyone can view and download it at full size. Delete moves one to the recycle
+**Photographs.** Guest uploads. Every one goes straight into the public
+album, where anyone can view and download it at full size. Hide takes one
+down; Show again puts it back. Delete moves one to the recycle
 bin; the file itself only goes when the bin lets it go.
 
 **Edit the website.** One entry per public page (Home, Our story, Details,
@@ -139,19 +142,18 @@ is 5 October 2026.
 
 ### Messages
 
-Read each one. Publish the ones you want on the wall. Anything you would
-rather not publish, simply leave as pending. It stays invisible and the
-writer is not told.
+They are already on the wall. Read them now and then, and press Hide (or
+Delete) on anything that should not be there. The writer is not told.
 
 ### Photographs
 
 These arrive after the wedding, mostly in the week after. Check the
-Photographs page daily that week. Publish the good ones. Hide anything that
-should not be in the album. Archive keeps one out of the way; Delete sends it
+Photographs page daily that week. They are already in the album; Hide
+anything that should not be there. Archive keeps one out of the way; Delete sends it
 to the recycle bin, and the file leaves storage only when the bin lets it go.
 
 You upload your own photographs the same way a guest does, on the Gallery
-page, then approve them in the dashboard. One process to learn instead of two.
+page, and they appear in the album at once. One process to learn instead of two.
 
 ## 7. Where emails go
 
@@ -214,8 +216,8 @@ elephants, the ring, the Christmas tree), each with a short caption you can
 change. To swap the Home photograph, upload a new one from the Home form
 (landscape, under 12 MB). To change any other photograph, paste the address
 of a published album photograph into its row under Edit the website. Guests'
-album photographs still come in through the Gallery page and are approved
-under Photographs.
+album photographs still come in through the Gallery page and go straight
+into the album.
 
 **The dress code pictures.** Each dress code card shows an illustration of
 the outfit in the same style as your attire guides, drawn in high
@@ -297,7 +299,7 @@ There are no payments, no analytics, and no advertising anywhere in the site.
 
 **Now until the wedding**
 - Check Replies once or twice a week
-- Publish any waiting messages
+- Glance at the wishing wall for anything to hide
 - Glance at the headcount on Overview
 
 **Two weeks before (around 3 October), and again after the 5 October deadline**

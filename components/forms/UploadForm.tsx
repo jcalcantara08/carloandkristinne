@@ -120,7 +120,7 @@ export function UploadForm() {
 
       <div className="flex flex-col gap-4 border-t border-brand-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs text-brand-ink/60">
-          Everything is checked by the couple before it appears in the album.
+          Your photographs appear in the album as soon as they upload, and anyone can download them.
         </p>
         <SubmitButton count={selected.length} />
       </div>

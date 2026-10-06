@@ -32,7 +32,7 @@ const tableSchema = z.enum(["rsvps", "guestbook", "photos"]);
 
 const PATHS: Record<RecordTable, string[]> = {
   rsvps: ["/admin/rsvps", "/admin"],
-  guestbook: ["/admin/guestbook", "/guestbook", "/", "/admin"],
+  guestbook: ["/admin/guestbook", "/wishingwall", "/", "/admin"],
   photos: ["/admin/photos", "/gallery", "/", "/admin"],
 };
 

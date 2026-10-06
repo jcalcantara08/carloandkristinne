@@ -16,6 +16,11 @@ const supabaseHost = (() => {
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // The page was renamed to match its title (Erick, 6 October 2026). Links
+  // already shared to /guestbook keep working.
+  async redirects() {
+    return [{ source: "/guestbook", destination: "/wishingwall", permanent: true }];
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: supabaseHost

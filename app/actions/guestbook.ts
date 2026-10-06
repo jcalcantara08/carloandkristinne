@@ -67,11 +67,15 @@ export async function submitGuestbook(
     };
   }
 
+  // Messages go up at once (Erick, 6 October 2026), so the public wall and
+  // the home preview are rebuilt now, not at the next deploy.
+  revalidatePath("/wishingwall");
+  revalidatePath("/");
   revalidatePath("/admin/guestbook");
 
   return {
     status: "success",
     message:
-      "Thank you. Messages are read before they go up, so it will appear on the wall shortly.",
+      "Thank you. Your message is on the wall.",
   };
 }

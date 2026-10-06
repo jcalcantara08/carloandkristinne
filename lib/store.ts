@@ -184,7 +184,7 @@ export async function createGuestbookEntry(input: {
 
   const { error } = await supabase
     .from("guestbook")
-    .insert({ name: input.name, message: input.message, status: "pending" });
+    .insert({ name: input.name, message: input.message, status: "approved" });
 
   if (error) {
     console.error("[store] createGuestbookEntry failed:", error.message);
@@ -193,8 +193,15 @@ export async function createGuestbookEntry(input: {
   return { ok: true };
 }
 
+/**
+ * `visible` is what the public pages read: everything not hidden. Since
+ * 6 October 2026 nothing waits for approval, and rows left `pending` from
+ * before then are shown rather than stranded.
+ */
+export type ListStatus = ModerationStatus | "all" | "visible";
+
 export async function listGuestbook(
-  status: ModerationStatus | "all" = "approved",
+  status: ListStatus = "visible",
   limit?: number,
   view: RecordView = "active",
 ): Promise<GuestbookEntry[]> {
@@ -205,7 +212,8 @@ export async function listGuestbook(
     supabase.from("guestbook").select("*").order("created_at", { ascending: false }),
     view,
   );
-  if (status !== "all") query = query.eq("status", status);
+  if (status === "visible") query = query.neq("status", "hidden");
+  else if (status !== "all") query = query.eq("status", status);
   if (limit) query = query.limit(limit);
 
   const { data, error } = await query;
@@ -298,7 +306,7 @@ export async function uploadPhoto(input: {
     storage_path: path,
     uploader_name: input.uploaderName,
     caption: input.caption,
-    status: "pending",
+    status: "approved",
   });
 
   if (error) {
@@ -311,7 +319,7 @@ export async function uploadPhoto(input: {
 }
 
 export async function listPhotos(
-  status: ModerationStatus | "all" = "approved",
+  status: ListStatus = "visible",
   view: RecordView = "active",
 ): Promise<Photo[]> {
   const supabase = createAdminClient();
@@ -321,7 +329,8 @@ export async function listPhotos(
     supabase.from("photos").select("*").order("created_at", { ascending: false }),
     view,
   );
-  if (status !== "all") query = query.eq("status", status);
+  if (status === "visible") query = query.neq("status", "hidden");
+  else if (status !== "all") query = query.eq("status", status);
 
   const { data, error } = await query;
   if (error) {

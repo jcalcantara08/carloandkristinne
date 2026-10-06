@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import { CalendarCheck, Users, Utensils } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { Section } from "@/components/Section";
+import { Section, SectionHeading } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/Card";
 import { RsvpForm } from "@/components/forms/RsvpForm";
+import { VenueQr } from "@/components/VenueQr";
 import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
-import { WEDDING_DAY } from "@/lib/constants";
+import { RSVP, WEDDING_DAY } from "@/lib/constants";
 
 export const metadata: Metadata = pageMeta({
   title: "RSVP",
-  description:
-    "Let Carlo and Kristinne know whether you can make it on 17 October 2026. Please reply by 30 September 2026.",
+  description: `Let Carlo and Kristinne know whether you can make it on ${WEDDING_DAY.dateLong}. Please reply by ${RSVP.deadlineLabel}.`,
   path: "/rsvp",
 });
 
 const WHY_ICONS = [Users, Utensils, CalendarCheck];
 
 export default async function RsvpPage() {
-  const { rsvp } = await getContent();
+  const { rsvp, details } = await getContent();
+  const mapped = details.venues.filter((venue) => venue.mapUrl);
 
   return (
     <>
@@ -68,6 +69,41 @@ export default async function RsvpPage() {
           </div>
         </div>
       </Section>
+
+      {/* --- Getting there. The couple asked for the map codes here, as on the printed cards. --- */}
+      {mapped.length > 0 ? (
+        <Section on="tint">
+          <div className="container">
+            <SectionHeading eyebrow={rsvp.mapsEyebrow} title={rsvp.mapsTitle} />
+            {rsvp.mapsIntro ? (
+              <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-brand-ink/70">{rsvp.mapsIntro}</p>
+            ) : null}
+
+            <ul className="mx-auto mt-10 grid max-w-3xl gap-5 sm:grid-cols-2">
+              {mapped.map((venue, index) => (
+                <Reveal as="li" key={venue.label} delay={index * 80}>
+                  <Card className="h-full text-center">
+                    <p className="eyebrow">{venue.label}</p>
+                    {venue.name ? <h3 className="mt-3 text-display-md">{venue.name}</h3> : null}
+                    {venue.time ? <p className="mt-1 text-sm text-brand-ink/70">{venue.time}</p> : null}
+                    <div className="mt-5">
+                      <VenueQr url={venue.mapUrl} venueName={venue.name || venue.label} />
+                    </div>
+                    <a
+                      href={venue.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-outline mt-5 w-full"
+                    >
+                      Open in Maps
+                    </a>
+                  </Card>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
 
       <script
         type="application/ld+json"

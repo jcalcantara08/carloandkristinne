@@ -79,7 +79,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
 
   return (
     <>
-      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
         {photos.map((photo, index) => (
           <Reveal as="li" key={photo.id} delay={Math.min(index, 12) * 80}>
             <button
@@ -97,7 +97,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
                   `Photograph from the wedding, uploaded by ${photo.uploaderName ?? "a guest"}`
                 }
                 fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover transition-transform duration-500 ease-expo group-hover:scale-105"
               />
               <span className="sr-only">Open larger view</span>

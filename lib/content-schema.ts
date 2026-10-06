@@ -249,7 +249,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     wishesIntro: "Anyone can leave a note, and it goes up on the wall the moment you send it.",
     ctaTitle: "Will we see you there?",
     ctaBody:
-      "There are a hundred seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.",
+      `There are ${WEDDING_DAY.guestCount} seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.`,
   },
   ourStory: {
     eyebrow: "Kaloob ng Diyos",
@@ -276,7 +276,7 @@ export const DEFAULT_CONTENT: SiteContent = {
       },
       {
         title: "The food",
-        body: "One hundred people, fed properly, in a room with air conditioning. Not a small thing to pull off in October.",
+        body: `${WEDDING_DAY.guestCount} people, fed properly, in a room with air conditioning. Not a small thing to pull off in October.`,
       },
       {
         title: "The photographs",
@@ -390,7 +390,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     faq: FAQ.map((f) => ({ q: f.q, a: f.a })),
     ctaTitle: "Will we see you there?",
     ctaBody:
-      "There are a hundred seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.",
+      `There are ${WEDDING_DAY.guestCount} seats and every one of them is spoken for, so an early reply is a real kindness to the caterer, and to Carlo and Kristinne.`,
   },
   programme: {
     eyebrow: "The run of show",
@@ -496,7 +496,7 @@ export const DEFAULT_CONTENT: SiteContent = {
         body: "No app and no account needed. Just choose the photographs from your phone and send them.",
       },
       {
-        title: "Checked first",
+        title: "Up straight away",
         body: "Your photographs go straight into the album for everyone to see and download.",
       },
       {
@@ -547,7 +547,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     ],
     why: [
       {
-        title: "The list is 100",
+        title: `The list is ${WEDDING_DAY.guestCount}`,
         body: "Every seat is already accounted for, so please count only the people named on your invitation.",
       },
       {

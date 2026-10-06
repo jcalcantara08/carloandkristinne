@@ -113,7 +113,7 @@ export const WEDDING_DAY = {
   ceremonyTime: "4:00 in the afternoon",
   /** From the finer details card: guests are welcome from three. */
   doorsTime: "3:00 PM",
-  guestCount: 100,
+  guestCount: 120, // Carlo, 6 October 2026: "Nag 120 kami"
   /** The ceremony's town. The reception is in `receptionTown`. */
   town: "General Trias",
   receptionTown: "Rosario",
@@ -808,7 +808,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Can I bring a plus one or my children?",
-    a: "Only if your invitation names them, and that is purely a numbers problem rather than anything personal. The list is capped at 100 and every seat is already accounted for. If you are not sure who is included in yours, just ask Erick and he will check.",
+    a: `Only if your invitation names them, and that is purely a numbers problem rather than anything personal. The list is capped at ${WEDDING_DAY.guestCount} and every seat is already accounted for. If you are not sure who is included in yours, just ask Erick and he will check.`,
   },
   {
     q: "What time should I actually arrive?",
@@ -900,7 +900,7 @@ export const PRIMARY_CTA = { href: "/rsvp", label: "RSVP" } as const;
    ========================= */
 
 export const RSVP = {
-  /** Hard cap per invitation. The list is 100 and every seat is allocated. */
+  /** Hard cap per invitation. The list is WEDDING_DAY.guestCount and every seat is allocated. */
   maxPartySize: 6,
   /** Shown on the form, and the date the caterer needs the final count. */
   deadlineLabel: "5 October 2026",
@@ -930,9 +930,9 @@ export const CREDITS = {
 
 /**
  * The studio card. Erick builds these sites, and a guest who likes this one
- * is the next client, so a small corner card offers Enclave at the first,
- * third and fifth minute of a visit (Erick's numbers), once each, and never
- * on the dashboard. Copy and link live here so the card has no words of its
+ * is the next client, so a small corner card offers Enclave and his social
+ * accounts every two minutes of a visit (Erick's number, 6 October 2026), and
+ * never on the dashboard. Copy and link live here so the card has no words of its
  * own.
  */
 export const PROMO = {
@@ -941,6 +941,15 @@ export const PROMO = {
   body: "This one was designed and built by Erick Cabal. Yours can be too.",
   cta: "See Enclave",
   url: "https://erickcabal.com/enclave",
-  /** Minutes into a visit at which the card appears, once each. */
-  minutes: [1, 3, 5],
+  /** The card comes back every this many seconds of a visit (Erick, 6 October 2026). */
+  everySeconds: 120,
+  /** Erick's content accounts, as listed on erickcabal.com. One handle across all five. */
+  socialsLabel: "Follow @erickcabalpro",
+  socials: [
+    { name: "YouTube", url: "https://www.youtube.com/@erickcabalpro" },
+    { name: "TikTok", url: "https://www.tiktok.com/@erickcabalpro" },
+    { name: "Instagram", url: "https://www.instagram.com/erickcabalpro/" },
+    { name: "Threads", url: "https://www.threads.com/@erickcabalpro" },
+    { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61591760250721" },
+  ],
 } as const;

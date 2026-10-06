@@ -67,7 +67,7 @@ const SECTIONS = [
   {
     title: "Changing what the site says",
     body: [
-      "The words and photographs on every page are edited under Edit the website, above. Three things stay in code on purpose and need Erick: the wedding date (it drives the countdown), the guest cap of 100 and the RSVP form's own limits, and the palette.",
+      "The words and photographs on every page are edited under Edit the website, above. Three things stay in code on purpose and need Erick: the wedding date (it drives the countdown), the guest cap of 120 and the RSVP form's own limits, and the palette.",
       "A change saved in the dashboard is live the moment you save it. A change Erick makes in code goes live about a minute after he publishes it.",
     ],
   },

@@ -8,7 +8,7 @@ import { submitRsvp } from "@/app/actions/rsvp";
 import { FieldError, Hint, Input, Label, Select, Textarea } from "@/components/ui/Field";
 import { FormStatus, Honeypot } from "@/components/forms/FormStatus";
 import { Button } from "@/components/ui/Button";
-import { RSVP } from "@/lib/constants";
+import { RSVP, WEDDING_DAY } from "@/lib/constants";
 import { IDLE, type ActionState } from "@/lib/types";
 
 function SubmitButton({ attending }: { attending: "yes" | "no" }) {
@@ -164,7 +164,7 @@ export function RsvpForm() {
               ))}
             </Select>
             <Hint id={field("party-hint")}>
-              Please count only the people named on your invitation. The list is capped at 100.
+              Please count only the people named on your invitation. The list is capped at {WEDDING_DAY.guestCount}.
             </Hint>
             <FieldError id={field("partySize-error")} messages={errors?.partySize} />
           </div>

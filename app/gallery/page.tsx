@@ -32,48 +32,6 @@ export default async function GalleryPage() {
         intro={gallery.intro ? <p>{gallery.intro}</p> : undefined}
       />
 
-      {gallery.how.length > 0 ? (
-        <Section>
-          <div className="container">
-            <ul className="grid gap-5 sm:grid-cols-3">
-              {gallery.how.map((item, index) => {
-                const Icon = HOW_ICONS[index] ?? Camera;
-                return (
-                  <Reveal as="li" key={item.title} delay={index * 80}>
-                    <Card hover className="h-full">
-                      <Icon className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />
-                      <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
-                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
-                    </Card>
-                  </Reveal>
-                );
-              })}
-            </ul>
-          </div>
-        </Section>
-      ) : null}
-
-      <Section id="upload">
-        <div className="container">
-          <SectionHeading
-            eyebrow={gallery.uploadEyebrow}
-            title={gallery.uploadTitle}
-            intro={
-              <p>
-                {gallery.uploadIntro}{" "}
-                <span className="aurora-text font-semibold">{SITE.hashtag}</span>
-              </p>
-            }
-          />
-
-          <Reveal delay={80}>
-            <Card className="mx-auto mt-12 max-w-2xl p-6 sm:p-8">
-              <UploadForm />
-            </Card>
-          </Reveal>
-        </div>
-      </Section>
-
       <Section>
         <div className="container">
           <SectionHeading
@@ -102,6 +60,50 @@ export default async function GalleryPage() {
               </Reveal>
             )}
           </div>
+        </div>
+      </Section>
+
+      {/* The album first and the upload last (Erick, 6 October 2026), like the
+          Wishing Wall. Links that mean "add yours" point at #upload. */}
+      {gallery.how.length > 0 ? (
+        <Section on="tint">
+          <div className="container">
+            <ul className="grid gap-5 sm:grid-cols-3">
+              {gallery.how.map((item, index) => {
+                const Icon = HOW_ICONS[index] ?? Camera;
+                return (
+                  <Reveal as="li" key={item.title} delay={index * 80}>
+                    <Card hover className="h-full">
+                      <Icon className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />
+                      <h2 className="mt-4 text-lg font-medium text-brand-ink">{item.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-ink/70">{item.body}</p>
+                    </Card>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
+
+      <Section id="upload" on="tint">
+        <div className="container">
+          <SectionHeading
+            eyebrow={gallery.uploadEyebrow}
+            title={gallery.uploadTitle}
+            intro={
+              <p>
+                {gallery.uploadIntro}{" "}
+                <span className="aurora-text font-semibold">{SITE.hashtag}</span>
+              </p>
+            }
+          />
+
+          <Reveal delay={80}>
+            <Card className="mx-auto mt-12 max-w-2xl p-6 sm:p-8">
+              <UploadForm />
+            </Card>
+          </Reveal>
         </div>
       </Section>
 

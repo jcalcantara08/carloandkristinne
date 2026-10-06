@@ -20,6 +20,13 @@ export const metadata: Metadata = pageMeta({
 
 export default async function GuestbookPage() {
   const [entries, { guestbook }] = await Promise.all([listGuestbook("visible"), getContent()]);
+  // Rows of similar length (Erick, 6 October 2026: "hindi pantay-pantay").
+  // A grid row stretches every card to its tallest, so a one-line greeting
+  // beside a long letter left a mostly empty box. Sorted longest first, each
+  // row holds messages of about the same size at every column count. A line
+  // break counts as a short line of text.
+  const weight = (message: string) => message.length + message.split("\n").length * 40;
+  const wall = [...entries].sort((a, b) => weight(b.message) - weight(a.message));
 
   return (
     <>
@@ -38,8 +45,8 @@ export default async function GuestbookPage() {
           />
 
           {entries.length > 0 ? (
-            <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {entries.map((entry, index) => (
+            <ul className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {wall.map((entry, index) => (
                 <Reveal as="li" key={entry.id} delay={Math.min(index, 8) * 80}>
                   <Card hover className="flex h-full flex-col">
                     <Quote className="h-5 w-5 text-brand-plum-500" aria-hidden="true" />

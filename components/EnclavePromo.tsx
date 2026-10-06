@@ -9,18 +9,17 @@ import { PROMO } from "@/lib/constants";
  * The studio card.
  *
  * A small corner card, not a modal: guests are here for the couple, so this
- * never blocks the page. It appears at the minutes in `PROMO.minutes` of a
- * visit, counted from the first page a guest opened (the start time is kept
- * in localStorage, so moving between pages does not reset it), once per
- * minute mark, and never on the dashboard. Closing it hides that showing;
- * the next minute mark still gets its turn, which is what Erick asked for.
- * After the last mark it does not come back.
+ * never blocks the page. Since 6 October 2026 (Erick's call) it appears every
+ * `PROMO.everySeconds` of a visit, on every page except the dashboard. The
+ * clock counts from the first page a guest opened (kept in localStorage), so
+ * moving between pages neither resets it nor shows the card early. Closing
+ * it hides it until the next mark. It carries the Enclave link and Erick's
+ * social accounts.
  *
- * Everything is wrapped in try/catch: with storage blocked the card simply
- * counts from the current page load.
+ * Storage is wrapped in try/catch: with it blocked, the card simply counts
+ * from the current page load.
  */
 const START_KEY = "kc-promo-start";
-const SHOWN_KEY = "kc-promo-shown";
 
 function readStart(): number {
   try {
@@ -34,51 +33,34 @@ function readStart(): number {
   }
 }
 
-function readShown(): number[] {
-  try {
-    const raw = window.localStorage.getItem(SHOWN_KEY);
-    return raw ? (JSON.parse(raw) as number[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeShown(minutes: number[]) {
-  try {
-    window.localStorage.setItem(SHOWN_KEY, JSON.stringify(minutes));
-  } catch {
-    // Nothing to do: the card may show again on the next visit.
-  }
-}
-
 export function EnclavePromo() {
   const pathname = usePathname();
-  const [minute, setMinute] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
 
   const excluded = pathname.startsWith("/admin");
 
   useEffect(() => {
     if (excluded) return;
     const start = readStart();
-    let shown = readShown();
-    const pending = PROMO.minutes.filter((m) => !shown.includes(m));
-    if (pending.length === 0) return;
+    const every = PROMO.everySeconds * 1000;
+    let timer = 0;
 
-    const timers = pending.map((m) => {
-      const due = start + m * 60_000 - Date.now();
-      return window.setTimeout(
-        () => {
-          shown = [...readShown(), m];
-          writeShown(shown);
-          setMinute(m);
-        },
-        Math.max(due, 0),
-      );
-    });
-    return () => timers.forEach((t) => window.clearTimeout(t));
+    const schedule = () => {
+      const elapsed = Date.now() - start;
+      // The next whole multiple of the interval, never zero: the first
+      // showing is one full interval into the visit.
+      const nextMark = Math.max(1, Math.floor(elapsed / every) + 1) * every;
+      timer = window.setTimeout(() => {
+        setOpen(true);
+        schedule();
+      }, nextMark - elapsed);
+    };
+
+    schedule();
+    return () => window.clearTimeout(timer);
   }, [excluded]);
 
-  if (minute === null) return null;
+  if (excluded || !open) return null;
 
   return (
     <aside
@@ -88,7 +70,7 @@ export function EnclavePromo() {
     >
       <button
         type="button"
-        onClick={() => setMinute(null)}
+        onClick={() => setOpen(false)}
         className="absolute right-2 top-2 inline-flex h-9 w-9 items-center justify-center rounded-full text-brand-ink/60 transition-colors hover:bg-brand-paper-200 hover:text-brand-ink"
       >
         <X className="h-4 w-4" aria-hidden="true" />
@@ -101,12 +83,27 @@ export function EnclavePromo() {
         href={PROMO.url}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => setMinute(null)}
+        onClick={() => setOpen(false)}
         className="btn-primary mt-4 w-full px-5 py-2.5 text-xs"
       >
         {PROMO.cta}
         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
       </a>
+      <p className="mt-4 text-center text-xs text-brand-ink/60">{PROMO.socialsLabel}</p>
+      <ul className="mt-2 flex flex-wrap justify-center gap-1.5">
+        {PROMO.socials.map((social) => (
+          <li key={social.name}>
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[32px] items-center rounded-full border border-brand-line px-3 text-xs text-brand-ink/75 transition-colors hover:border-brand-plum-500 hover:text-brand-plum-500"
+            >
+              {social.name}
+            </a>
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }

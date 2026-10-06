@@ -49,8 +49,9 @@ only points to the two pages.
 ## 2b. The Enclave card
 
 A small card in the corner of the screen offers Erick's studio, Enclave, to
-guests who might want a site like this one. It appears at the first, third
-and fifth minute of a visit, once each, and the X puts it away. It is
+guests who might want a site like this one, with links to his social
+accounts. It appears every two minutes of a visit, and the X puts it away
+until the next time. It is
 Erick's, and he can switch it off or change its words; tell him if you
 would rather it were not there.
 
@@ -76,7 +77,7 @@ fifteen minutes.
 
 ## 5. The dashboard, screen by screen
 
-**Overview.** Days to go, how many seats are confirmed out of 100, how many
+**Overview.** Days to go, how many seats are confirmed out of 120, how many
 replies you have had, and how many things are waiting for you.
 
 **RSVP.** Every reply as a list you can filter, search and sort, newest first, with names, contact details, dietary
@@ -226,7 +227,7 @@ from the third guide (earth-tone gowns, Barong Tagalog). The pictures are
 part of the design and need Erick to change; the words are yours to edit.
 
 Three things stay in code on purpose and need Erick: the wedding date (it
-drives the countdown and the calendar), the guest cap of 100 and the RSVP
+drives the countdown and the calendar), the guest cap of 120 and the RSVP
 form's own limits, and the colours. A change he makes goes live about a
 minute after he publishes it.
 
@@ -335,7 +336,7 @@ suppliers or negotiations is in the website or its code. That stays in your
 workbook.
 
 **Why is there a privacy page?** Because the RSVP form asks about allergies,
-which counts as health information under Philippine law, and a hundred guests
+which counts as health information under Philippine law, and a hundred and twenty guests
 handing that over deserve one page that says where it goes.
 
 ---

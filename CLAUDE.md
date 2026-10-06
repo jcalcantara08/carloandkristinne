@@ -7,8 +7,8 @@ Condensed brief for an AI assistant working on this project. Read
 
 The wedding website for Kristinne Monzon and John Carlo Alcantara.
 17 October 2026, 4:00 PM: ceremony at Jesus the Counselor Church, General
-Trias, Cavite; reception at Servando's Restaurant, Rosario, Cavite. 100
-guests. Hashtag `#CARLOobngDiyoskayKRISTINNE`. Kristinne's name comes first
+Trias, Cavite; reception at Servando's Restaurant, Rosario, Cavite. 120
+guests (100 until Carlo raised it on 6 October 2026). Hashtag `#CARLOobngDiyoskayKRISTINNE`. Kristinne's name comes first
 and the monogram is KC, because that is how the printed invitation has it.
 The couple's own KC logo is the mark: `components/Monogram.tsx` serves it
 from `public/logo-*.png`, cut from `photos-master/logo/`. Never redraw it in

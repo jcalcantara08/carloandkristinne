@@ -43,13 +43,13 @@ export default async function GuestListPage() {
             ) : null
           ) : (
             <Reveal>
-              <Card className="mx-auto mt-10 max-w-4xl p-0">
+              <Card className="mx-auto mt-10 max-w-6xl p-0">
                 <p className="border-b border-brand-line px-6 py-4 text-center text-xs uppercase tracking-wider text-brand-ink/60">
                   {peopleOnList} {peopleOnList === 1 ? "person" : "people"} so far
                 </p>
-                <ol className="grid gap-x-8 px-6 py-4 sm:grid-cols-2 lg:grid-cols-3">
+                <ol className="grid gap-x-8 px-6 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {guestList.map((entry, index) => (
-                    <li key={`${entry.name}-${index}`} className="border-b border-brand-line py-3 text-sm last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+3)]:border-b-0">
+                    <li key={`${entry.name}-${index}`} className="border-b border-brand-line py-3 text-sm">
                       <span className="font-medium text-brand-ink">{entry.name}</span>
                       {entry.guests.length > 0 ? (
                         <span className="mt-0.5 block text-xs text-brand-ink/60">with {entry.guests.join(", ")}</span>

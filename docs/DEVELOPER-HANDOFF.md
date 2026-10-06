@@ -13,7 +13,7 @@ The wedding website for **Kristinne Monzon and John Carlo Alcantara**,
 17 October 2026 at 4:00 PM. Ceremony at Jesus the Counselor Church, 428A
 Saint Francis Subdivision, San Juan I, General Trias, Cavite; reception at
 Servando's Restaurant, beside MV Soriano Medical Clinic, Rosario, Cavite.
-100 guests, officiated by Pastor Jomar Antalan and Pastora Lorna Antalan
+120 guests (raised from 100 on 6 October 2026), officiated by Pastor Jomar Antalan and Pastora Lorna Antalan
 under Christian rites. Hashtag `#CARLOobngDiyoskayKRISTINNE`, which reads
 as "Carlo, kaloob ng Diyos kay Kristinne". Kristinne's name is printed first
 on the invitation and the monogram is KC; the site follows the print.
@@ -1043,6 +1043,17 @@ rewrite a file in place.
   sitemap. The form and the privacy page say plainly that names are shown.
   Replies sent before 6 October were sent under "replies are private"; the
   couple were advised to tell guests, and to archive anyone who asks.
+- **Guest count 120** (Carlo: "Nag 120 kami"). `WEDDING_DAY.guestCount` is 120,
+  and every sentence that said 100 now reads the constant.
+- **Studio card every 120 seconds** (Erick). `PROMO.everySeconds` replaces
+  `PROMO.minutes`; the card comes back at every two-minute mark of a visit,
+  counted from `kc-promo-start`, and now lists Erick's five content accounts
+  (`PROMO.socials`, taken from erickcabal.com's `lib/site.ts`).
+- **Layouts, same night.** The Wishing Wall sorts greetings longest first so
+  each grid row holds messages of similar length (a row stretches every card
+  to its tallest), and runs four columns from `lg`. The Gallery shows the
+  album first, then "how it works" and the upload form (`#upload`) last, and its grid runs five columns from `lg` (image
+  `sizes` lowered to match). The Guest List runs four columns from `lg`.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from

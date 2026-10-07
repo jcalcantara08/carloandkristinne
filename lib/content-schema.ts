@@ -180,6 +180,16 @@ export type SiteContent = {
     ctaTitle: string;
     ctaBody: string;
   };
+  gifts: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    body: string;
+    thanks: string;
+    qrImage: string;
+    qrAlt: string;
+    qrNote: string;
+  };
   rsvp: {
     deadlineLabel: string;
     title: string;
@@ -532,6 +542,16 @@ export const DEFAULT_CONTENT: SiteContent = {
     emptyBody: "The wall fills up as messages come in. Yours could be the very first.",
     ctaTitle: "And are you coming?",
     ctaBody: "A message means a lot. A reply means the caterer can count you in.",
+  },
+  gifts: {
+    eyebrow: "Wedding gift note",
+    title: "With love and thanks",
+    intro: "Your presence on our special day is the greatest gift we could ask for.",
+    body: "If you wish to bless us with a gift, a monetary gift would be sincerely appreciated as we begin this new chapter of our lives together.",
+    thanks: "Thank you for your love, prayers, and generosity. We are truly grateful to celebrate this beautiful moment with you!",
+    qrImage: "/gifts/gift-qr.png",
+    qrAlt: "InstaPay QR code for Kristinne Joy Monzon",
+    qrNote: "Scan with your bank or e-wallet app. Transfer fees may apply.",
   },
   rsvp: {
     deadlineLabel: RSVP.deadlineLabel,
@@ -947,6 +967,22 @@ export const CONTENT_SECTIONS: ContentSection[] = [
       area("guestbook.emptyBody", "Empty wall text"),
       text("guestbook.ctaTitle", "Closing heading"),
       area("guestbook.ctaBody", "Closing text"),
+    ],
+  },
+  {
+    id: "gifts",
+    label: "Gifts",
+    description: "The unlisted gift page at /gifts: the printed gift note and the payment QR. Not in the menu or search results; share the link only with guests.",
+    preview: "/gifts",
+    fields: [
+      text("gifts.eyebrow", "Eyebrow"),
+      text("gifts.title", "Heading"),
+      area("gifts.intro", "First line"),
+      area("gifts.body", "The gift paragraph"),
+      area("gifts.thanks", "Thank you line"),
+      { type: "image", path: "gifts.qrImage", label: "Payment QR code", help: "Upload a new QR image to replace it. Check it scans before sharing the link." },
+      text("gifts.qrAlt", "QR description for screen readers"),
+      text("gifts.qrNote", "Note under the QR"),
     ],
   },
   {

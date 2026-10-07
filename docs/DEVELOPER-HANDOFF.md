@@ -1054,6 +1054,12 @@ rewrite a file in place.
   to its tallest), and runs four columns from `lg`. The Gallery shows the
   album first, then "how it works" and the upload form (`#upload`) last, and its grid runs five columns from `lg` (image
   `sizes` lowered to match). The Guest List runs four columns from `lg`.
+- **Unlisted gift page `/gifts`** (7 October 2026, Erick, after being told the
+  repo is public). The printed "Wedding Gift Note" wording and the couple's
+  InstaPay QR (`public/gifts/gift-qr.png`, decoded first: static EMVCo code,
+  pays Kristinne Joy Monzon, no fixed amount). Not in `NAV`, the sitemap or
+  any link; `noIndex`. Editable under Edit the website, Gifts. Remove the
+  file from the repo and its history once the repo is private, if wanted.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from

@@ -33,7 +33,10 @@ Vercel. Dev port **3028** (the folder number).
    can see everything still missing. A plausible lie about a venue could end
    up printed on an invitation.
 5. **No money, no vendors, no budget on the site or in this repo.** The
-   planning workbook has all of it. The website is for guests only.
+   planning workbook has all of it. The website is for guests only. One
+   exception, Erick's decision on 7 October 2026: the unlisted `/gifts` page
+   carries the couple's printed gift note and their InstaPay QR
+   (`public/gifts/gift-qr.png`). It is not in the menu, the sitemap or search.
 6. **No hex codes in components.** `tailwind.config.ts` plus the semantic
    layer in `styles/globals.css`.
 7. **The branding is the printed invitation suite's** (five cards the

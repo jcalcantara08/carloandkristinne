@@ -7,9 +7,9 @@ import { pageMeta } from "@/lib/seo";
 import { getContent } from "@/lib/content";
 
 /**
- * The gift page (Erick, 7 October 2026). Unlisted on purpose: it is not in
- * NAV, the sitemap or any link on the site, and it is noindex, so only
- * guests who are sent the address find it. The words are the printed
+ * The gift page (Erick, 7 October 2026). First unlisted, then put in the menu
+ * the same day at Erick's request. It stays noindex and out of the sitemap,
+ * so a search for the couple's names does not surface the payment QR. The words are the printed
  * "Wedding Gift Note" card; the QR is the couple's InstaPay code, decoded and
  * checked before it went up. Both are editable under Edit the website, Gifts.
  */

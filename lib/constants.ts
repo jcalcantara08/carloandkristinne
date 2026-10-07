@@ -890,6 +890,7 @@ export const NAV: { href: string; label: string }[] = [
   { href: "/entourage", label: "Entourage" },
   { href: "/gallery", label: "Gallery" },
   { href: "/wishingwall", label: "Wishing Wall" },
+  { href: "/gifts", label: "Gifts" },
   { href: "/guest-list", label: "Guest List" },
 ];
 

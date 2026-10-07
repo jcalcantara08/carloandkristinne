@@ -972,7 +972,7 @@ export const CONTENT_SECTIONS: ContentSection[] = [
   {
     id: "gifts",
     label: "Gifts",
-    description: "The unlisted gift page at /gifts: the printed gift note and the payment QR. Not in the menu or search results; share the link only with guests.",
+    description: "The Gifts page: the printed gift note and the payment QR. In the menu, kept out of search results.",
     preview: "/gifts",
     fields: [
       text("gifts.eyebrow", "Eyebrow"),

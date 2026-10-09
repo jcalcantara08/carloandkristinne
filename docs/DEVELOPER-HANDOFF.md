@@ -1068,6 +1068,12 @@ rewrite a file in place.
   totals, the RSVP table, Everyone coming, the CSV (`Seats` column), `/rsvp`
   and `/guest-list`. Both lists are numbered with a seat count per reply, and
   the dashboard flags "Picked X, named Y. Please check." on mismatches.
+- **The couple can edit an RSVP** (10 October 2026). Edit buttons on the
+  dashboard list open `/admin/rsvps/[id]`, saved by `saveRsvpEdit`
+  (`rsvps/actions.ts`, `requireAuth()` first, party up to 20, the database
+  limit) through `updateRsvp()`; audited as `rsvp.edit`; revalidates the
+  dashboard, `/rsvp` and `/guest-list`. Both lists now number by seat range
+  per reply ("1-3", "4-10"), so the last number is the running total.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from

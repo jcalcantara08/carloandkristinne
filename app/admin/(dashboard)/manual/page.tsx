@@ -31,7 +31,8 @@ const SECTIONS = [
     body: [
       "Open RSVP to see every reply as a list you can filter (Coming, Not coming), search by name and sort A to Z. The Everyone coming tab numbers every single person, guests included, for the seating plan and the door.",
       "Press Download spreadsheet to get the list as a file. That file is what you send to the caterer and what you build the seating plan from. It opens in Excel, Numbers and Google Sheets.",
-      "Deleting a reply is permanent. Only do it for an obvious duplicate or a test entry.",
+      "Press Edit on any reply to change the name, seats, guest names or anything else, then Save changes. The Guest List updates at once. Seat numbers run per reply (1-3, 4-10), so the last number is the total.",
+      "Delete moves a reply to the recycle bin. Use it for an obvious duplicate or a test entry.",
     ],
   },
   {

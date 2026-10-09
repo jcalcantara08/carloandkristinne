@@ -89,6 +89,8 @@ export default async function AdminOverviewPage() {
           <Link href="/admin/rsvps" className="btn-primary px-5 py-2.5 text-xs">
             Open the replies
           </Link>
+          {/* A file download from a route handler, not a page: a plain link, so the browser downloads it. */}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/admin/rsvps/export" className="btn-outline px-5 py-2.5 text-xs">
             Download the CSV
           </a>

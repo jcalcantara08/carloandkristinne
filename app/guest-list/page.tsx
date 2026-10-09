@@ -24,6 +24,14 @@ export const metadata: Metadata = pageMeta({
 export default async function GuestListPage() {
   const [{ rsvp }, guestList] = await Promise.all([getContent(), listGuestList()]);
   const peopleOnList = guestList.reduce((sum, entry) => sum + entry.seats, 0);
+  // Seat numbers per reply (Erick, 10 October 2026): "1-3", then "4-10", so
+  // the last number is the running total.
+  const slots: string[] = [];
+  let seatCursor = 0;
+  for (const entry of guestList) {
+    slots.push(entry.seats === 1 ? `${seatCursor + 1}` : `${seatCursor + 1}-${seatCursor + entry.seats}`);
+    seatCursor += entry.seats;
+  }
 
   return (
     <>
@@ -53,7 +61,7 @@ export default async function GuestListPage() {
                     const others = [...entry.guests, ...(unnamed > 0 ? [`${unnamed} more`] : [])];
                     return (
                       <li key={`${entry.name}-${index}`} className="flex gap-3 border-b border-brand-line py-3 text-sm">
-                        <span className="w-7 shrink-0 text-right tabular-nums text-brand-ink/60">{index + 1}.</span>
+                        <span className="w-14 shrink-0 text-right tabular-nums text-brand-ink/60">{slots[index]}</span>
                         <span className="min-w-0 flex-1">
                           <span className="font-medium text-brand-ink">{entry.name}</span>
                           {others.length > 0 ? (

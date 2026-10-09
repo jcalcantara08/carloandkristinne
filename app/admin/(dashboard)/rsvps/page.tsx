@@ -27,7 +27,7 @@ type Show = "all" | "yes" | "no";
 type Sort = "newest" | "az";
 type Tab = "replies" | "people";
 
-type Params = { view?: string; show?: string; q?: string; sort?: string; tab?: string };
+type Params = { view?: string; show?: string; q?: string; sort?: string; tab?: string; saved?: string };
 
 const pick = <T extends string>(value: string | undefined, allowed: readonly T[], fallback: T): T =>
   allowed.includes(value as T) ? (value as T) : fallback;
@@ -135,6 +135,18 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
     .filter(matches)
     .sort((a, b) => (sort === "az" ? a.name.localeCompare(b.name) : b.createdAt.localeCompare(a.createdAt)));
 
+  // Seat numbers per reply, in the order shown (Erick, 10 October 2026): a
+  // reply of three is "1-3", the next reply of seven "4-10", so the last
+  // number is always the running total. A reply that is not coming has none.
+  const slots = new Map<string, string>();
+  let seatCursor = 0;
+  for (const rsvp of rows) {
+    const seats = seatsFor(rsvp);
+    if (seats === 0) continue;
+    slots.set(rsvp.id, seats === 1 ? `${seatCursor + 1}` : `${seatCursor + 1}-${seatCursor + seats}`);
+    seatCursor += seats;
+  }
+
   const people = peopleFrom(active).filter(
     (person) => !needle || person.name.toLowerCase().includes(needle) || person.with.toLowerCase().includes(needle),
   );
@@ -165,9 +177,17 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
         <div>
           <h2 className="text-display-md">RSVP</h2>
           <p className="mt-2 text-sm text-brand-ink/70">
-            Every reply from the RSVP page lands here the moment it is sent.
+            Every reply from the RSVP page lands here the moment it is sent. Press Edit on any
+            reply to fix a name, the number of seats or anything else.
           </p>
+          {params.saved ? (
+            <p className="mt-3 inline-block rounded-full bg-brand-plum-100 px-3 py-1 text-xs text-brand-plum-600" role="status">
+              Saved. The Guest List is updated.
+            </p>
+          ) : null}
         </div>
+        {/* A file download from a route handler, not a page: a plain link, so the browser downloads it. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a href="/admin/rsvps/export" className="btn-primary shrink-0 px-5 py-2.5 text-xs">
           Download spreadsheet
         </a>
@@ -285,14 +305,14 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
             <>
               {/* Phones: one compact row per RSVP, the detail one tap away. */}
               <ul className="divide-y divide-brand-line overflow-hidden rounded-2xl border border-brand-line bg-brand-paper md:hidden">
-                {rows.map((rsvp, index) => (
+                {rows.map((rsvp) => (
                   <li key={rsvp.id}>
                     <details className="group">
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3">
                         <span className="min-w-0">
                           <span className="block truncate font-medium text-brand-ink">{rsvp.name}</span>
                           <span className="block text-xs text-brand-ink/60">
-                            {index + 1}.{" "}
+                            {slots.get(rsvp.id) ? `Seats ${slots.get(rsvp.id)}, ` : ""}
                             {rsvp.attending === "yes"
                               ? `${seatsFor(rsvp)} ${seatsFor(rsvp) === 1 ? "seat" : "seats"}`
                               : "Not coming"}
@@ -311,7 +331,12 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                         {rsvp.songRequest ? <div><dt className="text-xs text-brand-ink/60">Song</dt><dd>{rsvp.songRequest}</dd></div> : null}
                         {rsvp.message ? <div><dt className="text-xs text-brand-ink/60">Note</dt><dd className="whitespace-pre-line">{rsvp.message}</dd></div> : null}
                         <div><dt className="text-xs text-brand-ink/60">Sent</dt><dd>{formatDateTime(rsvp.createdAt)}</dd></div>
-                        <div className="flex flex-wrap gap-2 pt-2"><ShelfActions table="rsvps" id={rsvp.id} view={view} /></div>
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {view !== "trash" ? (
+                            <Link href={`/admin/rsvps/${rsvp.id}`} className="btn-primary px-4 py-2 text-xs">Edit</Link>
+                          ) : null}
+                          <ShelfActions table="rsvps" id={rsvp.id} view={view} />
+                        </div>
                       </dl>
                     </details>
                   </li>
@@ -323,7 +348,7 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                 <table className="w-full min-w-[56rem] text-left text-sm">
                   <thead className="border-b border-brand-line bg-brand-paper-200 text-xs uppercase tracking-wider text-brand-ink/60">
                     <tr>
-                      <th scope="col" className="w-10 px-4 py-3">#</th>
+                      <th scope="col" className="w-20 px-4 py-3">Seat no.</th>
                       <th scope="col" className="px-4 py-3">Name</th>
                       <th scope="col" className="px-4 py-3">RSVP</th>
                       <th scope="col" className="px-4 py-3 text-right">Seats</th>
@@ -334,9 +359,9 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-brand-line align-top">
-                    {rows.map((rsvp, index) => (
+                    {rows.map((rsvp) => (
                       <tr key={rsvp.id}>
-                        <td className="px-4 py-3 tabular-nums text-brand-ink/60">{index + 1}</td>
+                        <td className="whitespace-nowrap px-4 py-3 tabular-nums text-brand-ink/60">{slots.get(rsvp.id) ?? ""}</td>
                         <td className="px-4 py-3">
                           <p className="font-medium text-brand-ink">{rsvp.name}</p>
                           {rsvp.guests.length > 0 ? (
@@ -364,7 +389,12 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                         </td>
                         <td className="whitespace-nowrap px-4 py-3 text-xs text-brand-ink/60">{formatDateTime(rsvp.createdAt)}</td>
                         <td className="px-4 py-3">
-                          <div className="flex justify-end gap-2"><ShelfActions table="rsvps" id={rsvp.id} view={view} /></div>
+                          <div className="flex justify-end gap-2">
+                            {view !== "trash" ? (
+                              <Link href={`/admin/rsvps/${rsvp.id}`} className="btn-primary px-4 py-2 text-xs">Edit</Link>
+                            ) : null}
+                            <ShelfActions table="rsvps" id={rsvp.id} view={view} />
+                          </div>
                         </td>
                       </tr>
                     ))}

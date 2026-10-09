@@ -118,6 +118,60 @@ export async function createRsvp(input: {
   return { ok: true };
 }
 
+/** One reply, for the dashboard's edit page. Any shelf, so an archived reply can be fixed too. */
+export async function getRsvp(id: string): Promise<Rsvp | null> {
+  const supabase = createAdminClient();
+  if (!supabase) return null;
+
+  const { data, error } = await supabase.from("rsvps").select("*").eq("id", id).maybeSingle();
+  if (error) {
+    console.error("[store] getRsvp failed:", error.message);
+    return null;
+  }
+  return data ? toRsvp(data as RsvpRow) : null;
+}
+
+/** The couple's edit of a reply (10 October 2026). Same shape as createRsvp. */
+export async function updateRsvp(
+  id: string,
+  input: {
+    name: string;
+    email: string | null;
+    phone: string | null;
+    attending: "yes" | "no";
+    partySize: number;
+    guests: RsvpGuest[];
+    dietary: string | null;
+    songRequest: string | null;
+    message: string | null;
+  },
+): Promise<WriteResult> {
+  const supabase = createAdminClient();
+  if (!supabase) return notConfigured;
+
+  const { error } = await supabase
+    .from("rsvps")
+    .update({
+      name: input.name,
+      email: input.email,
+      phone: input.phone,
+      attending: input.attending,
+      party_size: input.attending === "yes" ? input.partySize : 0,
+      guests: input.attending === "yes" ? input.guests : [],
+      dietary: input.dietary,
+      song_request: input.songRequest,
+      message: input.message,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("[store] updateRsvp failed:", error.message);
+    return failed;
+  }
+  return { ok: true };
+}
+
 export async function listRsvps(view: RecordView = "active"): Promise<Rsvp[]> {
   const supabase = createAdminClient();
   if (!supabase) return [];

@@ -106,10 +106,14 @@ good. Restore or Delete for good from here. See section 6.
 
 ### RSVP
 
-Replies cannot be edited by guests once sent. If somebody needs to change
-theirs, they message Erick and he changes it in the database. If somebody
-replied twice, archive or delete the older one. Only active replies count
-towards the headcount.
+Guests cannot change a reply once sent, but you can. On the RSVP page of the
+dashboard, press **Edit** on any reply to fix the name, coming or not, the
+number of seats, the guest names, contact details, food notes, song or note,
+then **Save changes**. The Guest List updates at once. A reply where the
+number picked and the names typed disagree is flagged "Picked X, named Y";
+make them agree and the flag goes. Seat numbers run per reply (1-3, 4-10 and
+so on), so the last number is the total. If somebody replied twice, archive
+or delete the older one. Only active replies count towards the headcount.
 
 ### Archive, delete, and the recycle bin
 

@@ -1061,6 +1061,13 @@ rewrite a file in place.
   `NAV` as "Gifts" (before Guest List) the same day at Erick's request; still
   `noIndex` and out of the sitemap. Editable under Edit the website, Gifts. Remove the
   file from the repo and its history once the repo is private, if wanted.
+- **One seat rule** (9 October 2026: the dashboard and the public list showed
+  different totals). The dashboard summed the picked party size; the public
+  list counted typed names. `seatsFor()` in `lib/store.ts` now takes the
+  larger of the two for every reply, and every count uses it: dashboard
+  totals, the RSVP table, Everyone coming, the CSV (`Seats` column), `/rsvp`
+  and `/guest-list`. Both lists are numbered with a seat count per reply, and
+  the dashboard flags "Picked X, named Y. Please check." on mismatches.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from

@@ -1,5 +1,5 @@
 import { requireAuth } from "@/lib/admin-guard";
-import { listRsvps, writeAudit } from "@/lib/store";
+import { listRsvps, seatsFor, writeAudit } from "@/lib/store";
 import { csvResponse, toCsv } from "@/lib/csv";
 
 /**
@@ -20,6 +20,7 @@ export async function GET(): Promise<Response> {
     Name: rsvp.name,
     Attending: rsvp.attending === "yes" ? "Yes" : "No",
     "Party size": rsvp.partySize,
+    Seats: seatsFor(rsvp),
     Guests: rsvp.guests.map((guest) => guest.name).join("; "),
     Email: rsvp.email ?? "",
     Phone: rsvp.phone ?? "",

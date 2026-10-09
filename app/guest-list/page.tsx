@@ -23,7 +23,7 @@ export const metadata: Metadata = pageMeta({
 
 export default async function GuestListPage() {
   const [{ rsvp }, guestList] = await Promise.all([getContent(), listGuestList()]);
-  const peopleOnList = guestList.reduce((sum, entry) => sum + 1 + entry.guests.length, 0);
+  const peopleOnList = guestList.reduce((sum, entry) => sum + entry.seats, 0);
 
   return (
     <>
@@ -45,17 +45,27 @@ export default async function GuestListPage() {
             <Reveal>
               <Card className="mx-auto mt-10 max-w-6xl p-0">
                 <p className="border-b border-brand-line px-6 py-4 text-center text-xs uppercase tracking-wider text-brand-ink/60">
-                  {peopleOnList} {peopleOnList === 1 ? "person" : "people"} so far
+                  {guestList.length} {guestList.length === 1 ? "RSVP" : "RSVPs"}, {peopleOnList} {peopleOnList === 1 ? "seat" : "seats"} so far
                 </p>
                 <ol className="grid gap-x-8 px-6 py-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                  {guestList.map((entry, index) => (
-                    <li key={`${entry.name}-${index}`} className="border-b border-brand-line py-3 text-sm">
-                      <span className="font-medium text-brand-ink">{entry.name}</span>
-                      {entry.guests.length > 0 ? (
-                        <span className="mt-0.5 block text-xs text-brand-ink/60">with {entry.guests.join(", ")}</span>
-                      ) : null}
-                    </li>
-                  ))}
+                  {guestList.map((entry, index) => {
+                    const unnamed = entry.seats - 1 - entry.guests.length;
+                    const others = [...entry.guests, ...(unnamed > 0 ? [`${unnamed} more`] : [])];
+                    return (
+                      <li key={`${entry.name}-${index}`} className="flex gap-3 border-b border-brand-line py-3 text-sm">
+                        <span className="w-7 shrink-0 text-right tabular-nums text-brand-ink/60">{index + 1}.</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="font-medium text-brand-ink">{entry.name}</span>
+                          {others.length > 0 ? (
+                            <span className="mt-0.5 block text-xs text-brand-ink/60">with {others.join(", ")}</span>
+                          ) : null}
+                        </span>
+                        <span className="shrink-0 self-start rounded-full bg-brand-plum-100 px-2 py-0.5 text-xs tabular-nums text-brand-plum-600">
+                          {entry.seats} {entry.seats === 1 ? "seat" : "seats"}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ol>
               </Card>
             </Reveal>

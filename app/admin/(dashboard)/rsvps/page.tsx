@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import { requireAuth } from "@/lib/admin-guard";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { listRsvps, rsvpTotals, TRASH_DAYS } from "@/lib/store";
+import { listRsvps, rsvpTotals, seatsFor, TRASH_DAYS } from "@/lib/store";
 import { WEDDING_DAY } from "@/lib/constants";
 import { cn, formatDateTime } from "@/lib/utils";
 import type { Rsvp } from "@/lib/types";
@@ -43,7 +43,7 @@ function peopleFrom(rsvps: Rsvp[]): Person[] {
     for (const guest of rsvp.guests) {
       people.push({ name: guest.name, with: rsvp.name, child: guest.isChild, named: true });
     }
-    const unnamed = rsvp.partySize - 1 - rsvp.guests.length;
+    const unnamed = seatsFor(rsvp) - 1 - rsvp.guests.length;
     for (let i = 0; i < unnamed; i += 1) {
       people.push({ name: "Guest (name not given)", with: rsvp.name, child: false, named: false });
     }
@@ -73,6 +73,18 @@ function StatusBadge({ rsvp }: { rsvp: Rsvp }) {
     <Badge tone={rsvp.attending === "yes" ? "approved" : "hidden"}>
       {rsvp.attending === "yes" ? "Coming" : "Not coming"}
     </Badge>
+  );
+}
+
+/** Flags a reply whose picked number and typed names disagree, so the couple can check it. */
+function Mismatch({ rsvp }: { rsvp: Rsvp }) {
+  if (rsvp.attending !== "yes") return null;
+  const named = 1 + rsvp.guests.length;
+  if (named === rsvp.partySize) return null;
+  return (
+    <span className="mt-1 block text-xs text-brand-mauve-600">
+      Picked {rsvp.partySize}, named {named}. Please check.
+    </span>
   );
 }
 
@@ -273,15 +285,16 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
             <>
               {/* Phones: one compact row per RSVP, the detail one tap away. */}
               <ul className="divide-y divide-brand-line overflow-hidden rounded-2xl border border-brand-line bg-brand-paper md:hidden">
-                {rows.map((rsvp) => (
+                {rows.map((rsvp, index) => (
                   <li key={rsvp.id}>
                     <details className="group">
                       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3">
                         <span className="min-w-0">
                           <span className="block truncate font-medium text-brand-ink">{rsvp.name}</span>
                           <span className="block text-xs text-brand-ink/60">
+                            {index + 1}.{" "}
                             {rsvp.attending === "yes"
-                              ? `${rsvp.partySize} ${rsvp.partySize === 1 ? "person" : "people"}`
+                              ? `${seatsFor(rsvp)} ${seatsFor(rsvp) === 1 ? "seat" : "seats"}`
                               : "Not coming"}
                             {rsvp.dietary ? " · food note" : ""}
                           </span>
@@ -289,6 +302,7 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                         <StatusBadge rsvp={rsvp} />
                       </summary>
                       <dl className="space-y-2 px-4 pb-4 text-sm">
+                        <Mismatch rsvp={rsvp} />
                         {rsvp.guests.length > 0 ? (
                           <div><dt className="text-xs text-brand-ink/60">With them</dt><dd>{rsvp.guests.map((g) => g.name).join(", ")}</dd></div>
                         ) : null}
@@ -309,9 +323,10 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                 <table className="w-full min-w-[56rem] text-left text-sm">
                   <thead className="border-b border-brand-line bg-brand-paper-200 text-xs uppercase tracking-wider text-brand-ink/60">
                     <tr>
+                      <th scope="col" className="w-10 px-4 py-3">#</th>
                       <th scope="col" className="px-4 py-3">Name</th>
                       <th scope="col" className="px-4 py-3">RSVP</th>
-                      <th scope="col" className="px-4 py-3 text-right">Pax</th>
+                      <th scope="col" className="px-4 py-3 text-right">Seats</th>
                       <th scope="col" className="px-4 py-3">Contact</th>
                       <th scope="col" className="px-4 py-3">Food, song, note</th>
                       <th scope="col" className="px-4 py-3">Sent</th>
@@ -319,8 +334,9 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-brand-line align-top">
-                    {rows.map((rsvp) => (
+                    {rows.map((rsvp, index) => (
                       <tr key={rsvp.id}>
+                        <td className="px-4 py-3 tabular-nums text-brand-ink/60">{index + 1}</td>
                         <td className="px-4 py-3">
                           <p className="font-medium text-brand-ink">{rsvp.name}</p>
                           {rsvp.guests.length > 0 ? (
@@ -331,7 +347,8 @@ export default async function AdminRsvpsPage({ searchParams }: { searchParams: P
                         </td>
                         <td className="px-4 py-3"><StatusBadge rsvp={rsvp} /></td>
                         <td className="px-4 py-3 text-right tabular-nums">
-                          {rsvp.attending === "yes" ? rsvp.partySize : "0"}
+                          {seatsFor(rsvp)}
+                          <Mismatch rsvp={rsvp} />
                         </td>
                         <td className="px-4 py-3"><Contact rsvp={rsvp} /></td>
                         <td className="max-w-xs px-4 py-3 text-brand-ink/80">

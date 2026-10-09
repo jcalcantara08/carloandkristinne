@@ -22,7 +22,7 @@ const WHY_ICONS = [Users, Utensils, CalendarCheck];
 
 export default async function RsvpPage() {
   const [{ rsvp, details }, guestList] = await Promise.all([getContent(), listGuestList()]);
-  const peopleOnList = guestList.reduce((sum, entry) => sum + 1 + entry.guests.length, 0);
+  const peopleOnList = guestList.reduce((sum, entry) => sum + entry.seats, 0);
   const mapped = details.venues.filter((venue) => venue.mapUrl);
 
   return (

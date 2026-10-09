@@ -140,14 +140,25 @@ export async function listRsvps(view: RecordView = "active"): Promise<Rsvp[]> {
  * selected, so contact details, food notes and messages never leave the
  * database for a public page. Archiving a reply takes it off the list.
  */
-export type GuestListEntry = { name: string; guests: string[] };
+export type GuestListEntry = { name: string; guests: string[]; seats: number };
+
+/**
+ * Seats one reply takes (9 October 2026: the dashboard and the public list
+ * disagreed). A guest picks "how many are coming" and separately types the
+ * names, and the two do not always match. Whichever is larger counts, so a
+ * seat is never missed, and every count on the site uses this one rule.
+ */
+export function seatsFor(reply: { attending?: string; partySize: number; guests: unknown[] }): number {
+  if (reply.attending !== undefined && reply.attending !== "yes") return 0;
+  return Math.max(reply.partySize || 1, 1 + reply.guests.length);
+}
 
 export async function listGuestList(): Promise<GuestListEntry[]> {
   const supabase = createAdminClient();
   if (!supabase) return [];
 
   const { data, error } = await applyView(
-    supabase.from("rsvps").select("name, guests").eq("attending", "yes"),
+    supabase.from("rsvps").select("name, guests, party_size").eq("attending", "yes"),
     "active",
   );
 
@@ -155,13 +166,13 @@ export async function listGuestList(): Promise<GuestListEntry[]> {
     console.error("[store] listGuestList failed:", error.message);
     return [];
   }
-  return (data as { name: string; guests: { name?: unknown }[] | null }[])
-    .map((row) => ({
-      name: row.name,
-      guests: (row.guests ?? [])
+  return (data as { name: string; guests: { name?: unknown }[] | null; party_size: number }[])
+    .map((row) => {
+      const guests = (row.guests ?? [])
         .map((guest) => (typeof guest?.name === "string" ? guest.name.trim() : ""))
-        .filter(Boolean),
-    }))
+        .filter(Boolean);
+      return { name: row.name, guests, seats: seatsFor({ partySize: row.party_size, guests }) };
+    })
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -178,7 +189,7 @@ export async function rsvpTotals(): Promise<{
     responses: rsvps.length,
     attending: attendingRows.length,
     declined: rsvps.length - attendingRows.length,
-    headcount: attendingRows.reduce((sum, r) => sum + r.partySize, 0),
+    headcount: attendingRows.reduce((sum, r) => sum + seatsFor(r), 0),
   };
 }
 

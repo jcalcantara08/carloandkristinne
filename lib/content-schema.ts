@@ -449,7 +449,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     receptionEyebrow: "Reception",
     receptionTitle: "Then, the whole evening",
     receptionIntro:
-      "The full running order, in the order your host will actually call it. It opens with everybody on their feet and it ends at about ten, with a proper three quarters of an hour in the middle for dinner.",
+      "The full running order, as your host called it on the night. It opens with the families and the entourage walking in and ends at about ten, with a proper three quarters of an hour in the middle for dinner and the couple's table-to-table giveaways.",
     receptionNote:
       "Every time below is worked out from the six o'clock doors, so treat them as close rather than exact. A ceremony that runs long, or a room that will not stop dancing, moves everything after it. Nobody minds.",
     hostEyebrow: "Your host",

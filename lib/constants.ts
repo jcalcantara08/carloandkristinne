@@ -566,9 +566,9 @@ export const SCHEDULE: ScheduleItem[] = [
   {
     time: tbc<string>(),
     minutes: 15,
-    title: "The doors open, and we dance",
+    title: "The doors open",
     detail:
-      "Everybody on their feet, ninongs and ninangs very much included. Erick leads it, the music plays, and whoever gives it the most wins the first photograph with Carlo and Kristinne.",
+      "Guests arrive from the church, find their tables and settle in before the introductions.",
     phase: "reception",
   },
   {
@@ -576,15 +576,15 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "Welcome from your host",
     detail:
-      "Erick opens the evening, and announces that there is a special game at the end with packages to be won.",
+      "Erick opens the evening as host and as Carlo's best man, and teases the travel prizes saved for the last game.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
-    title: "The parents",
+    title: "The mothers, then the fathers",
     detail:
-      "Introduced from where they are seated.",
+      "Noreen Alcantara and Debora Monzon walk in together, with a welcome for Lola Lily Gragas. Then Carlito Alcantara and Ariel Monzon, side by side.",
     phase: "reception",
   },
   {
@@ -592,15 +592,23 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "The principal sponsors",
     detail:
-      "The ninongs and ninangs, from where they are seated.",
+      "Team Ninong walks in first to Mambo No. 5, then Team Ninang to Girls Just Want to Have Fun.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
-    minutes: 15,
-    title: "The entourage comes in",
+    minutes: 5,
+    title: "The secondary sponsors and the bearers",
     detail:
-      "By group: the secondary sponsors, the bearers, then Team Bride and Team Groom, each to their own song.",
+      "Candle, veil and cord, then the littlest VIPs with the rings, the Bible and the coins.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 10,
+    title: "Team Bride and Team Groom",
+    detail:
+      "The bridesmaids to Run the World, then the groomsmen to Uptown Funk.",
     phase: "reception",
   },
   {
@@ -608,7 +616,7 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "Grand entrance",
     detail:
-      "Carlo and Kristinne walk in as husband and wife for the first time. Phones up.",
+      "Everyone rises, cameras up, for the first entrance of Mr. and Mrs. Alcantara, to Gasolina.",
     phase: "reception",
   },
   {
@@ -616,23 +624,23 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "The prayer",
     detail:
-      "Led by Mar Alen Alamo.",
+      "Led by Mar Alen Alamo, before the first meal together.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "How well do you know them?",
+    title: "How well do you know Carlo and Tin?",
     detail:
-      "Ten trivia questions about the bride and groom, before anyone eats. The winners are first in line for dinner, with a photograph with the couple first.",
+      "Ten questions about their love story. The first to grab the microphone from Babie answers, and the winners get a photograph with the couple and the front of the dinner line.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 45,
-    title: "Dinner",
+    title: "Dinner, and the table-to-table giveaways",
     detail:
-      "Called table by table. Please eat well; there is a lot of evening left.",
+      "Dinner is served, and Carlo and Tin go round every table to greet each guest and hand out their giveaways. Stay at your table; they come to you.",
     phase: "reception",
   },
   {
@@ -640,71 +648,71 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 5,
     title: "The first dance",
     detail:
-      "Their first dance as husband and wife.",
+      "Carlo and Tin, to Libu-libong Buwan (Uuwian) by Kyle Raphael.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 15,
-    title: "The prosperity dance",
+    title: "The prosperity dance, their way",
     detail:
-      "No pins, no envelopes, no props. Come up, hold them for a moment, whisper them a blessing, and dance a few steps with them. That is the whole tradition, done the way they want it.",
+      "To Palagi on the violin. Come forward in ones or pairs for a little dance or a warm hug and your blessing. Gifts and envelopes go in the gift box.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "Cake cutting, the wine toast, and everyone sings",
+    title: "Cake, candle and wine toast",
     detail:
-      "Carlo and Kristinne slice the cake, blow out the candle and raise their glasses while the whole room sings Panalangin to them. You are not an audience for this one, so please do sing.",
+      "The cake, a wish on the candle and a raised glass, while the whole room sings Panalangin, at the couple's own request.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "The toasts",
+    title: "The maid of honour and the best man",
     detail:
-      "The best man and the maid of honour, in that order. Bring tissues.",
+      "Babie Georgie Monzon, then Erick, who swaps the host's microphone for the best man's for a few minutes.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "A word from loved ones",
+    title: "Messages from loved ones",
     detail:
-      "Short messages for the couple from the people closest to them.",
+      "Ninang Lilibeth Landero, Ninong Ereberto Aguilar, Tita Jeneth Monzon, Tita Emelita Nicolas, Carlo's close friend Triston Danlag, Tin's friend Irish Agudo, Tin's brother Bryan Kyle Monzon, and Carlo's sister Joahnna Alcantara.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "The parents speak",
+    title: "The parents' messages",
     detail:
-      "The two mothers first, then the two fathers.",
+      "The two mothers together, then the two fathers together: blessings for the home Carlo and Kristinne will build.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "Dance with the parents",
+    title: "Dances with the parents",
     detail:
-      "Kristinne with her father, then Carlo with his mother.",
-    phase: "reception",
-  },
-  {
-    time: tbc<string>(),
-    minutes: 10,
-    title: "The bouquet game",
-    detail:
-      "Sinulid at karayom for the single ladies. The first to thread the needle takes the bouquet.",
+      "Kristinne with her father, Ariel Monzon, to First Man; then Carlo with his mother, Noreen Alcantara, to Love You, Mom.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
-    title: "The garter",
+    title: "A scratch-card surprise",
     detail:
-      "Carlo does the honours.",
+      "Babie's cousins hand everyone a scratch card, kept unscratched until the end of the games. Three lucky winners, with prizes fresh from Palawan.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 5,
+    title: "The bouquet: sinulid at karayom",
+    detail:
+      "Five single ladies race to thread a needle, and the first one through receives the bouquet from Kristinne.",
     phase: "reception",
   },
   {
@@ -712,39 +720,47 @@ export const SCHEDULE: ScheduleItem[] = [
     minutes: 10,
     title: "The Cinderella game",
     detail:
-      "The single gentlemen lose a shoe, then race to find it. The last one back is Mr Bachelor and gets the garter.",
+      "Five single gentlemen hunt for their own left shoe. The last one back is Mr. Bachelor.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
-    title: "The winners' game",
+    title: "The garter",
     detail:
-      "The bouquet and garter winners copy whatever the couple do. Nobody is warned in advance.",
+      "Carlo removes the garter and passes it to Mr. Bachelor. Baka ikaw na ang next.",
+    phase: "reception",
+  },
+  {
+    time: tbc<string>(),
+    minutes: 5,
+    title: "Copy the newlyweds",
+    detail:
+      "The bouquet winner and Mr. Bachelor copy whatever Carlo and Kristinne do: step closer, hold hands, and a friendly hug.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 10,
-    title: "Guess the song",
+    title: "Guess the song, and win a trip",
     detail:
-      "The last game, for five players, with packages to be won. Trips, of a sort.",
+      "Five players, five song clips, and five trips: Alaska, Australia, Italy, Cagayan de Oro and Korea, of a sort. Then everyone scratches their cards together.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
-    title: "Thank you, from Carlo and Kristinne",
+    title: "Thank you, from Carlo and Tin",
     detail:
-      "The two of them say their piece, and they mean every word of it.",
+      "The newlyweds share their message of love and gratitude.",
     phase: "reception",
   },
   {
     time: tbc<string>(),
     minutes: 5,
-    title: "Goodnight",
+    title: "Closing and goodnight",
     detail:
-      "Erick closes the evening, and then we send them off properly.",
+      "Upload your photographs to the gallery, tag #CARLOobngDiyoskayKRISTINNE, and one last, loudest round of applause. Mabuhay ang bagong kasal!",
     phase: "reception",
   },
 ];
@@ -824,7 +840,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Will there be games?",
-    a: "Several, and you are in the first one whether you planned to be or not. The evening opens with a dance that Erick leads, and the winners take the first photograph with Carlo and Kristinne. Before dinner there are ten trivia questions about the couple, and the winners eat first. After the bouquet and the garter come the Cinderella game for the gentlemen, a game for the two winners, and a last game where five players guess song titles for prizes that are described as trips.",
+    a: "Several. Before dinner there are ten trivia questions about the couple, and the winners eat first. After the parents' dances come a scratch-card surprise from Babie, sinulid at karayom for the bouquet, the Cinderella game for the gentlemen, the garter, a copy-the-newlyweds game for the two winners, and a last game where five players guess song titles to win trips, of a sort.",
   },
   {
     q: "Is it true we have to sing?",

@@ -1074,6 +1074,15 @@ rewrite a file in place.
   limit) through `updateRsvp()`; audited as `rsvp.edit`; revalidates the
   dashboard, `/rsvp` and `/guest-list`. Both lists now number by seat range
   per reply ("1-3", "4-10"), so the last number is the running total.
+- **Programme = the script used on the night** (24 October 2026, after the
+  wedding). The reception `SCHEDULE` was rebuilt from Erick's final host
+  script: families and entourage enter (no opening dance-off), prayer and
+  trivia, dinner with table-to-table giveaways, the three traditions, toasts
+  and eight messages from loved ones, parents together, parent dances, a
+  scratch-card surprise, the four games, Guess the song (Alaska, Australia,
+  Italy, Cagayan de Oro, Korea), thank you and goodnight. Durations still
+  total 230 and land on the script's stage times. Game players and winners
+  are deliberately not named on the site.
 - **Two wrong facts fixed.** The RSVP share text said "reply by 30 September"
   (now built from `RSVP.deadlineLabel`), and the RSVP day box said "Be seated
   by 3:30 PM" (now "Guests are welcome from 3:00 PM", from
